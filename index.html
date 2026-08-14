@@ -67,14 +67,15 @@
         
         .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 94, 0, 0.08); border: 1px solid rgba(255, 94, 0, 0.15); padding: 10px 22px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; color: var(--primary-orange); letter-spacing: 1.5px; backdrop-filter: blur(12px); margin-bottom: 24px; text-transform: uppercase; box-shadow: 0 8px 20px rgba(255, 94, 0, 0.05); }
         
-        /* LOGO CON RAYOS 3D E ICONO DELIVERY */
-        .logo-premium-wrapper { position: relative; width: 200px; height: 200px; margin: 20px auto 30px auto; display: flex; justify-content: center; align-items: center; }
-        .logo-premium-rays { position: absolute; inset: -15px; background: conic-gradient(from 0deg, transparent 0%, rgba(255,94,0,0.7) 10%, transparent 20%, transparent 40%, rgba(255,94,0,0.7) 50%, transparent 60%, transparent 80%, rgba(255,94,0,0.7) 90%, transparent 100%); border-radius: 50%; animation: spinRays 8s linear infinite; filter: blur(12px); opacity: 0.85; z-index: 1; }
-        .logo-premium-core { width: 140px; height: 140px; border-radius: 40px; background: var(--bg-pure); border: 2px solid rgba(255,94,0,0.3); display: flex; align-items: center; justify-content: center; position: relative; z-index: 2; box-shadow: 0 25px 50px rgba(255,94,0,0.25), inset 0 0 20px rgba(255, 94, 0, 0.05); animation: floatLogo 4s ease-in-out infinite; }
-        .logo-icon-svg { width: 75px; height: 75px; filter: drop-shadow(0 12px 15px rgba(255,94,0,0.4)); }
+        /* LOGO CON RAYOS 3D E ICONO DELIVERY (MEJORADO) */
+        .logo-premium-wrapper { position: relative; width: 220px; height: 220px; margin: 20px auto 40px auto; display: flex; justify-content: center; align-items: center; }
+        /* Aumentamos el inset a -40px y el blur para que el rayo sea enorme e imponente */
+        .logo-premium-rays { position: absolute; inset: -40px; background: conic-gradient(from 0deg, transparent 0%, rgba(255,94,0,0.8) 10%, transparent 20%, transparent 40%, rgba(255,94,0,0.8) 50%, transparent 60%, transparent 80%, rgba(255,94,0,0.8) 90%, transparent 100%); border-radius: 50%; animation: spinRays 8s linear infinite; filter: blur(25px); opacity: 0.65; z-index: 1; }
+        .logo-premium-core { width: 150px; height: 150px; border-radius: 45px; background: var(--bg-pure); border: 2px solid rgba(255,94,0,0.35); display: flex; align-items: center; justify-content: center; position: relative; z-index: 2; box-shadow: 0 35px 60px rgba(255,94,0,0.25), inset 0 0 25px rgba(255, 94, 0, 0.08); animation: floatLogo 4s ease-in-out infinite; }
+        .logo-icon-svg { width: 85px; height: 85px; filter: drop-shadow(0 15px 18px rgba(255,94,0,0.45)); }
         
         /* TEXTO "PEDILO YA" IMPONENTE */
-        .pedilo-ya-title { font-family: 'Outfit', sans-serif; font-size: 3.4rem; font-weight: 900; color: var(--text-dark); margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: -2.5px; line-height: 1; text-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+        .pedilo-ya-title { font-family: 'Outfit', sans-serif; font-size: 3.6rem; font-weight: 900; color: var(--text-dark); margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: -2.5px; line-height: 1; text-shadow: 0 15px 30px rgba(0,0,0,0.08); }
         .pedilo-ya-title span { background: var(--gradient-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
         .premium-text-gradient { background: var(--gradient-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 10px 30px rgba(255, 94, 0, 0.25); font-weight: 900; }
@@ -210,9 +211,9 @@
         .add-btn-float { pointer-events: all; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 500; font-size: 1.8rem; box-shadow: 0 8px 20px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.3); line-height: 1; padding-bottom: 2px; margin-left: auto; transition:0.2s;}
         .add-btn-float:active { transform: scale(0.9); background: white; color: black; }
 
-        /* CARRITO FLOTANTE MCDONALDS */
-        .floating-cart-bar { position: fixed; bottom: 105px; left: 50%; transform: translateX(-50%); width: calc(100% - 48px); max-width: 450px; background: var(--text-dark); color: white; padding: 18px 24px; border-radius: 28px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 20px 50px rgba(15,23,42,0.5); z-index: 999; cursor: pointer; transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1); animation: slideUpCartBar 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        @keyframes slideUpCartBar { from { bottom: -100px; } to { bottom: 105px; } }
+        /* CARRITO FLOTANTE MCDONALDS (POSICIÓN MEJORADA) */
+        .floating-cart-bar { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%); width: calc(100% - 48px); max-width: 450px; background: var(--text-dark); color: white; padding: 18px 24px; border-radius: 28px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 20px 50px rgba(15,23,42,0.5); z-index: 999; cursor: pointer; transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1); animation: slideUpCartBar 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes slideUpCartBar { from { bottom: -100px; } to { bottom: 90px; } }
         .floating-cart-bar:active { transform: translateX(-50%) scale(0.96); }
         .fcb-left { display: flex; align-items: center; gap: 16px; font-family: 'Outfit'; font-weight: 700; font-size: 1rem; text-transform: uppercase;}
         .fcb-qty { background: var(--primary-orange); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 800;}
@@ -273,6 +274,26 @@
         .custom-div-icon { background: transparent; border: none; }
         @keyframes pulse-deli { 0% {transform: scale(1);} 100% {transform: scale(1.15);} }
         
+        /* MODAL CARRITO REDISEÑO PREMIUM */
+        #modal-carrito { justify-content: flex-end; align-items: center; padding: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(10px);}
+        #modal-carrito .modal-content-standard { width: 100%; max-width: 600px; border-radius: 40px 40px 0 0; padding: 32px 24px 24px; height: auto; max-height: 85vh; display: flex; flex-direction: column; background: #ffffff; box-shadow: 0 -20px 50px rgba(0,0,0,0.15); margin: 0; position: absolute; bottom: 0; transform: translateY(100%); animation: slideUpCartModal 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;}
+        @keyframes slideUpCartModal { to { transform: translateY(0); } }
+        
+        .drag-indicator { width: 40px; height: 5px; background: #e2e8f0; border-radius: 10px; margin: 0 auto 20px; flex-shrink: 0;}
+        .cart-header-title { font-family: 'Outfit'; font-size: 1.8rem; font-weight: 900; color: var(--text-dark); margin: 0; letter-spacing: -0.5px;}
+        
+        .cart-total-row { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; margin-bottom: 24px; background: linear-gradient(135deg, rgba(255,94,0,0.05), rgba(255,51,0,0.02)); padding: 16px 20px; border-radius: 20px; border: 1px solid rgba(255,94,0,0.15);}
+        .cart-total-label { font-size: 0.95rem; font-weight: 800; color: var(--text-dark); text-transform: uppercase; letter-spacing: 1px;}
+        .cart-total-val { font-size: 2.2rem; font-weight: 900; font-family: 'Outfit'; color: var(--primary-orange); letter-spacing: -1px; line-height: 1; }
+
+        .delivery-toggle-container { display: flex; background: #f1f5f9; border-radius: 16px; padding: 6px; margin-bottom: 20px; border: 1px solid #e2e8f0; }
+        .del-option { flex: 1; text-align: center; padding: 14px; border-radius: 12px; font-weight: 800; font-family:'Outfit'; font-size: 1rem; cursor: pointer; transition: 0.3s; color: var(--text-gray); }
+        .del-option.active { background: var(--text-dark); color: white; box-shadow: 0 8px 20px rgba(15,23,42,0.2); }
+
+        .btn-pay-cash { background: linear-gradient(135deg, #10b981, #059669); color: white; box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3); border: none; padding: 18px; border-radius: 18px; font-family: 'Outfit'; font-weight: 800; font-size: 1.1rem; flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: 0.2s;}
+        .btn-pay-cash:active { transform: scale(0.95); }
+        .btn-pay-transfer { background: linear-gradient(135deg, #0ea5e9, #0284c7); color: white; box-shadow: 0 10px 25px rgba(14, 165, 233, 0.3); border: none; padding: 18px; border-radius: 18px; font-family: 'Outfit'; font-weight: 800; font-size: 1.1rem; flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: 0.2s;}
+        .btn-pay-transfer:active { transform: scale(0.95); }
     </style>
 </head>
 <body>
@@ -694,11 +715,11 @@
             <!-- MAPA FULL SCREEN -->
             <div id="tracking-map-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></div>
             
-            <!-- CAJA BUSCADOR COMPACTA ARRIBA -->
-            <div style="position: absolute; top: 20px; left: 20px; right: 20px; z-index: 1000; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); padding: 12px; border-radius: 20px; box-shadow: var(--shadow-float); border: 1px solid var(--border-soft); display: flex; gap: 10px; align-items: center;">
-                <div style="font-size: 1.5rem; padding-left: 5px;">📍</div>
-                <input type="text" id="track-input-code" placeholder="Código TRK..." style="margin:0; padding:12px 14px; border-radius:12px; font-weight:800; font-size:1rem; text-transform:uppercase; background:var(--bg-app); flex:1; border: 1px solid var(--border-soft); outline:none; color:var(--text-dark);">
-                <button onclick="vibrar(); iniciarRastreoClienteManual()" style="margin:0; padding:12px 20px; border-radius:12px; width:auto; font-size:1.2rem; background:var(--gradient-orange); color:white; border:none; font-weight:bold; box-shadow:0 5px 15px rgba(255,94,0,0.3); cursor:pointer;">🔎</button>
+            <!-- CAJA BUSCADOR COMPACTA ARRIBA (CORREGIDA PARA QUE NO SOBRESALGA) -->
+            <div style="position: absolute; top: 20px; left: 20px; width: calc(100% - 40px); box-sizing: border-box; z-index: 1000; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); padding: 12px; border-radius: 20px; box-shadow: var(--shadow-float); border: 1px solid var(--border-soft); display: flex; gap: 10px; align-items: center; overflow: hidden;">
+                <div style="font-size: 1.5rem; padding-left: 5px; flex-shrink: 0;">📍</div>
+                <input type="text" id="track-input-code" placeholder="Código TRK..." style="margin:0; padding:12px 14px; border-radius:12px; font-weight:800; font-size:1rem; text-transform:uppercase; background:var(--bg-app); flex:1; border: 1px solid var(--border-soft); outline:none; color:var(--text-dark); min-width: 0;">
+                <button onclick="vibrar(); iniciarRastreoClienteManual()" style="margin:0; padding:12px 18px; border-radius:12px; flex-shrink: 0; font-size:1.2rem; background:var(--gradient-orange); color:white; border:none; font-weight:bold; box-shadow:0 5px 15px rgba(255,94,0,0.3); cursor:pointer;">🔎</button>
             </div>
 
             <!-- RESULTADO FLOTANTE ABAJO -->
@@ -732,20 +753,24 @@
         <p style="font-size:1.1rem; font-weight:500; margin-top:16px; opacity:0.9;">Conectando con el repartidor...</p>
     </div>
 
-    <!-- MODAL CARRITO MCDONALDS STYLE -->
+    <!-- MODAL CARRITO REDISEÑO PREMIUM -->
     <div class="modal" id="modal-carrito">
         <div class="modal-content-standard">
             <div class="drag-indicator"></div>
+            
+            <!-- HEADER FIJO -->
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-shrink: 0;">
                 <h2 class="cart-header-title">Tu Compra</h2>
                 <button style="background:var(--border-soft); border:none; width:40px; height:40px; border-radius:50%; font-size:1.1rem; cursor:pointer; color:var(--text-dark);" onclick="vibrar(); document.getElementById('modal-carrito').style.display='none'">✕</button>
             </div>
             
-            <div style="flex: 1; overflow-y: auto; padding-right: 5px; display: flex; flex-direction: column; margin-bottom: 10px;">
-                <div id="cart-items-list" style="margin-bottom: 16px;"></div>
+            <!-- CONTENIDO SCROLLEABLE -->
+            <div style="flex: 1; overflow-y: auto; padding-right: 5px; display: flex; flex-direction: column; padding-bottom: 40px;">
+                
+                <div id="cart-items-list" style="margin-bottom: 16px; display: flex; flex-direction: column;"></div>
                 
                 <div class="cart-total-row" style="flex-shrink: 0;">
-                    <span class="cart-total-label">Total</span>
+                    <span class="cart-total-label">Total a Pagar</span>
                     <span class="cart-total-val" id="cart-final-total">$0</span>
                 </div>
 
@@ -759,13 +784,20 @@
                 </div>
                 <input type="text" id="order-notes" class="form-input" placeholder="Aclaraciones para el local (Opcional)" style="background: white; margin-bottom: 16px; flex-shrink: 0;" onfocus="setTimeout(() => this.scrollIntoView({behavior:'smooth', block:'center'}), 300)">
                 
-                <!-- ESPACIADOR PARA EL TECLADO (Solución al scroll) -->
-                <div style="height: 250px; flex-shrink: 0;"></div>
+                <!-- Espaciador extra para que el teclado no tape el último input al hacer scroll -->
+                <div style="height: 60px; flex-shrink: 0;"></div>
             </div>
 
-            <div style="display:flex; gap:12px; flex-shrink: 0; padding-bottom: 15px; background: #ffffff; z-index: 10;">
-                <button class="btn-main" style="background:var(--text-dark); box-shadow:0 10px 25px rgba(15,23,42,0.2); padding: 18px; font-size: 1.05rem;" onclick="vibrar(); enviarPedido('Efectivo')">💵 EFECTIVO</button>
-                <button class="btn-main" style="background:var(--info); box-shadow:0 10px 25px rgba(14,165,233,0.3); padding: 18px; font-size: 1.05rem;" onclick="vibrar(); enviarPedido('Transferencia')">🏦 TRANSF.</button>
+            <!-- BOTONES DE PAGO FIJOS ABAJO -->
+            <div style="display:flex; gap:12px; flex-shrink: 0; padding-top: 15px; border-top: 1px solid var(--border-soft); background: #ffffff; z-index: 10;">
+                <button class="btn-pay-cash" onclick="vibrar(); enviarPedido('Efectivo')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path></svg>
+                    EFECTIVO
+                </button>
+                <button class="btn-pay-transfer" onclick="vibrar(); enviarPedido('Transferencia')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+                    TRANSF.
+                </button>
             </div>
         </div>
     </div>
@@ -992,7 +1024,7 @@
                 let pin = qs('reg-pin') ? qs('reg-pin').value.trim() : ''; 
                 let apin = qs('reg-admin-pin') ? qs('reg-admin-pin').value.trim() : ''; 
                 let wa = qs('reg-phone') ? qs('reg-phone').value.trim() : '';
-                if(!local || !pin || !apin || !wa) { alert("Completá todos los campos."); return; }
+                if(!local || pin || !apin || !wa) { alert("Completá todos los campos."); return; }
                 
                 setText('btn-reg', "CARGANDO..."); if(qs('btn-reg')) qs('btn-reg').disabled = true;
                 
@@ -1686,7 +1718,7 @@
             showToast("Agregado");
         }
 
-        // ================= CARRITO MCDONALDS STYLE =================
+        // ================= CARRITO REDISEÑADO PREMIUM =================
         function updateCartUI() {
             let bar = qs('floating-cart-bar');
             if(!bar) return;
@@ -1704,23 +1736,49 @@
         function abrirModalCarrito() {
             if(shoppingCart.length === 0) return;
             let html = ''; let total = 0;
-            shoppingCart.forEach((item, index) => {
-                total += parseFloat(item.precio); 
+            
+            // AGRUPAMIENTO INTELIGENTE DE PRODUCTOS
+            let counts = {};
+            shoppingCart.forEach(item => {
+                if(!counts[item.codigo]) counts[item.codigo] = { item: item, qty: 0 };
+                counts[item.codigo].qty++;
+                total += parseFloat(item.precio);
+            });
+
+            Object.values(counts).forEach(group => {
+                let p = group.item;
                 html += `
-                <div class="cart-item-row">
-                    <div><div class="cart-item-name">${item.nombre}</div></div>
-                    <div style="display:flex; align-items:center;">
-                        <span class="cart-item-price">$${item.precio.toLocaleString('es-AR')}</span>
-                        <div class="cart-item-del" onclick="vibrar(); removeFromCart(${index})">✕</div>
+                <div style="background:var(--bg-app); border-radius:20px; padding:16px; margin-bottom:12px; border:1px solid var(--border-soft); display:flex; align-items:center; justify-content:space-between;">
+                    <div style="display:flex; align-items:center; gap:14px; flex:1; overflow:hidden;">
+                        <div style="background:var(--text-dark); color:white; font-weight:900; font-family:'Outfit'; width:36px; height:36px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0;">${group.qty}</div>
+                        <div style="flex:1; overflow:hidden;">
+                            <div style="font-family:'Outfit'; font-weight:800; color:var(--text-dark); font-size:1.15rem; line-height:1.2; margin-bottom:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${p.nombre}</div>
+                            <div style="font-family:'Outfit'; font-weight:600; color:var(--text-gray); font-size:0.95rem;">$${p.precio.toLocaleString('es-AR')} <span style="opacity:0.6">c/u</span></div>
+                        </div>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:16px; flex-shrink:0; margin-left:10px;">
+                        <span style="font-family:'Outfit'; font-weight:900; color:var(--text-dark); font-size:1.3rem;">$${(p.precio * group.qty).toLocaleString('es-AR')}</span>
+                        <button style="background:#fee2e2; color:var(--danger); border:none; width:40px; height:40px; border-radius:12px; font-weight:bold; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:0.2s;" onclick="vibrar(); removeGroupFromCart('${p.codigo}')">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+                        </button>
                     </div>
                 </div>`;
             });
+
             setHtml('cart-items-list', html); 
             setText('cart-final-total', "$" + total.toLocaleString('es-AR')); 
             if(qs('modal-carrito')) qs('modal-carrito').style.display = 'flex';
         }
 
-        function removeFromCart(index) { shoppingCart.splice(index, 1); updateCartUI(); if(shoppingCart.length === 0) { if(qs('modal-carrito')) qs('modal-carrito').style.display = 'none'; } else abrirModalCarrito(); }
+        window.removeGroupFromCart = function(code) {
+            shoppingCart = shoppingCart.filter(item => item.codigo !== code);
+            updateCartUI(); 
+            if(shoppingCart.length === 0) { 
+                if(qs('modal-carrito')) qs('modal-carrito').style.display = 'none'; 
+            } else {
+                abrirModalCarrito();
+            }
+        }
 
         function setDeliveryOption(opt) {
             isDeliveryOption = (opt === 'delivery');
@@ -1788,7 +1846,6 @@
                 if(fcb) {
                     fcb.classList.remove('hidden-hard');
                     updateCartUI();
-                    fcb.style.bottom = '105px';
                 }
             } else if(tab === 'track') { 
                 if(qs('customer-tab-menu')) qs('customer-tab-menu').classList.add('hidden'); 
