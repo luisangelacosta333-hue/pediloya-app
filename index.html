@@ -73,11 +73,13 @@
         
         .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 94, 0, 0.08); border: 1px solid rgba(255, 94, 0, 0.15); padding: 10px 22px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; color: var(--primary-orange); letter-spacing: 1.5px; backdrop-filter: blur(12px); margin-bottom: 24px; text-transform: uppercase; box-shadow: 0 8px 20px rgba(255, 94, 0, 0.05); }
         
+        /* LOGO CON RAYOS 3D E ICONO DELIVERY (MEJORADO) */
         .logo-premium-wrapper { position: relative; width: 220px; height: 220px; margin: 20px auto 40px auto; display: flex; justify-content: center; align-items: center; }
         .logo-premium-rays { position: absolute; inset: -40px; background: conic-gradient(from 0deg, transparent 0%, rgba(255,94,0,0.8) 10%, transparent 20%, transparent 40%, rgba(255,94,0,0.8) 50%, transparent 60%, transparent 80%, rgba(255,94,0,0.8) 90%, transparent 100%); border-radius: 50%; animation: spinRays 8s linear infinite; filter: blur(25px); opacity: 0.65; z-index: 1; }
         .logo-premium-core { width: 150px; height: 150px; border-radius: 45px; background: var(--bg-pure); border: 2px solid rgba(255,94,0,0.35); display: flex; align-items: center; justify-content: center; position: relative; z-index: 2; box-shadow: 0 35px 60px rgba(255,94,0,0.25), inset 0 0 25px rgba(255, 94, 0, 0.08); animation: floatLogo 4s ease-in-out infinite; }
         .logo-icon-svg { width: 85px; height: 85px; filter: drop-shadow(0 15px 18px rgba(255,94,0,0.45)); }
         
+        /* TEXTO "PEDILO YA" IMPONENTE */
         .pedilo-ya-title { font-family: 'Outfit', sans-serif; font-size: 3.6rem; font-weight: 900; color: var(--text-dark); margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: -2.5px; line-height: 1; text-shadow: 0 15px 30px rgba(0,0,0,0.08); }
         .pedilo-ya-title span { background: var(--gradient-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
@@ -379,7 +381,7 @@
             <h1 style="font-size: 2.2rem; font-weight: 800; color: var(--text-dark); margin: 0 0 16px 0; letter-spacing: -1px; line-height: 1.2; font-family:'Outfit',sans-serif; text-align:center; white-space: nowrap;">LA REVOLUCIÓN<br><span class="premium-text-gradient">PREMIUM</span></h1>
             
             <p style="font-size: 1.05rem; color: var(--text-gray); line-height: 1.6; font-weight: 500; margin: 0 10px 30px 10px; text-align:center;">
-                La experiencia definitiva de venta online. Exhibí tu menú en video vertical HD, controlá tu caja en vivo, automatiza clientes y ofrecé seguimiento satelital.
+                La experiencia definitiva de venta online. Exhibí tu menú en video vertical HD, controlá tu caja en vivo y ofrecé seguimiento satelital.
             </p>
 
             <button class="btn-tts" onclick="vibrar(); leerCaracteristicasApp()">
@@ -608,6 +610,12 @@
                     <button class="btn-share" style="background:var(--bg-pure); color:var(--text-dark); font-weight:700; border:2px solid var(--border-soft); border-radius:14px; flex:1; box-shadow:var(--shadow-soft); padding:16px;" onclick="vibrar(); copiarLinkExacto()">📄 COPIAR</button>
                 </div>
                 <input type="text" id="store-link-display" readonly style="width:100%; box-sizing:border-box; border:none; background:var(--bg-app); border-radius:20px; font-weight:700; color:var(--info); font-size:0.95rem; padding:18px; text-align:center; outline:none; border:2px dashed var(--info); white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
+            </div>
+
+            <!-- BALANCE TOTAL -->
+            <div style="background:var(--gradient-orange); color:white; padding:32px 20px; border-radius:var(--radius-lg); text-align:center; box-shadow:var(--shadow-orange); margin-bottom:10px; width:100%; box-sizing:border-box;">
+                <span style="font-size:0.9rem; font-weight:800; color:rgba(255,255,255,0.9); text-transform:uppercase; letter-spacing:1.5px;">💰 Balance Total (Gran Total)</span>
+                <div id="adm-total-general" style="font-size:3.5rem; font-weight:900; margin-top:16px; font-family:'Outfit'; letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
             </div>
 
             <!-- CAJA MOSTRADOR -->
@@ -875,7 +883,7 @@
     <div class="modal" id="modal-radar-owner"><div class="modal-content-standard" style="padding:32px 24px;"><button class="modal-close-circle" style="background:rgba(0,0,0,0.05);" onclick="document.getElementById('modal-radar-owner').style.display='none'">✕</button><h3 style="margin:0 0 20px; font-family:'Outfit'; font-size:1.5rem; font-weight:800; color:var(--text-dark); letter-spacing:-0.5px;">Radar GPS Chofer</h3><div id="radar-owner-map-container" style="width:100%; height:350px; border-radius:20px; border:1px solid var(--border-soft); background:#e2e8f0; margin-bottom: 20px; z-index:1;"></div><button class="btn-secondary" onclick="vibrar(); actualizarRadarMap()">Actualizar Ubicación Ahora</button></div></div>
     <div class="modal" id="expense-modal"><div class="modal-content-standard" style="padding:32px 24px;"><button class="modal-close-circle" style="background:rgba(0,0,0,0.05);" onclick="document.getElementById('expense-modal').style.display='none'">✕</button><h3 style="margin:10px 0 16px; font-size:1.6rem; font-weight:800; color:var(--danger); font-family:'Outfit'; letter-spacing:-0.5px;">Registrar Gasto</h3><p id="exp-monto-text" style="font-size:2.8rem; font-weight:300; margin:0 0 24px; font-family:'Outfit'; color:var(--text-dark); letter-spacing:-1px; line-height:1;"></p><input type="text" id="exp-rsn" class="form-input" placeholder="Detalle (Ej: Mercadería)"><button class="btn-main" style="background:var(--danger); box-shadow:0 10px 25px rgba(239,68,68,0.25);" onclick="vibrar(); submitExpense()">Descontar de Caja</button></div></div>
     
-    <!-- NUEVO MODAL: CONTROL DE MOTOS (REEMPLAZA AL DE FIADOS) -->
+    <!-- NUEVO MODAL: CONTROL DE MOTOS -->
     <div class="modal" id="motos-modal">
         <div class="modal-content" style="max-width:100%; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background:var(--bg-app); border:none;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;">
@@ -998,7 +1006,6 @@
             });
         }
 
-        // TEXTO ACTUALIZADO (MICRÓFONO)
         function leerCaracteristicasApp() { 
             if(!('speechSynthesis' in window)) return alert("Tu navegador no soporta el asistente de voz.");
             window.speechSynthesis.cancel();
@@ -1436,17 +1443,28 @@
         async function agregarMoto() {
             let n = qs('add-moto-name') ? qs('add-moto-name').value.trim() : '';
             if(!n) return showToast("Escribí el nombre", "error");
-            await _supabase.from('pediloya_repartidores').insert([{ local_id: currentLocalId, nombre: n }]);
+            
+            // Actualización optimista inmediata
+            dbState.repartidores.push({ id: 'temp-'+Date.now(), local_id: currentLocalId, nombre: n });
             qs('add-moto-name').value = '';
-            await loadDataFromDB();
+            renderAllData();
             showToast("Repartidor agregado");
+            
+            // Inserción real en base de datos
+            await _supabase.from('pediloya_repartidores').insert([{ local_id: currentLocalId, nombre: n }]);
+            await loadDataFromDB();
         }
 
         window.eliminarMoto = async function(id) {
             if(confirm("¿Eliminar este repartidor?")) {
+                // Actualización optimista inmediata
+                dbState.repartidores = dbState.repartidores.filter(r => r.id !== id);
+                renderAllData();
+                showToast("Repartidor eliminado", "info");
+                
+                // Borrado real en base de datos
                 await _supabase.from('pediloya_repartidores').delete().eq('id', id);
                 await loadDataFromDB();
-                showToast("Repartidor eliminado", "info");
             }
         }
 
@@ -1742,6 +1760,9 @@
             window.currentCashPorMoto = cashPorMoto;
             window.currentTotalEnMotos = totalEnMotos;
             
+            let granTotal = calcCashMostrador + totalEnMotos + calcTransf; // SUMA TOTAL GENERAL
+
+            setText('adm-total-general', `$${granTotal.toLocaleString('es-AR')}`); 
             setText('adm-cash', `$${calcCashMostrador.toLocaleString('es-AR')}`); 
             setText('adm-transf', `$${calcTransf.toLocaleString('es-AR')}`); 
             setText('adm-motos-cash', `$${totalEnMotos.toLocaleString('es-AR')}`);
