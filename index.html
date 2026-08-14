@@ -39,6 +39,7 @@
         body { background-color: var(--bg-app); color: var(--text-dark); margin: 0; min-height: 100vh; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
         
         .hidden { display: none !important; }
+        .hidden-hard { display: none !important; }
         .view-container { display: none; flex-direction: column; max-width: 500px; margin: 0 auto; padding: 24px; min-height: 100vh; animation: fadeSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); background: var(--bg-app); padding-bottom: 140px; }
         .view-container.active { display: flex; }
         .view-container-no-pad { padding: 0; max-width: 100%; }
@@ -155,8 +156,8 @@
         .promo-img-box { width: 100%; height: 100%; position: absolute; inset: 0; z-index: 1; }
         .promo-img-box img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
         .promo-info { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(to top, rgba(15,23,42,0.95) 0%, rgba(15,23,42,0.6) 50%, transparent 100%); padding: 40px 24px 24px; z-index: 2; text-align: left;}
-        .promo-badge { display: inline-block; background: var(--gradient-orange); color: white; padding: 8px 16px; border-radius: 50px; font-size: 0.95rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 1px; box-shadow: 0 8px 20px rgba(255,94,0,0.4);}
-        .promo-title { font-family: 'Outfit'; font-size: 2.2rem; font-weight: 900; color: white; margin: 0; letter-spacing: -1px; line-height: 1.1; word-wrap: break-word;}
+        .promo-badge { display: inline-block; background: var(--gradient-orange); color: white; padding: 10px 20px; border-radius: 50px; font-size: 1rem; font-weight: 900; text-transform: uppercase; margin-bottom: 16px; letter-spacing: 1px; box-shadow: 0 8px 20px rgba(255,94,0,0.4);}
+        .promo-title { font-family: 'Outfit'; font-size: 2.8rem; font-weight: 900; color: white; margin: 0; letter-spacing: -1.5px; line-height: 1.1; word-wrap: break-word; text-shadow: 0 4px 15px rgba(0,0,0,0.8);}
 
         /* ================= APP CLIENTE (PREMIUM FULL 9:16) ================= */
         .customer-container { max-width: 500px; margin: 0 auto; width: 100%; position: relative;}
@@ -182,7 +183,7 @@
 
         .food-grid { display: flex; flex-direction: column; gap: 30px; padding: 0 24px 180px; }
         
-        /* TARJETAS 9:16 (TEXTO MÁS DELICADO Y PREMIUM) */
+        /* TARJETAS 9:16 */
         .food-card-large { width: 100%; aspect-ratio: 9 / 16; max-height: 85vh; background: #0f172a; border-radius: 40px; box-shadow: var(--shadow-float); overflow: hidden; cursor: pointer; transition: var(--transition-smooth); position: relative; }
         .food-card-large:active { transform: scale(0.98); }
         .food-img-large { width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: center; font-size: 4rem; }
@@ -205,7 +206,7 @@
         .fcb-qty { background: var(--primary-orange); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 800;}
         .fcb-right { font-family: 'Outfit'; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.5px;}
 
-        /* MODAL DE CARRITO CHECKOUT ESTILIZADO (ABSOLUTAMENTE ABAJO) */
+        /* MODAL DE CARRITO CHECKOUT (ABSOLUTAMENTE ABAJO Y PROTEGIDO DE TECLADOS) */
         #modal-carrito { justify-content: flex-end; align-items: center; padding: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(10px);}
         #modal-carrito .modal-content-standard { width: 100%; max-width: 600px; border-radius: 40px 40px 0 0; padding: 32px 24px 24px; height: auto; max-height: 85vh; display: flex; flex-direction: column; background: #ffffff; box-shadow: 0 -20px 50px rgba(0,0,0,0.15); margin: 0; position: absolute; bottom: 0; transform: translateY(100%); animation: slideUpCartModal 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;}
         @keyframes slideUpCartModal { to { transform: translateY(0); } }
@@ -256,7 +257,7 @@
         .nav-item.active .nav-icon { transform: translateY(-5px) scale(1.15); }
         .nav-icon { font-size: 1.5rem; transition: 0.3s; }
 
-        /* MODALES Y TOAST GENERICOS CORREGIDOS (SIN DOBLE ICONO) */
+        /* MODALES Y TOAST GENERICOS (SIN EMOJIS DUPLICADOS) */
         .toast { position: fixed; top: 40px; left: 50%; transform: translateX(-50%) translateY(-20px) scale(0.95); background: rgba(15, 23, 42, 0.95); color: white; padding: 16px 24px; border-radius: 50px; font-weight: 600; opacity: 0; transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); z-index: 99999999; font-size: 1rem; pointer-events: none; box-shadow: 0 20px 50px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; gap: 12px; min-width: max-content; white-space: nowrap; backdrop-filter: blur(10px);}
         .toast.ver { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
         #toast-icon { font-size: 1.3rem; display: flex; align-items: center; }
@@ -663,26 +664,24 @@
             </div>
         </div>
 
-        <div id="customer-tab-track" class="hidden customer-container" style="padding: 0; min-height: 100vh; background: #f8fafc;">
-            <div style="background: var(--text-dark); border-radius: 0 0 40px 40px; padding: 60px 24px 40px; color: white; margin-bottom: -30px; position: relative; z-index: 2; box-shadow: 0 20px 40px rgba(0,0,0,0.15); text-align: center;">
-                <div style="font-size: 4rem; margin-bottom: 10px;">📍</div>
-                <h1 style="font-family:'Outfit'; font-size:3rem; font-weight:900; margin:0 0 10px; letter-spacing:-1.5px; line-height:1;">Sigue tu Pedido</h1>
-                <p style="color:var(--text-light); font-weight:500; font-size:1.15rem; margin:0;">Monitoreo satelital en tiempo real.</p>
-            </div>
+        <div id="customer-tab-track" class="hidden customer-container" style="padding: 0; height: 100vh; width: 100%; position: relative; overflow: hidden; background: #e2e8f0;">
+            <!-- MAPA FULL SCREEN -->
+            <div id="tracking-map-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></div>
             
-            <div style="padding: 50px 24px 30px; position: relative; z-index: 1;">
-                <div style="background: white; padding: 32px 24px; border-radius: 32px; box-shadow: 0 15px 35px rgba(0,0,0,0.06);">
-                    <input type="text" id="track-input-code" class="form-input" placeholder="Ingresá código (Ej: TRK123)" style="background: #f1f5f9; text-align: center; font-weight: 800; font-size: 1.15rem; letter-spacing: 1px; text-transform: uppercase;">
-                    <button class="btn-main" onclick="vibrar(); iniciarRastreoClienteManual()" style="box-shadow: 0 15px 30px rgba(255,94,0,0.3); font-size: 1.15rem; padding: 22px;">BUSCAR PEDIDO</button>
+            <!-- CAJA BUSCADOR FLOTANTE PREMIUM -->
+            <div style="position: absolute; top: 40px; left: 20px; right: 20px; z-index: 1000; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); padding: 24px; border-radius: 32px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5);">
+                <h1 style="font-family:'Outfit'; font-size:2.2rem; font-weight:900; margin:0 0 8px; color:var(--text-dark); letter-spacing:-1px; line-height:1; display:flex; align-items:center; gap:10px;"><span style="font-size:2.5rem;">📍</span> Rastreo</h1>
+                <p style="color:var(--text-gray); font-weight:500; font-size:1rem; margin:0 0 20px;">Ubicación en vivo del delivery al estilo Uber.</p>
+                <div style="display:flex; gap:12px;">
+                    <input type="text" id="track-input-code" class="form-input" placeholder="EJ: TRK12345" style="margin:0; padding:16px 20px; border-radius:20px; font-weight:800; font-size:1.1rem; text-transform:uppercase; background:#f1f5f9; flex:1; border: 1px solid var(--border-soft);">
+                    <button class="btn-main" onclick="vibrar(); iniciarRastreoClienteManual()" style="margin:0; padding:0 24px; border-radius:20px; width:auto; font-size:1.4rem; box-shadow:0 10px 20px rgba(255,94,0,0.3);">🔎</button>
                 </div>
             </div>
-            
-            <div id="tracking-result-box" class="hidden" style="margin:20px 24px 40px; border-radius: 36px; overflow:hidden; border: 1px solid var(--border-soft); box-shadow: var(--shadow-float); background: white;">
-                <div id="tracking-map-container" style="width:100%; height:400px; background:#e2e8f0; z-index:1;"></div>
-                <div style="padding: 32px 24px; background: var(--bg-pure); position:relative; z-index:5;">
-                    <div style="font-size:1.3rem; font-weight:800; color:var(--text-dark); font-family:'Outfit'; margin-bottom:8px;" id="track-status-text">Buscando cadete...</div>
-                    <div style="font-size:0.95rem; color:var(--text-gray); font-weight:500;" id="track-detail-text"></div>
-                </div>
+
+            <!-- RESULTADO FLOTANTE -->
+            <div id="tracking-result-box" class="hidden" style="position: absolute; bottom: 120px; left: 20px; right: 20px; z-index: 1000; background: white; padding: 24px; border-radius: 32px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); border: 1px solid var(--border-soft);">
+                <div style="font-size:1.5rem; font-weight:900; color:var(--text-dark); font-family:'Outfit'; margin-bottom:8px; letter-spacing:-0.5px;" id="track-status-text">Buscando cadete...</div>
+                <div style="font-size:1rem; color:var(--text-gray); font-weight:500;" id="track-detail-text"></div>
             </div>
         </div>
 
@@ -1612,7 +1611,7 @@
             }
         });
 
-        // ================= QUICK VIEW CORREGIDO =================
+        // ================= QUICK VIEW CORREGIDO (AMBOS OCUPAN TODA LA PANTALLA) =================
         function openQuickView(code) {
             let item = menuItems.find(i => i.codigo === code); if(!item) return;
             currentQvItem = item; currentQvQty = 1;
@@ -1756,14 +1755,20 @@
 
         function switchCustomerTab(tab, element) {
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active')); if(element) element.classList.add('active');
+            let fcb = qs('floating-cart-bar');
             if(tab === 'menu') { 
                 if(qs('customer-tab-menu')) qs('customer-tab-menu').classList.remove('hidden'); 
                 if(qs('customer-tab-track')) qs('customer-tab-track').classList.add('hidden'); 
-                if(qs('floating-cart-bar')) qs('floating-cart-bar').style.bottom = '90px';
+                if(fcb) {
+                    fcb.classList.remove('hidden-hard');
+                    updateCartUI();
+                    fcb.style.bottom = '100px';
+                }
             } else if(tab === 'track') { 
                 if(qs('customer-tab-menu')) qs('customer-tab-menu').classList.add('hidden'); 
                 if(qs('customer-tab-track')) qs('customer-tab-track').classList.remove('hidden'); 
-                if(qs('floating-cart-bar')) qs('floating-cart-bar').style.bottom = '-100px'; 
+                if(fcb) fcb.classList.add('hidden-hard'); 
+                if(!trackingMap) updateLiveMap(-26.8241, -65.2226, 'tracking-map-container', false);
                 if(trackingMap) setTimeout(() => trackingMap.invalidateSize(), 300);
             }
         }
@@ -1789,17 +1794,17 @@
             if(!code) return showToast("Ingresá un código.", "error"); 
             if(!code.includes('TRK')) code = 'TRK' + code; 
             
-            showToast("Conectando al radar...", "info"); 
+            showToast("Buscando señal...", "info"); 
             let { data: logs } = await _supabase.from('pediloya_logs').select('*').eq('local_id', targetLocalId).ilike('descripcion', `%${code}%`).maybeSingle(); 
             
             if(logs) { 
                 if(qs('tracking-result-box')) qs('tracking-result-box').classList.remove('hidden'); 
-                setText('track-detail-text', logs.descripcion.split('Detalle:\n')[1] || "Preparando tu comida..."); 
+                setText('track-detail-text', logs.descripcion.split('Detalle:\n')[1] || "Preparando tu pedido..."); 
                 if (!trackingMap) updateLiveMap(-27.0545, -65.4032, 'tracking-map-container', false); 
                 actualizarMapaTracking(targetLocalId); 
                 setInterval(() => actualizarMapaTracking(targetLocalId), 5000);
-                showToast("Conectado al satélite"); 
-            } else { showToast("Código de pedido no válido.", "error"); } 
+                showToast("Conectado al GPS"); 
+            } else { showToast("Código inválido.", "error"); } 
         }
 
         async function iniciarRastreoCliente(orderId, localName) { 
@@ -1814,7 +1819,7 @@
 
         async function actualizarMapaTracking(localId) { 
             let { data } = await _supabase.from('pediloya_logs').select('descripcion').eq('local_id', localId).eq('tipo', 'GPS_DELI').order('created_at', {ascending: false}).limit(1).maybeSingle(); 
-            if(data) { try { let coords = JSON.parse(data.descripcion); updateLiveMap(coords.lat, coords.lon, 'tracking-map-container', false); setText('track-status-text', "🛵 El repartidor está en camino"); } catch(e) {} } 
+            if(data) { try { let coords = JSON.parse(data.descripcion); updateLiveMap(coords.lat, coords.lon, 'tracking-map-container', false); setText('track-status-text', "🛵 En camino"); } catch(e) {} } 
         }
 
         // ================= CALCULADORA CAJA Y STOCK INTELIGENTE =================
