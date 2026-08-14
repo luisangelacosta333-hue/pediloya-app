@@ -12,6 +12,18 @@
     <meta http-equiv="Expires" content="0">
     
     <title>Pedilo Ya Premium | La Revolución Gastronómica</title>
+
+    <!-- ANTI-COPIA: Bloquear clic derecho y herramientas de desarrollador -->
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123) return false; // Bloquea F12
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // Bloquea Ctrl+Shift+I
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; // Bloquea Ctrl+Shift+J
+            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // Bloquea Ctrl+U
+            if(e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) return false; // Bloquea Guardar página
+        }
+    </script>
     
     <!-- ================= CONEXIÓN PWA ================= -->
     <link rel="manifest" href="./manifest.json">
@@ -1320,6 +1332,8 @@
             let totalCash = 0;
 
             dbState.logs.forEach(l => {
+                if (l.tipo === 'HISTORIAL_CERRADO') return; // SALTAMOS LOS CERRADOS
+                
                 let pAmt = parseFloat(l.monto) || 0;
                 let methodStr = (l.metodo || '').toUpperCase();
                 
@@ -1330,7 +1344,6 @@
                     } else if (l.tipo === 'RENDICION' && l.moto_asignada) {
                         cashPorMoto[l.moto_asignada] = (cashPorMoto[l.moto_asignada] || 0) - pAmt;
                         calcCashMostrador += pAmt;
-                        // totalCash no cambia, solo se mueve de moto a mostrador
                     } else if (l.tipo !== 'SISTEMA' && l.tipo !== 'GPS_DELI' && l.tipo !== 'PEDIDO_WEB' && l.tipo !== 'PEDIDO_WEB_OK') {
                         calcCashMostrador += pAmt; 
                         totalCash += pAmt;
@@ -1387,9 +1400,25 @@
             let btn = qs('cierre-turno-modal').querySelector('.btn-main');
             if(btn) { btn.innerText = "CERRANDO..."; btn.disabled = true; }
 
+            // 1. Enviar el mensaje de WhatsApp al dueño
+            if(currentCierreData.phone) {
+                window.open(`https://wa.me/${currentCierreData.phone}?text=${encodeURIComponent(currentCierreData.msg)}`, '_blank');
+            }
+
+            // 2. Archivar todos los logs actuales para limpiar la pantalla y contadores a cero
+            // Excluimos GPS_DELI para no borrar el rastro en vivo, y PEDIDO_WEB para no borrar pedidos online pendientes
+            const logIds = dbState.logs.filter(l => l.tipo !== 'GPS_DELI' && l.tipo !== 'PEDIDO_WEB' && l.tipo !== 'HISTORIAL_CERRADO').map(l => l.id);
+            
+            // Hacemos el update en lotes de 50 para máxima seguridad en la base de datos
+            for (let i = 0; i < logIds.length; i += 50) {
+                let chunk = logIds.slice(i, i + 50);
+                await _supabase.from('pediloya_logs').update({ tipo: 'HISTORIAL_CERRADO' }).in('id', chunk);
+            }
+
+            // 3. Insertamos el registro de cierre (también oculto para que empiece limpio el contador)
             await _supabase.from('pediloya_logs').insert([{ 
                 local_id: currentLocalId, 
-                tipo: 'SALIDA', 
+                tipo: 'HISTORIAL_CERRADO', 
                 metodo: 'EFECTIVO', 
                 monto: -currentCierreData.total, 
                 fecha: getTucumanDateFE(), 
@@ -1399,11 +1428,7 @@
             
             await loadDataFromDB(); 
             if(qs('cierre-turno-modal')) qs('cierre-turno-modal').style.display = 'none';
-            showToast("Turno Cerrado");
-
-            if(currentCierreData.phone) {
-                window.open(`https://wa.me/${currentCierreData.phone}?text=${encodeURIComponent(currentCierreData.msg)}`, '_blank');
-            }
+            showToast("Turno Cerrado. Contadores en cero.");
             
             if(btn) { btn.innerText = "VACIAR CAJA Y AVISAR AL DUEÑO"; btn.disabled = false; }
             currentCierreData = null;
@@ -1709,6 +1734,8 @@
             let pedidosWebNuevos = 0;
 
             dbState.logs.forEach(l => {
+                if (l.tipo === 'HISTORIAL_CERRADO') return; // Ignoramos todos los archivados (turno cerrado)
+
                 let pAmt = parseFloat(l.monto) || 0; 
                 let methodStr = (l.metodo || '').toUpperCase();
                 
