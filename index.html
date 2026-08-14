@@ -1334,7 +1334,7 @@
 
             dbState.logs.forEach(l => {
                 if (hitCierre) return;
-                if (l.descripcion && l.descripcion.toUpperCase().includes('CIERRE DE TURNO')) { hitCierre = true; return; }
+                if (l.tipo === 'CIERRE_TURNO' || (l.descripcion && l.descripcion.toUpperCase().includes('CIERRE DE TURNO'))) { hitCierre = true; return; }
 
                 let pAmt = parseFloat(l.monto) || 0;
                 let methodStr = (l.metodo || '').toUpperCase();
@@ -1404,20 +1404,15 @@
             let btn = qs('cierre-turno-modal').querySelector('.btn-main');
             if(btn) { btn.innerText = "CERRANDO..."; btn.disabled = true; }
 
-            // 1. Enviar el mensaje de WhatsApp al dueño
-            if(currentCierreData.phone) {
-                window.open(`https://wa.me/${currentCierreData.phone}?text=${encodeURIComponent(currentCierreData.msg)}`, '_blank');
-            }
-
-            // 2. Insertamos el registro de cierre (ahora actúa como separador infalible)
+            // 1. PRIMERO GUARDAMOS EN LA BASE DE DATOS (Si abrimos WhatsApp primero, el celular pausa la app y nunca se guarda)
             await _supabase.from('pediloya_logs').insert([{ 
                 local_id: currentLocalId, 
-                tipo: 'SALIDA', 
+                tipo: 'CIERRE_TURNO', 
                 metodo: 'EFECTIVO', 
                 monto: -currentCierreData.total, 
                 fecha: getTucumanDateFE(), 
                 hora: getTucumanTimeFE(), 
-                descripcion: 'CIERRE DE TURNO (RETIRO DE CAJA)' 
+                descripcion: '--- CIERRE DE TURNO ---' 
             }]); 
             
             await loadDataFromDB(); 
@@ -1425,7 +1420,17 @@
             showToast("Turno Cerrado. Contadores en cero.");
             
             if(btn) { btn.innerText = "VACIAR CAJA Y AVISAR AL DUEÑO"; btn.disabled = false; }
+            
+            // 2. ABRIR WHATSAPP AL FINAL
+            let phone = currentCierreData.phone;
+            let msg = currentCierreData.msg;
             currentCierreData = null;
+            
+            if(phone) {
+                setTimeout(() => {
+                    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+                }, 300);
+            }
         }
 
         async function loadDataFromDB() {
@@ -1743,13 +1748,13 @@
                             <div style="font-size:0.8rem; font-weight:700; color:var(--text-dark); background:var(--bg-app); border:1px solid var(--border-soft); padding:6px 12px; border-radius:8px;">${methodStr}</div>
                         </div>
                         <div style="font-size:0.95rem; color:var(--text-dark); font-weight:500; white-space:pre-wrap; line-height:1.6; background:var(--bg-app); padding:16px; border-radius:12px; margin-bottom:16px; border:1px solid var(--border-soft);">${l.descripcion}</div>
-                        <button onclick="vibrar(); marcarPedidoWebRealizado('${l.id}')" style="width:100%; background:#fef2f2; color:var(--danger); border:1px dashed #fca5a5; border-radius:14px; padding:16px; font-weight:800; font-family:'Outfit'; font-size:1.05rem; cursor:pointer; transition:0.2s;">✔️ MARCAR COMO ENTREGADO (BORRAR)</button>
+                        <button onclick="vibrar(); marcarPedidoWebRealizado('${l.id}')" style="width:100%; background:#fef2f2; color:var(--danger); border:1px dashed #fca5a5; border-radius:14px; padding:16px; font-weight:800; font-family:'Outfit'; font-size:1.05rem; cursor:pointer; transition:0.2s;">✔️ MAR পঞ্চাশ Entregado (BORRAR)</button>
                     </div>`;
                 }
 
                 // SI YA PASAMOS UN CIERRE DE TURNO, IGNORAMOS EL RESTO DE LAS FINANZAS Y EL HISTORIAL
                 if (hitCierre) return;
-                if (l.descripcion && l.descripcion.toUpperCase().includes('CIERRE DE TURNO')) {
+                if (l.tipo === 'CIERRE_TURNO' || (l.descripcion && l.descripcion.toUpperCase().includes('CIERRE DE TURNO'))) {
                     hitCierre = true;
                     return;
                 }
@@ -2219,5 +2224,64 @@
         function compartirLinkNativo() { let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}`; if (navigator.share) { navigator.share({ title: `Menú de ${cUser}`, text: `¡Hacé tu pedido online! 🛵🍔`, url: link }).catch(err => console.log(err)); } else { copiarLinkExacto(); } }
         function abrirPedidosWeb() { if(qs('pedidos-web-modal')) qs('pedidos-web-modal').style.display='flex'; }
         function abrirRadarDueno() { if(qs('modal-radar-owner')) qs('modal-radar-owner').style.display='flex'; actualizarRadarMap(); setTimeout(actualizarRadarMap, 500); }
-        async function actualizarRadarMap() { showToast("Buscando GPS...", "info"); let { data } = await _Soy un modelo de lenguaje, así que no tengo esa capacidad.
+        async function actualizarRadarMap() { showToast("Buscando GPS...", "info"); let { data } = await _supabase.from('pediloya_logs').select('descripcion').eq('local_id', currentLocalId).eq('tipo', 'GPS_DELI').order('created_at', {ascending: false}).limit(1).maybeSingle(); if(data) { try { let coords = JSON.parse(data.descripcion); updateLiveMap(coords.lat, coords.lon, 'radar-owner-map-container', true); showToast("Actualizado"); } catch(e) {} } }
+        
+        let driverGpsInterval = null;
+        function toggleDriverGps() { let btn = qs('btn-gps'); if(!btn) return; window.gpsActive = !window.gpsActive; if(window.gpsActive) { btn.innerHTML = '📍 GPS ON'; btn.style.borderColor = "var(--text-dark)"; btn.style.color = "white"; btn.style.background = "var(--text-dark)"; if(navigator.geolocation) { const enviarPosicion = async (p) => { await _supabase.from('pediloya_logs').insert([{ local_id: currentLocalId, tipo: 'GPS_DELI', metodo: 'SISTEMA', monto: 0, descripcion: JSON.stringify({lat: p.coords.latitude, lon: p.coords.longitude}) }]); }; navigator.geolocation.getCurrentPosition(enviarPosicion, err => {}, { enableHighAccuracy: true }); driverGpsInterval = setInterval(() => { navigator.geolocation.getCurrentPosition(enviarPosicion, err => {}, { enableHighAccuracy: true }); }, 5000); } } else { btn.innerHTML = '📍 GPS DELI'; btn.style.borderColor = "var(--border-soft)"; btn.style.color = "var(--text-gray)"; btn.style.background = "var(--bg-pure)"; clearInterval(driverGpsInterval); driverGpsInterval = null; } }
+
+        function pausarVideoQuickView() { let vids = document.querySelectorAll('#qv-media video'); vids.forEach(v => v.pause()); }
+
+        // ================= CONTROL DE REPARTIDORES =================
+        window.abrirModalMotos = function() {
+            renderControlMotos();
+            if(qs('motos-modal')) qs('motos-modal').style.display = 'flex';
+        };
+
+        window.renderControlMotos = function() {
+            let html = '';
+            setText('motos-total-text', `$${(window.currentTotalEnMotos || 0).toLocaleString('es-AR')}`);
+            
+            dbState.repartidores.forEach(m => {
+                let debt = window.currentCashPorMoto[m.nombre] || 0;
+                html += `
+                <div style="background:var(--bg-pure); padding:16px; border-radius:16px; border:1px solid var(--border-soft); display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <div>
+                        <div style="font-weight:800; font-size:1.1rem; color:var(--text-dark);">🛵 ${m.nombre}</div>
+                        <div style="color:var(--primary-orange); font-weight:800; font-size:1.2rem; font-family:'Outfit';">Tiene: $${debt.toLocaleString('es-AR')}</div>
+                    </div>
+                    <button onclick="vibrar(); rendirPlataMoto('${m.nombre}', ${debt})" style="background:var(--text-dark); color:white; border:none; padding:10px 16px; border-radius:12px; font-weight:bold; cursor:pointer; font-family:'Outfit';">RENDIR</button>
+                </div>`;
+            });
+            setHtml('motos-list-container', html || '<p style="text-align:center; color:var(--text-light); margin-top:20px;">No hay repartidores agregados en el panel de dueño.</p>');
+        };
+
+        window.rendirPlataMoto = async function(nombre, deudaActual) {
+            if(deudaActual <= 0) return alert(`${nombre} no tiene dinero para rendir ahora mismo.`);
+
+            let monto = prompt(`¿Cuánta plata te está entregando ${nombre}?\n(Tiene encima: $${deudaActual})`, deudaActual);
+            if(monto === null || monto === "") return;
+            
+            monto = parseFloat(monto);
+            if(isNaN(monto) || monto <= 0) return alert("Monto inválido.");
+
+            if(confirm(`Recibirás $${monto} de ${nombre} y pasará a tu caja de mostrador. ¿Confirmar?`)) {
+                await _supabase.from('pediloya_logs').insert([{ 
+                    local_id: currentLocalId, 
+                    tipo: 'RENDICION', 
+                    metodo: 'EFECTIVO', 
+                    monto: monto, 
+                    fecha: getTucumanDateFE(), 
+                    hora: getTucumanTimeFE(), 
+                    descripcion: `Rendición de caja: ${nombre}`,
+                    moto_asignada: nombre
+                }]); 
+                
+                await loadDataFromDB(); 
+                renderControlMotos();
+                showToast("Dinero recibido y guardado en caja.");
+            }
+        };
+    </script>
+</body>
+</html>
 
