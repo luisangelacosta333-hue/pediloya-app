@@ -13,6 +13,12 @@
     
     <title>Pedilo Ya Premium | La Revolución Gastronómica</title>
     
+    <!-- ================= CONEXIÓN PWA ================= -->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#ff5e00">
+    <link rel="apple-touch-icon" href="./icon-192.png">
+    <!-- ================================================ -->
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -69,7 +75,6 @@
         
         /* LOGO CON RAYOS 3D E ICONO DELIVERY (MEJORADO) */
         .logo-premium-wrapper { position: relative; width: 220px; height: 220px; margin: 20px auto 40px auto; display: flex; justify-content: center; align-items: center; }
-        /* Aumentamos el inset a -40px y el blur para que el rayo sea enorme e imponente */
         .logo-premium-rays { position: absolute; inset: -40px; background: conic-gradient(from 0deg, transparent 0%, rgba(255,94,0,0.8) 10%, transparent 20%, transparent 40%, rgba(255,94,0,0.8) 50%, transparent 60%, transparent 80%, rgba(255,94,0,0.8) 90%, transparent 100%); border-radius: 50%; animation: spinRays 8s linear infinite; filter: blur(25px); opacity: 0.65; z-index: 1; }
         .logo-premium-core { width: 150px; height: 150px; border-radius: 45px; background: var(--bg-pure); border: 2px solid rgba(255,94,0,0.35); display: flex; align-items: center; justify-content: center; position: relative; z-index: 2; box-shadow: 0 35px 60px rgba(255,94,0,0.25), inset 0 0 25px rgba(255, 94, 0, 0.08); animation: floatLogo 4s ease-in-out infinite; }
         .logo-icon-svg { width: 85px; height: 85px; filter: drop-shadow(0 15px 18px rgba(255,94,0,0.45)); }
@@ -299,8 +304,20 @@
 <body>
 
     <script>
-        if ('caches' in window) { caches.keys().then(names => { for (let name of names) caches.delete(name); }); }
-        if ('serviceWorker' in navigator) { navigator.serviceWorker.getRegistrations().then(regs => { for(let reg of regs) reg.unregister(); }); }
+        // Limpieza de caché inicial (opcional, pero la dejo si la querías)
+        // if ('caches' in window) { caches.keys().then(names => { for (let name of names) caches.delete(name); }); }
+        
+        // REGISTRO DE SERVICE WORKER PARA PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js').then(registration => {
+                    console.log('PWA Lista - ServiceWorker registrado con éxito: ', registration.scope);
+                }).catch(error => {
+                    console.log('Error al registrar el ServiceWorker: ', error);
+                });
+            });
+        }
+
         setTimeout(() => { let s = document.getElementById('splash-screen'); if (s) { s.style.opacity = '0'; setTimeout(() => s.style.display = 'none', 500); } }, 1200);
     </script>
 
@@ -1024,7 +1041,7 @@
                 let pin = qs('reg-pin') ? qs('reg-pin').value.trim() : ''; 
                 let apin = qs('reg-admin-pin') ? qs('reg-admin-pin').value.trim() : ''; 
                 let wa = qs('reg-phone') ? qs('reg-phone').value.trim() : '';
-                if(!local || pin || !apin || !wa) { alert("Completá todos los campos."); return; }
+                if(!local || !pin || !apin || !wa) { alert("Completá todos los campos."); return; }
                 
                 setText('btn-reg', "CARGANDO..."); if(qs('btn-reg')) qs('btn-reg').disabled = true;
                 
