@@ -864,16 +864,14 @@
         }
 
         function leerCaracteristicasApp() { 
-            if(!('speechSynthesis' in window)) return alert("Tu celular no soporta el asistente de voz nativo.");
+            if(!('speechSynthesis' in window)) return alert("Tu navegador no soporta el asistente de voz.");
             window.speechSynthesis.cancel();
-            setTimeout(() => {
-                const speech = new SpeechSynthesisUtterance(); 
-                speech.text = "¡Bienvenido a Pedilo, ya, Premium por Energy Software! La solución tecnológica definitiva para tu comercio gastronómico. Muestra tu negocio en el celular de tus clientes con menú en video vertical formato TikTok de alta definición. Tus clientes hacen sus pedidos en segundos con carrito estilo McDonald's y siguen a la motito en vivo por GPS satelital como en Uber. Además, contás con caja registradora inteligente que descuenta stock automáticamente, control de gastos, libreta de fiados y cobros por WhatsApp. Disfrutá de 30 días de prueba completamente gratis, sin tarjeta de crédito y sin comisiones por venta. ¡Sumate a la revolución del delivery!"; 
-                speech.lang = 'es-ES'; // Más compatible a nivel global en celulares
-                speech.rate = 1.0; 
-                window.speechSynthesis.speak(speech); 
-                showToast("🔊 Reproduciendo presentación de voz...");
-            }, 100);
+            const speech = new SpeechSynthesisUtterance(); 
+            speech.text = "¡Bienvenido a Pedilo, ya, Premium por Energy Software! La solución tecnológica definitiva para tu comercio gastronómico. Muestra tu negocio en el celular de tus clientes con menú en video vertical formato TikTok de alta definición. Tus clientes hacen sus pedidos en segundos con carrito estilo McDonald's y siguen a la motito en vivo por GPS satelital como en Uber. Además, contás con caja registradora inteligente que descuenta stock automáticamente, control de gastos, libreta de fiados y cobros por WhatsApp. Disfrutá de 30 días de prueba completamente gratis, sin tarjeta de crédito y sin comisiones por venta. ¡Sumate a la revolución del delivery!"; 
+            speech.lang = 'es-AR'; 
+            speech.rate = 1.0; 
+            window.speechSynthesis.speak(speech); 
+            showToast("🔊 Reproduciendo presentación de voz...");
         }
 
         async function compressImage(file) {
