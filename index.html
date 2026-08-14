@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -61,39 +60,44 @@
         .btn-secondary { width: 100%; padding: 18px; background: var(--bg-pure); color: var(--text-dark); font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; border: 2px solid var(--border-soft); border-radius: 18px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; transition: var(--transition-smooth); box-shadow: var(--shadow-soft); }
         .btn-secondary:active { background: var(--bg-app); transform: scale(0.98); }
 
-        /* ================= LANDING PAGE SAAS ================= */
-        .landing-wrapper { background-color: #0f172a; background-image: radial-gradient(circle at 20% 20%, rgba(255, 94, 0, 0.18), transparent 45%), radial-gradient(circle at 80% 80%, rgba(14, 165, 233, 0.15), transparent 45%); background-attachment: fixed; color: #f8fafc; min-height: 100vh; position: relative; overflow: hidden; padding-bottom: 80px; }
+        /* ================= LANDING PAGE SAAS (BLANCO Y NARANJA) ================= */
+        .landing-wrapper { background-color: var(--bg-pure); background-image: radial-gradient(circle at 15% 10%, rgba(255, 94, 0, 0.05), transparent 45%), radial-gradient(circle at 85% 90%, rgba(255, 94, 0, 0.04), transparent 45%); color: var(--text-dark); min-height: 100vh; position: relative; overflow: hidden; padding-bottom: 80px; }
         .landing-content { position: relative; z-index: 2; padding: 24px 24px; max-width: 520px; margin: 0 auto; }
         
-        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 10px 22px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; color: #ff9d5c; letter-spacing: 1.5px; backdrop-filter: blur(12px); margin-bottom: 24px; text-transform: uppercase; box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 94, 0, 0.08); border: 1px solid rgba(255, 94, 0, 0.15); padding: 10px 22px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; color: var(--primary-orange); letter-spacing: 1.5px; backdrop-filter: blur(12px); margin-bottom: 24px; text-transform: uppercase; box-shadow: 0 8px 20px rgba(255, 94, 0, 0.05); }
         
-        .logo-3d-container { width: 160px; height: 160px; margin: 20px auto 30px auto; border-radius: 50%; background: linear-gradient(135deg, rgba(255, 94, 0, 0.15), rgba(255, 51, 0, 0.05)); border: 2px solid rgba(255, 94, 0, 0.5); display: flex; align-items: center; justify-content: center; position: relative; box-shadow: 0 0 60px rgba(255, 94, 0, 0.4), inset 0 0 30px rgba(255, 94, 0, 0.2); animation: floatLogo 4s ease-in-out infinite; }
-        .logo-3d-text { font-size: 5rem; font-family: 'Outfit', sans-serif; font-weight: 900; color: #ffffff; text-shadow: 0 0 25px #ff5e00, 0 0 45px #ff3300; letter-spacing: -2px; line-height: 1; padding-bottom: 5px; }
+        /* LOGO PIY 3D MODERNO */
+        .logo-3d-container { width: 140px; height: 140px; margin: 30px auto; border-radius: 35px; background: var(--bg-pure); border: 3px solid rgba(255,94,0,0.3); display: flex; align-items: center; justify-content: center; position: relative; box-shadow: 20px 20px 60px rgba(0,0,0,0.06), -20px -20px 60px #ffffff, inset 0 0 20px rgba(255, 94, 0, 0.05); animation: floatLogo 4s ease-in-out infinite; transform-style: preserve-3d; perspective: 1000px; }
+        .logo-3d-text { font-size: 4.8rem; font-family: 'Outfit', sans-serif; font-weight: 900; background: var(--gradient-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 3px 3px 0px rgba(255,94,0,0.1), 6px 6px 15px rgba(255,94,0,0.25); letter-spacing: -3px; padding-bottom: 5px; padding-right: 5px; transform: translateZ(15px); }
         
-        .premium-text-gradient { background: linear-gradient(to right, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 10px 30px rgba(56, 189, 248, 0.3); font-weight: 900; }
+        .premium-text-gradient { background: var(--gradient-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 10px 30px rgba(255, 94, 0, 0.25); font-weight: 900; }
 
-        .btn-tts { width: 100%; padding: 20px; background: rgba(14, 165, 233, 0.1); border: 2px solid #0ea5e9; color: #38bdf8; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.1rem; border-radius: 20px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 15px 30px rgba(14, 165, 233, 0.15); transition: all 0.3s; display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 40px; backdrop-filter: blur(10px); }
-        .btn-tts:active { transform: scale(0.97); background: rgba(14, 165, 233, 0.2); }
+        .btn-tts { width: 100%; padding: 20px; background: var(--bg-pure); border: 2px solid var(--border-soft); color: var(--text-dark); font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.1rem; border-radius: 20px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 15px 30px rgba(0,0,0,0.04); transition: all 0.3s; display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 40px; }
+        .btn-tts:active { transform: scale(0.97); background: var(--bg-app); }
 
-        .glass-card-dark { background: rgba(15, 23, 42, 0.6); border-radius: 36px; padding: 40px 28px; margin-bottom: 32px; box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); }
+        .glass-card-light { background: var(--bg-pure); border-radius: 36px; padding: 40px 28px; margin-bottom: 32px; box-shadow: 0 25px 50px rgba(0,0,0,0.05); border: 1px solid var(--border-soft); position: relative; overflow: hidden; }
         
         .feature-item { display: flex; align-items: flex-start; gap: 18px; margin-bottom: 28px; }
-        .feature-icon-box { width: 54px; height: 54px; border-radius: 18px; background: linear-gradient(135deg, rgba(255, 94, 0, 0.2), rgba(255, 51, 0, 0.05)); border: 1px solid rgba(255, 94, 0, 0.4); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; flex-shrink: 0; color: var(--primary-orange); box-shadow: 0 10px 20px rgba(255, 94, 0, 0.15); }
-        .feature-title-text { font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 800; color: #ffffff; margin: 0 0 6px 0; letter-spacing: -0.5px; }
-        .feature-desc-text { font-size: 0.95rem; color: #94a3b8; margin: 0; line-height: 1.6; font-weight: 400; }
+        .feature-icon-box { width: 54px; height: 54px; border-radius: 18px; background: rgba(255, 94, 0, 0.08); border: 1px solid rgba(255, 94, 0, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; flex-shrink: 0; color: var(--primary-orange); box-shadow: 0 10px 20px rgba(255, 94, 0, 0.06); }
+        .feature-title-text { font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin: 0 0 6px 0; letter-spacing: -0.5px; }
+        .feature-desc-text { font-size: 0.95rem; color: var(--text-gray); margin: 0; line-height: 1.6; font-weight: 500; }
 
-        .input-dark { width:100%; padding:20px 24px; border: 1px solid rgba(255, 255, 255, 0.1); border-radius:18px; margin-bottom:16px; font-size:1.05rem; background: rgba(255, 255, 255, 0.03); color:#ffffff; outline:none; box-shadow: inset 0 2px 10px rgba(0,0,0,0.2); transition: all 0.3s; font-weight: 500; backdrop-filter: blur(10px); }
-        .input-dark:focus { border-color: var(--primary-orange); box-shadow: 0 0 0 4px rgba(255, 94, 0, 0.15), inset 0 2px 10px rgba(0,0,0,0.2); background: rgba(255,255,255,0.06); }
-        .input-dark::placeholder { color: #64748b; font-weight: 400;}
+        .input-light { width:100%; padding:20px 24px; border: 1px solid var(--border-soft); border-radius:18px; margin-bottom:16px; font-size:1.05rem; background: var(--bg-app); color:var(--text-dark); outline:none; box-shadow: inset 0 2px 10px rgba(0,0,0,0.01); transition: all 0.3s; font-weight: 500; }
+        .input-light:focus { border-color: var(--primary-orange); box-shadow: 0 0 0 4px rgba(255, 94, 0, 0.1), inset 0 2px 10px rgba(0,0,0,0.01); background: var(--bg-pure); }
+        .input-light::placeholder { color: #94a3b8; font-weight: 500;}
         
-        .btn-gradient-orange { width:100%; padding:20px; background: var(--gradient-orange); color:white; font-weight:800; font-size:1.15rem; border:none; border-radius:18px; box-shadow: 0 15px 35px rgba(255, 94, 0, 0.4); text-transform:uppercase; cursor:pointer; letter-spacing: 1px; font-family: 'Outfit', sans-serif; transition: transform 0.2s; }
-        .btn-gradient-orange:active { transform: scale(0.97); box-shadow: 0 10px 25px rgba(255, 94, 0, 0.3); }
+        .btn-gradient-orange { width:100%; padding:20px; background: var(--gradient-orange); color:white; font-weight:800; font-size:1.15rem; border:none; border-radius:18px; box-shadow: 0 15px 35px rgba(255, 94, 0, 0.3); text-transform:uppercase; cursor:pointer; letter-spacing: 1px; font-family: 'Outfit', sans-serif; transition: transform 0.2s; }
+        .btn-gradient-orange:active { transform: scale(0.97); box-shadow: 0 10px 25px rgba(255, 94, 0, 0.2); }
 
-        .footer-tech { text-align: center; padding-top: 40px; margin-top: 50px; border-top: 1px solid rgba(255, 255, 255, 0.08); position: relative; z-index: 2; }
-        .footer-brand { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 900; color: #ffffff; letter-spacing: 2px; margin-bottom: 8px; }
-        .footer-brand span { color: var(--info); }
-        .footer-sub { font-size: 0.9rem; color: #64748b; font-weight: 600; margin: 0 0 6px 0; text-transform: uppercase; letter-spacing: 1px; }
-        .footer-copy { font-size: 0.8rem; color: #475569; margin-top: 12px; font-weight: 500; }
+        .subscription-box { border-top: 5px solid var(--primary-orange); text-align: center; background: var(--bg-pure); padding: 40px 28px; border-radius: 36px; box-shadow: 0 25px 60px rgba(255,94,0,0.12); border-left: 1px solid var(--border-soft); border-right: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); margin-bottom: 32px; position: relative; overflow: hidden; }
+        .subscription-box::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,94,0,0.04) 0%, transparent 50%); z-index: 0; pointer-events: none;}
+        .subscription-box > * { position: relative; z-index: 1; }
+
+        .footer-tech { text-align: center; padding-top: 40px; margin-top: 50px; border-top: 1px solid var(--border-soft); position: relative; z-index: 2; }
+        .footer-brand { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 900; color: var(--text-dark); letter-spacing: 2px; margin-bottom: 8px; }
+        .footer-brand span { color: var(--primary-orange); }
+        .footer-sub { font-size: 0.9rem; color: var(--text-gray); font-weight: 600; margin: 0 0 6px 0; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-copy { font-size: 0.8rem; color: #94a3b8; margin-top: 12px; font-weight: 500; }
 
         /* ================= CAJA Y DUEÑO ================= */
         .admin-container { width: 100%; max-width: 500px; margin: 0 auto; padding: 24px; box-sizing: border-box; padding-bottom: 120px; overflow-x: hidden;}
@@ -149,7 +153,7 @@
         .admin-dish-price { color:var(--primary-orange); font-weight:800; font-size:1.2rem; font-family:'Outfit'; line-height: 1;}
         .btn-delete-dish { width: 45px; height: 45px; border-radius: 14px; background: #fef2f2; color: var(--danger); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; transition: 0.2s; flex-shrink: 0; border: none; align-self: flex-start;}
 
-        /* ================= PROMOS CORREGIDAS (NO SE TAPAN) ================= */
+        /* ================= PROMOS ================= */
         .promo-carousel { display: flex; gap: 16px; overflow-x: auto; padding: 0 24px 30px; scroll-snap-type: x mandatory; scrollbar-width: none; margin-top: 10px; z-index:20; position:relative;}
         .promo-carousel::-webkit-scrollbar { display: none; }
         
@@ -207,31 +211,6 @@
         .fcb-qty { background: var(--primary-orange); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 800;}
         .fcb-right { font-family: 'Outfit'; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.5px;}
 
-        /* MODAL DE CARRITO CHECKOUT */
-        #modal-carrito { justify-content: flex-end; align-items: center; padding: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(10px);}
-        #modal-carrito .modal-content-standard { width: 100%; max-width: 600px; border-radius: 40px 40px 0 0; padding: 32px 24px 24px; height: auto; max-height: 85vh; display: flex; flex-direction: column; background: #ffffff; box-shadow: 0 -20px 50px rgba(0,0,0,0.15); margin: 0; position: absolute; bottom: 0; transform: translateY(100%); animation: slideUpCartModal 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;}
-        @keyframes slideUpCartModal { to { transform: translateY(0); } }
-        
-        .drag-indicator { width: 40px; height: 5px; background: #e2e8f0; border-radius: 10px; margin: 0 auto 20px; flex-shrink: 0;}
-        .cart-header-title { font-family: 'Outfit'; font-size: 1.6rem; font-weight: 800; color: var(--text-dark); margin: 0; letter-spacing: -0.5px;}
-        
-        .cart-item-row { display: flex; justify-content: space-between; align-items: center; padding: 16px; background: var(--bg-pure); border-bottom: 1px solid var(--border-soft); margin-bottom: 0; }
-        .cart-item-name { font-weight: 600; color: var(--text-dark); font-size: 1rem; }
-        .cart-item-price { font-weight: 800; font-family: 'Outfit'; color: var(--text-dark); font-size: 1.15rem;}
-        .cart-item-del { background: #fef2f2; color: var(--danger); width: 32px; height: 32px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; margin-left: 16px; font-size: 0.9rem;}
-
-        .cart-total-row { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; margin-bottom: 24px; background: var(--bg-pure); padding: 16px 20px; border-radius: 20px; border: 1px solid var(--border-soft);}
-        .cart-total-label { font-size: 0.95rem; font-weight: 700; color: var(--text-gray); text-transform: uppercase;}
-        .cart-total-val { font-size: 1.8rem; font-weight: 800; font-family: 'Outfit'; color: var(--primary-orange); letter-spacing: -1px; line-height: 1; }
-
-        .delivery-toggle-container { display: flex; background: var(--bg-app); border-radius: 16px; padding: 6px; margin-bottom: 20px;}
-        .del-option { flex: 1; text-align: center; padding: 14px; border-radius: 12px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: 0.3s; color: var(--text-gray); }
-        .del-option.active { background: var(--bg-pure); color: var(--text-dark); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-
-        /* PANTALLA ÉXITO COMPRA */
-        #order-success-overlay { position:fixed; inset:0; background:var(--gradient-orange); z-index:9999999; display:flex; flex-direction:column; align-items:center; justify-content:center; color:white; }
-        @keyframes bounceIcon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
-
         /* MODALES IA Y PAYWALL */
         .modal-paywall { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(15px); }
         .modal-paywall-content { background: #0f172a; border-top: 5px solid #0ea5e9; padding: 40px 24px; border-radius: 40px; box-shadow: 0 30px 80px rgba(0,0,0,0.8); color: white; width: 92%; max-width: 460px; text-align: center;}
@@ -270,8 +249,8 @@
         .modal-close-circle { position: absolute; top: 20px; right: 20px; font-size: 1.2rem; color: var(--text-dark); background: rgba(255,255,255,0.9); border: none; cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.2s; z-index: 20; box-shadow: 0 8px 20px rgba(0,0,0,0.15);}
         .modal-close-circle:active { transform: scale(0.9); }
         
-        #splash-screen { position: fixed; inset: 0; background: #0f172a; z-index: 9999999999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease; color: white;}
-        .loader-circle { width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.1); border-top-color: var(--primary-orange); border-radius: 50%; animation: spin 0.8s infinite cubic-bezier(0.5, 0, 0.5, 1); margin-top: 30px; }
+        #splash-screen { position: fixed; inset: 0; background: #ffffff; z-index: 9999999999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease; color: var(--text-dark);}
+        .loader-circle { width: 50px; height: 50px; border: 4px solid var(--border-soft); border-top-color: var(--primary-orange); border-radius: 50%; animation: spin 0.8s infinite cubic-bezier(0.5, 0, 0.5, 1); margin-top: 30px; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
         /* CAJA POS ESTILOS */
@@ -287,6 +266,8 @@
         .sheet-img-box img, .sheet-img-box video { width: 100%; height: 100%; object-fit: cover; position:absolute; inset:0;}
         .custom-div-icon { background: transparent; border: none; }
         @keyframes pulse-deli { 0% {transform: scale(1);} 100% {transform: scale(1.15);} }
+        
+        /* Modal carrito y order-success omitidos de cambios importantes para preservar el Light mode */
     </style>
 </head>
 <body>
@@ -297,9 +278,12 @@
         setTimeout(() => { let s = document.getElementById('splash-screen'); if (s) { s.style.opacity = '0'; setTimeout(() => s.style.display = 'none', 500); } }, 1200);
     </script>
 
+    <!-- SPLASH ACTUALIZADO BLANCO -->
     <div id="splash-screen">
-        <div style="font-size: 4rem; margin-bottom: 10px; animation: floatLogo 3s ease-in-out infinite;">🛵</div>
-        <div style="font-family:'Outfit'; font-size:2.5rem; font-weight:900; letter-spacing:-1px; color:white;">PEDILO<span style="color:var(--primary-orange)">YA</span></div>
+        <div class="logo-3d-container" style="margin-bottom: 10px; border-radius: 30px; width: 120px; height: 120px; border-width: 3px;">
+            <div class="logo-3d-text" style="font-size: 3.5rem;">PIY</div>
+        </div>
+        <div style="font-family:'Outfit'; font-size:2rem; font-weight:900; letter-spacing:3px; text-transform: uppercase; color:var(--text-gray);">Pedilo<span style="color:var(--primary-orange)">Ya</span></div>
         <div class="loader-circle"></div>
     </div>
 
@@ -319,26 +303,31 @@
         </div>
     </div>
 
-    <!-- VISTA 1: LANDING SAAS -->
+    <!-- VISTA 1: LANDING SAAS COMPLETAMENTE REDISEÑADA EN BLANCO Y NARANJA -->
     <div id="view-login" class="view-container active view-container-no-pad landing-wrapper">
         <div class="landing-content">
-            <div class="logo-3d-container"><div class="logo-3d-text" style="font-size: 4.5rem;">🛵</div></div>
+            
+            <div class="logo-3d-container">
+                <div class="logo-3d-text">PIY</div>
+            </div>
+            
             <div style="text-align:center;">
+                <div style="font-family:'Outfit'; font-weight:800; color:var(--text-gray); font-size:1rem; letter-spacing:5px; text-transform:uppercase; margin-bottom: 20px;">Pedilo Ya</div>
                 <div class="hero-badge">✨ TECNOLOGÍA GASTRONÓMICA 2026</div>
             </div>
             
-            <h1 style="font-size: 2.2rem; font-weight: 800; color: #ffffff; margin: 0 0 16px 0; letter-spacing: -1px; line-height: 1.2; font-family:'Outfit',sans-serif; text-align:center; white-space: nowrap;">PEDILO 🛵 YA<br><span class="premium-text-gradient">PREMIUM</span></h1>
+            <h1 style="font-size: 2.2rem; font-weight: 800; color: var(--text-dark); margin: 0 0 16px 0; letter-spacing: -1px; line-height: 1.2; font-family:'Outfit',sans-serif; text-align:center; white-space: nowrap;">LA REVOLUCIÓN<br><span class="premium-text-gradient">PREMIUM</span></h1>
             
-            <p style="font-size: 1rem; color: #94a3b8; line-height: 1.6; font-weight: 500; margin: 0 10px 30px 10px; text-align:center;">
-                La experiencia definitiva de venta online. Exhibí tu menú en video vertical HD, controlá tu caja en vivo y ofrecé seguimiento satelital a tus clientes.
+            <p style="font-size: 1.05rem; color: var(--text-gray); line-height: 1.6; font-weight: 500; margin: 0 10px 30px 10px; text-align:center;">
+                La experiencia definitiva de venta online. Exhibí tu menú en video vertical HD, controlá tu caja en vivo, automatiza clientes y ofrecé seguimiento satelital.
             </p>
 
             <button class="btn-tts" onclick="vibrar(); leerCaracteristicasApp()">
                 🎙️ ESCUCHAR PRESENTACIÓN
             </button>
 
-            <div class="glass-card-dark" style="margin-bottom: 30px;">
-                <h3 style="font-family:'Outfit'; font-size:1.3rem; font-weight:800; color:#ffffff; margin:0 0 24px 0; text-align:center; letter-spacing:-0.5px;">✨ FUNCIONALIDADES EXCLUSIVAS</h3>
+            <div class="glass-card-light" style="margin-bottom: 30px;">
+                <h3 style="font-family:'Outfit'; font-size:1.3rem; font-weight:800; color:var(--text-dark); margin:0 0 24px 0; text-align:center; letter-spacing:-0.5px;">✨ FUNCIONALIDADES EXCLUSIVAS</h3>
                 
                 <div class="feature-item">
                     <div class="feature-icon-box">📹</div>
@@ -349,7 +338,7 @@
                 </div>
 
                 <div class="feature-item">
-                    <div class="feature-icon-box">🛵</div>
+                    <div class="feature-icon-box">📍</div>
                     <div>
                         <h4 class="feature-title-text">Rastreo GPS Satelital en Vivo</h4>
                         <p class="feature-desc-text">Tus clientes siguen el recorrido de la motito de delivery en el mapa interactivo estilo Uber.</p>
@@ -359,55 +348,62 @@
                 <div class="feature-item">
                     <div class="feature-icon-box">🍔</div>
                     <div>
-                        <h4 class="feature-title-text">Carrito de Compras McDonald's</h4>
-                        <p class="feature-desc-text">Checkout ágil y adictivo con selección de envio, retiro en local y derivación directa a tu WhatsApp.</p>
+                        <h4 class="feature-title-text">Carrito de Compras Ágil</h4>
+                        <p class="feature-desc-text">Checkout adictivo con selección de envio, retiro en local y derivación directa al WhatsApp de tu negocio.</p>
                     </div>
                 </div>
 
                 <div class="feature-item">
                     <div class="feature-icon-box">🧮</div>
                     <div>
-                        <h4 class="feature-title-text">Caja POS & Descuento de Stock</h4>
-                        <p class="feature-desc-text">Calculadora inteligente que descuenta automáticamente el inventario en Supabase al registrar la venta.</p>
+                        <h4 class="feature-title-text">Caja POS Inteligente</h4>
+                        <p class="feature-desc-text">Calculadora rápida que registra la venta y descuenta automáticamente tu inventario en la nube.</p>
                     </div>
                 </div>
 
-                <div class="feature-item" style="margin-bottom:0;">
-                    <div class="feature-icon-box">📒</div>
+                <div class="feature-item">
+                    <div class="feature-icon-box">📊</div>
                     <div>
-                        <h4 class="feature-title-text">Libreta Mágica de Fiados</h4>
-                        <p class="feature-desc-text">Gestión centralizada de deudores con envío automático de recordatorios e historial por WhatsApp.</p>
+                        <h4 class="feature-title-text">Panel de Métricas Claras</h4>
+                        <p class="feature-desc-text">Conocé cuánto dinero entra, gestioná gastos del turno y lleva una libreta de fiados sin perder un solo peso.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="glass-card-dark" style="border-top: 4px solid var(--primary-orange); margin-bottom:30px; text-align:center;">
-                <div style="background: rgba(16, 185, 129, 0.15); border:1px solid rgba(16, 185, 129, 0.4); color: #34d399; padding:8px 20px; border-radius:50px; font-family:'Outfit'; font-weight:800; font-size:0.85rem; display:inline-block; margin-bottom:15px; letter-spacing:1px;">
-                    🎁 30 DÍAS GRATIS · SIN TARJETA DE CRÉDITO
+            <!-- CAJA DE SUSCRIPCIÓN MODERNA -->
+            <div class="subscription-box">
+                <div style="background: rgba(255, 94, 0, 0.08); color: var(--primary-orange); padding:8px 20px; border-radius:50px; font-family:'Outfit'; font-weight:800; font-size:0.85rem; display:inline-block; margin-bottom:20px; letter-spacing:1px; border: 1px solid rgba(255,94,0,0.15);">
+                    🎁 30 DÍAS GRATIS · SIN TARJETA
                 </div>
-                <div style="font-size:2.5rem; font-weight:800; color:#ffffff; font-family:'Outfit'; letter-spacing:-1px; line-height:1; margin-bottom:8px;">
-                    <span style="color:var(--primary-orange);">$</span>14.000
+                <div style="font-size:3.5rem; font-weight:900; color:var(--text-dark); font-family:'Outfit'; letter-spacing:-2px; line-height:1; margin-bottom:10px;">
+                    <span style="font-size: 2rem; color:var(--primary-orange); vertical-align: top;">$</span>14.000<span style="font-size: 1rem; color:var(--text-gray); font-weight: 600; letter-spacing: 0;">/mes</span>
                 </div>
-                <p style="color:#94a3b8; font-size:0.9rem; margin:0; font-weight:500;">Suscripción mensual fija. Sin comisiones por pedido.</p>
+                <p style="color:var(--text-gray); font-size:1rem; margin:15px 0 25px 0; font-weight:500;">Suscripción mensual fija. Todo incluido.</p>
+                <ul style="list-style:none; padding:0; margin:0 0 25px 0; text-align:left; font-size:1.05rem; color:var(--text-dark); font-weight:600; display:flex; flex-direction:column; gap:12px;">
+                    <li><span style="color:var(--primary-orange); font-weight:900; margin-right:8px;">✓</span> 0% Comisiones por venta</li>
+                    <li><span style="color:var(--primary-orange); font-weight:900; margin-right:8px;">✓</span> Productos y pedidos ilimitados</li>
+                    <li><span style="color:var(--primary-orange); font-weight:900; margin-right:8px;">✓</span> Servidores escalables AWS</li>
+                    <li><span style="color:var(--primary-orange); font-weight:900; margin-right:8px;">✓</span> Actualizaciones automáticas</li>
+                </ul>
             </div>
 
-            <div class="glass-card-dark" style="border-top: 4px solid #38bdf8; margin-bottom:30px;">
-                <h2 style="text-align: center; font-size: 1.4rem; font-weight: 800; margin: 0 0 10px 0; color: #ffffff; letter-spacing: -0.5px; font-family:'Outfit',sans-serif;">CREAR PLATAFORMA</h2>
-                <p style="text-align: center; color: #94a3b8; font-size: 0.95rem; margin-bottom: 24px; font-weight: 500;">Comenzá tus 30 días de prueba sin ingresar datos bancarios.</p>
+            <div class="glass-card-light" style="border-top: 4px solid var(--info); margin-bottom:30px;">
+                <h2 style="text-align: center; font-size: 1.4rem; font-weight: 800; margin: 0 0 10px 0; color: var(--text-dark); letter-spacing: -0.5px; font-family:'Outfit',sans-serif;">CREAR PLATAFORMA</h2>
+                <p style="text-align: center; color: var(--text-gray); font-size: 0.95rem; margin-bottom: 24px; font-weight: 500;">Comenzá tus 30 días de prueba sin ingresar datos bancarios.</p>
                 
-                <input type="text" id="reg-local" placeholder="Nombre de tu Local" class="input-dark">
-                <input type="tel" id="reg-phone" placeholder="Tu WhatsApp (Recepción pedidos)" class="input-dark">
-                <input type="password" id="reg-pin" placeholder="PIN Cajero (4 dígitos)" class="input-dark mask-text" maxlength="4">
-                <input type="password" id="reg-admin-pin" placeholder="PIN Secreto Dueño" class="input-dark mask-text" maxlength="4" style="border-color: rgba(255,94,0,0.5); margin-bottom: 24px;">
+                <input type="text" id="reg-local" placeholder="Nombre de tu Local" class="input-light">
+                <input type="tel" id="reg-phone" placeholder="Tu WhatsApp (Recepción pedidos)" class="input-light">
+                <input type="password" id="reg-pin" placeholder="PIN Cajero (4 dígitos)" class="input-light mask-text" maxlength="4">
+                <input type="password" id="reg-admin-pin" placeholder="PIN Secreto Dueño" class="input-light mask-text" maxlength="4" style="border-color: rgba(255,94,0,0.3); margin-bottom: 24px; background: rgba(255,94,0,0.02);">
                 
                 <button id="btn-reg" onclick="vibrar(); registerAccount()" class="btn-gradient-orange">Empezar Gratis Ahora</button>
             </div>
 
-            <div class="glass-card-dark">
-                <h2 style="text-align: center; font-size: 1.3rem; font-weight: 800; margin: 0 0 20px 0; color: #ffffff; font-family:'Outfit',sans-serif;">🛡️ YA TENGO CUENTA</h2>
-                <input type="text" id="login-user" placeholder="Nombre del Local" class="input-dark" spellcheck="false">
-                <input type="password" id="login-pass" placeholder="PIN de Cajero" class="input-dark mask-text" maxlength="4" style="margin-bottom: 24px;">
-                <button id="btn-log" onclick="vibrar(); executeLogin()" style="width:100%; padding:18px; background:rgba(14, 165, 233, 0.1); color:#38bdf8; font-weight:800; font-size:1rem; border:2px solid #0ea5e9; border-radius:18px; text-transform:uppercase; cursor:pointer; transition: 0.2s; font-family:'Outfit',sans-serif;">Abrir Caja</button>
+            <div class="glass-card-light">
+                <h2 style="text-align: center; font-size: 1.3rem; font-weight: 800; margin: 0 0 20px 0; color: var(--text-dark); font-family:'Outfit',sans-serif;">🛡️ YA TENGO CUENTA</h2>
+                <input type="text" id="login-user" placeholder="Nombre del Local" class="input-light" spellcheck="false">
+                <input type="password" id="login-pass" placeholder="PIN de Cajero" class="input-light mask-text" maxlength="4" style="margin-bottom: 24px;">
+                <button id="btn-log" onclick="vibrar(); executeLogin()" style="width:100%; padding:18px; background:rgba(14, 165, 233, 0.08); color:var(--info); font-weight:800; font-size:1.05rem; border:2px solid rgba(14, 165, 233, 0.3); border-radius:18px; text-transform:uppercase; cursor:pointer; transition: 0.2s; font-family:'Outfit',sans-serif;">Abrir Caja</button>
             </div>
 
             <div class="footer-tech">
@@ -461,7 +457,7 @@
             <button class="modal-close-circle" style="background:rgba(0,0,0,0.05);" onclick="document.getElementById('pin-modal').style.display='none'">✕</button>
             <h3 style="margin:0 0 15px; font-family:'Outfit'; font-size:1.8rem; font-weight:800; line-height:1; letter-spacing: -1px; color:var(--text-dark);">🔒 Bóveda<br>Dueño</h3>
             <p style="color:var(--text-gray); margin-bottom:24px; font-size: 0.95rem;">Ingresá el PIN de administrador para acceder a las finanzas.</p>
-            <input type="password" id="pin-input" class="form-input" style="text-align:center; font-size:1.6rem; letter-spacing:15px; padding:20px; font-weight:800;" maxlength="4" placeholder="****" autocomplete="off">
+            <input type="password" id="pin-input" class="form-input" style="text-align:center; font-size:1.6rem; letter-spacing:15px; padding:20px; font-weight:800; border: 1px solid var(--border-soft);" maxlength="4" placeholder="****" autocomplete="off">
             <button class="btn-main" style="background:var(--text-dark); box-shadow: 0 10px 25px rgba(15,23,42,0.3);" onclick="vibrar(); verifyAdminPin()">ENTRAR AL PANEL</button>
         </div>
     </div>
@@ -882,7 +878,7 @@
             if(!('speechSynthesis' in window)) return alert("Tu navegador no soporta el asistente de voz.");
             window.speechSynthesis.cancel();
             const speech = new SpeechSynthesisUtterance(); 
-            speech.text = "¡Bienvenido a Pedilo, ya, Premium por Energy Software! La solución tecnológica definitiva para tu comercio gastronómico. Muestra tu negocio en el celular de tus clientes con menú en video vertical formato TikTok de alta definición. Tus clientes hacen sus pedidos en segundos con carrito estilo McDonald's y siguen a la motito en vivo por GPS satelital como en Uber. Además, contás con caja registradora inteligente que descuenta stock automáticamente, control de gastos, libreta de fiados y cobros por WhatsApp. Disfrutá de 30 días de prueba completamente gratis, sin tarjeta de crédito y sin comisiones por venta. ¡Sumate a la revolución del delivery!"; 
+            speech.text = "¡Bienvenido a Pedilo, ya, Premium por Energy Software! La solución tecnológica definitiva para tu comercio gastronómico. Muestra tu negocio en el celular de tus clientes con menú en video vertical formato TikTok de alta definición. Tus clientes hacen sus pedidos en segundos con carrito ágil y siguen a la motito en vivo por GPS satelital. Además, contás con caja registradora inteligente que descuenta stock automáticamente, control de gastos, libreta de fiados y panel de métricas. Disfrutá de 30 días de prueba completamente gratis, sin tarjeta de crédito y sin comisiones por venta. ¡Sumate a la revolución del delivery!"; 
             speech.lang = 'es-AR'; 
             speech.rate = 1.0; 
             window.speechSynthesis.speak(speech); 
@@ -1880,3 +1876,4 @@
     </script>
 </body>
 </html>
+
