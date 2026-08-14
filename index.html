@@ -73,11 +73,13 @@
         
         .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 94, 0, 0.08); border: 1px solid rgba(255, 94, 0, 0.15); padding: 10px 22px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; color: var(--primary-orange); letter-spacing: 1.5px; backdrop-filter: blur(12px); margin-bottom: 24px; text-transform: uppercase; box-shadow: 0 8px 20px rgba(255, 94, 0, 0.05); }
         
+        /* LOGO CON RAYOS 3D E ICONO DELIVERY (MEJORADO) */
         .logo-premium-wrapper { position: relative; width: 220px; height: 220px; margin: 20px auto 40px auto; display: flex; justify-content: center; align-items: center; }
         .logo-premium-rays { position: absolute; inset: -40px; background: conic-gradient(from 0deg, transparent 0%, rgba(255,94,0,0.8) 10%, transparent 20%, transparent 40%, rgba(255,94,0,0.8) 50%, transparent 60%, transparent 80%, rgba(255,94,0,0.8) 90%, transparent 100%); border-radius: 50%; animation: spinRays 8s linear infinite; filter: blur(25px); opacity: 0.65; z-index: 1; }
         .logo-premium-core { width: 150px; height: 150px; border-radius: 45px; background: var(--bg-pure); border: 2px solid rgba(255,94,0,0.35); display: flex; align-items: center; justify-content: center; position: relative; z-index: 2; box-shadow: 0 35px 60px rgba(255,94,0,0.25), inset 0 0 25px rgba(255, 94, 0, 0.08); animation: floatLogo 4s ease-in-out infinite; }
         .logo-icon-svg { width: 85px; height: 85px; filter: drop-shadow(0 15px 18px rgba(255,94,0,0.45)); }
         
+        /* TEXTO "PEDILO YA" IMPONENTE */
         .pedilo-ya-title { font-family: 'Outfit', sans-serif; font-size: 3.6rem; font-weight: 900; color: var(--text-dark); margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: -2.5px; line-height: 1; text-shadow: 0 15px 30px rgba(0,0,0,0.08); }
         .pedilo-ya-title span { background: var(--gradient-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
@@ -526,7 +528,7 @@
     <div id="view-chofer" class="view-container-no-pad" style="display:none; flex-direction:column; height:100dvh; overflow:hidden; padding:12px; box-sizing:border-box; background:var(--bg-app); max-width:500px; margin:0 auto;">
         
         <div class="chofer-top-bar" style="flex-shrink:0; display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; gap:8px;">
-            <div class="pill-btn" onclick="vibrar(); toggleDriverGps()" id="btn-gps">📍 GPS DELI</div>
+            <div class="pill-btn" onclick="vibrar(); toggleDriverGps()" id="btn-gps" style="background:var(--text-dark); color:white;">📍 GPS DELI</div>
             <div class="pill-btn badge" id="btn-pedidos-web" style="color:var(--primary-orange); border-color:var(--primary-orange); background:rgba(255,94,0,0.05);" onclick="vibrar(); abrirPedidosWeb()">🔔 WEB</div>
             <div class="pill-btn" style="color:var(--info); border-color:var(--info); background:rgba(14,165,233,0.05);" onclick="vibrar(); document.getElementById('pin-modal').style.display='flex'">⚙️ DUEÑO</div>
         </div>
@@ -1661,7 +1663,7 @@
                 if(i.codigo && i.codigo.includes('PLATO-')) {
                     let { img, vid, hasVideo, hasImg } = parseUrlsSeguro(i.foto_url); 
                     
-                    let mediaTag = '<div style="width:100%;height:100%;background:#0f172a;display:flex;align-items:center;justify-content:center;font-size:2.5rem;">🍽️</div>';
+                    let mediaTag = '<div stylewidth:100%;height:100%;background:#0f172a;display:flex;align-items:center;justify-content:center;font-size:2.5rem;">🍽️</div>';
                     if (hasVideo) { mediaTag = `<video src="${vid}" poster="${img}" muted loop playsinline class="lazy-video" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;"></video>`; } 
                     else if (hasImg) { mediaTag = `<img src="${img}" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">`; }
                     
