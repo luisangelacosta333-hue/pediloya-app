@@ -1330,10 +1330,12 @@
             let calcCashMostrador = 0;
             let cashPorMoto = {};
             let totalCash = 0;
+            let hitCierre = false;
 
             dbState.logs.forEach(l => {
-                if (l.tipo === 'HISTORIAL_CERRADO') return; // SALTAMOS LOS CERRADOS
-                
+                if (hitCierre) return;
+                if (l.tipo === 'CIERRE_TURNO') { hitCierre = true; return; }
+
                 let pAmt = parseFloat(l.monto) || 0;
                 let methodStr = (l.metodo || '').toUpperCase();
                 
@@ -1405,25 +1407,15 @@
                 window.open(`https://wa.me/${currentCierreData.phone}?text=${encodeURIComponent(currentCierreData.msg)}`, '_blank');
             }
 
-            // 2. Archivar todos los logs actuales para limpiar la pantalla y contadores a cero
-            // Excluimos GPS_DELI para no borrar el rastro en vivo, y PEDIDO_WEB para no borrar pedidos online pendientes
-            const logIds = dbState.logs.filter(l => l.tipo !== 'GPS_DELI' && l.tipo !== 'PEDIDO_WEB' && l.tipo !== 'HISTORIAL_CERRADO').map(l => l.id);
-            
-            // Hacemos el update en lotes de 50 para máxima seguridad en la base de datos
-            for (let i = 0; i < logIds.length; i += 50) {
-                let chunk = logIds.slice(i, i + 50);
-                await _supabase.from('pediloya_logs').update({ tipo: 'HISTORIAL_CERRADO' }).in('id', chunk);
-            }
-
-            // 3. Insertamos el registro de cierre (también oculto para que empiece limpio el contador)
+            // 2. Insertar el MARCADOR DE CIERRE (Seguro, usa INSERT en vez de UPDATE)
             await _supabase.from('pediloya_logs').insert([{ 
                 local_id: currentLocalId, 
-                tipo: 'HISTORIAL_CERRADO', 
-                metodo: 'EFECTIVO', 
-                monto: -currentCierreData.total, 
+                tipo: 'CIERRE_TURNO', 
+                metodo: 'SISTEMA', 
+                monto: 0, 
                 fecha: getTucumanDateFE(), 
                 hora: getTucumanTimeFE(), 
-                descripcion: 'CIERRE DE TURNO (RETIRO DE CAJA)' 
+                descripcion: '--- TURNO CERRADO ---' 
             }]); 
             
             await loadDataFromDB(); 
@@ -1732,14 +1724,13 @@
             let choferLogsArray = []; 
             let webLogsHtml = ''; 
             let pedidosWebNuevos = 0;
+            let hitCierre = false;
 
             dbState.logs.forEach(l => {
-                if (l.tipo === 'HISTORIAL_CERRADO') return; // Ignoramos todos los archivados (turno cerrado)
-
                 let pAmt = parseFloat(l.monto) || 0; 
                 let methodStr = (l.metodo || '').toUpperCase();
                 
-                // Pedidos Web UI
+                // Pedidos Web UI (SIEMPRE SE MUESTRAN HASTA SER ENTREGADOS)
                 if(l.tipo === 'PEDIDO_WEB') {
                     pedidosWebNuevos++;
                     webLogsHtml += `
@@ -1754,8 +1745,12 @@
                     </div>`;
                 }
 
+                // SI YA PASAMOS UN CIERRE DE TURNO, IGNORAMOS EL RESTO DE LAS FINANZAS Y EL HISTORIAL
+                if (hitCierre) return;
+                if (l.tipo === 'CIERRE_TURNO') { hitCierre = true; return; }
+
                 // Lógica contabilidad general y Rendición
-                if(l.tipo !== 'SISTEMA' && l.tipo !== 'GPS_DELI') {
+                if(l.tipo !== 'SISTEMA' && l.tipo !== 'GPS_DELI' && l.tipo !== 'PEDIDO_WEB' && l.tipo !== 'PEDIDO_WEB_OK') {
                     if (methodStr === 'EFECTIVO' || methodStr === 'DEBITO') {
                         if (l.tipo === 'VENTA' && l.moto_asignada) {
                             cashPorMoto[l.moto_asignada] = (cashPorMoto[l.moto_asignada] || 0) + pAmt;
@@ -1764,24 +1759,19 @@
                             cashPorMoto[l.moto_asignada] = (cashPorMoto[l.moto_asignada] || 0) - pAmt;
                             totalEnMotos -= pAmt;
                             calcCashMostrador += pAmt; // Entra a la caja
-                        } else if (l.tipo !== 'PEDIDO_WEB' && l.tipo !== 'PEDIDO_WEB_OK') {
+                        } else {
                             // Ventas mostrador, gastos, ingresos, cierres
                             calcCashMostrador += pAmt;
                         }
                     } else if (methodStr === 'TRANSFERENCIA') {
-                        if (l.tipo !== 'PEDIDO_WEB' && l.tipo !== 'PEDIDO_WEB_OK') {
-                            calcTransf += pAmt;
-                        }
+                        calcTransf += pAmt;
                     }
 
                     // Generación de historial UI
                     let icon = methodStr==='EFECTIVO'?'💵':methodStr==='TRANSFERENCIA'?'🏦':'💸';
-                    if(l.tipo==='PEDIDO_WEB') icon='🍔'; else if(l.tipo==='PEDIDO_WEB_OK') icon='✅';
                     if(l.tipo==='RENDICION') icon='🛵';
                     
                     let col = (l.tipo === 'SALIDA') ? 'var(--danger)' : 'var(--success)';
-                    if(l.tipo==='PEDIDO_WEB') col = 'var(--primary-orange)';
-                    if(l.tipo==='PEDIDO_WEB_OK') col = 'var(--text-light)';
                     if(l.tipo==='RENDICION') col = 'var(--info)';
                     
                     let receiptBtn = '';
