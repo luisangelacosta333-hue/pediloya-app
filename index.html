@@ -67,19 +67,17 @@
         .btn-secondary { width: 100%; padding: 18px; background: var(--bg-pure); color: var(--text-dark); font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; border: 2px solid var(--border-soft); border-radius: 18px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; transition: var(--transition-smooth); box-shadow: var(--shadow-soft); }
         .btn-secondary:active { background: var(--bg-app); transform: scale(0.98); }
 
-        /* ================= LANDING PAGE SAAS (BLANCO Y NARANJA) ================= */
+        /* ================= LANDING PAGE SAAS ================= */
         .landing-wrapper { background-color: var(--bg-pure); background-image: radial-gradient(circle at 15% 10%, rgba(255, 94, 0, 0.05), transparent 45%), radial-gradient(circle at 85% 90%, rgba(255, 94, 0, 0.04), transparent 45%); color: var(--text-dark); min-height: 100vh; position: relative; overflow: hidden; padding-bottom: 80px; }
         .landing-content { position: relative; z-index: 2; padding: 24px 24px; max-width: 520px; margin: 0 auto; }
         
         .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 94, 0, 0.08); border: 1px solid rgba(255, 94, 0, 0.15); padding: 10px 22px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; color: var(--primary-orange); letter-spacing: 1.5px; backdrop-filter: blur(12px); margin-bottom: 24px; text-transform: uppercase; box-shadow: 0 8px 20px rgba(255, 94, 0, 0.05); }
         
-        /* LOGO CON RAYOS 3D E ICONO DELIVERY (MEJORADO) */
         .logo-premium-wrapper { position: relative; width: 220px; height: 220px; margin: 20px auto 40px auto; display: flex; justify-content: center; align-items: center; }
         .logo-premium-rays { position: absolute; inset: -40px; background: conic-gradient(from 0deg, transparent 0%, rgba(255,94,0,0.8) 10%, transparent 20%, transparent 40%, rgba(255,94,0,0.8) 50%, transparent 60%, transparent 80%, rgba(255,94,0,0.8) 90%, transparent 100%); border-radius: 50%; animation: spinRays 8s linear infinite; filter: blur(25px); opacity: 0.65; z-index: 1; }
         .logo-premium-core { width: 150px; height: 150px; border-radius: 45px; background: var(--bg-pure); border: 2px solid rgba(255,94,0,0.35); display: flex; align-items: center; justify-content: center; position: relative; z-index: 2; box-shadow: 0 35px 60px rgba(255,94,0,0.25), inset 0 0 25px rgba(255, 94, 0, 0.08); animation: floatLogo 4s ease-in-out infinite; }
         .logo-icon-svg { width: 85px; height: 85px; filter: drop-shadow(0 15px 18px rgba(255,94,0,0.45)); }
         
-        /* TEXTO "PEDILO YA" IMPONENTE */
         .pedilo-ya-title { font-family: 'Outfit', sans-serif; font-size: 3.6rem; font-weight: 900; color: var(--text-dark); margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: -2.5px; line-height: 1; text-shadow: 0 15px 30px rgba(0,0,0,0.08); }
         .pedilo-ya-title span { background: var(--gradient-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
@@ -216,7 +214,7 @@
         .add-btn-float { pointer-events: all; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 500; font-size: 1.8rem; box-shadow: 0 8px 20px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.3); line-height: 1; padding-bottom: 2px; margin-left: auto; transition:0.2s;}
         .add-btn-float:active { transform: scale(0.9); background: white; color: black; }
 
-        /* CARRITO FLOTANTE MCDONALDS (POSICIÓN MEJORADA) */
+        /* CARRITO FLOTANTE MCDONALDS */
         .floating-cart-bar { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%); width: calc(100% - 48px); max-width: 450px; background: var(--text-dark); color: white; padding: 18px 24px; border-radius: 28px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 20px 50px rgba(15,23,42,0.5); z-index: 999; cursor: pointer; transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1); animation: slideUpCartBar 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         @keyframes slideUpCartBar { from { bottom: -100px; } to { bottom: 90px; } }
         .floating-cart-bar:active { transform: translateX(-50%) scale(0.96); }
@@ -427,7 +425,7 @@
                     <div class="feature-icon-box">📊</div>
                     <div>
                         <h4 class="feature-title-text">Panel de Métricas Claras</h4>
-                        <p class="feature-desc-text">Conocé cuánto dinero entra, gestioná gastos del turno y lleva una libreta de fiados sin perder un solo peso.</p>
+                        <p class="feature-desc-text">Conocé cuánto dinero entra, gestioná gastos del turno y tenés control total de la plata de los repartidores.</p>
                     </div>
                 </div>
             </div>
@@ -548,8 +546,8 @@
         
         <div class="chofer-action-row" style="flex-shrink:0; display:flex; gap:8px; margin-bottom:8px;">
             <button class="chofer-btn-white" style="flex:1; padding:12px 6px; font-weight:700; font-size:0.85rem; font-family:'Outfit'; text-transform:uppercase; border-radius:12px; border:1px solid var(--border-soft); background:var(--bg-pure); cursor:pointer; box-shadow:var(--shadow-soft);" onclick="vibrar(); triggerExpenseModal()">💸 Gastos</button>
-            <button class="chofer-btn-white" style="flex:1; padding:12px 6px; font-weight:700; font-size:0.85rem; font-family:'Outfit'; text-transform:uppercase; border-radius:12px; border:1px solid var(--border-soft); background:var(--bg-pure); cursor:pointer; box-shadow:var(--shadow-soft);" onclick="vibrar(); abrirModalFiado()">📝 Fiados</button>
-            <button class="chofer-btn-white" style="flex:1; padding:12px 6px; font-weight:700; font-size:0.85rem; font-family:'Outfit'; text-transform:uppercase; border-radius:12px; border:1px solid var(--success); background:rgba(16,185,129,0.05); color:var(--success); cursor:pointer; box-shadow:var(--shadow-soft);" onclick="vibrar(); document.getElementById('ventas-modal').style.display='flex'">🧾 Ventas</button>
+            <button class="chofer-btn-white" style="flex:1; padding:12px 6px; font-weight:700; font-size:0.85rem; font-family:'Outfit'; text-transform:uppercase; border-radius:12px; border:1px solid var(--border-soft); background:var(--bg-pure); cursor:pointer; box-shadow:var(--shadow-soft);" onclick="vibrar(); abrirModalMotos()">🛵 Repartidores</button>
+            <button class="chofer-btn-white" style="flex:1; padding:12px 6px; font-weight:700; font-size:0.85rem; font-family:'Outfit'; text-transform:uppercase; border-radius:12px; border:1px solid var(--success); background:rgba(16,185,129,0.05); color:var(--success); cursor:pointer; box-shadow:var(--shadow-soft);" onclick="vibrar(); document.getElementById('ventas-modal').style.display='flex'">🧾 Historial</button>
         </div>
         
         <div class="chofer-keypad" style="flex-shrink:0; display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:10px;">
@@ -576,8 +574,8 @@
 
         <!-- REPARTIDORES SELECT -->
         <div style="flex-shrink:0; margin-bottom: 8px;">
-            <select id="chofer-moto-select" class="form-input" style="padding: 12px; margin-bottom: 0; background: #f1f5f9; border-color: var(--border-soft); cursor: pointer;">
-                <option value="">🏪 VENTA MOSTRADOR</option>
+            <select id="chofer-moto-select" class="form-input" style="padding: 12px; margin-bottom: 0; background: #f1f5f9; border-color: var(--border-soft); cursor: pointer; font-weight: 700; text-align: center;">
+                <option value="">🏪 ENVIAR A: MOSTRADOR (CAJA)</option>
             </select>
         </div>
         
@@ -612,15 +610,22 @@
                 <input type="text" id="store-link-display" readonly style="width:100%; box-sizing:border-box; border:none; background:var(--bg-app); border-radius:20px; font-weight:700; color:var(--info); font-size:0.95rem; padding:18px; text-align:center; outline:none; border:2px dashed var(--info); white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
             </div>
 
+            <!-- CAJA MOSTRADOR -->
             <div style="background:var(--bg-pure); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(0,0,0,0.03); box-shadow:var(--shadow-float); margin-bottom:10px; width:100%; box-sizing:border-box;">
-                <span style="font-size:0.9rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1.5px;">💵 Efectivo en Caja</span>
+                <span style="font-size:0.9rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1.5px;">💵 Caja Mostrador</span>
                 <div id="adm-cash" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
             </div>
 
-            <!-- AGREGADO: Contenedor para Transferencias -->
-            <div style="background:var(--bg-pure); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(0,0,0,0.03); box-shadow:var(--shadow-float); margin-bottom:40px; width:100%; box-sizing:border-box;">
+            <!-- TRANSFERENCIAS -->
+            <div style="background:var(--bg-pure); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(0,0,0,0.03); box-shadow:var(--shadow-float); margin-bottom:10px; width:100%; box-sizing:border-box;">
                 <span style="font-size:0.9rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1.5px;">🏦 Transferencias</span>
                 <div id="adm-transf" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; color:var(--info); letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
+            </div>
+
+            <!-- PLATA EN MOTO -->
+            <div style="background:var(--bg-pure); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(0,0,0,0.03); box-shadow:var(--shadow-float); margin-bottom:40px; width:100%; box-sizing:border-box;">
+                <span style="font-size:0.9rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1.5px;">🛵 Plata en Repartidores</span>
+                <div id="adm-motos-cash" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; color:var(--primary-orange); letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
             </div>
 
             <!-- SECCIÓN REPARTIDORES -->
@@ -869,7 +874,21 @@
     <div id="pos-sheet-overlay" class="pos-sheet-overlay" onclick="cerrarPosSheet()"></div><div id="pos-sheet" class="pos-sheet"><div class="pos-sheet-header"><h3 style="margin:0; font-family:'Outfit'; font-size:1.4rem; font-weight:800; color:var(--text-dark);">Seleccionar Plato</h3><button style="background:rgba(0,0,0,0.05); border:none; font-size:1.2rem; color:var(--text-dark); cursor:pointer; width:35px; height:35px; border-radius:50%; display:flex; align-items:center; justify-content:center;" onclick="cerrarPosSheet()">✕</button></div><div id="pos-sheet-grid" class="pos-sheet-body"></div></div>
     <div class="modal" id="modal-radar-owner"><div class="modal-content-standard" style="padding:32px 24px;"><button class="modal-close-circle" style="background:rgba(0,0,0,0.05);" onclick="document.getElementById('modal-radar-owner').style.display='none'">✕</button><h3 style="margin:0 0 20px; font-family:'Outfit'; font-size:1.5rem; font-weight:800; color:var(--text-dark); letter-spacing:-0.5px;">Radar GPS Chofer</h3><div id="radar-owner-map-container" style="width:100%; height:350px; border-radius:20px; border:1px solid var(--border-soft); background:#e2e8f0; margin-bottom: 20px; z-index:1;"></div><button class="btn-secondary" onclick="vibrar(); actualizarRadarMap()">Actualizar Ubicación Ahora</button></div></div>
     <div class="modal" id="expense-modal"><div class="modal-content-standard" style="padding:32px 24px;"><button class="modal-close-circle" style="background:rgba(0,0,0,0.05);" onclick="document.getElementById('expense-modal').style.display='none'">✕</button><h3 style="margin:10px 0 16px; font-size:1.6rem; font-weight:800; color:var(--danger); font-family:'Outfit'; letter-spacing:-0.5px;">Registrar Gasto</h3><p id="exp-monto-text" style="font-size:2.8rem; font-weight:300; margin:0 0 24px; font-family:'Outfit'; color:var(--text-dark); letter-spacing:-1px; line-height:1;"></p><input type="text" id="exp-rsn" class="form-input" placeholder="Detalle (Ej: Mercadería)"><button class="btn-main" style="background:var(--danger); box-shadow:0 10px 25px rgba(239,68,68,0.25);" onclick="vibrar(); submitExpense()">Descontar de Caja</button></div></div>
-    <div class="modal" id="fiado-modal"><div class="modal-content" style="max-width:100%; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background:var(--bg-app); border:none;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;"><h2 style="margin:0; font-family:'Outfit'; font-size:1.8rem; font-weight:800;">Libreta Mágica</h2><button style="background:rgba(0,0,0,0.05); border:none; font-size:1.1rem; cursor:pointer; width:35px; height:35px; border-radius:50%;" onclick="document.getElementById('fiado-modal').style.display='none'">✕</button></div><div style="background: var(--bg-pure); border: 1px solid var(--border-soft); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 20px; text-align:center; box-shadow:var(--shadow-soft);"><p style="margin:0 0 8px; font-weight:700; color:var(--text-light); text-transform:uppercase; font-size:0.85rem;">Monto Calculadora</p><h2 id="fiado-monto-text" style="font-size:3rem; font-weight:300; font-family:'Outfit'; margin:0; line-height:1; letter-spacing:-1px;">$0</h2></div><div style="background:var(--bg-pure); border:1px solid var(--border-soft); box-shadow:var(--shadow-soft); padding:24px 20px; border-radius:var(--radius-lg); margin-bottom:20px;"><h4 style="margin:0 0 20px; font-size:1.1rem; font-weight:700; text-align:left; font-family:'Outfit';">➕ Nuevo Cliente</h4><input type="text" id="new-client-name" class="form-input" placeholder="Nombre completo" style="margin-bottom:12px;"><input type="tel" id="new-client-wa" class="form-input" placeholder="WhatsApp (Opcional)" style="margin-bottom:20px;"><button class="btn-main" style="background:var(--text-dark);" onclick="vibrar(); crearNuevoCliente()">Guardar en Libreta</button></div><input type="text" id="search-client" class="client-search" placeholder="Buscar cliente..." onkeyup="renderFiadoClients()" style="margin-bottom:16px; background-color:var(--bg-pure);"><div id="fiado-clients-list" style="display:flex; flex-direction:column; gap:12px; text-align:left; overflow-y:auto; flex:1; padding-bottom:50px;"></div></div></div>
+    
+    <!-- NUEVO MODAL: CONTROL DE MOTOS (REEMPLAZA AL DE FIADOS) -->
+    <div class="modal" id="motos-modal">
+        <div class="modal-content" style="max-width:100%; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background:var(--bg-app); border:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;">
+                <h2 style="margin:0; font-family:'Outfit'; font-size:1.8rem; font-weight:800;">Control Repartidores</h2>
+                <button style="background:rgba(0,0,0,0.05); border:none; font-size:1.1rem; cursor:pointer; width:35px; height:35px; border-radius:50%;" onclick="document.getElementById('motos-modal').style.display='none'">✕</button>
+            </div>
+            <div style="background: var(--bg-pure); border: 1px solid var(--border-soft); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 20px; text-align:center; box-shadow:var(--shadow-soft);">
+                <p style="margin:0 0 8px; font-weight:700; color:var(--text-light); text-transform:uppercase; font-size:0.85rem;">Total a Rendir (En Calle)</p>
+                <h2 id="motos-total-text" style="font-size:3rem; font-weight:300; font-family:'Outfit'; margin:0; line-height:1; letter-spacing:-1px;">$0</h2>
+            </div>
+            <div id="motos-list-container" style="display:flex; flex-direction:column; gap:12px; text-align:left; overflow-y:auto; flex:1; padding-bottom:50px;"></div>
+        </div>
+    </div>
     
     <div class="modal" id="pedidos-web-modal"><div class="modal-content" style="max-width:100%; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background: var(--bg-app); border:none;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;"><h3 style="margin:0; font-size:1.8rem; font-weight:800; font-family:'Outfit'; color:var(--primary-orange); letter-spacing:-0.5px;">Pedidos Web</h3><button style="background:rgba(255,94,0,0.1); border:none; font-size:1.1rem; color:var(--primary-orange); cursor:pointer; width:35px; height:35px; border-radius:50%;" onclick="document.getElementById('pedidos-web-modal').style.display='none'">✕</button></div><div id="pedidos-web-list" style="flex:1; overflow-y:auto; text-align:left; display:flex; flex-direction:column; gap:16px; padding-bottom:40px;"></div></div></div>
     <div class="modal" id="ventas-modal"><div class="modal-content" style="max-width:100%; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background: var(--bg-app); border:none;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;"><h3 style="margin:0; font-size:1.8rem; font-weight:800; font-family:'Outfit'; color:var(--success);">Ventas Diarias</h3><button style="background:rgba(16,185,129,0.1); border:none; font-size:1.1rem; color:var(--success); cursor:pointer; width:35px; height:35px; border-radius:50%;" onclick="document.getElementById('ventas-modal').style.display='none'">✕</button></div><div id="chofer-logs-modal-container" style="flex:1; overflow-y:auto; text-align:left; padding-bottom:40px;"></div></div></div>
@@ -886,7 +905,7 @@
         const supabaseKey = 'sb_publishable_xo7-uUQqtWvEWoLGqqlrsg_rxdroLx4';
         const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-        let dbState = { inventory:[], clients:[], logs:[], repartidores:[] };
+        let dbState = { inventory:[], logs:[], repartidores:[] };
         let cUser = "LOCAL_GENERICO", currentLocalId = "", cAdminPin = "0000", expr = "", isEval = false;
         let shoppingCart = [], storeData = { perfil_url: '', descripcion: '', direccion: '', maps_url: '', whatsapp_publico: '', promos: [], sub_end_date: '' };
         let selProd = null, currentQvItem = null, currentQvQty = 1;
@@ -979,11 +998,12 @@
             });
         }
 
+        // TEXTO ACTUALIZADO (MICRÓFONO)
         function leerCaracteristicasApp() { 
             if(!('speechSynthesis' in window)) return alert("Tu navegador no soporta el asistente de voz.");
             window.speechSynthesis.cancel();
             const speech = new SpeechSynthesisUtterance(); 
-            speech.text = "¡Bienvenido a Pedilo, ya, Premium por Energy Software! La solución tecnológica definitiva para tu comercio gastronómico. Muestra tu negocio en el celular de tus clientes con menú en video vertical formato TikTok de alta definición. Tus clientes hacen sus pedidos en segundos con carrito ágil y siguen a la motito en vivo por GPS satelital. Además, contás con caja registradora inteligente que descuenta stock automáticamente, control de gastos, libreta de fiados y panel de métricas. Disfrutá de 30 días de prueba completamente gratis, sin tarjeta de crédito y sin comisiones por venta. ¡Sumate a la revolución del delivery!"; 
+            speech.text = "¡Bienvenido a Pedilo, ya, Premium por Energy Software! La solución tecnológica definitiva para tu comercio gastronómico. Muestra tu negocio en el celular de tus clientes con menú en video vertical formato TikTok de alta definición. Tus clientes hacen sus pedidos en segundos con carrito ágil y siguen a la motito en vivo por GPS satelital. Además, contás con caja registradora inteligente que descuenta stock automáticamente, control de gastos, gestión en vivo de repartidores y panel de métricas. El sistema está diseñado exclusivamente para ventas de contado, garantizando que tengas control exacto de lo que debe entregarte cada repartidor. ¡Sumate a la revolución del delivery!"; 
             speech.lang = 'es-AR'; 
             speech.rate = 1.0; 
             window.speechSynthesis.speak(speech); 
@@ -1295,18 +1315,17 @@
                 let pAmt = parseFloat(l.monto) || 0;
                 let methodStr = (l.metodo || '').toUpperCase();
                 
-                if(l.tipo !== 'SISTEMA' && l.tipo !== 'GPS_DELI' && l.tipo !== 'PEDIDO_WEB' && l.tipo !== 'PEDIDO_WEB_OK') {
-                    // Contamos SOLO el EFECTIVO para la rendición física
-                    if (methodStr === 'EFECTIVO') {
-                        if (l.moto_asignada && pAmt > 0) { 
-                            if (!cashPorMoto[l.moto_asignada]) cashPorMoto[l.moto_asignada] = 0;
-                            cashPorMoto[l.moto_asignada] += pAmt;
-                            totalCash += pAmt;
-                        } else {
-                            // Entra el mostrador y restan los GASTOS (que vienen en negativo)
-                            calcCashMostrador += pAmt; 
-                            totalCash += pAmt;
-                        }
+                if (methodStr === 'EFECTIVO') {
+                    if (l.tipo === 'VENTA' && l.moto_asignada) {
+                        cashPorMoto[l.moto_asignada] = (cashPorMoto[l.moto_asignada] || 0) + pAmt;
+                        totalCash += pAmt;
+                    } else if (l.tipo === 'RENDICION' && l.moto_asignada) {
+                        cashPorMoto[l.moto_asignada] = (cashPorMoto[l.moto_asignada] || 0) - pAmt;
+                        calcCashMostrador += pAmt;
+                        // totalCash no cambia, solo se mueve de moto a mostrador
+                    } else if (l.tipo !== 'SISTEMA' && l.tipo !== 'GPS_DELI' && l.tipo !== 'PEDIDO_WEB' && l.tipo !== 'PEDIDO_WEB_OK') {
+                        calcCashMostrador += pAmt; 
+                        totalCash += pAmt;
                     }
                 }
             });
@@ -1384,14 +1403,12 @@
 
         async function loadDataFromDB() {
             if (!currentLocalId) return;
-            const [inv, cli, log, rep] = await Promise.all([
+            const [inv, log, rep] = await Promise.all([
                 _supabase.from('pediloya_inventario').select('*').eq('local_id', currentLocalId),
-                _supabase.from('pediloya_clientes').select('*').eq('local_id', currentLocalId),
                 _supabase.from('pediloya_logs').select('*').eq('local_id', currentLocalId).order('created_at', {ascending: false}).limit(200),
                 _supabase.from('pediloya_repartidores').select('*').eq('local_id', currentLocalId)
             ]);
             dbState.inventory = inv.data || []; 
-            dbState.clients = cli.data || []; 
             dbState.logs = log.data || [];
             dbState.repartidores = rep.data || [];
             
@@ -1642,21 +1659,31 @@
 
             // RENDER REPARTIDORES
             let htmlMotos = '';
-            let htmlSelectMotos = '<option value="">🏪 VENTA MOSTRADOR</option>';
+            let htmlSelectMotos = '<option value="">🏪 ENVIAR A: MOSTRADOR (CAJA)</option>';
             dbState.repartidores.forEach(m => {
                 htmlMotos += `
                     <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-app); padding:14px; border-radius:16px; border:1px solid var(--border-soft);">
                         <span style="font-weight:700; font-size:1.05rem; color:var(--text-dark);">🛵 ${m.nombre}</span>
                         <button onclick="vibrar(); eliminarMoto('${m.id}')" style="background:#fef2f2; color:var(--danger); border:none; padding:8px 12px; border-radius:8px; font-weight:bold; cursor:pointer;">🗑️</button>
                     </div>`;
-                htmlSelectMotos += `<option value="${m.nombre}">🛵 MOTO: ${m.nombre}</option>`;
+                htmlSelectMotos += `<option value="${m.nombre}">🛵 ENVIAR CON: ${m.nombre}</option>`;
             });
             setHtml('adm-motos-list', htmlMotos || '<p style="color:var(--text-light); font-weight:500; text-align:center;">Aún no hay motos agregadas.</p>');
             if(qs('chofer-moto-select')) setHtml('chofer-moto-select', htmlSelectMotos);
 
-            let calcCash = 0, calcTransf = 0, calcFiado = 0; let choferLogsArray = []; let webLogsHtml = ''; let pedidosWebNuevos = 0;
+            let calcCashMostrador = 0;
+            let calcTransf = 0;
+            let cashPorMoto = {};
+            let totalEnMotos = 0;
+            let choferLogsArray = []; 
+            let webLogsHtml = ''; 
+            let pedidosWebNuevos = 0;
+
             dbState.logs.forEach(l => {
-                let pAmt = parseFloat(l.monto) || 0; let methodStr = (l.metodo || '').toUpperCase();
+                let pAmt = parseFloat(l.monto) || 0; 
+                let methodStr = (l.metodo || '').toUpperCase();
+                
+                // Pedidos Web UI
                 if(l.tipo === 'PEDIDO_WEB') {
                     pedidosWebNuevos++;
                     webLogsHtml += `
@@ -1670,13 +1697,36 @@
                         <button onclick="vibrar(); marcarPedidoWebRealizado('${l.id}')" style="width:100%; background:#fef2f2; color:var(--danger); border:1px dashed #fca5a5; border-radius:14px; padding:16px; font-weight:800; font-family:'Outfit'; font-size:1.05rem; cursor:pointer; transition:0.2s;">✔️ MARCAR COMO ENTREGADO (BORRAR)</button>
                     </div>`;
                 }
+
+                // Lógica contabilidad general y Rendición
                 if(l.tipo !== 'SISTEMA' && l.tipo !== 'GPS_DELI') {
-                    if (methodStr === 'EFECTIVO' || methodStr === 'DEBITO') calcCash += pAmt; else if (methodStr === 'TRANSFERENCIA') calcTransf += pAmt;
-                    let icon = methodStr==='EFECTIVO'?'💵':methodStr==='TRANSFERENCIA'?'🏦':methodStr==='FIADO'?'📝':'💸';
+                    if (methodStr === 'EFECTIVO' || methodStr === 'DEBITO') {
+                        if (l.tipo === 'VENTA' && l.moto_asignada) {
+                            cashPorMoto[l.moto_asignada] = (cashPorMoto[l.moto_asignada] || 0) + pAmt;
+                            totalEnMotos += pAmt;
+                        } else if (l.tipo === 'RENDICION' && l.moto_asignada) {
+                            cashPorMoto[l.moto_asignada] = (cashPorMoto[l.moto_asignada] || 0) - pAmt;
+                            totalEnMotos -= pAmt;
+                            calcCashMostrador += pAmt; // Entra a la caja
+                        } else if (l.tipo !== 'PEDIDO_WEB' && l.tipo !== 'PEDIDO_WEB_OK') {
+                            // Ventas mostrador, gastos, ingresos, cierres
+                            calcCashMostrador += pAmt;
+                        }
+                    } else if (methodStr === 'TRANSFERENCIA') {
+                        if (l.tipo !== 'PEDIDO_WEB' && l.tipo !== 'PEDIDO_WEB_OK') {
+                            calcTransf += pAmt;
+                        }
+                    }
+
+                    // Generación de historial UI
+                    let icon = methodStr==='EFECTIVO'?'💵':methodStr==='TRANSFERENCIA'?'🏦':'💸';
                     if(l.tipo==='PEDIDO_WEB') icon='🍔'; else if(l.tipo==='PEDIDO_WEB_OK') icon='✅';
-                    let col = l.tipo === 'SALIDA' ? 'var(--danger)' : 'var(--success)';
+                    if(l.tipo==='RENDICION') icon='🛵';
+                    
+                    let col = (l.tipo === 'SALIDA') ? 'var(--danger)' : 'var(--success)';
                     if(l.tipo==='PEDIDO_WEB') col = 'var(--primary-orange)';
                     if(l.tipo==='PEDIDO_WEB_OK') col = 'var(--text-light)';
+                    if(l.tipo==='RENDICION') col = 'var(--info)';
                     
                     let receiptBtn = '';
                     if(l.recibo_url && l.recibo_url.includes('http')) {
@@ -1688,11 +1738,13 @@
                 }
             });
 
-            dbState.clients.forEach(c => { calcFiado += Math.abs(parseFloat(c.deuda) || 0); });
+            // Guardamos para uso global en el Modal de Motos
+            window.currentCashPorMoto = cashPorMoto;
+            window.currentTotalEnMotos = totalEnMotos;
             
-            setText('adm-cash', `$${calcCash.toLocaleString('es-AR')}`); 
+            setText('adm-cash', `$${calcCashMostrador.toLocaleString('es-AR')}`); 
             setText('adm-transf', `$${calcTransf.toLocaleString('es-AR')}`); 
-            setText('adm-fiado', `$${calcFiado.toLocaleString('es-AR')}`);
+            setText('adm-motos-cash', `$${totalEnMotos.toLocaleString('es-AR')}`);
             
             setHtml('chofer-logs-modal-container', choferLogsArray.join('') || '<p style="text-align:center; color:var(--text-light); margin-top:40px; font-weight:500; font-size:1.1rem;">Sin ventas hoy.</p>');
             
@@ -2120,77 +2172,55 @@
 
         function pausarVideoQuickView() { let vids = document.querySelectorAll('#qv-media video'); vids.forEach(v => v.pause()); }
 
-        // ================= SOLUCIÓN LIBRETA DE FIADOS =================
-        window.abrirModalFiado = function() { 
-            let val = parseFloat(qs('calc-total') ? qs('calc-total').innerText : 0) || 0; 
-            setText('fiado-monto-text', `$${val.toLocaleString('es-AR')}`); 
-            renderFiadoClients(); 
-            if(qs('fiado-modal')) qs('fiado-modal').style.display = 'flex'; 
+        // ================= CONTROL DE REPARTIDORES =================
+        window.abrirModalMotos = function() {
+            renderControlMotos();
+            if(qs('motos-modal')) qs('motos-modal').style.display = 'flex';
         };
 
-        window.crearNuevoCliente = async function() { 
-            let n = qs('new-client-name').value.trim(); 
-            let w = qs('new-client-wa').value.trim(); 
-            let val = parseFloat(qs('calc-total').innerText) || 0; 
-            if(!n) return showToast("Escribí el nombre del cliente.", "error"); 
+        window.renderControlMotos = function() {
+            let html = '';
+            setText('motos-total-text', `$${(window.currentTotalEnMotos || 0).toLocaleString('es-AR')}`);
             
-            await _supabase.from('pediloya_clientes').insert([{ local_id: currentLocalId, nombre: n, whatsapp: w, deuda: val }]); 
-            
-            if(val > 0) { 
-                await _supabase.from('pediloya_logs').insert([{ local_id: currentLocalId, tipo: 'VENTA', metodo: 'FIADO', monto: val, fecha: getTucumanDateFE(), hora: getTucumanTimeFE(), descripcion: `Fiado a: ${n}` }]); 
-            } 
-            
-            qs('new-client-name').value = ''; 
-            qs('new-client-wa').value = ''; 
-            await loadDataFromDB(); 
-            renderFiadoClients(); 
-            clearCalc(); 
-            showToast("Cliente y fiado guardados."); 
-        };
-
-        window.renderFiadoClients = function() { 
-            let q = qs('search-client') ? qs('search-client').value.toLowerCase().trim() : ''; 
-            let f = dbState.clients.filter(c => c.nombre.toLowerCase().includes(q)); 
-            let html = ''; 
-            f.forEach(c => { 
+            dbState.repartidores.forEach(m => {
+                let debt = window.currentCashPorMoto[m.nombre] || 0;
                 html += `
                 <div style="background:var(--bg-pure); padding:16px; border-radius:16px; border:1px solid var(--border-soft); display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
                     <div>
-                        <div style="font-weight:800; font-size:1.1rem; color:var(--text-dark);">${c.nombre}</div>
-                        <div style="color:var(--danger); font-weight:800; font-size:1.2rem; font-family:'Outfit';">Debe: $${parseFloat(c.deuda).toLocaleString('es-AR')}</div>
+                        <div style="font-weight:800; font-size:1.1rem; color:var(--text-dark);">🛵 ${m.nombre}</div>
+                        <div style="color:var(--primary-orange); font-weight:800; font-size:1.2rem; font-family:'Outfit';">Tiene: $${debt.toLocaleString('es-AR')}</div>
                     </div>
-                    <button onclick="vibrar(); saldarDeuda('${c.id}', ${c.deuda}, '${c.nombre}', '${c.whatsapp || ''}')" style="background:var(--success); color:white; border:none; padding:10px 16px; border-radius:12px; font-weight:bold; cursor:pointer; font-family:'Outfit';">DESCONTAR</button>
-                </div>`; 
-            }); 
-            setHtml('fiado-clients-list', html || '<p style="text-align:center; color:var(--text-light); margin-top:20px;">No hay clientes registrados.</p>'); 
+                    <button onclick="vibrar(); rendirPlataMoto('${m.nombre}', ${debt})" style="background:var(--text-dark); color:white; border:none; padding:10px 16px; border-radius:12px; font-weight:bold; cursor:pointer; font-family:'Outfit';">RENDIR</button>
+                </div>`;
+            });
+            setHtml('motos-list-container', html || '<p style="text-align:center; color:var(--text-light); margin-top:20px;">No hay repartidores agregados en el panel de dueño.</p>');
         };
 
-        window.saldarDeuda = async function(id, deudaActual, nombre, whatsapp) { 
-            let montoPago = prompt(`¿Cuánto va a entregar ${nombre}? (Deuda total: $${deudaActual})`, deudaActual);
+        window.rendirPlataMoto = async function(nombre, deudaActual) {
+            if(deudaActual <= 0) return alert(`${nombre} no tiene dinero para rendir ahora mismo.`);
+
+            let monto = prompt(`¿Cuánta plata te está entregando ${nombre}?\n(Tiene encima: $${deudaActual})`, deudaActual);
+            if(monto === null || monto === "") return;
             
-            if(montoPago === null || montoPago === "") return; 
-            montoPago = parseFloat(montoPago);
-            if(isNaN(montoPago) || montoPago <= 0) return alert("Monto inválido.");
+            monto = parseFloat(monto);
+            if(isNaN(monto) || monto <= 0) return alert("Monto inválido.");
 
-            let nuevaDeuda = Math.max(0, deudaActual - montoPago);
-
-            if(confirm(`Se descontarán $${montoPago}. La deuda quedará en $${nuevaDeuda}. ¿Confirmar?`)) { 
-                await _supabase.from('pediloya_clientes').update({ deuda: nuevaDeuda }).eq('id', id); 
-                await _supabase.from('pediloya_logs').insert([{ local_id: currentLocalId, tipo: 'INGRESO', metodo: 'EFECTIVO', monto: montoPago, fecha: getTucumanDateFE(), hora: getTucumanTimeFE(), descripcion: `Pago de fiado: ${nombre}` }]); 
+            if(confirm(`Recibirás $${monto} de ${nombre} y pasará a tu caja de mostrador. ¿Confirmar?`)) {
+                await _supabase.from('pediloya_logs').insert([{ 
+                    local_id: currentLocalId, 
+                    tipo: 'RENDICION', 
+                    metodo: 'EFECTIVO', 
+                    monto: monto, 
+                    fecha: getTucumanDateFE(), 
+                    hora: getTucumanTimeFE(), 
+                    descripcion: `Rendición de caja: ${nombre}`,
+                    moto_asignada: nombre
+                }]); 
                 
                 await loadDataFromDB(); 
-                renderFiadoClients(); 
-                showToast("Pago registrado exitosamente."); 
-
-                if(whatsapp && whatsapp.trim() !== "") {
-                    let num = whatsapp.replace(/\D/g, ''); 
-                    if(num.length === 10) num = '549' + num; 
-                    let msg = `Hola ${nombre}, recibimos tu pago de $${montoPago}. Tu saldo restante es de $${nuevaDeuda}. ¡Gracias!`;
-                    window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`, '_blank');
-                } else {
-                    alert("Pago guardado, pero el cliente no tiene un WhatsApp registrado para avisarle.");
-                }
-            } 
+                renderControlMotos();
+                showToast("Dinero recibido y guardado en caja.");
+            }
         };
     </script>
 </body>
