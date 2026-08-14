@@ -2114,6 +2114,60 @@
 
         function pausarVideoQuickView() { let vids = document.querySelectorAll('#qv-media video'); vids.forEach(v => v.pause()); }
 
+        // ================= SOLUCIÓN LIBRETA DE FIADOS =================
+        window.abrirModalFiado = function() { 
+            let val = parseFloat(qs('calc-total') ? qs('calc-total').innerText : 0) || 0; 
+            setText('fiado-monto-text', `$${val.toLocaleString('es-AR')}`); 
+            renderFiadoClients(); 
+            if(qs('fiado-modal')) qs('fiado-modal').style.display = 'flex'; 
+        };
+
+        window.crearNuevoCliente = async function() { 
+            let n = qs('new-client-name').value.trim(); 
+            let w = qs('new-client-wa').value.trim(); 
+            let val = parseFloat(qs('calc-total').innerText) || 0; 
+            if(!n) return showToast("Escribí el nombre del cliente.", "error"); 
+            
+            await _supabase.from('pediloya_clientes').insert([{ local_id: currentLocalId, nombre: n, whatsapp: w, deuda: val }]); 
+            
+            if(val > 0) { 
+                await _supabase.from('pediloya_logs').insert([{ local_id: currentLocalId, tipo: 'VENTA', metodo: 'FIADO', monto: val, fecha: getTucumanDateFE(), hora: getTucumanTimeFE(), descripcion: `Fiado a: ${n}` }]); 
+            } 
+            
+            qs('new-client-name').value = ''; 
+            qs('new-client-wa').value = ''; 
+            await loadDataFromDB(); 
+            renderFiadoClients(); 
+            clearCalc(); 
+            showToast("Cliente y fiado guardados."); 
+        };
+
+        window.renderFiadoClients = function() { 
+            let q = qs('search-client') ? qs('search-client').value.toLowerCase().trim() : ''; 
+            let f = dbState.clients.filter(c => c.nombre.toLowerCase().includes(q)); 
+            let html = ''; 
+            f.forEach(c => { 
+                html += `
+                <div style="background:var(--bg-pure); padding:16px; border-radius:16px; border:1px solid var(--border-soft); display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <div>
+                        <div style="font-weight:800; font-size:1.1rem; color:var(--text-dark);">${c.nombre}</div>
+                        <div style="color:var(--danger); font-weight:800; font-size:1.2rem; font-family:'Outfit';">Debe: $${parseFloat(c.deuda).toLocaleString('es-AR')}</div>
+                    </div>
+                    <button onclick="vibrar(); saldarDeuda('${c.id}', ${c.deuda}, '${c.nombre}')" style="background:var(--success); color:white; border:none; padding:10px 16px; border-radius:12px; font-weight:bold; cursor:pointer; font-family:'Outfit';">SALDAR</button>
+                </div>`; 
+            }); 
+            setHtml('fiado-clients-list', html || '<p style="text-align:center; color:var(--text-light); margin-top:20px;">No hay clientes registrados.</p>'); 
+        };
+
+        window.saldarDeuda = async function(id, monto, nombre) { 
+            if(confirm(`¿Saldar la deuda de $${monto} de ${nombre}?`)) { 
+                await _supabase.from('pediloya_clientes').update({ deuda: 0 }).eq('id', id); 
+                await _supabase.from('pediloya_logs').insert([{ local_id: currentLocalId, tipo: 'INGRESO', metodo: 'EFECTIVO', monto: monto, fecha: getTucumanDateFE(), hora: getTucumanTimeFE(), descripcion: `Pago de deuda: ${nombre}` }]); 
+                await loadDataFromDB(); 
+                renderFiadoClients(); 
+                showToast("Deuda saldada exitosamente."); 
+            } 
+        };
     </script>
 </body>
 </html>
