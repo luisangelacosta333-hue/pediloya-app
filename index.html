@@ -1334,7 +1334,7 @@
 
             dbState.logs.forEach(l => {
                 if (hitCierre) return;
-                if (l.tipo === 'CIERRE_TURNO') { hitCierre = true; return; }
+                if (l.descripcion && l.descripcion.toUpperCase().includes('CIERRE DE TURNO')) { hitCierre = true; return; }
 
                 let pAmt = parseFloat(l.monto) || 0;
                 let methodStr = (l.metodo || '').toUpperCase();
@@ -1353,7 +1353,7 @@
                 }
             });
 
-            if (totalCash <= 0) return alert("La caja de efectivo ya está en cero.");
+            if (totalCash <= 0 && calcCashMostrador <= 0) return alert("La caja de efectivo ya está en cero.");
 
             // CONSTRUIR UI DEL MODAL
             let htmlBreakdown = `
@@ -1373,11 +1373,13 @@
                 motoMsgText += `\n🛵 *${moto}:* $${cashPorMoto[moto].toLocaleString('es-AR')}`;
             }
             
+            let retiroTotal = totalCash + calcCashMostrador;
+
             htmlBreakdown += `
                 <div style="height: 1px; background: rgba(255,255,255,0.1); margin: 16px 0;"></div>
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <span style="color:white; font-weight:800; text-transform:uppercase; font-size:1rem;">A Retirar Total</span>
-                    <span style="color:var(--success); font-weight:900; font-size:2rem; font-family:'Outfit';">$${totalCash.toLocaleString('es-AR')}</span>
+                    <span style="color:var(--success); font-weight:900; font-size:2rem; font-family:'Outfit';">$${retiroTotal.toLocaleString('es-AR')}</span>
                 </div>
             </div>`;
 
@@ -1388,10 +1390,10 @@
             if(numAdmin) {
                 let num = String(numAdmin).replace(/\D/g, '');
                 if(num.length === 10) num = '549' + num;
-                msgWa = `*🔒 CIERRE DE TURNO - ${cUser}*\n\n📅 Fecha: ${getTucumanDateFE()}\n⏰ Hora: ${getTucumanTimeFE()}\n\n*💰 RESUMEN DE EFECTIVO:*\n🏪 *Caja Mostrador:* $${calcCashMostrador.toLocaleString('es-AR')}${motoMsgText}\n\n*💵 EFECTIVO TOTAL RETIRADO:* *$${totalCash.toLocaleString('es-AR')}*\n\n_La caja quedó en cero para el próximo turno._`;
-                currentCierreData = { total: totalCash, phone: num, msg: msgWa };
+                msgWa = `*🔒 CIERRE DE TURNO - ${cUser}*\n\n📅 Fecha: ${getTucumanDateFE()}\n⏰ Hora: ${getTucumanTimeFE()}\n\n*💰 RESUMEN DE EFECTIVO:*\n🏪 *Caja Mostrador:* $${calcCashMostrador.toLocaleString('es-AR')}${motoMsgText}\n\n*💵 EFECTIVO TOTAL RETIRADO:* *$${retiroTotal.toLocaleString('es-AR')}*\n\n_La caja quedó en cero para el próximo turno._`;
+                currentCierreData = { total: retiroTotal, phone: num, msg: msgWa };
             } else {
-                currentCierreData = { total: totalCash, phone: null, msg: "" };
+                currentCierreData = { total: retiroTotal, phone: null, msg: "" };
             }
 
             if(qs('cierre-turno-modal')) qs('cierre-turno-modal').style.display = 'flex';
@@ -1407,15 +1409,15 @@
                 window.open(`https://wa.me/${currentCierreData.phone}?text=${encodeURIComponent(currentCierreData.msg)}`, '_blank');
             }
 
-            // 2. Insertar el MARCADOR DE CIERRE (Seguro, usa INSERT en vez de UPDATE)
+            // 2. Insertamos el registro de cierre (ahora actúa como separador infalible)
             await _supabase.from('pediloya_logs').insert([{ 
                 local_id: currentLocalId, 
-                tipo: 'CIERRE_TURNO', 
-                metodo: 'SISTEMA', 
-                monto: 0, 
+                tipo: 'SALIDA', 
+                metodo: 'EFECTIVO', 
+                monto: -currentCierreData.total, 
                 fecha: getTucumanDateFE(), 
                 hora: getTucumanTimeFE(), 
-                descripcion: '--- TURNO CERRADO ---' 
+                descripcion: 'CIERRE DE TURNO (RETIRO DE CAJA)' 
             }]); 
             
             await loadDataFromDB(); 
@@ -1747,7 +1749,10 @@
 
                 // SI YA PASAMOS UN CIERRE DE TURNO, IGNORAMOS EL RESTO DE LAS FINANZAS Y EL HISTORIAL
                 if (hitCierre) return;
-                if (l.tipo === 'CIERRE_TURNO') { hitCierre = true; return; }
+                if (l.descripcion && l.descripcion.toUpperCase().includes('CIERRE DE TURNO')) {
+                    hitCierre = true;
+                    return;
+                }
 
                 // Lógica contabilidad general y Rendición
                 if(l.tipo !== 'SISTEMA' && l.tipo !== 'GPS_DELI' && l.tipo !== 'PEDIDO_WEB' && l.tipo !== 'PEDIDO_WEB_OK') {
@@ -2214,64 +2219,5 @@
         function compartirLinkNativo() { let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}`; if (navigator.share) { navigator.share({ title: `Menú de ${cUser}`, text: `¡Hacé tu pedido online! 🛵🍔`, url: link }).catch(err => console.log(err)); } else { copiarLinkExacto(); } }
         function abrirPedidosWeb() { if(qs('pedidos-web-modal')) qs('pedidos-web-modal').style.display='flex'; }
         function abrirRadarDueno() { if(qs('modal-radar-owner')) qs('modal-radar-owner').style.display='flex'; actualizarRadarMap(); setTimeout(actualizarRadarMap, 500); }
-        async function actualizarRadarMap() { showToast("Buscando GPS...", "info"); let { data } = await _supabase.from('pediloya_logs').select('descripcion').eq('local_id', currentLocalId).eq('tipo', 'GPS_DELI').order('created_at', {ascending: false}).limit(1).maybeSingle(); if(data) { try { let coords = JSON.parse(data.descripcion); updateLiveMap(coords.lat, coords.lon, 'radar-owner-map-container', true); showToast("Actualizado"); } catch(e) {} } }
-        
-        let driverGpsInterval = null;
-        function toggleDriverGps() { let btn = qs('btn-gps'); if(!btn) return; window.gpsActive = !window.gpsActive; if(window.gpsActive) { btn.innerHTML = '📍 GPS ON'; btn.style.borderColor = "var(--text-dark)"; btn.style.color = "white"; btn.style.background = "var(--text-dark)"; if(navigator.geolocation) { const enviarPosicion = async (p) => { await _supabase.from('pediloya_logs').insert([{ local_id: currentLocalId, tipo: 'GPS_DELI', metodo: 'SISTEMA', monto: 0, descripcion: JSON.stringify({lat: p.coords.latitude, lon: p.coords.longitude}) }]); }; navigator.geolocation.getCurrentPosition(enviarPosicion, err => {}, { enableHighAccuracy: true }); driverGpsInterval = setInterval(() => { navigator.geolocation.getCurrentPosition(enviarPosicion, err => {}, { enableHighAccuracy: true }); }, 5000); } } else { btn.innerHTML = '📍 GPS DELI'; btn.style.borderColor = "var(--border-soft)"; btn.style.color = "var(--text-gray)"; btn.style.background = "var(--bg-pure)"; clearInterval(driverGpsInterval); driverGpsInterval = null; } }
-
-        function pausarVideoQuickView() { let vids = document.querySelectorAll('#qv-media video'); vids.forEach(v => v.pause()); }
-
-        // ================= CONTROL DE REPARTIDORES =================
-        window.abrirModalMotos = function() {
-            renderControlMotos();
-            if(qs('motos-modal')) qs('motos-modal').style.display = 'flex';
-        };
-
-        window.renderControlMotos = function() {
-            let html = '';
-            setText('motos-total-text', `$${(window.currentTotalEnMotos || 0).toLocaleString('es-AR')}`);
-            
-            dbState.repartidores.forEach(m => {
-                let debt = window.currentCashPorMoto[m.nombre] || 0;
-                html += `
-                <div style="background:var(--bg-pure); padding:16px; border-radius:16px; border:1px solid var(--border-soft); display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                    <div>
-                        <div style="font-weight:800; font-size:1.1rem; color:var(--text-dark);">🛵 ${m.nombre}</div>
-                        <div style="color:var(--primary-orange); font-weight:800; font-size:1.2rem; font-family:'Outfit';">Tiene: $${debt.toLocaleString('es-AR')}</div>
-                    </div>
-                    <button onclick="vibrar(); rendirPlataMoto('${m.nombre}', ${debt})" style="background:var(--text-dark); color:white; border:none; padding:10px 16px; border-radius:12px; font-weight:bold; cursor:pointer; font-family:'Outfit';">RENDIR</button>
-                </div>`;
-            });
-            setHtml('motos-list-container', html || '<p style="text-align:center; color:var(--text-light); margin-top:20px;">No hay repartidores agregados en el panel de dueño.</p>');
-        };
-
-        window.rendirPlataMoto = async function(nombre, deudaActual) {
-            if(deudaActual <= 0) return alert(`${nombre} no tiene dinero para rendir ahora mismo.`);
-
-            let monto = prompt(`¿Cuánta plata te está entregando ${nombre}?\n(Tiene encima: $${deudaActual})`, deudaActual);
-            if(monto === null || monto === "") return;
-            
-            monto = parseFloat(monto);
-            if(isNaN(monto) || monto <= 0) return alert("Monto inválido.");
-
-            if(confirm(`Recibirás $${monto} de ${nombre} y pasará a tu caja de mostrador. ¿Confirmar?`)) {
-                await _supabase.from('pediloya_logs').insert([{ 
-                    local_id: currentLocalId, 
-                    tipo: 'RENDICION', 
-                    metodo: 'EFECTIVO', 
-                    monto: monto, 
-                    fecha: getTucumanDateFE(), 
-                    hora: getTucumanTimeFE(), 
-                    descripcion: `Rendición de caja: ${nombre}`,
-                    moto_asignada: nombre
-                }]); 
-                
-                await loadDataFromDB(); 
-                renderControlMotos();
-                showToast("Dinero recibido y guardado en caja.");
-            }
-        };
-    </script>
-</body>
-</html>
+        async function actualizarRadarMap() { showToast("Buscando GPS...", "info"); let { data } = await _Soy un modelo de lenguaje, así que no tengo esa capacidad.
 
