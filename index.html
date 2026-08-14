@@ -304,9 +304,6 @@
 <body>
 
     <script>
-        // Limpieza de caché inicial (opcional, pero la dejo si la querías)
-        // if ('caches' in window) { caches.keys().then(names => { for (let name of names) caches.delete(name); }); }
-        
         // REGISTRO DE SERVICE WORKER PARA PWA
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -341,7 +338,7 @@
         <div class="loader-circle"></div>
     </div>
 
-    <!-- TOAST LIMPIO SIN EMOJIS DUPLICADOS -->
+    <!-- TOAST -->
     <div id="toast" class="toast"><span id="toast-icon">✅</span> <span id="toast-msg">Mensaje</span></div>
 
     <!-- SELECCIONADOR FOTO/CAMARA -->
@@ -361,7 +358,6 @@
     <div id="view-login" class="view-container active view-container-no-pad landing-wrapper">
         <div class="landing-content">
             
-            <!-- NUEVO LOGO IMPONENTE CON RAYOS 3D -->
             <div class="logo-premium-wrapper">
                 <div class="logo-premium-rays"></div>
                 <div class="logo-premium-core">
@@ -372,14 +368,12 @@
                                 <stop offset="100%" stop-color="#ff3300" />
                             </linearGradient>
                         </defs>
-                        <!-- Icono Pin Ubicación + Rayo Energía (Delivery Rápido) -->
                         <path fill="url(#icon-gradient)" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm-1 11.5v-4H8.5L13 4.5v4h2.5L11 13.5z" />
                     </svg>
                 </div>
             </div>
             
             <div style="text-align:center;">
-                <!-- NUEVO TEXTO "PEDILO YA" GRANDE Y POTENTE -->
                 <h2 class="pedilo-ya-title">PEDILO<span>YA</span></h2>
                 <div class="hero-badge">✨ TECNOLOGÍA GASTRONÓMICA 2026</div>
             </div>
@@ -580,7 +574,7 @@
             <button class="ckey ckey-eq" style="height:8vh; max-height:70px; border-radius:16px; font-size:2.2rem; font-weight:300; background:var(--gradient-orange); color:white; border:none; cursor:pointer; box-shadow:var(--shadow-orange); display:flex; align-items:center; justify-content:center; font-family:'Outfit';" onclick="vibrar(); evalCalc()">=</button>
         </div>
 
-        <!-- REPARTIDORES SELECT (NUEVO) -->
+        <!-- REPARTIDORES SELECT -->
         <div style="flex-shrink:0; margin-bottom: 8px;">
             <select id="chofer-moto-select" class="form-input" style="padding: 12px; margin-bottom: 0; background: #f1f5f9; border-color: var(--border-soft); cursor: pointer;">
                 <option value="">🏪 VENTA MOSTRADOR</option>
@@ -623,7 +617,7 @@
                 <div id="adm-cash" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
             </div>
 
-            <!-- SECCIÓN REPARTIDORES (NUEVO) -->
+            <!-- SECCIÓN REPARTIDORES -->
             <div class="admin-card" style="width:100%; box-sizing:border-box; padding:24px 20px;">
                 <h3 style="margin:0 0 15px; font-size:1.5rem; font-family:'Outfit'; font-weight:800; color:var(--text-dark);">🛵 Repartidores</h3>
                 <p style="font-size:0.95rem; color:var(--text-gray); margin-bottom:20px;">Agregá las motos para seleccionarlas directo desde la caja.</p>
@@ -750,7 +744,7 @@
             <!-- MAPA FULL SCREEN -->
             <div id="tracking-map-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></div>
             
-            <!-- CAJA BUSCADOR COMPACTA ARRIBA (CORREGIDA PARA QUE NO SOBRESALGA) -->
+            <!-- CAJA BUSCADOR COMPACTA ARRIBA -->
             <div style="position: absolute; top: 20px; left: 20px; width: calc(100% - 40px); box-sizing: border-box; z-index: 1000; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); padding: 12px; border-radius: 20px; box-shadow: var(--shadow-float); border: 1px solid var(--border-soft); display: flex; gap: 10px; align-items: center; overflow: hidden;">
                 <div style="font-size: 1.5rem; padding-left: 5px; flex-shrink: 0;">📍</div>
                 <input type="text" id="track-input-code" placeholder="Código TRK..." style="margin:0; padding:12px 14px; border-radius:12px; font-weight:800; font-size:1rem; text-transform:uppercase; background:var(--bg-app); flex:1; border: 1px solid var(--border-soft); outline:none; color:var(--text-dark); min-width: 0;">
@@ -793,13 +787,11 @@
         <div class="modal-content-standard">
             <div class="drag-indicator"></div>
             
-            <!-- HEADER FIJO -->
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-shrink: 0;">
                 <h2 class="cart-header-title">Tu Compra</h2>
                 <button style="background:var(--border-soft); border:none; width:40px; height:40px; border-radius:50%; font-size:1.1rem; cursor:pointer; color:var(--text-dark);" onclick="vibrar(); document.getElementById('modal-carrito').style.display='none'">✕</button>
             </div>
             
-            <!-- CONTENIDO SCROLLEABLE -->
             <div style="flex: 1; overflow-y: auto; padding-right: 5px; display: flex; flex-direction: column; padding-bottom: 40px;">
                 
                 <div id="cart-items-list" style="margin-bottom: 16px; display: flex; flex-direction: column;"></div>
@@ -819,11 +811,9 @@
                 </div>
                 <input type="text" id="order-notes" class="form-input" placeholder="Aclaraciones para el local (Opcional)" style="background: white; margin-bottom: 16px; flex-shrink: 0;" onfocus="setTimeout(() => this.scrollIntoView({behavior:'smooth', block:'center'}), 300)">
                 
-                <!-- Espaciador extra para que el teclado no tape el último input al hacer scroll -->
                 <div style="height: 60px; flex-shrink: 0;"></div>
             </div>
 
-            <!-- BOTONES DE PAGO FIJOS ABAJO -->
             <div style="display:flex; gap:12px; flex-shrink: 0; padding-top: 15px; border-top: 1px solid var(--border-soft); background: #ffffff; z-index: 10;">
                 <button class="btn-pay-cash" onclick="vibrar(); enviarPedido('Efectivo')">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path></svg>
@@ -837,7 +827,7 @@
         </div>
     </div>
 
-    <!-- MODAL QUICK VIEW CORREGIDO -->
+    <!-- MODAL QUICK VIEW -->
     <div class="modal" id="modal-quick-view" style="align-items: flex-start; padding-top: 5vh;">
         <div class="modal-content-standard" style="padding:0; overflow-x:hidden; overflow-y:auto; background:var(--bg-pure); width: 100%; max-width: 500px; max-height: 90vh; margin-top: auto; margin-bottom: auto;">
             <button style="position:absolute; top:20px; right:20px; z-index:20; background:rgba(255,255,255,0.95); border:none; width:40px; height:40px; border-radius:50%; font-size:1.1rem; color:#0f172a; box-shadow:0 10px 25px rgba(0,0,0,0.2);" onclick="vibrar(); pausarVideoQuickView(); document.getElementById('modal-quick-view').style.display='none'">✕</button>
@@ -856,6 +846,16 @@
                 </div>
                 <button class="btn-main" style="padding: 18px; font-size: 1.05rem; box-shadow: 0 8px 20px rgba(255,94,0,0.3);" onclick="vibrar(); agregarDesdeQuickView()">AGREGAR AL PEDIDO</button>
             </div>
+        </div>
+    </div>
+
+    <!-- MODAL PREMIUM CIERRE DE TURNO (NUEVO) -->
+    <div class="modal" id="cierre-turno-modal">
+        <div class="modal-content-standard" style="padding:32px 24px; background: #0f172a; color: white; border-top: 5px solid var(--primary-orange);">
+            <button class="modal-close-circle" style="background:rgba(255,255,255,0.1); color:white;" onclick="document.getElementById('cierre-turno-modal').style.display='none'">✕</button>
+            <h3 style="margin:0 0 20px; font-family:'Outfit'; font-size:1.8rem; font-weight:800; color:white; letter-spacing:-0.5px;">🔒 Arqueo de Caja</h3>
+            <div id="cierre-breakdown" style="margin-bottom: 24px;"></div>
+            <button class="btn-main" style="background:var(--gradient-orange); width:100%; font-size: 1rem; box-shadow: 0 10px 25px rgba(255,94,0,0.3);" onclick="vibrar(); confirmarCierreTurno()">VACIAR CAJA Y AVISAR AL DUEÑO</button>
         </div>
     </div>
 
@@ -891,6 +891,8 @@
         let trackingMap = null, trackingMarker = null, radarMap = null, radarMarker = null;
         let isPaywallUpload = false;
         let pendingTransferData = null;
+        
+        let currentCierreData = null; // Guardará la info para confirmar el cierre
 
         function vibrar(ms = 40) { if(navigator.vibrate) navigator.vibrate(ms); }
 
@@ -1042,7 +1044,6 @@
             if(id === 'view-admin') { actualizarLinkDisplay(); }
         }
 
-        // ================= FIX PARA EL TOAST =================
         function showToast(m, type="success") { 
             setText('toast-msg', m);
             setText('toast-icon', type === "success" ? "✅" : (type === "error" ? "❌" : "🔔"));
@@ -1278,43 +1279,101 @@
         function elegirCamara() { if(qs('foto-input-camara')) qs('foto-input-camara').click(); setTimeout(() => { cerrarSheet(); }, 500); }
         function elegirGaleria() { if(qs('foto-input-galeria')) qs('foto-input-galeria').click(); setTimeout(() => { cerrarSheet(); }, 500); }
 
-        // ================= CERRAR TURNO LOGICA WHATSAPP =================
+        // ================= CIERRE DE TURNO PREMIUM (ARQUEO POR MOTO) =================
         async function cerrarTurno() {
-            let calcCash = 0;
+            let calcCashMostrador = 0;
+            let cashPorMoto = {};
+            let totalCash = 0;
+
             dbState.logs.forEach(l => {
                 let pAmt = parseFloat(l.monto) || 0;
                 let methodStr = (l.metodo || '').toUpperCase();
+                
                 if(l.tipo !== 'SISTEMA' && l.tipo !== 'GPS_DELI' && l.tipo !== 'PEDIDO_WEB' && l.tipo !== 'PEDIDO_WEB_OK') {
-                    if (methodStr === 'EFECTIVO' || methodStr === 'DEBITO') calcCash += pAmt;
+                    // Contamos SOLO el EFECTIVO para la rendición física
+                    if (methodStr === 'EFECTIVO') {
+                        if (l.moto_asignada && pAmt > 0) { 
+                            if (!cashPorMoto[l.moto_asignada]) cashPorMoto[l.moto_asignada] = 0;
+                            cashPorMoto[l.moto_asignada] += pAmt;
+                            totalCash += pAmt;
+                        } else {
+                            // Entra el mostrador y restan los GASTOS (que vienen en negativo)
+                            calcCashMostrador += pAmt; 
+                            totalCash += pAmt;
+                        }
+                    }
                 }
             });
 
-            if (calcCash <= 0) return alert("La caja ya está en cero.");
+            if (totalCash <= 0) return alert("La caja de efectivo ya está en cero.");
 
-            if(confirm(`¿Estás seguro de CERRAR TURNO?\nSe retirarán $${calcCash.toLocaleString('es-AR')} de la caja en efectivo, dejándola en cero para el próximo día.`)) {
-                showToast("Cerrando caja...", "info");
-                
-                await _supabase.from('pediloya_logs').insert([{ 
-                    local_id: currentLocalId, 
-                    tipo: 'SALIDA', 
-                    metodo: 'EFECTIVO', 
-                    monto: -calcCash, 
-                    fecha: getTucumanDateFE(), 
-                    hora: getTucumanTimeFE(), 
-                    descripcion: 'CIERRE DE TURNO (RETIRO DE CAJA)' 
-                }]); 
-                
-                await loadDataFromDB(); 
-                showToast("Turno Cerrado");
-                
-                let numAdmin = targetLocalPhone || '';
-                if(numAdmin) {
-                    let num = String(numAdmin).replace(/\D/g, '');
-                    if(num.length === 10) num = '549' + num;
-                    let msg = `*🔒 CIERRE DE TURNO - ${cUser}*\n\n📅 Fecha: ${getTucumanDateFE()}\n⏰ Hora: ${getTucumanTimeFE()}\n💵 Efectivo Retirado: *$${calcCash.toLocaleString('es-AR')}*\n\n_La caja quedó en cero para el próximo turno._`;
-                    window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`, '_blank');
-                }
+            // CONSTRUIR UI DEL MODAL
+            let htmlBreakdown = `
+            <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 16px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.1);">
+                <div style="display:flex; justify-content:space-between; margin-bottom: 12px; font-size:1.1rem;">
+                    <span style="color:#94a3b8; font-weight:600;">🏪 Mostrador (Caja)</span>
+                    <span style="color:white; font-weight:800; font-family:'Outfit';">$${calcCashMostrador.toLocaleString('es-AR')}</span>
+                </div>`;
+            
+            let motoMsgText = "";
+            for (let moto in cashPorMoto) {
+                htmlBreakdown += `
+                <div style="display:flex; justify-content:space-between; margin-bottom: 12px; font-size:1.1rem;">
+                    <span style="color:#94a3b8; font-weight:600;">🛵 Repartidor: ${moto}</span>
+                    <span style="color:var(--primary-orange); font-weight:800; font-family:'Outfit';">$${cashPorMoto[moto].toLocaleString('es-AR')}</span>
+                </div>`;
+                motoMsgText += `\n🛵 *${moto}:* $${cashPorMoto[moto].toLocaleString('es-AR')}`;
             }
+            
+            htmlBreakdown += `
+                <div style="height: 1px; background: rgba(255,255,255,0.1); margin: 16px 0;"></div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span style="color:white; font-weight:800; text-transform:uppercase; font-size:1rem;">A Retirar Total</span>
+                    <span style="color:var(--success); font-weight:900; font-size:2rem; font-family:'Outfit';">$${totalCash.toLocaleString('es-AR')}</span>
+                </div>
+            </div>`;
+
+            setHtml('cierre-breakdown', htmlBreakdown);
+            
+            let numAdmin = targetLocalPhone || '';
+            let msgWa = "";
+            if(numAdmin) {
+                let num = String(numAdmin).replace(/\D/g, '');
+                if(num.length === 10) num = '549' + num;
+                msgWa = `*🔒 CIERRE DE TURNO - ${cUser}*\n\n📅 Fecha: ${getTucumanDateFE()}\n⏰ Hora: ${getTucumanTimeFE()}\n\n*💰 RESUMEN DE EFECTIVO:*\n🏪 *Caja Mostrador:* $${calcCashMostrador.toLocaleString('es-AR')}${motoMsgText}\n\n*💵 EFECTIVO TOTAL RETIRADO:* *$${totalCash.toLocaleString('es-AR')}*\n\n_La caja quedó en cero para el próximo turno._`;
+                currentCierreData = { total: totalCash, phone: num, msg: msgWa };
+            } else {
+                currentCierreData = { total: totalCash, phone: null, msg: "" };
+            }
+
+            if(qs('cierre-turno-modal')) qs('cierre-turno-modal').style.display = 'flex';
+        }
+
+        async function confirmarCierreTurno() {
+            if(!currentCierreData) return;
+            let btn = qs('cierre-turno-modal').querySelector('.btn-main');
+            if(btn) { btn.innerText = "CERRANDO..."; btn.disabled = true; }
+
+            await _supabase.from('pediloya_logs').insert([{ 
+                local_id: currentLocalId, 
+                tipo: 'SALIDA', 
+                metodo: 'EFECTIVO', 
+                monto: -currentCierreData.total, 
+                fecha: getTucumanDateFE(), 
+                hora: getTucumanTimeFE(), 
+                descripcion: 'CIERRE DE TURNO (RETIRO DE CAJA)' 
+            }]); 
+            
+            await loadDataFromDB(); 
+            if(qs('cierre-turno-modal')) qs('cierre-turno-modal').style.display = 'none';
+            showToast("Turno Cerrado");
+
+            if(currentCierreData.phone) {
+                window.open(`https://wa.me/${currentCierreData.phone}?text=${encodeURIComponent(currentCierreData.msg)}`, '_blank');
+            }
+            
+            if(btn) { btn.innerText = "VACIAR CAJA Y AVISAR AL DUEÑO"; btn.disabled = false; }
+            currentCierreData = null;
         }
 
         async function loadDataFromDB() {
@@ -2011,7 +2070,6 @@
             
             let desc = selProd ? `Venta: ${selProd.nombre}` : 'Venta de Mostrador'; 
             
-            // CAPTURAMOS EL REPARTIDOR (NUEVO)
             let motoSelected = qs('chofer-moto-select') ? qs('chofer-moto-select').value : null;
             
             let qtyToDeduct = selProd ? Math.max(1, Math.floor(val / selProd.precio)) : 0;
@@ -2026,7 +2084,7 @@
                 fecha: getTucumanDateFE(), 
                 hora: getTucumanTimeFE(), 
                 descripcion: desc,
-                moto_asignada: motoSelected // SE GUARDA EN DB
+                moto_asignada: motoSelected
             }]); 
             
             if(selProd && qtyToDeduct > 0) {
