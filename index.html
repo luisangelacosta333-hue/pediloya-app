@@ -86,11 +86,11 @@
         
         .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 94, 0, 0.08); border: 1px solid rgba(255, 94, 0, 0.15); padding: 10px 22px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; color: var(--primary-orange); letter-spacing: 1.5px; backdrop-filter: blur(12px); margin-bottom: 16px; text-transform: uppercase; box-shadow: 0 8px 20px rgba(255, 94, 0, 0.05); }
         
-        /* LOGO CON RAYOS Y LUZ (REDISEÑADO) */
-        .logo-premium-wrapper { position: relative; width: 170px; height: 170px; margin: 0px auto 20px auto; display: flex; justify-content: center; align-items: center; }
-        .logo-premium-rays { position: absolute; inset: -30px; background: conic-gradient(from 0deg, transparent 0%, rgba(255,94,0,0.8) 10%, transparent 20%, transparent 40%, rgba(255,94,0,0.8) 50%, transparent 60%, transparent 80%, rgba(255,94,0,0.8) 90%, transparent 100%); border-radius: 50%; animation: spinRays 8s linear infinite; filter: blur(20px); opacity: 0.7; z-index: 1; }
-        .logo-premium-core { width: 120px; height: 120px; border-radius: 35px; background: var(--bg-pure); border: 2px solid rgba(255,94,0,0.35); display: flex; align-items: center; justify-content: center; position: relative; z-index: 2; box-shadow: 0 25px 50px rgba(255,94,0,0.3), inset 0 0 25px rgba(255, 94, 0, 0.1); animation: floatLogo 4s ease-in-out infinite; }
-        .logo-icon-svg { width: 70px; height: 70px; filter: drop-shadow(0 0 20px rgba(255,94,0,0.8)); }
+        /* LOGO CON RAYOS Y LUZ (REDISEÑADO DOS RAYOS X GIGANTES) */
+        .logo-premium-wrapper { position: relative; width: 220px; height: 220px; margin: 0px auto 30px auto; display: flex; justify-content: center; align-items: center; }
+        .logo-premium-rays { position: absolute; inset: -40px; background: conic-gradient(from 0deg, transparent 0%, rgba(255,94,0,0.8) 10%, transparent 20%, transparent 40%, rgba(255,94,0,0.8) 50%, transparent 60%, transparent 80%, rgba(255,94,0,0.8) 90%, transparent 100%); border-radius: 50%; animation: spinRays 8s linear infinite; filter: blur(25px); opacity: 0.8; z-index: 1; }
+        .logo-premium-core { width: 150px; height: 150px; border-radius: 40px; background: var(--bg-pure); border: 3px solid rgba(255,94,0,0.4); display: flex; align-items: center; justify-content: center; position: relative; z-index: 2; box-shadow: 0 30px 60px rgba(255,94,0,0.4), inset 0 0 30px rgba(255, 94, 0, 0.15); animation: floatLogo 4s ease-in-out infinite; }
+        .logo-icon-svg { width: 100px; height: 100px; filter: drop-shadow(0 0 25px rgba(255,94,0,0.9)); }
         
         /* TEXTO "PEDILO YA" IMPONENTE */
         .pedilo-ya-title { font-family: 'Outfit', sans-serif; font-size: 3.6rem; font-weight: 900; color: var(--text-dark); margin: 0 0 16px 0; text-transform: uppercase; letter-spacing: -2.5px; line-height: 1; text-shadow: 0 15px 30px rgba(0,0,0,0.08); }
@@ -338,17 +338,18 @@
 
     <!-- SPLASH ACTUALIZADO -->
     <div id="splash-screen">
-        <div class="logo-premium-wrapper" style="width: 140px; height: 140px; margin-bottom: 20px;">
+        <div class="logo-premium-wrapper" style="width: 180px; height: 180px; margin-bottom: 30px;">
             <div class="logo-premium-rays"></div>
-            <div class="logo-premium-core" style="width: 100px; height: 100px; border-radius: 25px;">
-                <svg class="logo-icon-svg" style="width: 50px; height: 50px;" viewBox="0 0 24 24">
+            <div class="logo-premium-core" style="width: 120px; height: 120px; border-radius: 30px;">
+                <svg class="logo-icon-svg" style="width: 80px; height: 80px;" viewBox="0 0 32 32">
                     <defs>
                         <linearGradient id="splash-icon-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" stop-color="#ff7b00" />
                             <stop offset="100%" stop-color="#ff3300" />
                         </linearGradient>
                     </defs>
-                    <path fill="url(#splash-icon-gradient)" d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                    <path fill="url(#splash-icon-gradient)" d="M 14 2 L 2 18 H 13 L 8 30 L 24 14 H 14 Z" />
+                    <path fill="url(#splash-icon-gradient)" d="M 18 2 L 30 18 H 19 L 24 30 L 8 14 H 18 Z" />
                 </svg>
             </div>
         </div>
@@ -379,14 +380,15 @@
             <div class="logo-premium-wrapper">
                 <div class="logo-premium-rays"></div>
                 <div class="logo-premium-core">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="logo-icon-svg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="logo-icon-svg">
                         <defs>
                             <linearGradient id="icon-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" stop-color="#ff7b00" />
                                 <stop offset="100%" stop-color="#ff3300" />
                             </linearGradient>
                         </defs>
-                        <path fill="url(#icon-gradient)" d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                        <path fill="url(#icon-gradient)" d="M 14 2 L 2 18 H 13 L 8 30 L 24 14 H 14 Z" />
+                        <path fill="url(#icon-gradient)" d="M 18 2 L 30 18 H 19 L 24 30 L 8 14 H 18 Z" />
                     </svg>
                 </div>
             </div>
@@ -2308,3 +2310,4 @@
     </script>
 </body>
 </html>
+
