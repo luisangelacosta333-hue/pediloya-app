@@ -148,18 +148,18 @@
         .admin-dish-price { color:var(--primary-orange); font-weight:800; font-size:1.2rem; font-family:'Outfit'; line-height: 1;}
         .btn-delete-dish { width: 45px; height: 45px; border-radius: 14px; background: #fef2f2; color: var(--danger); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; transition: 0.2s; flex-shrink: 0; border: none; align-self: flex-start;}
 
-        /* ================= PROMOS CORREGIDAS (SÚPER GIGANTES) ================= */
+        /* ================= PROMOS CORREGIDAS (NO SE TAPAN) ================= */
         .promo-carousel { display: flex; gap: 16px; overflow-x: auto; padding: 0 24px 30px; scroll-snap-type: x mandatory; scrollbar-width: none; margin-top: 10px; z-index:20; position:relative;}
         .promo-carousel::-webkit-scrollbar { display: none; }
         
-        .promo-card { flex: 0 0 100%; display: flex; flex-direction: column; background: var(--text-dark); border-radius: 36px; scroll-snap-align: center; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.12); aspect-ratio: 4/5;}
-        .promo-img-box { width: 100%; height: 100%; position: absolute; inset: 0; z-index: 1; }
-        .promo-img-box img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
-        .promo-info { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(to top, rgba(15,23,42,0.95) 0%, rgba(15,23,42,0.6) 50%, transparent 100%); padding: 40px 24px 24px; z-index: 2; text-align: left;}
-        .promo-badge { display: inline-block; background: var(--gradient-orange); color: white; padding: 10px 20px; border-radius: 50px; font-size: 1rem; font-weight: 900; text-transform: uppercase; margin-bottom: 16px; letter-spacing: 1px; box-shadow: 0 8px 20px rgba(255,94,0,0.4);}
-        .promo-title { font-family: 'Outfit'; font-size: 2.8rem; font-weight: 900; color: white; margin: 0; letter-spacing: -1.5px; line-height: 1.1; word-wrap: break-word; text-shadow: 0 4px 15px rgba(0,0,0,0.8);}
+        .promo-card { flex: 0 0 100%; display: flex; flex-direction: column; background: var(--bg-pure); border-radius: 28px; scroll-snap-align: center; position: relative; overflow: hidden; box-shadow: var(--shadow-float); border: 1px solid var(--border-soft);}
+        .promo-img-box { width: 100%; height: 250px; position: relative; z-index: 1; }
+        .promo-img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .promo-info { position: relative; width: 100%; background: var(--bg-pure); padding: 20px 24px; z-index: 2; text-align: left; border-top: 1px solid var(--border-soft);}
+        .promo-badge { display: inline-block; background: var(--gradient-orange); color: white; padding: 8px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(255,94,0,0.3);}
+        .promo-title { font-family: 'Outfit'; font-size: 1.8rem; font-weight: 900; color: var(--text-dark); margin: 0; letter-spacing: -0.5px; line-height: 1.1; word-wrap: break-word;}
 
-        /* ================= APP CLIENTE (PREMIUM FULL 9:16) ================= */
+        /* ================= APP CLIENTE ================= */
         .customer-container { max-width: 500px; margin: 0 auto; width: 100%; position: relative;}
         
         .storefront-hero { position: relative; width: 100%; height: 280px; display: flex; justify-content: center; align-items: flex-end; background: #0f172a; border-radius: 0 0 40px 40px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); z-index: 1; margin-bottom: 75px; }
@@ -199,14 +199,14 @@
         .add-btn-float:active { transform: scale(0.9); background: white; color: black; }
 
         /* CARRITO FLOTANTE MCDONALDS */
-        .floating-cart-bar { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); width: calc(100% - 48px); max-width: 450px; background: var(--text-dark); color: white; padding: 18px 24px; border-radius: 28px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 20px 50px rgba(15,23,42,0.5); z-index: 999; cursor: pointer; transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1); animation: slideUpCartBar 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        @keyframes slideUpCartBar { from { bottom: -100px; } to { bottom: 100px; } }
+        .floating-cart-bar { position: fixed; bottom: 105px; left: 50%; transform: translateX(-50%); width: calc(100% - 48px); max-width: 450px; background: var(--text-dark); color: white; padding: 18px 24px; border-radius: 28px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 20px 50px rgba(15,23,42,0.5); z-index: 999; cursor: pointer; transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1); animation: slideUpCartBar 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes slideUpCartBar { from { bottom: -100px; } to { bottom: 105px; } }
         .floating-cart-bar:active { transform: translateX(-50%) scale(0.96); }
         .fcb-left { display: flex; align-items: center; gap: 16px; font-family: 'Outfit'; font-weight: 700; font-size: 1rem; text-transform: uppercase;}
         .fcb-qty { background: var(--primary-orange); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 800;}
         .fcb-right { font-family: 'Outfit'; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.5px;}
 
-        /* MODAL DE CARRITO CHECKOUT (ABSOLUTAMENTE ABAJO Y PROTEGIDO DE TECLADOS) */
+        /* MODAL DE CARRITO CHECKOUT */
         #modal-carrito { justify-content: flex-end; align-items: center; padding: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(10px);}
         #modal-carrito .modal-content-standard { width: 100%; max-width: 600px; border-radius: 40px 40px 0 0; padding: 32px 24px 24px; height: auto; max-height: 85vh; display: flex; flex-direction: column; background: #ffffff; box-shadow: 0 -20px 50px rgba(0,0,0,0.15); margin: 0; position: absolute; bottom: 0; transform: translateY(100%); animation: slideUpCartModal 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;}
         @keyframes slideUpCartModal { to { transform: translateY(0); } }
@@ -257,7 +257,7 @@
         .nav-item.active .nav-icon { transform: translateY(-5px) scale(1.15); }
         .nav-icon { font-size: 1.5rem; transition: 0.3s; }
 
-        /* MODALES Y TOAST GENERICOS (SIN EMOJIS DUPLICADOS) */
+        /* MODALES Y TOAST GENERICOS */
         .toast { position: fixed; top: 40px; left: 50%; transform: translateX(-50%) translateY(-20px) scale(0.95); background: rgba(15, 23, 42, 0.95); color: white; padding: 16px 24px; border-radius: 50px; font-weight: 600; opacity: 0; transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); z-index: 99999999; font-size: 1rem; pointer-events: none; box-shadow: 0 20px 50px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; gap: 12px; min-width: max-content; white-space: nowrap; backdrop-filter: blur(10px);}
         .toast.ver { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
         #toast-icon { font-size: 1.3rem; display: flex; align-items: center; }
@@ -291,7 +291,6 @@
 <body>
 
     <script>
-        // BOMBA DE CACHÉ: PURGA INMEDIATA DE LA VERSIÓN ROTA
         if ('caches' in window) { caches.keys().then(names => { for (let name of names) caches.delete(name); }); }
         if ('serviceWorker' in navigator) { navigator.serviceWorker.getRegistrations().then(regs => { for(let reg of regs) reg.unregister(); }); }
         setTimeout(() => { let s = document.getElementById('splash-screen'); if (s) { s.style.opacity = '0'; setTimeout(() => s.style.display = 'none', 500); } }, 1200);
@@ -557,7 +556,7 @@
                 <p style="font-size:0.95rem; color:var(--text-gray); margin-bottom:24px;">Subí un banner apaisado para la portada del menú.</p>
                 
                 <input type="text" id="promo-title" class="form-input" style="box-sizing:border-box;" placeholder="Ej: Promo Lunes: Pizza + Coca">
-                <div class="upload-box-hero" style="min-height:180px; width:100%; box-sizing:border-box; aspect-ratio:4/3; border-radius:24px; border:3px dashed rgba(255,94,0,0.4);" onclick="document.getElementById('input-promo-img').click()">
+                <div class="upload-box-hero" style="min-height:180px; width:100%; box-sizing:border-box; border-radius:24px; border:3px dashed rgba(255,94,0,0.4);" onclick="document.getElementById('input-promo-img').click()">
                     <div id="placeholder-promo" class="upload-placeholder"><span class="upload-icon">🖼️</span><span class="upload-text">Subir Banner Promo</span></div>
                     <img id="promo-preview-img" class="upload-media" style="border-radius:24px;">
                 </div>
@@ -668,20 +667,20 @@
             <!-- MAPA FULL SCREEN -->
             <div id="tracking-map-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></div>
             
-            <!-- CAJA BUSCADOR FLOTANTE PREMIUM -->
-            <div style="position: absolute; top: 40px; left: 20px; right: 20px; z-index: 1000; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); padding: 24px; border-radius: 32px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5);">
-                <h1 style="font-family:'Outfit'; font-size:2.2rem; font-weight:900; margin:0 0 8px; color:var(--text-dark); letter-spacing:-1px; line-height:1; display:flex; align-items:center; gap:10px;"><span style="font-size:2.5rem;">📍</span> Rastreo</h1>
-                <p style="color:var(--text-gray); font-weight:500; font-size:1rem; margin:0 0 20px;">Ubicación en vivo del delivery al estilo Uber.</p>
-                <div style="display:flex; gap:12px;">
-                    <input type="text" id="track-input-code" class="form-input" placeholder="EJ: TRK12345" style="margin:0; padding:16px 20px; border-radius:20px; font-weight:800; font-size:1.1rem; text-transform:uppercase; background:#f1f5f9; flex:1; border: 1px solid var(--border-soft);">
-                    <button class="btn-main" onclick="vibrar(); iniciarRastreoClienteManual()" style="margin:0; padding:0 24px; border-radius:20px; width:auto; font-size:1.4rem; box-shadow:0 10px 20px rgba(255,94,0,0.3);">🔎</button>
-                </div>
+            <!-- CAJA BUSCADOR COMPACTA ARRIBA -->
+            <div style="position: absolute; top: 20px; left: 20px; right: 20px; z-index: 1000; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); padding: 12px; border-radius: 20px; box-shadow: var(--shadow-float); border: 1px solid var(--border-soft); display: flex; gap: 10px; align-items: center;">
+                <div style="font-size: 1.5rem; padding-left: 5px;">📍</div>
+                <input type="text" id="track-input-code" placeholder="Código TRK..." style="margin:0; padding:12px 14px; border-radius:12px; font-weight:800; font-size:1rem; text-transform:uppercase; background:var(--bg-app); flex:1; border: 1px solid var(--border-soft); outline:none; color:var(--text-dark);">
+                <button onclick="vibrar(); iniciarRastreoClienteManual()" style="margin:0; padding:12px 20px; border-radius:12px; width:auto; font-size:1.2rem; background:var(--gradient-orange); color:white; border:none; font-weight:bold; box-shadow:0 5px 15px rgba(255,94,0,0.3); cursor:pointer;">🔎</button>
             </div>
 
-            <!-- RESULTADO FLOTANTE -->
-            <div id="tracking-result-box" class="hidden" style="position: absolute; bottom: 120px; left: 20px; right: 20px; z-index: 1000; background: white; padding: 24px; border-radius: 32px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); border: 1px solid var(--border-soft);">
-                <div style="font-size:1.5rem; font-weight:900; color:var(--text-dark); font-family:'Outfit'; margin-bottom:8px; letter-spacing:-0.5px;" id="track-status-text">Buscando cadete...</div>
-                <div style="font-size:1rem; color:var(--text-gray); font-weight:500;" id="track-detail-text"></div>
+            <!-- RESULTADO FLOTANTE ABAJO -->
+            <div id="tracking-result-box" class="hidden" style="position: absolute; bottom: 100px; left: 20px; right: 20px; z-index: 1000; background: white; padding: 20px; border-radius: 24px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); border: 1px solid var(--border-soft); display: flex; align-items: center; gap: 16px;">
+                <div style="font-size: 2.5rem; animation: pulse-deli 1s infinite alternate;">🛵</div>
+                <div>
+                    <div style="font-size:1.4rem; font-weight:900; color:var(--text-dark); font-family:'Outfit'; margin-bottom:4px; letter-spacing:-0.5px;" id="track-status-text">Buscando...</div>
+                    <div style="font-size:0.95rem; color:var(--text-gray); font-weight:500; line-height: 1.3;" id="track-detail-text"></div>
+                </div>
             </div>
         </div>
 
@@ -706,7 +705,7 @@
         <p style="font-size:1.1rem; font-weight:500; margin-top:16px; opacity:0.9;">Conectando con el repartidor...</p>
     </div>
 
-    <!-- MODAL CARRITO MCDONALDS STYLE - CORREGIDO BOTTOM SHEET ABSOLUTO -->
+    <!-- MODAL CARRITO MCDONALDS STYLE -->
     <div class="modal" id="modal-carrito">
         <div class="modal-content-standard">
             <div class="drag-indicator"></div>
@@ -733,7 +732,7 @@
                 </div>
                 <input type="text" id="order-notes" class="form-input" placeholder="Aclaraciones para el local (Opcional)" style="background: white; margin-bottom: 16px; flex-shrink: 0;" onfocus="setTimeout(() => this.scrollIntoView({behavior:'smooth', block:'center'}), 300)">
                 
-                <!-- ESPACIADOR GIGANTE PARA EL TECLADO (Solución al scroll) -->
+                <!-- ESPACIADOR PARA EL TECLADO (Solución al scroll) -->
                 <div style="height: 250px; flex-shrink: 0;"></div>
             </div>
 
@@ -744,7 +743,7 @@
         </div>
     </div>
 
-    <!-- MODAL QUICK VIEW CORREGIDO (FOTO Y VIDEO TAMAÑO COMPLETO IGUALES) -->
+    <!-- MODAL QUICK VIEW CORREGIDO -->
     <div class="modal" id="modal-quick-view" style="align-items: flex-start; padding-top: 5vh;">
         <div class="modal-content-standard" style="padding:0; overflow-x:hidden; overflow-y:auto; background:var(--bg-pure); width: 100%; max-width: 500px; max-height: 90vh; margin-top: auto; margin-bottom: auto;">
             <button style="position:absolute; top:20px; right:20px; z-index:20; background:rgba(255,255,255,0.95); border:none; width:40px; height:40px; border-radius:50%; font-size:1.1rem; color:#0f172a; box-shadow:0 10px 25px rgba(0,0,0,0.2);" onclick="vibrar(); pausarVideoQuickView(); document.getElementById('modal-quick-view').style.display='none'">✕</button>
@@ -1611,7 +1610,7 @@
             }
         });
 
-        // ================= QUICK VIEW CORREGIDO (AMBOS OCUPAN TODA LA PANTALLA) =================
+        // ================= QUICK VIEW =================
         function openQuickView(code) {
             let item = menuItems.find(i => i.codigo === code); if(!item) return;
             currentQvItem = item; currentQvQty = 1;
@@ -1623,7 +1622,7 @@
             let { img, vid, hasVideo, hasImg } = parseUrlsSeguro(item.foto_url);
             let mediaHtml = '';
 
-            // AMBOS TAMAÑO COMPLETO 60vh
+            // AMBOS TAMAÑO COMPLETO
             if(hasVideo && hasImg) {
                 mediaHtml = `
                 <video src="${vid}" autoplay muted loop playsinline style="width:100%; height: 60vh; object-fit: cover; display: block;"></video>
@@ -1762,7 +1761,7 @@
                 if(fcb) {
                     fcb.classList.remove('hidden-hard');
                     updateCartUI();
-                    fcb.style.bottom = '100px';
+                    fcb.style.bottom = '105px';
                 }
             } else if(tab === 'track') { 
                 if(qs('customer-tab-menu')) qs('customer-tab-menu').classList.add('hidden'); 
