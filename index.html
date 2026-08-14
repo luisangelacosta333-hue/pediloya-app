@@ -73,13 +73,11 @@
         
         .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 94, 0, 0.08); border: 1px solid rgba(255, 94, 0, 0.15); padding: 10px 22px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; color: var(--primary-orange); letter-spacing: 1.5px; backdrop-filter: blur(12px); margin-bottom: 24px; text-transform: uppercase; box-shadow: 0 8px 20px rgba(255, 94, 0, 0.05); }
         
-        /* LOGO CON RAYOS 3D E ICONO DELIVERY (MEJORADO) */
         .logo-premium-wrapper { position: relative; width: 220px; height: 220px; margin: 20px auto 40px auto; display: flex; justify-content: center; align-items: center; }
         .logo-premium-rays { position: absolute; inset: -40px; background: conic-gradient(from 0deg, transparent 0%, rgba(255,94,0,0.8) 10%, transparent 20%, transparent 40%, rgba(255,94,0,0.8) 50%, transparent 60%, transparent 80%, rgba(255,94,0,0.8) 90%, transparent 100%); border-radius: 50%; animation: spinRays 8s linear infinite; filter: blur(25px); opacity: 0.65; z-index: 1; }
         .logo-premium-core { width: 150px; height: 150px; border-radius: 45px; background: var(--bg-pure); border: 2px solid rgba(255,94,0,0.35); display: flex; align-items: center; justify-content: center; position: relative; z-index: 2; box-shadow: 0 35px 60px rgba(255,94,0,0.25), inset 0 0 25px rgba(255, 94, 0, 0.08); animation: floatLogo 4s ease-in-out infinite; }
         .logo-icon-svg { width: 85px; height: 85px; filter: drop-shadow(0 15px 18px rgba(255,94,0,0.45)); }
         
-        /* TEXTO "PEDILO YA" IMPONENTE */
         .pedilo-ya-title { font-family: 'Outfit', sans-serif; font-size: 3.6rem; font-weight: 900; color: var(--text-dark); margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: -2.5px; line-height: 1; text-shadow: 0 15px 30px rgba(0,0,0,0.08); }
         .pedilo-ya-title span { background: var(--gradient-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
@@ -1006,6 +1004,7 @@
             });
         }
 
+        // TEXTO ACTUALIZADO (MICRÓFONO)
         function leerCaracteristicasApp() { 
             if(!('speechSynthesis' in window)) return alert("Tu navegador no soporta el asistente de voz.");
             window.speechSynthesis.cancel();
@@ -1102,7 +1101,7 @@
                 await _supabase.auth.signUp({ email: `${waLimpio}@pediloya.com`, password: pin + "IA" }).catch(e=>console.log(e));
                 
                 let endDate = new Date(); endDate.setDate(endDate.getDate() + 30); // 30 DIAS GRATIS
-                let appDataObj = { perfil_url: '', descripcion: 'Tu mejor opción delivery', direccion: '', maps_url: '', whatsapp_publico: waLimpio, promos: [], sub_end_date: endDate.toISOString() };
+                let appDataObj = { perfil_url: '', descripcion: 'Tu mejor opción delivery', direccion: '', maps_url: '', whatsapp_publico: waLimpio, promos: [], sub_end_date: endDate.toISOString(), repartidores: [] };
 
                 let { error } = await _supabase.from('pediloya_usuarios').insert([{ local: local, pin: pin, admin_pin: apin, whatsapp: waLimpio, prov: 'Gastronomia', app_data: appDataObj }]);
                 
@@ -1132,7 +1131,7 @@
                 
                 currentLocalId = data.id; cUser = data.local; targetLocalPhone = data.whatsapp; 
                 cAdminPin = data.admin_pin || "0000";
-                storeData = data.app_data || { perfil_url: '', descripcion: '', direccion: '', maps_url: '', whatsapp_publico: '', promos: [], sub_end_date: '' };
+                storeData = data.app_data || { perfil_url: '', descripcion: '', direccion: '', maps_url: '', whatsapp_publico: '', promos: [], sub_end_date: '', repartidores: [] };
                 
                 setText('lbl-owner', cUser);
                 await loadDataFromDB(); 
@@ -1410,14 +1409,12 @@
 
         async function loadDataFromDB() {
             if (!currentLocalId) return;
-            const [inv, log, rep] = await Promise.all([
+            const [inv, log] = await Promise.all([
                 _supabase.from('pediloya_inventario').select('*').eq('local_id', currentLocalId),
-                _supabase.from('pediloya_logs').select('*').eq('local_id', currentLocalId).order('created_at', {ascending: false}).limit(200),
-                _supabase.from('pediloya_repartidores').select('*').eq('local_id', currentLocalId)
+                _supabase.from('pediloya_logs').select('*').eq('local_id', currentLocalId).order('created_at', {ascending: false}).limit(200)
             ]);
             dbState.inventory = inv.data || []; 
             dbState.logs = log.data || [];
-            dbState.repartidores = rep.data || [];
             
             if(storeData.perfil_url) {
                 setImgSrc('store-logo-preview', storeData.perfil_url);
@@ -1435,36 +1432,48 @@
             setVal('store-address-input', storeData.direccion || '');
             setVal('store-wa-input', storeData.whatsapp_publico || targetLocalPhone || '');
 
+            // Cargamos la lista de repartidores que ahora vive en la bóveda segura de app_data
+            dbState.repartidores = storeData.repartidores || [];
+
             renderPromosListAdmin();
             renderAllData();
         }
 
-        // ================= REPARTIDORES =================
+        // ================= REPARTIDORES (VERSIÓN SEGURA 100%) =================
         async function agregarMoto() {
             let n = qs('add-moto-name') ? qs('add-moto-name').value.trim() : '';
             if(!n) return showToast("Escribí el nombre", "error");
             
-            // Actualización optimista inmediata
-            dbState.repartidores.push({ id: 'temp-'+Date.now(), local_id: currentLocalId, nombre: n });
+            let nuevosRepartidores = storeData.repartidores || [];
+            let nuevoId = 'moto-' + Date.now();
+            nuevosRepartidores.push({ id: nuevoId, nombre: n });
+            
+            let newAppData = { ...storeData, repartidores: nuevosRepartidores };
+            
+            // Actualización optimista
+            dbState.repartidores = nuevosRepartidores;
+            storeData = newAppData;
             qs('add-moto-name').value = '';
             renderAllData();
             showToast("Repartidor agregado");
             
-            // Inserción real en base de datos
-            await _supabase.from('pediloya_repartidores').insert([{ local_id: currentLocalId, nombre: n }]);
-            await loadDataFromDB();
+            // Guardado real a base de datos (seguro)
+            await _supabase.from('pediloya_usuarios').update({ app_data: newAppData }).eq('id', currentLocalId);
         }
 
         window.eliminarMoto = async function(id) {
             if(confirm("¿Eliminar este repartidor?")) {
-                // Actualización optimista inmediata
-                dbState.repartidores = dbState.repartidores.filter(r => r.id !== id);
+                let nuevosRepartidores = (storeData.repartidores || []).filter(r => r.id !== id);
+                let newAppData = { ...storeData, repartidores: nuevosRepartidores };
+                
+                // Actualización optimista
+                dbState.repartidores = nuevosRepartidores;
+                storeData = newAppData;
                 renderAllData();
                 showToast("Repartidor eliminado", "info");
                 
-                // Borrado real en base de datos
-                await _supabase.from('pediloya_repartidores').delete().eq('id', id);
-                await loadDataFromDB();
+                // Guardado real a base de datos
+                await _supabase.from('pediloya_usuarios').update({ app_data: newAppData }).eq('id', currentLocalId);
             }
         }
 
