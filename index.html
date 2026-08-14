@@ -612,9 +612,15 @@
                 <input type="text" id="store-link-display" readonly style="width:100%; box-sizing:border-box; border:none; background:var(--bg-app); border-radius:20px; font-weight:700; color:var(--info); font-size:0.95rem; padding:18px; text-align:center; outline:none; border:2px dashed var(--info); white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
             </div>
 
-            <div style="background:var(--bg-pure); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(0,0,0,0.03); box-shadow:var(--shadow-float); margin-bottom:40px; width:100%; box-sizing:border-box;">
+            <div style="background:var(--bg-pure); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(0,0,0,0.03); box-shadow:var(--shadow-float); margin-bottom:10px; width:100%; box-sizing:border-box;">
                 <span style="font-size:0.9rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1.5px;">💵 Efectivo en Caja</span>
                 <div id="adm-cash" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
+            </div>
+
+            <!-- NUEVO: Contenedor para Transferencias -->
+            <div style="background:var(--bg-pure); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(0,0,0,0.03); box-shadow:var(--shadow-float); margin-bottom:40px; width:100%; box-sizing:border-box;">
+                <span style="font-size:0.9rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1.5px;">🏦 Transferencias</span>
+                <div id="adm-transf" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; color:var(--info); letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
             </div>
 
             <!-- SECCIÓN REPARTIDORES -->
@@ -2153,19 +2159,41 @@
                         <div style="font-weight:800; font-size:1.1rem; color:var(--text-dark);">${c.nombre}</div>
                         <div style="color:var(--danger); font-weight:800; font-size:1.2rem; font-family:'Outfit';">Debe: $${parseFloat(c.deuda).toLocaleString('es-AR')}</div>
                     </div>
-                    <button onclick="vibrar(); saldarDeuda('${c.id}', ${c.deuda}, '${c.nombre}')" style="background:var(--success); color:white; border:none; padding:10px 16px; border-radius:12px; font-weight:bold; cursor:pointer; font-family:'Outfit';">SALDAR</button>
+                    <button onclick="vibrar(); saldarDeuda('${c.id}', ${c.deuda}, '${c.nombre}', '${c.whatsapp || ''}')" style="background:var(--success); color:white; border:none; padding:10px 16px; border-radius:12px; font-weight:bold; cursor:pointer; font-family:'Outfit';">SALDAR / DESCONTAR</button>
                 </div>`; 
             }); 
             setHtml('fiado-clients-list', html || '<p style="text-align:center; color:var(--text-light); margin-top:20px;">No hay clientes registrados.</p>'); 
         };
 
-        window.saldarDeuda = async function(id, monto, nombre) { 
-            if(confirm(`¿Saldar la deuda de $${monto} de ${nombre}?`)) { 
-                await _supabase.from('pediloya_clientes').update({ deuda: 0 }).eq('id', id); 
-                await _supabase.from('pediloya_logs').insert([{ local_id: currentLocalId, tipo: 'INGRESO', metodo: 'EFECTIVO', monto: monto, fecha: getTucumanDateFE(), hora: getTucumanTimeFE(), descripcion: `Pago de deuda: ${nombre}` }]); 
+        window.saldarDeuda = async function(id, deudaActual, nombre, whatsapp) { 
+            // 1. Preguntamos cuánto quiere pagar (permite pago parcial o total)
+            let montoPago = prompt(`¿Cuánto va a entregar ${nombre}? (Deuda total: $${deudaActual})`, deudaActual);
+            
+            if(montoPago === null || montoPago === "") return; // Si cancela, no hace nada
+            montoPago = parseFloat(montoPago);
+            if(isNaN(montoPago) || montoPago <= 0) return alert("Monto inválido.");
+
+            // 2. Calculamos la nueva deuda (si paga más, queda en 0)
+            let nuevaDeuda = Math.max(0, deudaActual - montoPago);
+
+            if(confirm(`Se descontarán $${montoPago}. La deuda quedará en $${nuevaDeuda}. ¿Confirmar?`)) { 
+                // 3. Actualizamos la base de datos
+                await _supabase.from('pediloya_clientes').update({ deuda: nuevaDeuda }).eq('id', id); 
+                await _supabase.from('pediloya_logs').insert([{ local_id: currentLocalId, tipo: 'INGRESO', metodo: 'EFECTIVO', monto: montoPago, fecha: getTucumanDateFE(), hora: getTucumanTimeFE(), descripcion: `Pago de fiado: ${nombre}` }]); 
+                
                 await loadDataFromDB(); 
                 renderFiadoClients(); 
-                showToast("Deuda saldada exitosamente."); 
+                showToast("Pago registrado exitosamente."); 
+
+                // 4. Enviamos el comprobante por WhatsApp
+                if(whatsapp && whatsapp.trim() !== "") {
+                    let num = whatsapp.replace(/\D/g, ''); // Limpiamos el número
+                    if(num.length === 10) num = '549' + num; // Agregamos prefijo de Argentina si hace falta
+                    let msg = `Hola ${nombre}, recibimos tu pago de $${montoPago}. Tu saldo restante es de $${nuevaDeuda}. ¡Gracias!`;
+                    window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`, '_blank');
+                } else {
+                    alert("Pago guardado, pero el cliente no tiene un WhatsApp registrado para avisarle.");
+                }
             } 
         };
     </script>
