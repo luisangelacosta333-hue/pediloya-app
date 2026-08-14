@@ -191,7 +191,9 @@
         .food-info-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 40%, transparent 100%); padding: 120px 24px 24px; display: flex; justify-content: space-between; align-items: flex-end; color: white; pointer-events: none;}
         .food-title-large { font-size: 2.2rem; font-weight: 900; color: white; margin-bottom: 8px; font-family: 'Outfit'; line-height: 1.1; letter-spacing: -1px; text-shadow: 0 4px 15px rgba(0,0,0,0.8); overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;}
         .food-desc-large { font-size: 1.05rem; color: rgba(255,255,255,0.9); margin-bottom: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4; font-weight: 400; text-shadow: 0 2px 8px rgba(0,0,0,0.8);}
-        .food-price-large { font-size: 2.4rem; font-weight: 900; color: var(--primary-orange); font-family: 'Outfit'; letter-spacing: -1.5px; margin-bottom: 12px; text-shadow: 0 4px 15px rgba(0,0,0,0.6); text-align: right;}
+        
+        /* PRECIO CORREGIDO AL MEDIO */
+        .food-price-large { font-size: 2.4rem; font-weight: 900; color: var(--primary-orange); font-family: 'Outfit'; letter-spacing: -1.5px; margin-bottom: 0; margin-top: 8px; text-shadow: 0 4px 15px rgba(0,0,0,0.6); text-align: left;}
         
         .add-btn-float { pointer-events: all; background: var(--gradient-orange); color: white; width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 2.8rem; box-shadow: 0 15px 35px rgba(255,94,0,0.5); border: 4px solid #fff; line-height: 1; padding-bottom: 6px; margin-left: auto; transition:0.2s;}
         .add-btn-float:active { transform: scale(0.9); }
@@ -204,13 +206,13 @@
         .fcb-qty { background: var(--primary-orange); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 900;}
         .fcb-right { font-family: 'Outfit'; font-weight: 900; font-size: 1.8rem; letter-spacing: -1px;}
 
-        /* MODAL DE CARRITO CHECKOUT SÚPER AMPLIO */
+        /* MODAL DE CARRITO CHECKOUT SÚPER AMPLIO CORREGIDO */
         #modal-carrito { align-items: flex-end; padding: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(15px);}
-        #modal-carrito .modal-content { width: 100%; max-width: 500px; border-radius: 45px 45px 0 0; padding: 32px 24px 32px; height: 92vh; display: flex; flex-direction: column; transform: translateY(100%); animation: slideUpCartModal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; background: #f8fafc;}
+        #modal-carrito .modal-content-standard { width: 100%; max-width: 600px; border-radius: 35px 35px 0 0; padding: 24px 24px 20px; height: 85vh; display: flex; flex-direction: column; transform: translateY(100%); animation: slideUpCartModal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; background: #f8fafc;}
         @keyframes slideUpCartModal { to { transform: translateY(0); } }
         
         .drag-indicator { width: 50px; height: 6px; background: #cbd5e1; border-radius: 10px; margin: 0 auto 30px; }
-        .cart-header-title { font-family: 'Outfit'; font-size: 2.8rem; font-weight: 900; color: var(--text-dark); margin: 0; letter-spacing: -1px;}
+        .cart-header-title { font-family: 'Outfit'; font-size: 2.2rem; font-weight: 900; color: var(--text-dark); margin: 0; letter-spacing: -1px;}
         
         .cart-items-container { flex: 1; overflow-y: auto; padding-right: 8px; margin-bottom: 20px;}
         .cart-item-row { display: flex; justify-content: space-between; align-items: center; padding: 20px; background: var(--bg-pure); border: none; border-radius: 24px; margin-bottom: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.03); }
@@ -218,12 +220,12 @@
         .cart-item-price { font-weight: 900; font-family: 'Outfit'; color: var(--text-dark); font-size: 1.3rem; letter-spacing: -0.5px;}
         .cart-item-del { background: #fef2f2; color: var(--danger); width: 40px; height: 40px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; margin-left: 16px; font-size: 1.2rem;}
 
-        .cart-total-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background: var(--bg-pure); padding: 20px 28px; border-radius: 28px; box-shadow: 0 15px 35px rgba(0,0,0,0.05);}
-        .cart-total-label { font-size: 1.2rem; font-weight: 800; color: var(--text-gray); text-transform: uppercase;}
-        .cart-total-val { font-size: 3rem; font-weight: 900; font-family: 'Outfit'; color: var(--primary-orange); letter-spacing: -2px; line-height: 1; }
+        .cart-total-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; background: var(--bg-pure); padding: 16px 24px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);}
+        .cart-total-label { font-size: 1.1rem; font-weight: 800; color: var(--text-gray); text-transform: uppercase;}
+        .cart-total-val { font-size: 2.4rem; font-weight: 900; font-family: 'Outfit'; color: var(--primary-orange); letter-spacing: -1px; line-height: 1; }
 
-        .delivery-toggle-container { display: flex; background: var(--border-soft); border-radius: 18px; padding: 6px; margin-bottom: 20px;}
-        .del-option { flex: 1; text-align: center; padding: 14px; border-radius: 14px; font-weight: 800; font-size: 1.05rem; cursor: pointer; transition: 0.3s; color: var(--text-gray); }
+        .delivery-toggle-container { display: flex; background: var(--border-soft); border-radius: 14px; padding: 4px; margin-bottom: 16px;}
+        .del-option { flex: 1; text-align: center; padding: 12px; border-radius: 12px; font-weight: 800; font-size: 1rem; cursor: pointer; transition: 0.3s; color: var(--text-gray); }
         .del-option.active { background: var(--bg-pure); color: var(--text-dark); box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
 
         /* PANTALLA ÉXITO COMPRA CINEMATOGRÁFICA */
@@ -698,11 +700,11 @@
 
     <!-- MODAL CARRITO MCDONALDS STYLE -->
     <div class="modal" id="modal-carrito">
-        <div class="modal-content-standard" style="padding:40px 24px 50px; border-radius: 45px 45px 0 0; align-self: flex-end; height: 92vh; display:flex; flex-direction:column; background: #f8fafc; max-width: 600px; width: 100%;">
+        <div class="modal-content-standard">
             <div class="drag-indicator"></div>
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                 <h2 class="cart-header-title">Tu Compra</h2>
-                <button style="background:var(--border-soft); border:none; width:50px; height:50px; border-radius:50%; font-size:1.4rem; cursor:pointer; color:var(--text-dark);" onclick="vibrar(); document.getElementById('modal-carrito').style.display='none'">✕</button>
+                <button style="background:var(--border-soft); border:none; width:45px; height:45px; border-radius:50%; font-size:1.2rem; cursor:pointer; color:var(--text-dark);" onclick="vibrar(); document.getElementById('modal-carrito').style.display='none'">✕</button>
             </div>
             
             <div class="cart-items-container" id="cart-items-list"></div>
@@ -720,9 +722,9 @@
             <div id="delivery-address-box">
                 <input type="text" id="order-address" class="form-input" placeholder="📍 Dirección de Envío (Calle y N°)" style="background: white;">
             </div>
-            <input type="text" id="order-notes" class="form-input" placeholder="Aclaraciones para el local (Opcional)" style="background: white; margin-bottom: 30px;">
+            <input type="text" id="order-notes" class="form-input" placeholder="Aclaraciones para el local (Opcional)" style="background: white; margin-bottom: 16px;">
             
-            <div style="display:flex; gap:16px;">
+            <div style="display:flex; gap:12px; margin-bottom:10px;">
                 <button class="btn-main" style="background:var(--text-dark); box-shadow:0 15px 35px rgba(15,23,42,0.3);" onclick="vibrar(); enviarPedido('Efectivo')">💵 EFECTIVO</button>
                 <button class="btn-main" style="background:var(--info); box-shadow:0 15px 35px rgba(14,165,233,0.4);" onclick="vibrar(); enviarPedido('Transferencia')">🏦 TRANSF.</button>
             </div>
@@ -1561,12 +1563,12 @@
                     <div class="food-card-large" onclick="vibrar(); openQuickView('${item.codigo}')">
                         <div class="food-img-large">${mediaHtml}</div>
                         <div class="food-info-overlay">
-                            <div style="flex:1; padding-right:15px;">
+                            <div style="flex:1; padding-right:15px; display:flex; flex-direction:column; justify-content:flex-end;">
                                 <div class="food-title-large">${item.nombre}</div>
                                 <div class="food-desc-large">${item.descripcion || ''}</div>
-                            </div>
-                            <div style="text-align:right;">
                                 <div class="food-price-large">$${item.precio.toLocaleString('es-AR')}</div>
+                            </div>
+                            <div style="text-align:right; display:flex; align-items:flex-end; padding-bottom:4px;">
                                 <div class="add-btn-float" onclick="event.stopPropagation(); vibrar(); agregarAlCarritoDirecto(${index})">+</div>
                             </div>
                         </div>
