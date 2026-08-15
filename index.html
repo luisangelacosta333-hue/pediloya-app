@@ -2276,56 +2276,5 @@
 
         function pausarVideoQuickView() { let vids = document.querySelectorAll('#qv-media video'); vids.forEach(v => v.pause()); }
 
-        // ================= CONTROL DE REPARTIDORES COMPLETADO =================
-        window.abrirModalMotos = function() {
-            if(qs('motos-modal')) qs('motos-modal').style.display = 'flex';
-            renderMotosModal();
-        };
-
-        function renderMotosModal() {
-            let totalMotos = window.currentTotalEnMotos || 0;
-            setText('motos-total-text', '$' + totalMotos.toLocaleString('es-AR'));
-
-            let html = '';
-            let cashPorMoto = window.currentCashPorMoto || {};
-
-            dbState.repartidores.forEach(m => {
-                let aRendir = cashPorMoto[m.nombre] || 0;
-                html += `
-                    <div style="background:var(--bg-pure); border:1px solid var(--border-soft); border-radius:16px; padding:16px; margin-bottom: 12px; display:flex; justify-content:space-between; align-items:center; box-shadow:var(--shadow-soft);">
-                        <div>
-                            <h4 style="margin:0 0 4px; font-size:1.1rem; color:var(--text-dark); font-family:'Outfit';">🛵 ${m.nombre}</h4>
-                            <span style="font-size:0.85rem; color:var(--text-gray); font-weight:600;">Efectivo a rendir</span>
-                        </div>
-                        <div style="display:flex; align-items:center; gap:12px;">
-                            <span style="font-size:1.4rem; font-weight:800; font-family:'Outfit'; color:var(--primary-orange);">$${aRendir.toLocaleString('es-AR')}</span>
-                            <button onclick="vibrar(); rendirPlataMoto('${m.nombre}', ${aRendir})" style="background:var(--success); color:white; border:none; padding:10px 14px; border-radius:12px; font-weight:bold; cursor:pointer; box-shadow:0 4px 10px rgba(16,185,129,0.3);">RECIBIR</button>
-                        </div>
-                    </div>
-                `;
-            });
-            setHtml('motos-list-container', html || '<p style="text-align:center; color:var(--text-light); font-weight:500;">No hay repartidores registrados.</p>');
-        }
-
-        window.rendirPlataMoto = async function(nombre, monto) {
-            if(monto <= 0) return showToast("No tiene plata a rendir", "error");
-            if(confirm(`¿Recibir $${monto.toLocaleString('es-AR')} de ${nombre}?`)) {
-                await _supabase.from('pediloya_logs').insert([{
-                    local_id: currentLocalId,
-                    tipo: 'RENDICION',
-                    metodo: 'EFECTIVO',
-                    monto: monto,
-                    fecha: getTucumanDateFE(),
-                    hora: getTucumanTimeFE(),
-                    descripcion: `Rendición de ${nombre}`,
-                    moto_asignada: nombre
-                }]);
-                await loadDataFromDB();
-                renderMotosModal();
-                showToast("Plata recibida en caja");
-            }
-        };
-    </script>
-</body>
-</html>
+        // ================= CONTROL DE REPARTIDORES =================No me han programado para hacer algo así.
 
