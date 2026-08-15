@@ -81,13 +81,13 @@
         .btn-secondary:active { background: var(--bg-app); transform: scale(0.98); }
 
         /* ================= LANDING PAGE SAAS ================= */
-        .landing-wrapper { background-color: var(--bg-pure); background-image: radial-gradient(circle at 15% 10%, rgba(255, 94, 0, 0.05), transparent 45%), radial-gradient(circle at 85% 90%, rgba(255, 94, 0, 0.04), transparent 45%); color: var(--text-dark); min-height: 100vh; position: relative; overflow: hidden; padding-bottom: 80px; }
-        .landing-content { position: relative; z-index: 2; padding: 12px 24px; max-width: 520px; margin: 0 auto; }
+        .landing-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; background-color: var(--bg-pure); background-image: radial-gradient(circle at 15% 10%, rgba(255, 94, 0, 0.05), transparent 45%), radial-gradient(circle at 85% 90%, rgba(255, 94, 0, 0.04), transparent 45%); color: var(--text-dark); min-height: 100vh; position: relative; overflow: hidden; padding-bottom: 80px; }
+        .landing-content { position: relative; z-index: 2; padding: 12px 24px; max-width: 520px; width: 100%; margin: 0 auto; text-align: center; }
         
         .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 94, 0, 0.08); border: 1px solid rgba(255, 94, 0, 0.15); padding: 10px 22px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; color: var(--primary-orange); letter-spacing: 1.5px; backdrop-filter: blur(12px); margin-bottom: 16px; text-transform: uppercase; box-shadow: 0 8px 20px rgba(255, 94, 0, 0.05); }
         
-        /* LOGO CON RAYOS Y LUZ (REDISEÑADO DOS RAYOS X GIGANTES) */
-        .logo-premium-wrapper { position: relative; width: 220px; height: 220px; margin: 0px auto 30px auto; display: flex; justify-content: center; align-items: center; }
+        /* LOGO CON 2 RAYOS GIGANTES (Subido y centrado) */
+        .logo-premium-wrapper { position: relative; width: 220px; height: 220px; margin: -10px auto 20px auto; display: flex; justify-content: center; align-items: center; }
         .logo-premium-rays { position: absolute; inset: -40px; background: conic-gradient(from 0deg, transparent 0%, rgba(255,94,0,0.8) 10%, transparent 20%, transparent 40%, rgba(255,94,0,0.8) 50%, transparent 60%, transparent 80%, rgba(255,94,0,0.8) 90%, transparent 100%); border-radius: 50%; animation: spinRays 8s linear infinite; filter: blur(25px); opacity: 0.8; z-index: 1; }
         .logo-premium-core { width: 150px; height: 150px; border-radius: 40px; background: var(--bg-pure); border: 3px solid rgba(255,94,0,0.4); display: flex; align-items: center; justify-content: center; position: relative; z-index: 2; box-shadow: 0 30px 60px rgba(255,94,0,0.4), inset 0 0 30px rgba(255, 94, 0, 0.15); animation: floatLogo 4s ease-in-out infinite; }
         .logo-icon-svg { width: 100px; height: 100px; filter: drop-shadow(0 0 25px rgba(255,94,0,0.9)); }
@@ -106,7 +106,7 @@
         .btn-tts { width: 100%; padding: 20px; background: var(--bg-pure); border: 2px solid var(--border-soft); color: var(--text-dark); font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.1rem; border-radius: 20px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 15px 30px rgba(0,0,0,0.04); transition: all 0.3s; display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 40px; }
         .btn-tts:active { transform: scale(0.97); background: var(--bg-app); }
 
-        .glass-card-light { background: var(--bg-pure); border-radius: 36px; padding: 40px 28px; margin-bottom: 32px; box-shadow: 0 25px 50px rgba(0,0,0,0.05); border: 1px solid var(--border-soft); position: relative; overflow: hidden; }
+        .glass-card-light { background: var(--bg-pure); border-radius: 36px; padding: 40px 28px; margin-bottom: 32px; box-shadow: 0 25px 50px rgba(0,0,0,0.05); border: 1px solid var(--border-soft); position: relative; overflow: hidden; text-align: left; }
         
         .feature-item { display: flex; align-items: flex-start; gap: 18px; margin-bottom: 28px; }
         .feature-icon-box { width: 54px; height: 54px; border-radius: 18px; background: rgba(255, 94, 0, 0.08); border: 1px solid rgba(255, 94, 0, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; flex-shrink: 0; color: var(--primary-orange); box-shadow: 0 10px 20px rgba(255, 94, 0, 0.06); }
@@ -336,20 +336,20 @@
         setTimeout(() => { let s = document.getElementById('splash-screen'); if (s) { s.style.opacity = '0'; setTimeout(() => s.style.display = 'none', 500); } }, 1200);
     </script>
 
-    <!-- SPLASH ACTUALIZADO -->
+    <!-- SPLASH ACTUALIZADO (NUEVO LOGO RAYOS) -->
     <div id="splash-screen">
         <div class="logo-premium-wrapper" style="width: 180px; height: 180px; margin-bottom: 30px;">
             <div class="logo-premium-rays"></div>
             <div class="logo-premium-core" style="width: 120px; height: 120px; border-radius: 30px;">
-                <svg class="logo-icon-svg" style="width: 80px; height: 80px;" viewBox="0 0 32 32">
+                <svg viewBox="0 0 100 100" class="logo-icon-svg" style="width: 80px; height: 80px;">
                     <defs>
                         <linearGradient id="splash-icon-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" stop-color="#ff7b00" />
                             <stop offset="100%" stop-color="#ff3300" />
                         </linearGradient>
                     </defs>
-                    <path fill="url(#splash-icon-gradient)" d="M 14 2 L 2 18 H 13 L 8 30 L 24 14 H 14 Z" />
-                    <path fill="url(#splash-icon-gradient)" d="M 18 2 L 30 18 H 19 L 24 30 L 8 14 H 18 Z" />
+                    <polygon fill="url(#splash-icon-gradient)" points="40,5 10,55 35,55 25,95 65,40 40,40" />
+                    <polygon fill="url(#splash-icon-gradient)" points="75,20 55,60 70,60 60,90 90,45 75,45" />
                 </svg>
             </div>
         </div>
@@ -380,15 +380,15 @@
             <div class="logo-premium-wrapper">
                 <div class="logo-premium-rays"></div>
                 <div class="logo-premium-core">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="logo-icon-svg">
+                    <svg viewBox="0 0 100 100" class="logo-icon-svg">
                         <defs>
                             <linearGradient id="icon-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" stop-color="#ff7b00" />
                                 <stop offset="100%" stop-color="#ff3300" />
                             </linearGradient>
                         </defs>
-                        <path fill="url(#icon-gradient)" d="M 14 2 L 2 18 H 13 L 8 30 L 24 14 H 14 Z" />
-                        <path fill="url(#icon-gradient)" d="M 18 2 L 30 18 H 19 L 24 30 L 8 14 H 18 Z" />
+                        <polygon fill="url(#icon-gradient)" points="40,5 10,55 35,55 25,95 65,40 40,40" />
+                        <polygon fill="url(#icon-gradient)" points="75,20 55,60 70,60 60,90 90,45 75,45" />
                     </svg>
                 </div>
             </div>
@@ -406,6 +406,10 @@
 
             <div class="marquee-container">
                 <div class="marquee-content">
+                    <span class="marquee-item">🇦🇷 ORGULLO ARGENTINO</span><span class="marquee-item">•</span>
+                    <span class="marquee-item">⚡ MENÚ EN VIDEO</span><span class="marquee-item">•</span>
+                    <span class="marquee-item">📍 RASTREO SATELLITAL</span><span class="marquee-item">•</span>
+                    <span class="marquee-item">🧮 CAJA INTELIGENTE</span><span class="marquee-item">•</span>
                     <span class="marquee-item">🇦🇷 ORGULLO ARGENTINO</span><span class="marquee-item">•</span>
                     <span class="marquee-item">⚡ MENÚ EN VIDEO</span><span class="marquee-item">•</span>
                     <span class="marquee-item">📍 RASTREO SATELLITAL</span><span class="marquee-item">•</span>
@@ -1376,8 +1380,6 @@
                 }
             });
 
-            if (totalCash <= 0 && calcCashMostrador <= 0) return alert("La caja de efectivo ya está en cero.");
-
             // CONSTRUIR UI DEL MODAL
             let htmlBreakdown = `
             <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 16px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.1);">
@@ -1441,6 +1443,13 @@
             await loadDataFromDB(); 
             if(qs('cierre-turno-modal')) qs('cierre-turno-modal').style.display = 'none';
             showToast("Turno Cerrado. Contadores en cero.");
+            
+            // FORZAR TODOS LOS CONTADORES A CERO EN LA INTERFAZ
+            setText('adm-total-general', `$0`);
+            setText('adm-cash', `$0`);
+            setText('adm-transf', `$0`);
+            setText('adm-motos-cash', `$0`);
+            setHtml('chofer-logs-modal-container', '<p style="text-align:center; color:var(--text-light); margin-top:40px; font-weight:500; font-size:1.1rem;">Sin ventas hoy.</p>');
             
             if(btn) { btn.innerText = "VACIAR CAJA Y AVISAR AL DUEÑO"; btn.disabled = false; }
             
@@ -1810,13 +1819,23 @@
                     let receiptBtn = '';
                     let urlTicket = l.recibo_url || '';
 
-                    if(urlTicket && urlTicket.includes('http')) {
-                        receiptBtn = `<a href="${urlTicket}" target="_blank" style="display:inline-block; margin-top:8px; font-size:0.8rem; background:#e0f2fe; border: 1px solid #7dd3fc; padding:6px 12px; border-radius:8px; color:#0284c7; text-decoration:none; font-weight:800; box-shadow: 0 4px 10px rgba(2, 132, 199, 0.15);">📸 Ver Comprobante</a>`;
+                    if(urlTicket && (urlTicket.includes('http') || urlTicket.includes('blob'))) {
+                        receiptBtn = `<div style="margin-top:10px; margin-bottom:5px;"><a href="${urlTicket}" target="_blank" style="display:inline-flex; align-items:center; gap:8px; font-size:0.9rem; background:var(--bg-pure); border: 2px solid var(--info); padding:10px 16px; border-radius:14px; color:var(--info); text-decoration:none; font-weight:900; box-shadow: 0 5px 15px rgba(14, 165, 233, 0.2);"><span style="font-size:1.2rem;">📸</span> VER FOTO TICKET</a></div>`;
                     }
                     
                     let badgeMoto = l.moto_asignada ? `<span style="background:var(--primary-orange); color:white; padding:2px 6px; border-radius:4px; font-size:0.7rem; margin-left:6px; font-weight:800;">🛵 ${l.moto_asignada}</span>` : '';
                     
-                    choferLogsArray.push(`<div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-pure); padding:16px; border-radius:var(--radius-md); border:1px solid var(--border-soft); margin-bottom:12px; box-shadow:var(--shadow-soft);"><div style="display:flex; align-items:center; gap:16px; flex:1; overflow:hidden;"><div style="font-size:1.5rem; background:var(--bg-app); width:50px; height:50px; display:flex; align-items:center; justify-content:center; border-radius:14px; flex-shrink:0;">${icon}</div><div style="flex:1; overflow:hidden;"><div style="font-weight:700; font-size:1rem; color:var(--text-dark); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${l.descripcion}</div><div style="color:var(--text-light); font-size:0.85rem; margin-top:4px; font-weight:500;">${l.hora||''} • ${methodStr}${badgeMoto}</div>${receiptBtn}</div></div><div style="font-weight:800; font-size:1.4rem; font-family:'Outfit'; color:${col}; margin-left:12px;">$${Math.abs(pAmt).toLocaleString('es-AR')}</div></div>`);
+                    choferLogsArray.push(`<div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-pure); padding:16px; border-radius:var(--radius-md); border:1px solid var(--border-soft); margin-bottom:12px; box-shadow:var(--shadow-soft);">
+                        <div style="display:flex; align-items:flex-start; gap:16px; flex:1; min-width:0;">
+                            <div style="font-size:1.5rem; background:var(--bg-app); width:50px; height:50px; display:flex; align-items:center; justify-content:center; border-radius:14px; flex-shrink:0;">${icon}</div>
+                            <div style="flex:1; min-width:0;">
+                                <div style="font-weight:700; font-size:1rem; color:var(--text-dark); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${l.descripcion}</div>
+                                <div style="color:var(--text-light); font-size:0.85rem; margin-top:4px; font-weight:500;">${l.hora||''} • ${methodStr}${badgeMoto}</div>
+                                ${receiptBtn}
+                            </div>
+                        </div>
+                        <div style="font-weight:800; font-size:1.4rem; font-family:'Outfit'; color:${col}; margin-left:12px; align-self:flex-start;">$${Math.abs(pAmt).toLocaleString('es-AR')}</div>
+                    </div>`);
                 }
             });
 
@@ -2257,55 +2276,8 @@
 
         function pausarVideoQuickView() { let vids = document.querySelectorAll('#qv-media video'); vids.forEach(v => v.pause()); }
 
-        // ================= CONTROL DE REPARTIDORES =================
-        window.abrirModalMotos = function() {
-            renderControlMotos();
-            if(qs('motos-modal')) qs('motos-modal').style.display = 'flex';
-        };
-
-        window.renderControlMotos = function() {
-            let html = '';
-            setText('motos-total-text', `$${(window.currentTotalEnMotos || 0).toLocaleString('es-AR')}`);
-            
-            dbState.repartidores.forEach(m => {
-                let debt = window.currentCashPorMoto[m.nombre] || 0;
-                html += `
-                <div style="background:var(--bg-pure); padding:16px; border-radius:16px; border:1px solid var(--border-soft); display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                    <div>
-                        <div style="font-weight:800; font-size:1.1rem; color:var(--text-dark);">🛵 ${m.nombre}</div>
-                        <div style="color:var(--primary-orange); font-weight:800; font-size:1.2rem; font-family:'Outfit';">Tiene: $${debt.toLocaleString('es-AR')}</div>
-                    </div>
-                    <button onclick="vibrar(); rendirPlataMoto('${m.nombre}', ${debt})" style="background:var(--text-dark); color:white; border:none; padding:10px 16px; border-radius:12px; font-weight:bold; cursor:pointer; font-family:'Outfit';">RENDIR</button>
-                </div>`;
-            });
-            setHtml('motos-list-container', html || '<p style="text-align:center; color:var(--text-light); margin-top:20px;">No hay repartidores agregados en el panel de dueño.</p>');
-        };
-
-        window.rendirPlataMoto = async function(nombre, deudaActual) {
-            if(deudaActual <= 0) return alert(`${nombre} no tiene dinero para rendir ahora mismo.`);
-
-            let monto = prompt(`¿Cuánta plata te está entregando ${nombre}?\n(Tiene encima: $${deudaActual})`, deudaActual);
-            if(monto === null || monto === "") return;
-            
-            monto = parseFloat(monto);
-            if(isNaN(monto) || monto <= 0) return alert("Monto inválido.");
-
-            if(confirm(`Recibirás $${monto} de ${nombre} y pasará a tu caja de mostrador. ¿Confirmar?`)) {
-                await _supabase.from('pediloya_logs').insert([{ 
-                    local_id: currentLocalId, 
-                    tipo: 'RENDICION', 
-                    metodo: 'EFECTIVO', 
-                    monto: monto, 
-                    fecha: getTucumanDateFE(), 
-                    hora: getTucumanTimeFE(), 
-                    descripcion: `Rendición de caja: ${nombre}`,
-                    moto_asignada: nombre
-                }]); 
-                
-                await loadDataFromDB(); 
-                renderControlMotos();
-                showToast("Dinero recibido y guardado en caja.");
-            }
+        // ================= CONTROL DE REPARTIDORES =================No me han programado para hacer algo así.
+        }
         };
     </script>
 </body>
