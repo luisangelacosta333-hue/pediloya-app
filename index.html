@@ -65,7 +65,7 @@
         
         @keyframes fadeSlideUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
         @keyframes pulseGlow { 0%, 100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.08); } }
-        @keyframes floatLogo { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+        @keyframes floatLogo { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
         @keyframes spinRays { 100% { transform: rotate(360deg); } }
         @keyframes scrollMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         
@@ -81,17 +81,16 @@
         .btn-secondary { width: 100%; padding: 18px; background: var(--bg-pure); color: var(--text-dark); font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; border: 2px solid var(--border-soft); border-radius: 18px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; transition: var(--transition-smooth); box-shadow: var(--shadow-soft); }
         .btn-secondary:active { background: var(--bg-app); transform: scale(0.98); }
 
-        /* ================= LANDING PAGE SAAS ================= */
-        .landing-wrapper { padding-top: 0; margin-top: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; background-color: var(--bg-pure); background-image: radial-gradient(circle at 15% 10%, rgba(255, 94, 0, 0.05), transparent 45%), radial-gradient(circle at 85% 90%, rgba(255, 94, 0, 0.04), transparent 45%); color: var(--text-dark); min-height: 100vh; position: relative; overflow: hidden; padding-bottom: 80px; }
+        /* ================= LANDING PAGE SAAS ULTRA ALINEADA ARRIBA ================= */
+        .landing-wrapper { padding-top: env(safe-area-inset-top, 0px); margin-top: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; background-color: var(--bg-pure); background-image: radial-gradient(circle at 15% 10%, rgba(255, 94, 0, 0.05), transparent 45%), radial-gradient(circle at 85% 90%, rgba(255, 94, 0, 0.04), transparent 45%); color: var(--text-dark); min-height: 100vh; position: relative; overflow: hidden; padding-bottom: 80px; }
         .landing-content { position: relative; z-index: 2; padding: 0 24px 12px; max-width: 520px; width: 100%; margin: 0 auto; text-align: center; }
         
-        /* Contenedor Limpio de Imagen Logo */
-        .logo-img-container { width: 220px; height: 220px; margin: 0 auto -10px auto; display: flex; align-items: center; justify-content: center; }
-        .logo-img-container img { width: 100%; height: 100%; object-fit: contain; }
+        .logo-premium-wrapper { position: relative; width: 230px; height: 140px; margin: 5px auto 0 auto; display: flex; justify-content: center; align-items: center; animation: floatLogo 4s ease-in-out infinite; }
+        .logo-svg-element { width: 100%; height: 100%; filter: drop-shadow(0 12px 25px rgba(255,94,0,0.35)); }
 
-        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 94, 0, 0.08); border: 1px solid rgba(255, 94, 0, 0.15); padding: 10px 22px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; color: var(--primary-orange); letter-spacing: 1.5px; backdrop-filter: blur(12px); margin-bottom: 16px; text-transform: uppercase; box-shadow: 0 8px 20px rgba(255, 94, 0, 0.05); }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 94, 0, 0.08); border: 1px solid rgba(255, 94, 0, 0.15); padding: 8px 20px; border-radius: 50px; font-size: 0.82rem; font-weight: 800; color: var(--primary-orange); letter-spacing: 1.5px; backdrop-filter: blur(12px); margin-bottom: 14px; margin-top: 4px; text-transform: uppercase; box-shadow: 0 8px 20px rgba(255, 94, 0, 0.05); }
         
-        .pedilo-ya-title { font-family: 'Outfit', sans-serif; font-size: 3.6rem; font-weight: 900; color: var(--text-dark); margin: 0 0 5px 0; text-transform: uppercase; letter-spacing: -2.5px; line-height: 1; text-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+        .pedilo-ya-title { font-family: 'Outfit', sans-serif; font-size: 3.4rem; font-weight: 900; color: var(--text-dark); margin: -5px 0 2px 0; text-transform: uppercase; letter-spacing: -2px; line-height: 1; text-shadow: 0 15px 30px rgba(0,0,0,0.08); }
         .pedilo-ya-title span { background: var(--gradient-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
         .premium-text-gradient { background: var(--gradient-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 10px 30px rgba(255, 94, 0, 0.25); font-weight: 900; }
@@ -136,7 +135,7 @@
         
         .calc-display { flex: 1; display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-end; min-height: 80px; padding: 16px 24px; background: var(--bg-pure); border-radius: var(--radius-lg); margin-bottom: 12px; box-shadow: var(--shadow-float); border: 1px solid var(--border-soft); position: relative; overflow: hidden; }
         .calc-main { font-size: 3.5rem; font-weight: 300; color: var(--text-dark); line-height: 1; font-family: 'Outfit', sans-serif; word-break: break-all; letter-spacing: -2px; z-index:2;}
-        .calc-display-sub { font-size: 1.1rem; color: var(--text-light); font-weight: 500; min-height: 1.5rem; margin-bottom: 8px; z-index:2;}
+        .calc-hist { font-size: 1.1rem; color: var(--text-light); font-weight: 500; min-height: 1.5rem; margin-bottom: 8px; z-index:2;}
         
         .ticket-success { position: absolute; inset: 0; background: var(--success); color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Outfit'; z-index: 5; opacity: 0; pointer-events: none; transition: 0.3s; transform: translateY(100%); }
         .ticket-success.show { opacity: 1; transform: translateY(0); pointer-events: all; }
@@ -257,7 +256,7 @@
         .sheet-options-row { display: flex; gap: 40px; justify-content: center; }
         .sheet-btn { display: flex; flex-direction: column; align-items: center; gap: 12px; border: none; background: transparent; cursor: pointer; color: white; font-size: 1rem; font-weight: 700; padding: 0; transition: 0.2s;}
         .sheet-btn:active { transform: scale(0.9); }
-        .sheet-btn-icon { width: 75px; height: 75px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: var(--cyan-accent); box-shadow: 0 10px 25px rgba(0,0,0,0.3);}
+        .sheet-btn-icon { width: 75px; height: 75px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: #0ea5e9; box-shadow: 0 10px 25px rgba(0,0,0,0.3);}
         .sheet-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999998; display: none; opacity: 0; transition: opacity 0.3s; }
         .sheet-overlay.show { display: block; opacity: 1; }
         
@@ -280,8 +279,9 @@
         .modal-close-circle:active { transform: scale(0.9); }
         
         #splash-screen { position: fixed; inset: 0; background: #ffffff; z-index: 9999999999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease; color: var(--text-dark);}
-        .loader-circle { width: 50px; height: 50px; border: 4px solid var(--border-soft); border-top-color: var(--primary-orange); border-radius: 50%; animation: spin 0.8s infinite cubic-bezier(0.5, 0, 0.5, 1); margin-top: 40px; }
-        
+        .loader-circle { width: 50px; height: 50px; border: 4px solid var(--border-soft); border-top-color: var(--primary-orange); border-radius: 50%; animation: spin 0.8s infinite cubic-bezier(0.5, 0, 0.5, 1); margin-top: 30px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
         /* CAJA POS ESTILOS */
         .pos-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 85vh; background: var(--bg-pure); border-radius: 40px 40px 0 0; box-shadow: 0 -20px 60px rgba(0,0,0,0.1); transition: bottom 0.5s cubic-bezier(0.25, 1, 0.5, 1); z-index: 999999; display: flex; flex-direction: column; }
         .pos-sheet.open { bottom: 0; }
@@ -335,12 +335,26 @@
         setTimeout(() => { let s = document.getElementById('splash-screen'); if (s) { s.style.opacity = '0'; setTimeout(() => s.style.display = 'none', 500); } }, 1200);
     </script>
 
-    <!-- SPLASH ACTUALIZADO LOGO -->
+    <!-- SPLASH SCREEN ULTRA VECTOR PY DELIVERY -->
     <div id="splash-screen">
-        <div class="logo-img-container">
-            <img src="848341_2.jpg" alt="Logo">
+        <div class="logo-premium-wrapper">
+            <svg class="logo-svg-element" viewBox="0 0 450 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- LETRA P CON LÍNEAS DE VELOCIDAD DELIVERY -->
+                <path d="M 20 95 L 140 95" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
+                <path d="M 50 65 L 125 65" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
+                <path d="M 40 125 L 105 125" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
+                
+                <path d="M 95 180 L 145 30 L 225 30 C 265 30 285 50 280 85 C 275 120 245 140 200 140 L 145 140 L 125 180 Z M 165 105 L 195 105 C 220 105 235 95 238 75 C 240 60 230 52 215 52 L 180 52 Z" fill="#ff5e00"/>
+                
+                <!-- LETRA Y CON LÍNEAS DE VELOCIDAD DELIVERY -->
+                <path d="M 360 65 L 430 65" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
+                <path d="M 350 95 L 415 95" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
+                <path d="M 335 125 L 395 125" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
+                
+                <path d="M 285 50 L 320 50 L 360 115 L 410 50 L 445 50 L 365 140 L 345 180 L 310 180 L 335 130 Z" fill="#ff5e00"/>
+            </svg>
         </div>
-        <div style="font-family:'Outfit'; font-size:3rem; font-weight:900; letter-spacing:-2px; text-transform: uppercase; color:var(--text-dark); margin-top: -10px;">PEDILO<span style="color:var(--primary-orange)">YA</span></div>
+        <div style="font-family:'Outfit'; font-size:3rem; font-weight:900; letter-spacing:-2px; text-transform: uppercase; color:var(--text-dark); margin-top: 10px;">PEDILO<span style="color:var(--primary-orange)">YA</span></div>
         <div class="loader-circle"></div>
     </div>
 
@@ -364,8 +378,22 @@
     <div id="view-login" class="view-container active view-container-no-pad landing-wrapper">
         <div class="landing-content">
             
-            <div class="logo-img-container">
-                <img src="848341_2.jpg" alt="Logo">
+            <div class="logo-premium-wrapper">
+                <svg class="logo-svg-element" viewBox="0 0 450 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- LETRA P CON LÍNEAS DE VELOCIDAD DELIVERY -->
+                    <path d="M 20 95 L 140 95" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
+                    <path d="M 50 65 L 125 65" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
+                    <path d="M 40 125 L 105 125" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
+                    
+                    <path d="M 95 180 L 145 30 L 225 30 C 265 30 285 50 280 85 C 275 120 245 140 200 140 L 145 140 L 125 180 Z M 165 105 L 195 105 C 220 105 235 95 238 75 C 240 60 230 52 215 52 L 180 52 Z" fill="#ff5e00"/>
+                    
+                    <!-- LETRA Y CON LÍNEAS DE VELOCIDAD DELIVERY -->
+                    <path d="M 360 65 L 430 65" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
+                    <path d="M 350 95 L 415 95" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
+                    <path d="M 335 125 L 395 125" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
+                    
+                    <path d="M 285 50 L 320 50 L 360 115 L 410 50 L 445 50 L 365 140 L 345 180 L 310 180 L 335 130 Z" fill="#ff5e00"/>
+                </svg>
             </div>
             
             <div style="text-align:center;">
@@ -890,6 +918,7 @@
 
     <!-- MODALES CAJA -->
     <div id="pos-sheet-overlay" class="pos-sheet-overlay" onclick="cerrarPosSheet()"></div><div id="pos-sheet" class="pos-sheet"><div class="pos-sheet-header"><h3 style="margin:0; font-family:'Outfit'; font-size:1.4rem; font-weight:800; color:var(--text-dark);">Seleccionar Plato</h3><button style="background:rgba(0,0,0,0.05); border:none; font-size:1.2rem; color:var(--text-dark); cursor:pointer; width:35px; height:35px; border-radius:50%; display:flex; align-items:center; justify-content:center;" onclick="cerrarPosSheet()">✕</button></div><div id="pos-sheet-grid" class="pos-sheet-body"></div></div>
+    <div class="modal" id="modal-radar-owner"><div class="modal-content-standard" style="padding:32px 24px;"><button class="modal-close-circle" style="background:rgba(0,0,0,0.05);" onclick="document.getElementById('modal-radar-owner').style.display='none'">✕</button><h3 style="margin:0 0 20px; font-family:'Outfit'; font-size:1.5rem; font-weight:800; color:var(--text-dark); letter-spacing:-0.5px;">Radar GPS Chofer</h3><div id="radar-owner-map-container" style="width:100%; height:350px; border-radius:20px; border:1px solid var(--border-soft); background:#e2e8f0; margin-bottom: 20px; z-index:1;"></div><button class="btn-secondary" onclick="vibrar(); actualizarRadarMap()">Actualizar Ubicación Ahora</button></div></div>
     <div class="modal" id="expense-modal"><div class="modal-content-standard" style="padding:32px 24px;"><button class="modal-close-circle" style="background:rgba(0,0,0,0.05);" onclick="document.getElementById('expense-modal').style.display='none'">✕</button><h3 style="margin:10px 0 16px; font-size:1.6rem; font-weight:800; color:var(--danger); font-family:'Outfit'; letter-spacing:-0.5px;">Registrar Gasto</h3><p id="exp-monto-text" style="font-size:2.8rem; font-weight:300; margin:0 0 24px; font-family:'Outfit'; color:var(--text-dark); letter-spacing:-1px; line-height:1;"></p><input type="text" id="exp-rsn" class="form-input" placeholder="Detalle (Ej: Mercadería)"><button class="btn-main" style="background:var(--danger); box-shadow:0 10px 25px rgba(239,68,68,0.25);" onclick="vibrar(); submitExpense()">Descontar de Caja</button></div></div>
     
     <div class="modal" id="motos-modal">
@@ -2071,7 +2100,7 @@
             let desc = `NUEVO PEDIDO [${orderId}]\nDir: ${dirFinal}\nNotas: ${notes}\nDetalle:\n`; 
             
             let itemsCount = {}; shoppingCart.forEach(i => { itemsCount[i.nombre] = (itemsCount[i.nombre]||0)+1; });
-            for (let [nombre, qty] of Object.entries(itemsCount)) { desc += `- ${qty}x ${nombre}\n`; }
+            for (let [nombre, qty] of Object.entries(itemsCount)) { desc += `- ${qty}x ${nombre}\n`; } 
             
             for (let [nombre, qty] of Object.entries(itemsCount)) {
                 let p = menuItems.find(x => x.nombre === nombre);
