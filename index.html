@@ -136,7 +136,7 @@
         
         .calc-display { flex: 1; display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-end; min-height: 80px; padding: 16px 24px; background: var(--bg-pure); border-radius: var(--radius-lg); margin-bottom: 12px; box-shadow: var(--shadow-float); border: 1px solid var(--border-soft); position: relative; overflow: hidden; }
         .calc-main { font-size: 3.5rem; font-weight: 300; color: var(--text-dark); line-height: 1; font-family: 'Outfit', sans-serif; word-break: break-all; letter-spacing: -2px; z-index:2;}
-        .calc-hist { font-size: 1.1rem; color: var(--text-light); font-weight: 500; min-height: 1.5rem; margin-bottom: 8px; z-index:2;}
+        .calc-display-sub { font-size: 1.1rem; color: var(--text-light); font-weight: 500; min-height: 1.5rem; margin-bottom: 8px; z-index:2;}
         
         .ticket-success { position: absolute; inset: 0; background: var(--success); color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Outfit'; z-index: 5; opacity: 0; pointer-events: none; transition: 0.3s; transform: translateY(100%); }
         .ticket-success.show { opacity: 1; transform: translateY(0); pointer-events: all; }
@@ -914,7 +914,6 @@
 
     <!-- MODALES CAJA -->
     <div id="pos-sheet-overlay" class="pos-sheet-overlay" onclick="cerrarPosSheet()"></div><div id="pos-sheet" class="pos-sheet"><div class="pos-sheet-header"><h3 style="margin:0; font-family:'Outfit'; font-size:1.4rem; font-weight:800; color:var(--text-dark);">Seleccionar Plato</h3><button style="background:rgba(0,0,0,0.05); border:none; font-size:1.2rem; color:var(--text-dark); cursor:pointer; width:35px; height:35px; border-radius:50%; display:flex; align-items:center; justify-content:center;" onclick="cerrarPosSheet()">✕</button></div><div id="pos-sheet-grid" class="pos-sheet-body"></div></div>
-    <div class="modal" id="modal-radar-owner"><div class="modal-content-standard" style="padding:32px 24px;"><button class="modal-close-circle" style="background:rgba(0,0,0,0.05);" onclick="document.getElementById('modal-radar-owner').style.display='none'">✕</button><h3 style="margin:0 0 20px; font-family:'Outfit'; font-size:1.5rem; font-weight:800; color:var(--text-dark); letter-spacing:-0.5px;">Radar GPS Chofer</h3><div id="radar-owner-map-container" style="width:100%; height:350px; border-radius:20px; border:1px solid var(--border-soft); background:#e2e8f0; margin-bottom: 20px; z-index:1;"></div><button class="btn-secondary" onclick="vibrar(); actualizarRadarMap()">Actualizar Ubicación Ahora</button></div></div>
     <div class="modal" id="expense-modal"><div class="modal-content-standard" style="padding:32px 24px;"><button class="modal-close-circle" style="background:rgba(0,0,0,0.05);" onclick="document.getElementById('expense-modal').style.display='none'">✕</button><h3 style="margin:10px 0 16px; font-size:1.6rem; font-weight:800; color:var(--danger); font-family:'Outfit'; letter-spacing:-0.5px;">Registrar Gasto</h3><p id="exp-monto-text" style="font-size:2.8rem; font-weight:300; margin:0 0 24px; font-family:'Outfit'; color:var(--text-dark); letter-spacing:-1px; line-height:1;"></p><input type="text" id="exp-rsn" class="form-input" placeholder="Detalle (Ej: Mercadería)"><button class="btn-main" style="background:var(--danger); box-shadow:0 10px 25px rgba(239,68,68,0.25);" onclick="vibrar(); submitExpense()">Descontar de Caja</button></div></div>
     
     <div class="modal" id="motos-modal">
@@ -954,7 +953,7 @@
         let isDeliveryOption = true;
 
         let tempImgFile = null; let tempVidFile = null; let tempLogoFile = null; let tempPromoFile = null;
-        let trackingMap = null, trackingMarker = null, radarMap = null, radarMarker = null;
+        let trackingMap = null, trackingMarker = null;
         let isPaywallUpload = false;
         let pendingTransferData = null;
         let currentCierreData = null; 
