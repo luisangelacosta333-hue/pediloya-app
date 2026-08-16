@@ -945,6 +945,10 @@
         
         let isGpsActive = false;
         let gpsInterval = null;
+        
+        // NUEVAS VARIABLES GLOBALES PARA SOLUCIONAR PROBLEMAS DE ALERTAS Y SINCRONIZACIÓN
+        let unseenOrdersAlert = false;
+        let syncInterval = null;
 
         // FUNCIÓN DE VIBRACIÓN MODIFICADA PARA PERMITIR PATRONES
         function vibrar(pattern = 40) { if(navigator.vibrate) navigator.vibrate(pattern); }
@@ -1175,27 +1179,42 @@
                 if(qs('btn-log')) qs('btn-log').disabled = false; setText('btn-log', "Abrir Caja");
                 go('view-chofer'); showToast("¡Bienvenido!");
 
-                // ACTUALIZACIÓN EN TIEMPO REAL CORREGIDA
+                // ACTUALIZACIÓN EN TIEMPO REAL (WEBSOCKETS)
                 _supabase.channel('pedidos-nuevos')
                     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'pediloya_logs', filter: `local_id=eq.${currentLocalId}` }, payload => {
                         if(payload.new.tipo === 'PEDIDO_WEB') {
-                            showToast("¡NUEVO PEDIDO RECIBIDO!", "orange");
-                            vibrar([300, 100, 300, 100, 500]); // Vibración fuerte y prolongada
-                            
-                            // Forzamos el botón a ponerse rojo intenso de inmediato
-                            let btnWeb = qs('btn-pedidos-web'); 
-                            if(btnWeb) {
-                                btnWeb.style.background = 'var(--danger)';
-                                btnWeb.style.color = 'white';
-                                btnWeb.style.borderColor = 'var(--danger)';
-                                btnWeb.innerText = `🚨 NUEVO PEDIDO`;
-                                btnWeb.style.animation = 'pulse-deli 1s infinite';
+                            if (!dbState.logs.some(l => l.id === payload.new.id)) {
+                                dbState.logs.unshift(payload.new); // Agrega al instante
+                                unseenOrdersAlert = true;
+                                showToast("¡NUEVO PEDIDO RECIBIDO!", "orange");
+                                vibrar([300, 100, 300, 100, 500]); 
+                                renderAllData(); // Renderiza de inmediato
                             }
-                            
-                            // Recargamos los datos para que el listado se actualice en la web sin salir
-                            loadDataFromDB();
                         }
                     }).subscribe();
+
+                // POLLING DE RESPALDO: Garantiza que los pedidos entren incluso si el websocket falla en móviles
+                if(syncInterval) clearInterval(syncInterval);
+                syncInterval = setInterval(async () => {
+                    if (currentLocalId) {
+                        let { data } = await _supabase.from('pediloya_logs').select('*').eq('local_id', currentLocalId).order('created_at', {ascending: false}).limit(200);
+                        if(data) {
+                            let hasNew = false;
+                            data.forEach(d => {
+                                if (d.tipo === 'PEDIDO_WEB' && !dbState.logs.some(l => l.id === d.id)) {
+                                    hasNew = true;
+                                }
+                            });
+                            if(hasNew) {
+                                unseenOrdersAlert = true;
+                                vibrar([300, 100, 300, 100, 500]);
+                                showToast("¡NUEVO PEDIDO RECIBIDO!", "orange");
+                            }
+                            dbState.logs = data;
+                            renderAllData(); // Forzamos el redibujado
+                        }
+                    }
+                }, 7000); // Revisa cada 7 segundos, garantizando cero atrasos
 
             } catch (err) { alert("Fallo Interno: " + err.message); if(qs('btn-log')) qs('btn-log').disabled = false; setText('btn-log', "Abrir Caja"); }
         }
@@ -1816,8 +1835,8 @@
                     if(trkCode) {
                         actionsHtml = `
                         <div style="display:flex; gap:8px; margin-bottom:12px;">
-                            <button onclick="vibrar([40]); compartirTRKWhatsApp('${trkCode}')" style="flex:1; background:#25D366; color:white; border:none; border-radius:12px; padding:12px; font-weight:800; font-family:'Outfit'; font-size:0.9rem; cursor:pointer; box-shadow:0 4px 10px rgba(37,211,102,0.2);"><span style="font-size:1.1rem; margin-right:4px;">📲</span> ENVIAR LINK</button>
-                            <button onclick="vibrar([40]); copiarTRK('${trkCode}')" style="flex:1; background:var(--bg-pure); color:var(--text-dark); border:2px solid var(--border-soft); border-radius:12px; padding:12px; font-weight:800; font-family:'Outfit'; font-size:0.9rem; cursor:pointer; box-shadow:var(--shadow-soft);"><span style="font-size:1.1rem; margin-right:4px;">📄</span> COPIAR CÓDIGO</button>
+                            <button onclick="vibrar([40]); compartirTRKWhatsApp('${trkCode}')" style="flex:1; background:#25D366; color:white; border:none; border-radius:12px; padding:12px; font-weight:800; font-family:'Outfit'; font-size:0.9rem; cursor:pointer; box-shadow:0 4px 10px rgba(37,211,102,0.2);"><span style="font-size:1.1rem; margin-right:4px;">📍</span> COMPARTIR MAPA GPS</button>
+                            <button onclick="vibrar([40]); copiarTRK('${trkCode}')" style="flex:1; background:var(--bg-pure); color:var(--text-dark); border:2px solid var(--border-soft); border-radius:12px; padding:12px; font-weight:800; font-family:'Outfit'; font-size:0.9rem; cursor:pointer; box-shadow:var(--shadow-soft);"><span style="font-size:1.1rem; margin-right:4px;">📄</span> COPIAR TRK</button>
                         </div>`;
                     }
 
@@ -1902,25 +1921,31 @@
             
             let btnWeb = qs('btn-pedidos-web'); 
             if(btnWeb) { 
-                if(pedidosWebNuevos > 0) {
-                    // BOTÓN ROJO DE ALERTA PARA DUEÑO
-                    btnWeb.style.background = 'var(--danger)';
+                if(unseenOrdersAlert && pedidosWebNuevos > 0) {
+                    // BOTÓN NARANJA DE ALERTA PARA DUEÑO (NO ROJO) Y TITILANDO
+                    btnWeb.style.background = 'var(--gradient-orange)';
                     btnWeb.style.color = 'white';
-                    btnWeb.style.borderColor = 'var(--danger)';
-                    btnWeb.innerText = `🚨 PEDIDOS (${pedidosWebNuevos})`;
+                    btnWeb.style.borderColor = 'var(--primary-orange)';
+                    btnWeb.innerText = `🔔 NUEVO PEDIDO`;
                     btnWeb.style.animation = 'pulse-deli 1s infinite';
                     btnWeb.classList.add('active'); 
                 } else {
-                    // ESTADO NORMAL
+                    // ESTADO NORMAL (DEJA DE TITILAR CUANDO YA LO TOCÓ)
                     btnWeb.style.background = 'rgba(255,94,0,0.05)';
                     btnWeb.style.color = 'var(--primary-orange)';
                     btnWeb.style.borderColor = 'var(--primary-orange)';
-                    btnWeb.innerText = "🔔 PEDIDOS";
+                    btnWeb.innerText = pedidosWebNuevos > 0 ? `🔔 PEDIDOS (${pedidosWebNuevos})` : "🔔 PEDIDOS";
                     btnWeb.style.animation = 'none';
                     btnWeb.classList.remove('active'); 
                 }
             }
             setHtml('pedidos-web-list', webLogsHtml || '<div style="text-align:center; padding:50px 20px;"><span style="font-size:3rem; opacity:0.5;">🍽️</span><p style="font-weight:500; color:var(--text-light); font-size:1.1rem; margin-top:20px;">Aún no tenés pedidos online pendientes.</p></div>');
+        }
+
+        function abrirPedidosWeb() { 
+            unseenOrdersAlert = false; // Se apaga la alerta visual
+            renderAllData(); // Forzamos el redibujado para que el botón vuelva a la normalidad
+            if(qs('pedidos-web-modal')) qs('pedidos-web-modal').style.display='flex'; 
         }
 
         async function cargarMenuCliente(localName) {
@@ -2361,7 +2386,6 @@
             }, { enableHighAccuracy: true });
         };
         
-        function abrirPedidosWeb() { if(qs('pedidos-web-modal')) qs('pedidos-web-modal').style.display='flex'; }
         function abrirRadarDueno() { if(qs('modal-radar-owner')) qs('modal-radar-owner').style.display='flex'; actualizarRadarMap(); setTimeout(actualizarRadarMap, 500); }
         async function actualizarRadarMap() { showToast("Buscando GPS...", "info"); let { data } = await _supabase.from('pediloya_logs').select('descripcion').eq('local_id', currentLocalId).eq('tipo', 'GPS_DELI').order('created_at', {ascending: false}).limit(1).maybeSingle(); if(data) { try { let coords = JSON.parse(data.descripcion); updateLiveMap(coords.lat, coords.lon, 'radar-owner-map-container', true); showToast("Actualizado"); } catch(e) {} } }
         
