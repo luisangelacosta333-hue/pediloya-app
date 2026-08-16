@@ -28,6 +28,7 @@
     <!-- ================= CONEXIÓN PWA ================= -->
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#ff5e00">
+    <link rel="apple-touch-icon" href="./icon-192.png">
     <!-- ================================================ -->
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,30 +44,13 @@
     <style>
         /* =========================================================
            DISEÑO ULTRA PREMIUM 9:16 & GLASSMORPHISM SAAS
-           LOGO MODERNO DELIVERY - CSS MEJORADO
         ========================================================= */
         :root { 
-            --bg-pure: #ffffff; 
-            --bg-app: #f8fafc; 
-            --text-dark: #0f172a; 
-            --text-gray: #475569; 
-            --text-light: #94a3b8;
-            --border-soft: #e2e8f0; 
-            --primary-orange: #ff5e00; 
-            --primary-orange-light: #ff8c3a;
-            --primary-orange-dark: #cc4a00;
-            --gradient-orange: linear-gradient(135deg, #ff8c3a 0%, #ff5e00 50%, #ff3300 100%);
-            --gradient-orange-soft: linear-gradient(135deg, rgba(255,140,58,0.12) 0%, rgba(255,94,0,0.08) 100%);
-            --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.04); 
-            --shadow-float: 0 25px 60px rgba(15, 23, 42, 0.08);
-            --shadow-orange: 0 18px 40px rgba(255, 94, 0, 0.28); 
-            --shadow-orange-intense: 0 25px 55px rgba(255, 94, 0, 0.4);
-            --success: #10b981; 
-            --danger: #ef4444; 
-            --info: #0ea5e9;
-            --radius-md: 24px; 
-            --radius-lg: 36px; 
-            --transition-smooth: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+            --bg-pure: #ffffff; --bg-app: #f8fafc; --text-dark: #0f172a; --text-gray: #475569; --text-light: #94a3b8;
+            --border-soft: #e2e8f0; --primary-orange: #ff5e00; --gradient-orange: linear-gradient(135deg, #ff7b00, #ff3300);
+            --shadow-soft: 0 10px 25px rgba(0, 0, 0, 0.03); --shadow-float: 0 20px 40px rgba(0, 0, 0, 0.08);
+            --shadow-orange: 0 15px 30px rgba(255, 94, 0, 0.25); --success: #10b981; --danger: #ef4444; --info: #0ea5e9;
+            --radius-md: 24px; --radius-lg: 36px; --transition-smooth: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         * { box-sizing: border-box; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -74,106 +58,72 @@
         
         .hidden { display: none !important; }
         .hidden-hard { display: none !important; }
-        
-        .view-container { display: none; flex-direction: column; max-width: 500px; margin: 0 auto; padding: 24px; min-height: 100vh; animation: fadeSlideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1); background: var(--bg-app); padding-bottom: 80px; }
+        /* Reducción de espacio inferior para optimizar pantalla */
+        .view-container { display: none; flex-direction: column; max-width: 500px; margin: 0 auto; padding: 24px; min-height: 100vh; animation: fadeSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); background: var(--bg-app); padding-bottom: 80px; }
         .view-container.active { display: flex; }
         .view-container-no-pad { padding: 0; max-width: 100%; }
         
-        @keyframes fadeSlideUp { 
-            0% { opacity: 0; transform: translateY(24px) scale(0.98); } 
-            100% { opacity: 1; transform: translateY(0) scale(1); } 
-        }
-        @keyframes pulseGlow { 
-            0%, 100% { opacity: 0.5; transform: scale(1); filter: blur(0px); } 
-            50% { opacity: 0.9; transform: scale(1.1); filter: blur(2px); } 
-        }
-        @keyframes floatLogo { 
-            0%, 100% { transform: translateY(0px) rotate(-1deg); } 
-            50% { transform: translateY(-15px) rotate(1deg); } 
-        }
-        @keyframes spinRays { 
-            100% { transform: rotate(360deg); } 
-        }
-        @keyframes scrollMarquee { 
-            0% { transform: translateX(0); } 
-            100% { transform: translateX(-50%); } 
-        }
-        @keyframes shimmer {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
-        }
+        @keyframes fadeSlideUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseGlow { 0%, 100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.08); } }
+        @keyframes floatLogo { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+        @keyframes spinRays { 100% { transform: rotate(360deg); } }
+        @keyframes scrollMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         
         .mask-text { -webkit-text-security: disc; }
 
         .form-input { width: 100%; padding: 18px 24px; background: #f8fafc; border: 2px solid transparent; color: var(--text-dark); border-radius: 18px; font-size: 1.05rem; margin-bottom: 16px; transition: var(--transition-smooth); font-weight: 500; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);}
-        .form-input:focus { background: var(--bg-pure); border-color: var(--primary-orange); outline: none; box-shadow: 0 10px 30px rgba(255, 94, 0, 0.12); }
+        .form-input:focus { background: var(--bg-pure); border-color: var(--primary-orange); outline: none; box-shadow: 0 10px 25px rgba(255, 94, 0, 0.1); }
         .form-input::placeholder { color: #a1a1aa; font-weight: 400; }
         
-        .btn-main { width: 100%; padding: 18px; background: var(--gradient-orange); color: white; font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.1rem; border: none; border-radius: 18px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; box-shadow: var(--shadow-orange); transition: var(--transition-smooth); display: flex; justify-content: center; align-items: center; position: relative; overflow: hidden; }
-        .btn-main::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: left 0.5s; }
-        .btn-main:hover::before { left: 100%; }
-        .btn-main:active { transform: scale(0.96); box-shadow: var(--shadow-orange-intense); }
+        .btn-main { width: 100%; padding: 18px; background: var(--gradient-orange); color: white; font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.1rem; border: none; border-radius: 18px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; box-shadow: var(--shadow-orange); transition: var(--transition-smooth); display: flex; justify-content: center; align-items: center; }
+        .btn-main:active { transform: scale(0.96); }
         
         .btn-secondary { width: 100%; padding: 18px; background: var(--bg-pure); color: var(--text-dark); font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; border: 2px solid var(--border-soft); border-radius: 18px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; transition: var(--transition-smooth); box-shadow: var(--shadow-soft); }
         .btn-secondary:active { background: var(--bg-app); transform: scale(0.98); }
 
         /* ================= LANDING PAGE SAAS ================= */
-        .landing-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; background-color: var(--bg-pure); background-image: 
-            radial-gradient(circle at 15% 10%, rgba(255, 94, 0, 0.08), transparent 45%), 
-            radial-gradient(circle at 85% 90%, rgba(255, 94, 0, 0.06), transparent 45%),
-            radial-gradient(circle at 50% 50%, rgba(255, 140, 58, 0.03), transparent 60%); 
-            color: var(--text-dark); min-height: 100vh; position: relative; overflow: hidden; padding-bottom: 80px; }
+        .landing-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; background-color: var(--bg-pure); background-image: radial-gradient(circle at 15% 10%, rgba(255, 94, 0, 0.05), transparent 45%), radial-gradient(circle at 85% 90%, rgba(255, 94, 0, 0.04), transparent 45%); color: var(--text-dark); min-height: 100vh; position: relative; overflow: hidden; padding-bottom: 80px; }
         .landing-content { position: relative; z-index: 2; padding: 12px 24px; max-width: 520px; width: 100%; margin: 0 auto; text-align: center; }
         
-        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--gradient-orange-soft); border: 1px solid rgba(255, 94, 0, 0.2); padding: 10px 22px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; color: var(--primary-orange); letter-spacing: 1.5px; backdrop-filter: blur(12px); margin-bottom: 16px; text-transform: uppercase; box-shadow: 0 8px 25px rgba(255, 94, 0, 0.08); }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 94, 0, 0.08); border: 1px solid rgba(255, 94, 0, 0.15); padding: 10px 22px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; color: var(--primary-orange); letter-spacing: 1.5px; backdrop-filter: blur(12px); margin-bottom: 16px; text-transform: uppercase; box-shadow: 0 8px 20px rgba(255, 94, 0, 0.05); }
         
-        /* ================= LOGO MODERNO DELIVERY PREMIUM ================= */
-        .logo-premium-wrapper { position: relative; width: 240px; height: 240px; margin: -10px auto 20px auto; display: flex; justify-content: center; align-items: center; }
-        .logo-premium-rays { position: absolute; inset: -50px; background: conic-gradient(from 0deg, transparent 0%, rgba(255,140,58,0.6) 8%, transparent 18%, transparent 32%, rgba(255,94,0,0.7) 42%, transparent 52%, transparent 68%, rgba(255,51,0,0.5) 78%, transparent 88%, transparent 100%); border-radius: 50%; animation: spinRays 10s linear infinite; filter: blur(30px); opacity: 0.75; z-index: 1; }
-        .logo-premium-glow { position: absolute; inset: 20px; background: radial-gradient(circle, rgba(255,94,0,0.35) 0%, transparent 70%); border-radius: 50%; animation: pulseGlow 3s ease-in-out infinite; z-index: 1; }
-        .logo-premium-core { width: 170px; height: 170px; border-radius: 44px; background: linear-gradient(145deg, #ffffff 0%, #fff8f0 100%); border: 3px solid rgba(255,94,0,0.35); display: flex; align-items: center; justify-content: center; position: relative; z-index: 2; box-shadow: 0 35px 70px rgba(255,94,0,0.45), inset 0 0 40px rgba(255, 94, 0, 0.1); animation: floatLogo 4.5s ease-in-out infinite; }
-        .logo-premium-core svg { width: 120px; height: 120px; filter: drop-shadow(0 8px 20px rgba(255,94,0,0.45)); }
+        .logo-premium-wrapper { position: relative; width: 220px; height: 220px; margin: -10px auto 20px auto; display: flex; justify-content: center; align-items: center; }
+        .logo-premium-rays { position: absolute; inset: -40px; background: conic-gradient(from 0deg, transparent 0%, rgba(255,94,0,0.8) 10%, transparent 20%, transparent 40%, rgba(255,94,0,0.8) 50%, transparent 60%, transparent 80%, rgba(255,94,0,0.8) 90%, transparent 100%); border-radius: 50%; animation: spinRays 8s linear infinite; filter: blur(25px); opacity: 0.8; z-index: 1; }
+        .logo-premium-core { width: 150px; height: 150px; border-radius: 40px; background: transparent; border: none; display: flex; align-items: center; justify-content: center; position: relative; z-index: 2; animation: floatLogo 4s ease-in-out infinite; }
         
-        .pedilo-ya-title { font-family: 'Outfit', sans-serif; font-size: 3.8rem; font-weight: 900; color: var(--text-dark); margin: 0 0 16px 0; text-transform: uppercase; letter-spacing: -2.5px; line-height: 1; text-shadow: 0 18px 40px rgba(0,0,0,0.1); }
-        .pedilo-ya-title span { background: var(--gradient-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size: 200% auto; animation: shimmer 4s linear infinite; }
+        .pedilo-ya-title { font-family: 'Outfit', sans-serif; font-size: 3.6rem; font-weight: 900; color: var(--text-dark); margin: 0 0 16px 0; text-transform: uppercase; letter-spacing: -2.5px; line-height: 1; text-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+        .pedilo-ya-title span { background: var(--gradient-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        .premium-text-gradient { background: var(--gradient-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 10px 30px rgba(255, 94, 0, 0.25); font-weight: 900; background-size: 200% auto; }
+        .premium-text-gradient { background: var(--gradient-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 10px 30px rgba(255, 94, 0, 0.25); font-weight: 900; }
 
-        .marquee-container { width: 100%; overflow: hidden; background: var(--gradient-orange-soft); border: 1px solid rgba(255, 94, 0, 0.18); border-radius: 20px; padding: 14px 0; margin-bottom: 30px; display: flex; box-shadow: inset 0 0 25px rgba(255,94,0,0.04); }
-        .marquee-content { display: flex; white-space: nowrap; animation: scrollMarquee 22s linear infinite; font-family: 'Outfit', sans-serif; font-weight: 800; color: var(--primary-orange); font-size: 0.95rem; text-transform: uppercase; align-items: center; }
+        .marquee-container { width: 100%; overflow: hidden; background: rgba(255, 94, 0, 0.05); border: 1px solid rgba(255, 94, 0, 0.15); border-radius: 20px; padding: 14px 0; margin-bottom: 30px; display: flex; box-shadow: inset 0 0 20px rgba(255,94,0,0.02); }
+        .marquee-content { display: flex; white-space: nowrap; animation: scrollMarquee 20s linear infinite; font-family: 'Outfit', sans-serif; font-weight: 800; color: var(--primary-orange); font-size: 0.95rem; text-transform: uppercase; align-items: center; }
         .marquee-item { margin-right: 30px; display: flex; align-items: center; gap: 8px; }
 
-        .btn-tts { width: 100%; padding: 20px; background: linear-gradient(145deg, #ffffff 0%, #fafafa 100%); border: 2px solid var(--border-soft); color: var(--text-dark); font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.1rem; border-radius: 20px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); transition: all 0.3s; display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 40px; position: relative; }
-        .btn-tts:hover { border-color: rgba(255,94,0,0.3); box-shadow: 0 18px 40px rgba(255,94,0,0.12); transform: translateY(-2px); }
+        .btn-tts { width: 100%; padding: 20px; background: var(--bg-pure); border: 2px solid var(--border-soft); color: var(--text-dark); font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.1rem; border-radius: 20px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 15px 30px rgba(0,0,0,0.04); transition: all 0.3s; display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 40px; }
         .btn-tts:active { transform: scale(0.97); background: var(--bg-app); }
 
-        .glass-card-light { background: linear-gradient(145deg, #ffffff 0%, #fdfdfd 100%); border-radius: 36px; padding: 40px 28px; margin-bottom: 32px; box-shadow: 0 28px 65px rgba(15,23,42,0.06); border: 1px solid rgba(226, 232, 240, 0.8); position: relative; overflow: hidden; text-align: left; }
-        .glass-card-light::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient-orange); opacity: 0; transition: opacity 0.3s; }
-        .glass-card-light:hover::before { opacity: 1; }
+        .glass-card-light { background: var(--bg-pure); border-radius: 36px; padding: 40px 28px; margin-bottom: 32px; box-shadow: 0 25px 50px rgba(0,0,0,0.05); border: 1px solid var(--border-soft); position: relative; overflow: hidden; text-align: left; }
         
-        .feature-item { display: flex; align-items: flex-start; gap: 18px; margin-bottom: 28px; transition: var(--transition-smooth); }
-        .feature-item:hover { transform: translateX(4px); }
-        .feature-icon-box { width: 56px; height: 56px; border-radius: 18px; background: var(--gradient-orange-soft); border: 1px solid rgba(255, 94, 0, 0.18); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; flex-shrink: 0; color: var(--primary-orange); box-shadow: 0 10px 25px rgba(255, 94, 0, 0.08); transition: var(--transition-smooth); }
-        .feature-item:hover .feature-icon-box { transform: scale(1.08) rotate(-3deg); box-shadow: 0 15px 35px rgba(255, 94, 0, 0.18); }
+        .feature-item { display: flex; align-items: flex-start; gap: 18px; margin-bottom: 28px; }
+        .feature-icon-box { width: 54px; height: 54px; border-radius: 18px; background: rgba(255, 94, 0, 0.08); border: 1px solid rgba(255, 94, 0, 0.15); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; flex-shrink: 0; color: var(--primary-orange); box-shadow: 0 10px 20px rgba(255, 94, 0, 0.06); }
         .feature-title-text { font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin: 0 0 6px 0; letter-spacing: -0.5px; }
         .feature-desc-text { font-size: 0.95rem; color: var(--text-gray); margin: 0; line-height: 1.6; font-weight: 500; }
 
-        .input-light { width:100%; padding:20px 24px; border: 2px solid var(--border-soft); border-radius:18px; margin-bottom:16px; font-size:1.05rem; background: var(--bg-app); color:var(--text-dark); outline:none; box-shadow: inset 0 2px 10px rgba(0,0,0,0.01); transition: all 0.3s; font-weight: 500; }
-        .input-light:focus { border-color: var(--primary-orange); box-shadow: 0 0 0 5px rgba(255, 94, 0, 0.1), inset 0 2px 10px rgba(0,0,0,0.01); background: var(--bg-pure); transform: translateY(-1px); }
+        .input-light { width:100%; padding:20px 24px; border: 1px solid var(--border-soft); border-radius:18px; margin-bottom:16px; font-size:1.05rem; background: var(--bg-app); color:var(--text-dark); outline:none; box-shadow: inset 0 2px 10px rgba(0,0,0,0.01); transition: all 0.3s; font-weight: 500; }
+        .input-light:focus { border-color: var(--primary-orange); box-shadow: 0 0 0 4px rgba(255, 94, 0, 0.1), inset 0 2px 10px rgba(0,0,0,0.01); background: var(--bg-pure); }
         .input-light::placeholder { color: #94a3b8; font-weight: 500;}
         
-        .btn-gradient-orange { width:100%; padding:20px; background: var(--gradient-orange); color:white; font-weight:800; font-size:1.15rem; border:none; border-radius:18px; box-shadow: var(--shadow-orange); text-transform:uppercase; cursor:pointer; letter-spacing: 1px; font-family: 'Outfit', sans-serif; transition: all 0.3s; position: relative; overflow: hidden; }
-        .btn-gradient-orange::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent); transition: left 0.6s; }
-        .btn-gradient-orange:hover::before { left: 100%; }
-        .btn-gradient-orange:active { transform: scale(0.97); box-shadow: var(--shadow-orange-intense); }
+        .btn-gradient-orange { width:100%; padding:20px; background: var(--gradient-orange); color:white; font-weight:800; font-size:1.15rem; border:none; border-radius:18px; box-shadow: 0 15px 35px rgba(255, 94, 0, 0.3); text-transform:uppercase; cursor:pointer; letter-spacing: 1px; font-family: 'Outfit', sans-serif; transition: transform 0.2s; }
+        .btn-gradient-orange:active { transform: scale(0.97); box-shadow: 0 10px 25px rgba(255, 94, 0, 0.2); }
 
-        .subscription-box { border-top: 5px solid var(--primary-orange); text-align: center; background: linear-gradient(145deg, #ffffff 0%, #fffaf5 100%); padding: 40px 28px; border-radius: 36px; box-shadow: 0 30px 70px rgba(255,94,0,0.15); border-left: 1px solid rgba(255,94,0,0.1); border-right: 1px solid rgba(255,94,0,0.1); border-bottom: 1px solid rgba(255,94,0,0.1); margin-bottom: 32px; position: relative; overflow: hidden; }
-        .subscription-box::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,94,0,0.06) 0%, transparent 50%); z-index: 0; pointer-events: none; animation: pulseGlow 5s ease-in-out infinite;}
+        .subscription-box { border-top: 5px solid var(--primary-orange); text-align: center; background: var(--bg-pure); padding: 40px 28px; border-radius: 36px; box-shadow: 0 25px 60px rgba(255,94,0,0.12); border-left: 1px solid var(--border-soft); border-right: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); margin-bottom: 32px; position: relative; overflow: hidden; }
+        .subscription-box::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,94,0,0.04) 0%, transparent 50%); z-index: 0; pointer-events: none;}
         .subscription-box > * { position: relative; z-index: 1; }
 
         .footer-tech { text-align: center; padding-top: 40px; margin-top: 50px; border-top: 1px solid var(--border-soft); position: relative; z-index: 2; }
         .footer-brand { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 900; color: var(--text-dark); letter-spacing: 2px; margin-bottom: 8px; }
-        .footer-brand span { background: var(--gradient-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .footer-brand span { color: var(--primary-orange); }
         .footer-sub { font-size: 0.9rem; color: var(--text-gray); font-weight: 600; margin: 0 0 6px 0; text-transform: uppercase; letter-spacing: 1px; }
         .footer-copy { font-size: 0.8rem; color: #94a3b8; margin-top: 12px; font-weight: 500; }
 
@@ -181,197 +131,191 @@
         .admin-container { width: 100%; max-width: 500px; margin: 0 auto; padding: 24px; box-sizing: border-box; padding-bottom: 60px; overflow-x: hidden;}
         
         .chofer-top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 8px; flex-shrink: 0; }
-        .pill-btn { background: var(--bg-pure); border-radius: 50px; padding: 12px 16px; font-size: 0.8rem; font-weight: 800; color: var(--text-gray); box-shadow: var(--shadow-soft); cursor: pointer; border: 1px solid var(--border-soft); text-transform: uppercase; font-family:'Outfit'; letter-spacing: 0.5px; transition:0.25s; flex: 1; text-align: center; white-space: nowrap;}
+        .pill-btn { background: var(--bg-pure); border-radius: 50px; padding: 12px 16px; font-size: 0.8rem; font-weight: 800; color: var(--text-gray); box-shadow: var(--shadow-soft); cursor: pointer; border: 1px solid var(--border-soft); text-transform: uppercase; font-family:'Outfit'; letter-spacing: 0.5px; transition:0.2s; flex: 1; text-align: center; white-space: nowrap;}
         .pill-btn:active { transform: scale(0.95); }
         
-        .calc-display { flex: 1; display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-end; min-height: 80px; padding: 16px 24px; background: linear-gradient(145deg, #ffffff 0%, #fcfcfc 100%); border-radius: var(--radius-lg); margin-bottom: 12px; box-shadow: var(--shadow-float); border: 1px solid var(--border-soft); position: relative; overflow: hidden; }
-        .calc-display::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient-orange); }
+        .calc-display { flex: 1; display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-end; min-height: 80px; padding: 16px 24px; background: var(--bg-pure); border-radius: var(--radius-lg); margin-bottom: 12px; box-shadow: var(--shadow-float); border: 1px solid var(--border-soft); position: relative; overflow: hidden; }
         .calc-main { font-size: 3.5rem; font-weight: 300; color: var(--text-dark); line-height: 1; font-family: 'Outfit', sans-serif; word-break: break-all; letter-spacing: -2px; z-index:2;}
         .calc-hist { font-size: 1.1rem; color: var(--text-light); font-weight: 500; min-height: 1.5rem; margin-bottom: 8px; z-index:2;}
         
-        .ticket-success { position: absolute; inset: 0; background: linear-gradient(135deg, var(--success) 0%, #059669 100%); color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Outfit'; z-index: 5; opacity: 0; pointer-events: none; transition: 0.35s; transform: translateY(100%); }
+        .ticket-success { position: absolute; inset: 0; background: var(--success); color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Outfit'; z-index: 5; opacity: 0; pointer-events: none; transition: 0.3s; transform: translateY(100%); }
         .ticket-success.show { opacity: 1; transform: translateY(0); pointer-events: all; }
 
-        .btn-sheet-trigger { flex-shrink: 0; width: 100%; padding: 16px; background: rgba(255, 94, 0, 0.05); color: var(--text-dark); font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.1rem; border: 1px solid var(--border-soft); border-radius: 16px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; display:flex; justify-content:center; align-items:center; gap:12px; transition:0.25s; background: #f1f5f9;}
-        .btn-sheet-trigger:active { transform: scale(0.97); background: rgba(255,94,0,0.08); border-color: rgba(255,94,0,0.2); }
+        .btn-sheet-trigger { flex-shrink: 0; width: 100%; padding: 16px; background: rgba(255, 94, 0, 0.05); color: var(--text-dark); font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.1rem; border: 1px solid var(--border-soft); border-radius: 16px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; display:flex; justify-content:center; align-items:center; gap:12px; transition:0.2s; background: #f1f5f9;}
+        .btn-sheet-trigger:active { transform: scale(0.97); }
 
         .chofer-action-row { flex-shrink: 0; display: flex; gap: 8px; margin-bottom: 12px; }
-        .chofer-btn-white { background: var(--bg-pure); border: 1px solid var(--border-soft); border-radius: 12px; padding: 12px 6px; flex: 1; font-weight: 800; font-size: 0.9rem; color: var(--text-dark); box-shadow: var(--shadow-soft); cursor: pointer; font-family: 'Outfit', sans-serif; text-transform:uppercase; transition:0.25s; display: flex; justify-content: center; align-items: center; gap: 6px;}
+        .chofer-btn-white { background: var(--bg-pure); border: 1px solid var(--border-soft); border-radius: 12px; padding: 12px 6px; flex: 1; font-weight: 800; font-size: 0.9rem; color: var(--text-dark); box-shadow: var(--shadow-soft); cursor: pointer; font-family: 'Outfit', sans-serif; text-transform:uppercase; transition:0.2s; display: flex; justify-content: center; align-items: center; gap: 6px;}
         .chofer-btn-white:active { transform: scale(0.95); background: #f1f5f9; }
         
         .chofer-keypad { flex-shrink: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 12px; }
-        .ckey { background: linear-gradient(145deg, #ffffff 0%, #fafafa 100%); border: 1px solid var(--border-soft); border-radius: 20px; height: 8.5vh; min-height: 55px; max-height: 75px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 600; color: var(--text-dark); box-shadow: 0 4px 12px rgba(0,0,0,0.03); cursor: pointer; font-family: 'Outfit', sans-serif; transition: 0.15s;}
-        .ckey:active { transform: scale(0.92); background: #f1f5f9; box-shadow: inset 0 2px 8px rgba(0,0,0,0.05); }
-        .ckey-op { color: var(--primary-orange); font-size: 2.5rem; background: var(--gradient-orange-soft); border-color: transparent; font-weight: 700;}
+        .ckey { background: var(--bg-pure); border: 1px solid var(--border-soft); border-radius: 20px; height: 8.5vh; min-height: 55px; max-height: 75px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 600; color: var(--text-dark); box-shadow: 0 4px 10px rgba(0,0,0,0.02); cursor: pointer; font-family: 'Outfit', sans-serif; transition: 0.1s;}
+        .ckey:active { transform: scale(0.92); background: #f1f5f9; }
+        .ckey-op { color: var(--primary-orange); font-size: 2.5rem; background: rgba(255,94,0,0.05); border-color: transparent;}
         .ckey-eq { background: var(--gradient-orange); color: white; border: none; font-size: 2.5rem; box-shadow: var(--shadow-orange); font-weight: 300; }
         
         .chofer-pay-row { flex-shrink: 0; display: flex; gap: 12px; margin-bottom: 4px; }
-        .chofer-pay-btn { flex: 1; border-radius: 16px; padding: 16px 10px; font-weight: 800; font-size: 1.1rem; font-family: 'Outfit', sans-serif; text-transform: uppercase; background: linear-gradient(145deg, #f1f5f9 0%, #e8edf3 100%); color:var(--text-dark); border:1px solid var(--border-soft); cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; transition:0.25s;}
+        .chofer-pay-btn { flex: 1; border-radius: 16px; padding: 16px 10px; font-weight: 800; font-size: 1.1rem; font-family: 'Outfit', sans-serif; text-transform: uppercase; background:#f1f5f9; color:var(--text-dark); border:1px solid var(--border-soft); cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; transition:0.2s;}
         .chofer-pay-btn:active { transform: scale(0.95); }
-        .btn-pay-transfer { flex:1; border-radius:16px; padding:16px 10px; font-weight:800; font-size:1.1rem; font-family:'Outfit'; text-transform: uppercase; background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%); color:white; border:none; box-shadow:0 12px 30px rgba(14,165,233,0.35); cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; transition:0.25s;}
-        .btn-pay-transfer:active { transform: scale(0.95); box-shadow: 0 8px 20px rgba(14,165,233,0.4); }
+        .btn-pay-transfer { flex:1; border-radius:16px; padding:16px 10px; font-weight:800; font-size:1.1rem; font-family:'Outfit'; text-transform: uppercase; background:#0ea5e9; color:white; border:none; box-shadow:0 10px 25px rgba(14,165,233,0.3); cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; transition:0.2s;}
+        .btn-pay-transfer:active { transform: scale(0.95); }
         
-        .admin-card { background: linear-gradient(145deg, #ffffff 0%, #fdfdfd 100%); padding: 32px 24px; border-radius: var(--radius-lg); margin-bottom: 24px; border: 1px solid rgba(226, 232, 240, 0.7); box-shadow: var(--shadow-float); width: 100%; box-sizing: border-box; overflow: hidden;}
+        .admin-card { background: var(--bg-pure); padding: 32px 24px; border-radius: var(--radius-lg); margin-bottom: 24px; border: 1px solid rgba(0,0,0,0.03); box-shadow: var(--shadow-float); width: 100%; box-sizing: border-box; overflow: hidden;}
         
         .upload-box-hero { background: #f8fafc; border: 3px dashed var(--border-soft); border-radius: 36px; padding: 0; text-align: center; cursor: pointer; transition: var(--transition-smooth); position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 200px; margin-bottom: 24px; }
         .upload-box-hero.has-file { border: 3px solid var(--primary-orange); box-shadow: var(--shadow-orange); }
         .media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
-        .upload-box-mini { background: #f8fafc; border: 3px dashed var(--border-soft); border-radius: 28px; padding: 0; text-align: center; cursor: pointer; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 180px; transition: 0.25s;}
+        .upload-box-mini { background: #f8fafc; border: 3px dashed var(--border-soft); border-radius: 28px; padding: 0; text-align: center; cursor: pointer; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 180px; transition: 0.2s;}
         .upload-box-mini.has-file { border-color: var(--primary-orange); }
         .upload-placeholder { display: flex; flex-direction: column; align-items: center; padding: 15px; transition: 0.2s; }
         .upload-icon { font-size: 3rem; margin-bottom: 8px; opacity: 0.9; }
         .upload-text { font-size: 1rem; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; line-height: 1.2;}
         .upload-media { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 5; display: none; }
-        .upload-overlay-pill { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: rgba(15, 23, 42, 0.92); color: white; padding: 10px 20px; border-radius: 50px; font-size: 0.9rem; font-weight: 700; z-index: 10; display: none; backdrop-filter: blur(10px); box-shadow: 0 10px 25px rgba(0,0,0,0.35); white-space: nowrap;}
+        .upload-overlay-pill { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); background: rgba(15, 23, 42, 0.9); color: white; padding: 10px 20px; border-radius: 50px; font-size: 0.9rem; font-weight: 700; z-index: 10; display: none; backdrop-filter: blur(8px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); white-space: nowrap;}
 
-        .admin-dish-card { display:flex; justify-content:space-between; align-items:center; background: linear-gradient(145deg, #ffffff 0%, #fcfcfc 100%); padding:16px; border-radius:28px; border:1px solid var(--border-soft); margin-bottom:16px; box-shadow:var(--shadow-soft); transition:var(--transition-smooth);}
-        .admin-dish-card:hover { transform: translateX(4px); box-shadow: var(--shadow-float); }
+        .admin-dish-card { display:flex; justify-content:space-between; align-items:center; background:var(--bg-pure); padding:16px; border-radius:28px; border:1px solid var(--border-soft); margin-bottom:16px; box-shadow:var(--shadow-soft); transition:var(--transition-smooth);}
         .admin-dish-left { display: flex; gap: 16px; align-items: center; flex: 1; overflow: hidden; }
-        .admin-dish-img { width: 75px; height: 133px; border-radius: 16px; object-fit: cover; background: linear-gradient(135deg, #0f172a, #1e293b); flex-shrink: 0; display:flex; justify-content:center; align-items:center; font-size: 2.5rem; overflow: hidden; position: relative; border: 1px solid var(--border-soft);}
+        .admin-dish-img { width: 75px; height: 133px; border-radius: 16px; object-fit: cover; background: #0f172a; flex-shrink: 0; display:flex; justify-content:center; align-items:center; font-size: 2.5rem; overflow: hidden; position: relative; border: 1px solid var(--border-soft);}
         .admin-dish-img img, .admin-dish-img video { width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0;}
         .admin-dish-info { flex:1; overflow: hidden; display: flex; flex-direction: column; justify-content: center; min-width: 0;}
         .admin-dish-title { font-size:1.1rem; font-family:'Outfit'; font-weight:800; color:var(--text-dark); margin:0 0 6px 0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
         .stock-badge-blue { display:inline-flex; align-items:center; gap:6px; background: #e0f2fe; color: #0284c7; font-size: 0.75rem; font-weight: 800; padding: 4px 10px; border-radius: 8px; text-transform: uppercase; margin-bottom: 6px; white-space: nowrap;}
         .admin-dish-price { color:var(--primary-orange); font-weight:800; font-size:1.2rem; font-family:'Outfit'; line-height: 1;}
         .btn-delete-dish { width: 45px; height: 45px; border-radius: 14px; background: #fef2f2; color: var(--danger); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; transition: 0.2s; flex-shrink: 0; border: none; align-self: flex-start;}
-        .btn-delete-dish:hover { background: #fee2e2; transform: scale(1.05); }
 
         /* ================= PROMOS ================= */
         .promo-carousel { display: flex; gap: 16px; overflow-x: auto; padding: 0 24px 30px; scroll-snap-type: x mandatory; scrollbar-width: none; margin-top: 10px; z-index:20; position:relative;}
         .promo-carousel::-webkit-scrollbar { display: none; }
         
-        .promo-card { flex: 0 0 100%; display: flex; flex-direction: column; background: linear-gradient(145deg, #ffffff 0%, #fcfcfc 100%); border-radius: 28px; scroll-snap-align: center; position: relative; overflow: hidden; box-shadow: var(--shadow-float); border: 1px solid var(--border-soft);}
+        .promo-card { flex: 0 0 100%; display: flex; flex-direction: column; background: var(--bg-pure); border-radius: 28px; scroll-snap-align: center; position: relative; overflow: hidden; box-shadow: var(--shadow-float); border: 1px solid var(--border-soft);}
         .promo-img-box { width: 100%; height: 250px; position: relative; z-index: 1; }
         .promo-img-box img { width: 100%; height: 100%; object-fit: cover; }
-        .promo-info { position: relative; width: 100%; background: linear-gradient(145deg, #ffffff 0%, #fdfdfd 100%); padding: 20px 24px; z-index: 2; text-align: left; border-top: 1px solid var(--border-soft);}
-        .promo-badge { display: inline-block; background: var(--gradient-orange); color: white; padding: 8px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 1px; box-shadow: 0 6px 20px rgba(255,94,0,0.35);}
+        .promo-info { position: relative; width: 100%; background: var(--bg-pure); padding: 20px 24px; z-index: 2; text-align: left; border-top: 1px solid var(--border-soft);}
+        .promo-badge { display: inline-block; background: var(--gradient-orange); color: white; padding: 8px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(255,94,0,0.3);}
         .promo-title { font-family: 'Outfit'; font-size: 1.8rem; font-weight: 900; color: var(--text-dark); margin: 0; letter-spacing: -0.5px; line-height: 1.1; word-wrap: break-word;}
 
         /* ================= APP CLIENTE ================= */
         .customer-container { max-width: 500px; margin: 0 auto; width: 100%; position: relative;}
         
-        .storefront-hero { position: relative; width: 100%; height: 280px; display: flex; justify-content: center; align-items: flex-end; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 0 0 40px 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); z-index: 1; margin-bottom: 75px; }
+        .storefront-hero { position: relative; width: 100%; height: 280px; display: flex; justify-content: center; align-items: flex-end; background: #0f172a; border-radius: 0 0 40px 40px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); z-index: 1; margin-bottom: 75px; }
         .storefront-hero-bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 0 0 40px 40px; z-index: 0; transition: 0.5s;}
-        .storefront-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 35%, rgba(0,0,0,0.75) 100%); border-radius: 0 0 40px 40px; z-index: 1;}
-        .store-logo-large { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 6px solid var(--bg-pure); box-shadow: 0 20px 45px rgba(0,0,0,0.25); background: linear-gradient(145deg, #ffffff, #fafafa); position: absolute; bottom: -65px; left: 50%; transform: translateX(-50%); z-index: 10; display: none; }
+        .storefront-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.6) 100%); border-radius: 0 0 40px 40px; z-index: 1;}
+        .store-logo-large { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 6px solid var(--bg-pure); box-shadow: 0 15px 35px rgba(0,0,0,0.15); background: var(--bg-pure); position: absolute; bottom: -65px; left: 50%; transform: translateX(-50%); z-index: 10; display: none; }
         
         .storefront-details { background: transparent; padding: 0 24px 30px; text-align: center; position: relative; z-index: 5; margin-bottom: 20px;}
         .storefront-details h1 { font-size: 2.2rem; font-family: 'Outfit', sans-serif; font-weight: 800; color: var(--text-dark); margin: 0 0 10px 0; letter-spacing: -1px; text-transform: uppercase; line-height: 1; }
         .storefront-details p.desc { font-size: 1.05rem; color: var(--text-gray); margin: 0 0 30px 0; font-weight: 500; padding: 0 10px;}
         
-        .client-search { width: 100%; padding: 20px 24px 20px 60px; background: var(--bg-pure) url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3ccircle cx='11' cy='11' r='8'%3e%3c/circle%3e%3cline x1='21' y1='21' x2='16.65' y2='16.65'%3e%3c/line%3e%3c/svg%3e") no-repeat 24px center; background-size: 22px; border: 2px solid transparent; border-radius: 50px; font-size: 1rem; font-weight:500; outline:none; transition:0.3s; box-shadow: 0 12px 35px rgba(0,0,0,0.06);}
-        .client-search:focus { border-color: var(--primary-orange); box-shadow: 0 18px 45px rgba(255,94,0,0.12); transform: translateY(-1px); }
+        .client-search { width: 100%; padding: 20px 24px 20px 60px; background: var(--bg-pure) url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3ccircle cx='11' cy='11' r='8'%3e%3c/circle%3e%3cline x1='21' y1='21' x2='16.65' y2='16.65'%3e%3c/line%3e%3c/svg%3e") no-repeat 24px center; background-size: 22px; border: 2px solid transparent; border-radius: 50px; font-size: 1rem; font-weight:500; outline:none; transition:0.3s; box-shadow: 0 10px 30px rgba(0,0,0,0.05);}
+        .client-search:focus { border-color: var(--primary-orange); box-shadow: 0 15px 35px rgba(255,94,0,0.1); }
 
         .category-title { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.8rem; margin: 0 0 24px; color: var(--text-dark); padding: 0 24px; letter-spacing: -0.5px;}
         
         .cat-scroll { display: flex; overflow-x: auto; gap: 12px; padding: 0 24px 20px; scrollbar-width: none; scroll-snap-type: x mandatory;}
         .cat-scroll::-webkit-scrollbar { display: none; }
-        .cat-pill { padding: 10px 20px; background: linear-gradient(145deg, #ffffff 0%, #fafafa 100%); border: 1px solid var(--border-soft); border-radius: 50px; font-weight: 700; font-size: 0.95rem; white-space: nowrap; cursor: pointer; box-shadow: var(--shadow-soft); transition: 0.25s; scroll-snap-align: start; color: var(--text-gray);}
-        .cat-pill.active { background: var(--gradient-orange); color: white; border-color: transparent; box-shadow: var(--shadow-orange); transform: scale(1.05); }
+        .cat-pill { padding: 10px 20px; background: var(--bg-pure); border: 1px solid var(--border-soft); border-radius: 50px; font-weight: 700; font-size: 0.95rem; white-space: nowrap; cursor: pointer; box-shadow: var(--shadow-soft); transition: 0.2s; scroll-snap-align: start; color: var(--text-gray);}
+        .cat-pill.active { background: var(--text-dark); color: white; border-color: var(--text-dark); }
 
         .food-grid { display: flex; flex-direction: column; gap: 30px; padding: 0 24px 100px; }
         
         /* TARJETAS 9:16 */
-        .food-card-large { width: 100%; aspect-ratio: 9 / 16; max-height: 85vh; background: linear-gradient(135deg, #0f172a, #1e293b); border-radius: 40px; box-shadow: var(--shadow-float); overflow: hidden; cursor: pointer; transition: var(--transition-smooth); position: relative; }
+        .food-card-large { width: 100%; aspect-ratio: 9 / 16; max-height: 85vh; background: #0f172a; border-radius: 40px; box-shadow: var(--shadow-float); overflow: hidden; cursor: pointer; transition: var(--transition-smooth); position: relative; }
         .food-card-large:active { transform: scale(0.98); }
-        .food-card-large:hover { box-shadow: 0 35px 80px rgba(15,23,42,0.15); }
         .food-img-large { width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: center; font-size: 4rem; }
         .food-img-large img, .food-img-large video { width: 100%; height: 100%; object-fit: cover; position: absolute; inset:0; }
         
-        .food-info-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.75) 40%, transparent 100%); padding: 130px 24px 24px; display: flex; justify-content: space-between; align-items: flex-end; color: white; pointer-events: none;}
-        .food-title-large { font-size: 1.4rem; font-weight: 700; color: white; margin-bottom: 6px; font-family: 'Outfit'; line-height: 1.2; letter-spacing: 0px; text-shadow: 0 3px 15px rgba(0,0,0,0.9); overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;}
-        .food-desc-large { font-size: 0.95rem; color: rgba(255,255,255,0.88); margin-bottom: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4; font-weight: 400; text-shadow: 0 2px 10px rgba(0,0,0,0.9);}
+        .food-info-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 40%, transparent 100%); padding: 120px 24px 24px; display: flex; justify-content: space-between; align-items: flex-end; color: white; pointer-events: none;}
+        .food-title-large { font-size: 1.4rem; font-weight: 700; color: white; margin-bottom: 6px; font-family: 'Outfit'; line-height: 1.2; letter-spacing: 0px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;}
+        .food-desc-large { font-size: 0.95rem; color: rgba(255,255,255,0.85); margin-bottom: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4; font-weight: 400; text-shadow: 0 2px 8px rgba(0,0,0,0.8);}
         
-        .food-price-large { font-size: 1.4rem; font-weight: 800; color: var(--primary-orange-light); font-family: 'Outfit'; letter-spacing: -0.5px; margin-bottom: 0; margin-top: 8px; text-shadow: 0 3px 15px rgba(0,0,0,0.8); text-align: left;}
+        .food-price-large { font-size: 1.4rem; font-weight: 800; color: var(--primary-orange); font-family: 'Outfit'; letter-spacing: -0.5px; margin-bottom: 0; margin-top: 8px; text-shadow: 0 2px 10px rgba(0,0,0,0.6); text-align: left;}
         
-        .add-btn-float { pointer-events: all; background: rgba(255,255,255,0.18); backdrop-filter: blur(12px); color: white; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 500; font-size: 1.8rem; box-shadow: 0 10px 30px rgba(0,0,0,0.4); border: 1.5px solid rgba(255,255,255,0.35); line-height: 1; padding-bottom: 2px; margin-left: auto; transition:0.25s;}
-        .add-btn-float:active { transform: scale(0.9); background: white; color: var(--primary-orange); }
+        .add-btn-float { pointer-events: all; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 500; font-size: 1.8rem; box-shadow: 0 8px 20px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.3); line-height: 1; padding-bottom: 2px; margin-left: auto; transition:0.2s;}
+        .add-btn-float:active { transform: scale(0.9); background: white; color: black; }
 
-        /* CARRITO FLOTANTE */
-        .floating-cart-bar { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); width: calc(100% - 48px); max-width: 450px; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; padding: 18px 24px; border-radius: 28px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 25px 60px rgba(15,23,42,0.55); z-index: 999; cursor: pointer; transition: all 0.35s cubic-bezier(0.2, 1, 0.3, 1); animation: slideUpCartBar 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; border: 1px solid rgba(255,255,255,0.08); }
-        @keyframes slideUpCartBar { from { bottom: -100px; opacity: 0; } to { bottom: 80px; opacity: 1; } }
+        /* CARRITO FLOTANTE MCDONALDS */
+        .floating-cart-bar { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); width: calc(100% - 48px); max-width: 450px; background: var(--text-dark); color: white; padding: 18px 24px; border-radius: 28px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 20px 50px rgba(15,23,42,0.5); z-index: 999; cursor: pointer; transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1); animation: slideUpCartBar 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes slideUpCartBar { from { bottom: -100px; } to { bottom: 80px; } }
         .floating-cart-bar:active { transform: translateX(-50%) scale(0.96); }
         .fcb-left { display: flex; align-items: center; gap: 16px; font-family: 'Outfit'; font-weight: 700; font-size: 1rem; text-transform: uppercase;}
-        .fcb-qty { background: var(--gradient-orange); color: white; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 800; box-shadow: 0 5px 15px rgba(255,94,0,0.4);}
-        .fcb-right { font-family: 'Outfit'; font-weight: 800; font-size: 1.25rem; letter-spacing: -0.5px; background: var(--gradient-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .fcb-qty { background: var(--primary-orange); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 800;}
+        .fcb-right { font-family: 'Outfit'; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.5px;}
 
-        /* MODALES */
-        .modal-paywall { background: rgba(15, 23, 42, 0.96); backdrop-filter: blur(18px); }
-        .modal-paywall-content { background: linear-gradient(145deg, #0f172a 0%, #0b1120 100%); border-top: 5px solid #0ea5e9; padding: 40px 24px; border-radius: 40px; box-shadow: 0 35px 90px rgba(0,0,0,0.85); color: white; width: 92%; max-width: 460px; text-align: center;}
+        /* MODALES IA Y PAYWALL */
+        .modal-paywall { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(15px); }
+        .modal-paywall-content { background: #0f172a; border-top: 5px solid #0ea5e9; padding: 40px 24px; border-radius: 40px; box-shadow: 0 30px 80px rgba(0,0,0,0.8); color: white; width: 92%; max-width: 460px; text-align: center;}
         
-        .scanner-container { position:relative; width:100%; height:200px; background:#000; border-radius:24px; overflow:hidden; margin-bottom:20px; display:none; border: 1px solid rgba(255,255,255,0.12);}
+        .scanner-container { position:relative; width:100%; height:200px; background:#000; border-radius:24px; overflow:hidden; margin-bottom:20px; display:none; border: 1px solid rgba(255,255,255,0.1);}
         .scanner-container img { width:100%; height:100%; object-fit:contain; opacity:0.6; }
-        .scanner-line { position:absolute; top:0; left:0; width:100%; height:4px; background:var(--success); box-shadow:0 0 20px var(--success); animation: scan 2s linear infinite; }
+        .scanner-line { position:absolute; top:0; left:0; width:100%; height:4px; background:var(--success); box-shadow:0 0 15px var(--success); animation: scan 2s linear infinite; }
         @keyframes scan { 0% {top:0;} 50% {top:100%;} 100% {top:0;} }
 
         /* BOTTOM SHEET CÁMARA/GALERÍA */
-        #native-bottom-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; background: rgba(15, 23, 42, 0.98); border-radius: 32px 32px 0 0; z-index: 9999999; transition: bottom 0.45s cubic-bezier(0.3, 1, 0.3, 1); padding: 20px 25px 50px 25px; box-shadow: 0 -20px 60px rgba(0,0,0,0.85); border-top: 1px solid rgba(255,255,255,0.18); backdrop-filter: blur(25px);}
+        #native-bottom-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; background: rgba(15, 23, 42, 0.98); border-radius: 32px 32px 0 0; z-index: 9999999; transition: bottom 0.4s cubic-bezier(0.3, 1, 0.3, 1); padding: 20px 25px 50px 25px; box-shadow: 0 -15px 50px rgba(0,0,0,0.8); border-top: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(20px);}
         #native-bottom-sheet.show { bottom: 0; }
-        .sheet-drag { width: 60px; height: 6px; background: rgba(255,255,255,0.35); border-radius: 10px; margin: 0 auto 30px auto; }
+        .sheet-drag { width: 60px; height: 6px; background: rgba(255,255,255,0.3); border-radius: 10px; margin: 0 auto 30px auto; }
         .sheet-options-row { display: flex; gap: 40px; justify-content: center; }
-        .sheet-btn { display: flex; flex-direction: column; align-items: center; gap: 12px; border: none; background: transparent; cursor: pointer; color: white; font-size: 1rem; font-weight: 700; padding: 0; transition: 0.25s;}
+        .sheet-btn { display: flex; flex-direction: column; align-items: center; gap: 12px; border: none; background: transparent; cursor: pointer; color: white; font-size: 1rem; font-weight: 700; padding: 0; transition: 0.2s;}
         .sheet-btn:active { transform: scale(0.9); }
-        .sheet-btn-icon { width: 75px; height: 75px; border-radius: 50%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: var(--info); box-shadow: 0 12px 30px rgba(0,0,0,0.35); transition: 0.25s;}
-        .sheet-btn:hover .sheet-btn-icon { background: rgba(14,165,233,0.15); border-color: rgba(14,165,233,0.3); }
-        .sheet-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999998; display: none; opacity: 0; transition: opacity 0.35s; }
+        .sheet-btn-icon { width: 75px; height: 75px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: var(--cyan-accent); box-shadow: 0 10px 25px rgba(0,0,0,0.3);}
+        .sheet-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999998; display: none; opacity: 0; transition: opacity 0.3s; }
         .sheet-overlay.show { display: block; opacity: 1; }
         
-        .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 500px; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(25px); border-top: 1px solid var(--border-soft); display: flex; justify-content: space-around; padding: 10px 10px 18px; z-index: 1000; box-shadow: 0 -10px 40px rgba(0,0,0,0.06); }
+        .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 500px; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); border-top: 1px solid var(--border-soft); display: flex; justify-content: space-around; padding: 10px 10px 15px; z-index: 1000; }
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--text-gray); font-size: 0.8rem; font-weight: 800; cursor: pointer; text-transform: uppercase; position:relative; transition: 0.3s;}
         .nav-item.active { color: var(--primary-orange); }
-        .nav-item.active .nav-icon { transform: translateY(-6px) scale(1.18); filter: drop-shadow(0 6px 15px rgba(255,94,0,0.4)); }
+        .nav-item.active .nav-icon { transform: translateY(-5px) scale(1.15); }
         .nav-icon { font-size: 1.5rem; transition: 0.3s; }
 
         /* MODALES Y TOAST GENERICOS */
-        .toast { position: fixed; top: 40px; left: 50%; transform: translateX(-50%) translateY(-20px) scale(0.95); background: rgba(15, 23, 42, 0.96); color: white; padding: 16px 24px; border-radius: 50px; font-weight: 600; opacity: 0; transition: 0.45s cubic-bezier(0.16, 1, 0.3, 1); z-index: 99999999; font-size: 1rem; pointer-events: none; box-shadow: 0 25px 60px rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; gap: 12px; min-width: max-content; white-space: nowrap; backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08);}
+        .toast { position: fixed; top: 40px; left: 50%; transform: translateX(-50%) translateY(-20px) scale(0.95); background: rgba(15, 23, 42, 0.95); color: white; padding: 16px 24px; border-radius: 50px; font-weight: 600; opacity: 0; transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); z-index: 99999999; font-size: 1rem; pointer-events: none; box-shadow: 0 20px 50px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; gap: 12px; min-width: max-content; white-space: nowrap; backdrop-filter: blur(10px);}
         .toast.ver { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
         #toast-icon { font-size: 1.3rem; display: flex; align-items: center; }
         
-        .modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.72); display: none; justify-content: center; align-items: center; z-index: 999999; backdrop-filter: blur(18px); opacity: 0; animation: fadeInModal 0.4s forwards; }
+        .modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.7); display: none; justify-content: center; align-items: center; z-index: 999999; backdrop-filter: blur(15px); opacity: 0; animation: fadeInModal 0.4s forwards; }
         @keyframes fadeInModal { to { opacity: 1; } }
-        .modal-content-standard { background: linear-gradient(145deg, #ffffff 0%, #fcfcfc 100%); padding: 40px 32px; border-radius: 40px; width: 92%; max-width: 460px; box-shadow: 0 35px 90px rgba(0,0,0,0.35); position: relative; transform: translateY(30px); animation: slideUpModal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; border: 1px solid rgba(226, 232, 240, 0.6);}
+        .modal-content-standard { background: var(--bg-pure); padding: 40px 32px; border-radius: 40px; width: 92%; max-width: 460px; box-shadow: 0 30px 80px rgba(0,0,0,0.3); position: relative; transform: translateY(30px); animation: slideUpModal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;}
         @keyframes slideUpModal { to { transform: translateY(0); } }
-        .modal-close-circle { position: absolute; top: 20px; right: 20px; font-size: 1.2rem; color: var(--text-dark); background: rgba(255,255,255,0.95); border: none; cursor: pointer; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.25s; z-index: 20; box-shadow: 0 10px 30px rgba(0,0,0,0.18);}
-        .modal-close-circle:active { transform: scale(0.9); background: #f1f5f9; }
+        .modal-close-circle { position: absolute; top: 20px; right: 20px; font-size: 1.2rem; color: var(--text-dark); background: rgba(255,255,255,0.9); border: none; cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.2s; z-index: 20; box-shadow: 0 8px 20px rgba(0,0,0,0.15);}
+        .modal-close-circle:active { transform: scale(0.9); }
         
-        #splash-screen { position: fixed; inset: 0; background: linear-gradient(145deg, #ffffff 0%, #fff8f0 100%); z-index: 9999999999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.6s ease; color: var(--text-dark); }
-        .loader-circle { width: 55px; height: 55px; border: 4px solid rgba(255,94,0,0.15); border-top-color: var(--primary-orange); border-radius: 50%; animation: spin 0.8s infinite cubic-bezier(0.5, 0, 0.5, 1); margin-top: 40px; box-shadow: 0 0 30px rgba(255,94,0,0.2); }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
+        #splash-screen { position: fixed; inset: 0; background: #ffffff; z-index: 9999999999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease; color: var(--text-dark);}
+        .loader-circle { width: 50px; height: 50px; border: 4px solid var(--border-soft); border-top-color: var(--primary-orange); border-radius: 50%; animation: spin 0.8s infinite cubic-bezier(0.5, 0, 0.5, 1); margin-top: 40px; }
         
         /* CAJA POS ESTILOS */
-        .pos-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 85vh; background: linear-gradient(145deg, #ffffff 0%, #fcfcfc 100%); border-radius: 40px 40px 0 0; box-shadow: 0 -25px 70px rgba(0,0,0,0.12); transition: bottom 0.55s cubic-bezier(0.25, 1, 0.5, 1); z-index: 999999; display: flex; flex-direction: column; }
+        .pos-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; height: 85vh; background: var(--bg-pure); border-radius: 40px 40px 0 0; box-shadow: 0 -20px 60px rgba(0,0,0,0.1); transition: bottom 0.5s cubic-bezier(0.25, 1, 0.5, 1); z-index: 999999; display: flex; flex-direction: column; }
         .pos-sheet.open { bottom: 0; }
         .pos-sheet-header { padding: 32px 32px 16px; border-bottom: 1px solid var(--border-soft); display: flex; justify-content: space-between; align-items: center; }
         .pos-sheet-body { flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 16px; padding-bottom: 80px;}
-        .pos-sheet-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.55); z-index: 999998; display: none; opacity: 0; transition: 0.45s; backdrop-filter: blur(10px); }
+        .pos-sheet-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.5); z-index: 999998; display: none; opacity: 0; transition: 0.4s; backdrop-filter: blur(8px); }
         .pos-sheet-overlay.open { display: block; opacity: 1; }
-        .sheet-product-card { display: flex; align-items: center; justify-content: space-between; background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%); padding: 16px; border-radius: 24px; border: 1px solid var(--border-soft); box-shadow: 0 5px 18px rgba(0,0,0,0.03); cursor: pointer; transition: 0.25s;}
-        .sheet-product-card:active { transform: scale(0.97); background: rgba(255,94,0,0.05); border-color: rgba(255,94,0,0.2); }
-        .sheet-img-box { width: 60px; height: 60px; border-radius: 12px; background: linear-gradient(135deg, #0f172a, #1e293b); overflow: hidden; margin-right: 16px; flex-shrink: 0; display:flex; justify-content:center; align-items:center; font-size: 1.5rem; position:relative;}
+        .sheet-product-card { display: flex; align-items: center; justify-content: space-between; background: var(--bg-app); padding: 16px; border-radius: 24px; border: 1px solid var(--border-soft); box-shadow: 0 4px 15px rgba(0,0,0,0.02); cursor: pointer; transition: 0.2s;}
+        .sheet-product-card:active { transform: scale(0.97); }
+        .sheet-img-box { width: 60px; height: 60px; border-radius: 12px; background: #0f172a; overflow: hidden; margin-right: 16px; flex-shrink: 0; display:flex; justify-content:center; align-items:center; font-size: 1.5rem; position:relative;}
         .sheet-img-box img, .sheet-img-box video { width: 100%; height: 100%; object-fit: cover; position:absolute; inset:0;}
         .custom-div-icon { background: transparent; border: none; }
-        @keyframes pulse-deli { 0% {transform: scale(1);} 100% {transform: scale(1.18);} }
+        @keyframes pulse-deli { 0% {transform: scale(1);} 100% {transform: scale(1.15);} }
         
         /* MODAL CARRITO REDISEÑO PREMIUM */
-        #modal-carrito { justify-content: flex-end; align-items: center; padding: 0; background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(12px);}
-        #modal-carrito .modal-content-standard { width: 100%; max-width: 600px; border-radius: 40px 40px 0 0; padding: 32px 24px 24px; height: auto; max-height: 85vh; display: flex; flex-direction: column; background: linear-gradient(145deg, #ffffff 0%, #fcfcfc 100%); box-shadow: 0 -25px 65px rgba(0,0,0,0.2); margin: 0; position: absolute; bottom: 0; transform: translateY(100%); animation: slideUpCartModal 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;}
+        #modal-carrito { justify-content: flex-end; align-items: center; padding: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(10px);}
+        #modal-carrito .modal-content-standard { width: 100%; max-width: 600px; border-radius: 40px 40px 0 0; padding: 32px 24px 24px; height: auto; max-height: 85vh; display: flex; flex-direction: column; background: #ffffff; box-shadow: 0 -20px 50px rgba(0,0,0,0.15); margin: 0; position: absolute; bottom: 0; transform: translateY(100%); animation: slideUpCartModal 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;}
         @keyframes slideUpCartModal { to { transform: translateY(0); } }
         
-        .drag-indicator { width: 44px; height: 5px; background: linear-gradient(90deg, #cbd5e1, #e2e8f0); border-radius: 10px; margin: 0 auto 20px; flex-shrink: 0;}
+        .drag-indicator { width: 40px; height: 5px; background: #e2e8f0; border-radius: 10px; margin: 0 auto 20px; flex-shrink: 0;}
         .cart-header-title { font-family: 'Outfit'; font-size: 1.8rem; font-weight: 900; color: var(--text-dark); margin: 0; letter-spacing: -0.5px;}
         
-        .cart-total-row { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; margin-bottom: 24px; background: var(--gradient-orange-soft); padding: 18px 22px; border-radius: 22px; border: 1px solid rgba(255,94,0,0.18);}
+        .cart-total-row { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; margin-bottom: 24px; background: linear-gradient(135deg, rgba(255,94,0,0.05), rgba(255,51,0,0.02)); padding: 16px 20px; border-radius: 20px; border: 1px solid rgba(255,94,0,0.15);}
         .cart-total-label { font-size: 0.95rem; font-weight: 800; color: var(--text-dark); text-transform: uppercase; letter-spacing: 1px;}
-        .cart-total-val { font-size: 2.3rem; font-weight: 900; font-family: 'Outfit'; background: var(--gradient-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -1px; line-height: 1; }
+        .cart-total-val { font-size: 2.2rem; font-weight: 900; font-family: 'Outfit'; color: var(--primary-orange); letter-spacing: -1px; line-height: 1; }
 
         .delivery-toggle-container { display: flex; background: #f1f5f9; border-radius: 16px; padding: 6px; margin-bottom: 20px; border: 1px solid #e2e8f0; }
         .del-option { flex: 1; text-align: center; padding: 14px; border-radius: 12px; font-weight: 800; font-family:'Outfit'; font-size: 1rem; cursor: pointer; transition: 0.3s; color: var(--text-gray); }
-        .del-option.active { background: var(--gradient-orange); color: white; box-shadow: var(--shadow-orange); transform: scale(1.02); }
+        .del-option.active { background: var(--text-dark); color: white; box-shadow: 0 8px 20px rgba(15,23,42,0.2); }
 
-        .btn-pay-cash { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4); border: none; padding: 18px; border-radius: 18px; font-family: 'Outfit'; font-weight: 800; font-size: 1.1rem; flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: 0.25s;}
-        .btn-pay-cash:active { transform: scale(0.95); box-shadow: 0 8px 20px rgba(16, 185, 129, 0.5); }
-        .btn-pay-transfer { background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%); color: white; box-shadow: 0 12px 30px rgba(14, 165, 233, 0.4); border: none; padding: 18px; border-radius: 18px; font-family: 'Outfit'; font-weight: 800; font-size: 1.1rem; flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: 0.25s;}
-        .btn-pay-transfer:active { transform: scale(0.95); box-shadow: 0 8px 20px rgba(14, 165, 233, 0.5); }
+        .btn-pay-cash { background: linear-gradient(135deg, #10b981, #059669); color: white; box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3); border: none; padding: 18px; border-radius: 18px; font-family: 'Outfit'; font-weight: 800; font-size: 1.1rem; flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: 0.2s;}
+        .btn-pay-cash:active { transform: scale(0.95); }
+        .btn-pay-transfer { background: linear-gradient(135deg, #0ea5e9, #0284c7); color: white; box-shadow: 0 10px 25px rgba(14, 165, 233, 0.3); border: none; padding: 18px; border-radius: 18px; font-family: 'Outfit'; font-weight: 800; font-size: 1.1rem; flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: 0.2s;}
+        .btn-pay-transfer:active { transform: scale(0.95); }
     </style>
 </head>
 <body>
@@ -388,76 +332,27 @@
             });
         }
 
-        setTimeout(() => { let s = document.getElementById('splash-screen'); if (s) { s.style.opacity = '0'; setTimeout(() => s.style.display = 'none', 600); } }, 1400);
+        setTimeout(() => { let s = document.getElementById('splash-screen'); if (s) { s.style.opacity = '0'; setTimeout(() => s.style.display = 'none', 500); } }, 1200);
     </script>
 
-    <!-- ================= LOGO SVG MODERNO DELIVERY INLINE ================= -->
-    <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#ff8c3a;stop-opacity:1" />
-                <stop offset="50%" style="stop-color:#ff5e00;stop-opacity:1" />
-                <stop offset="100%" style="stop-color:#ff3300;stop-opacity:1" />
-            </linearGradient>
-            <linearGradient id="logoGradDark" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#cc4a00;stop-opacity:1" />
-                <stop offset="100%" style="stop-color:#992200;stop-opacity:1" />
-            </linearGradient>
-            <filter id="logoShadow" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#ff5e00" flood-opacity="0.4"/>
-            </filter>
-        </defs>
-    </svg>
-
-    <!-- SPLASH ACTUALIZADO CON LOGO SVG MODERNO -->
+    <!-- SPLASH ACTUALIZADO LOGO MOTO DE DELIVERY -->
     <div id="splash-screen">
-        <div class="logo-premium-wrapper" style="width: 200px; height: 200px; margin-bottom: 30px;">
+        <div class="logo-premium-wrapper" style="width: 180px; height: 180px; margin-bottom: 30px;">
             <div class="logo-premium-rays"></div>
-            <div class="logo-premium-glow"></div>
-            <div class="logo-premium-core" style="width: 140px; height: 140px; border-radius: 36px;">
-                <!-- LOGO SVG MODERNO DELIVERY -->
-                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width: 100px; height: 100px;">
-                    <!-- Caja de entrega -->
-                    <rect x="40" y="55" width="65" height="50" rx="6" fill="url(#logoGrad)" filter="url(#logoShadow)"/>
-                    <rect x="40" y="55" width="65" height="14" rx="6" fill="url(#logoGradDark)" opacity="0.6"/>
-                    <line x1="72.5" y1="55" x2="72.5" y2="105" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
-                    <path d="M55 62 L90 62" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
-                    
-                    <!-- Líneas de velocidad -->
-                    <path d="M15 75 L35 75" stroke="url(#logoGrad)" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
-                    <path d="M10 88 L30 88" stroke="url(#logoGrad)" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
-                    <path d="M18 100 L32 100" stroke="url(#logoGrad)" stroke-width="2.5" stroke-linecap="round" opacity="0.45"/>
-                    
-                    <!-- Scooter/Moto cuerpo principal -->
-                    <path d="M70 130 Q85 115 110 118 L145 120 Q160 122 162 135 L162 148 Q162 158 152 160 L115 160 Q95 160 88 150 L75 145 Q68 142 70 130 Z" 
-                          fill="url(#logoGrad)" filter="url(#logoShadow)"/>
-                    
-                    <!-- Asiento -->
-                    <ellipse cx="115" cy="118" rx="22" ry="7" fill="url(#logoGradDark)" opacity="0.5"/>
-                    
-                    <!-- Manubrio -->
-                    <path d="M145 120 L155 108" stroke="url(#logoGrad)" stroke-width="5" stroke-linecap="round"/>
-                    <circle cx="157" cy="106" r="5" fill="url(#logoGrad)"/>
-                    
-                    <!-- Rueda delantera -->
-                    <circle cx="150" cy="162" r="18" fill="#0f172a"/>
-                    <circle cx="150" cy="162" r="11" fill="#ffffff"/>
-                    <circle cx="150" cy="162" r="5" fill="url(#logoGrad)"/>
-                    
-                    <!-- Rueda trasera -->
-                    <circle cx="92" cy="162" r="18" fill="#0f172a"/>
-                    <circle cx="92" cy="162" r="11" fill="#ffffff"/>
-                    <circle cx="92" cy="162" r="5" fill="url(#logoGrad)"/>
-                    
-                    <!-- Guardabarros delantero -->
-                    <path d="M138 150 Q150 140 162 150" stroke="url(#logoGradDark)" stroke-width="3" fill="none" opacity="0.7"/>
-                    
-                    <!-- Detalle brillante -->
-                    <ellipse cx="100" cy="128" rx="12" ry="3" fill="#ffffff" opacity="0.35" transform="rotate(-10 100 128)"/>
+            <div class="logo-premium-core" style="width: 120px; height: 120px; border-radius: 30px; border:none; background:transparent; box-shadow:none;">
+                <!-- Logo Delivery SVG Integrado -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="url(#orange-grad-splash)" style="width: 140px; height: 140px; filter: drop-shadow(0 15px 25px rgba(255,94,0,0.4)); transform:scale(1.2);">
+                  <defs>
+                    <linearGradient id="orange-grad-splash" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ff7b00" />
+                      <stop offset="100%" stop-color="#ff3300" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M19.15,8H17V5a1,1,0,0,0-1-1H4A1,1,0,0,0,3,5V16a1,1,0,0,0,1,1H5.13a2.89,2.89,0,0,0,5.74,0h2.26a2.89,2.89,0,0,0,5.74,0H20a1,1,0,0,0,1-1V10A2,2,0,0,0,19.15,8ZM8,18a1,1,0,1,1,1-1A1,1,0,0,1,8,18Zm9,0a1,1,0,1,1,1-1A1,1,0,0,1,17,18Zm2-3h-.13a2.89,2.89,0,0,0-5.74,0H9.87a2.89,2.89,0,0,0-5.74,0H5V6H15v7a1,1,0,0,0,1,1h3Z"/>
                 </svg>
             </div>
         </div>
-        <div style="font-family:'Outfit'; font-size:3.2rem; font-weight:900; letter-spacing:-2.5px; text-transform: uppercase; color:var(--text-dark);">PEDILO<span style="background: var(--gradient-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">YA</span></div>
+        <div style="font-family:'Outfit'; font-size:3rem; font-weight:900; letter-spacing:-2px; text-transform: uppercase; color:var(--text-dark);">PEDILO<span style="color:var(--primary-orange)">YA</span></div>
         <div class="loader-circle"></div>
     </div>
 
@@ -477,53 +372,22 @@
         </div>
     </div>
 
-    <!-- VISTA 1: LANDING SAAS CON LOGO SVG MODERNO -->
+    <!-- VISTA 1: LANDING SAAS COMPLETAMENTE REDISEÑADA -->
     <div id="view-login" class="view-container active view-container-no-pad landing-wrapper">
         <div class="landing-content">
             
             <div class="logo-premium-wrapper">
                 <div class="logo-premium-rays"></div>
-                <div class="logo-premium-glow"></div>
-                <div class="logo-premium-core">
-                    <!-- LOGO SVG MODERNO DELIVERY - LANDING -->
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Caja de entrega -->
-                        <rect x="40" y="55" width="65" height="50" rx="6" fill="url(#logoGrad)" filter="url(#logoShadow)"/>
-                        <rect x="40" y="55" width="65" height="14" rx="6" fill="url(#logoGradDark)" opacity="0.6"/>
-                        <line x1="72.5" y1="55" x2="72.5" y2="105" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
-                        <path d="M55 62 L90 62" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
-                        
-                        <!-- Líneas de velocidad -->
-                        <path d="M15 75 L35 75" stroke="url(#logoGrad)" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
-                        <path d="M10 88 L30 88" stroke="url(#logoGrad)" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
-                        <path d="M18 100 L32 100" stroke="url(#logoGrad)" stroke-width="2.5" stroke-linecap="round" opacity="0.45"/>
-                        
-                        <!-- Scooter/Moto cuerpo principal -->
-                        <path d="M70 130 Q85 115 110 118 L145 120 Q160 122 162 135 L162 148 Q162 158 152 160 L115 160 Q95 160 88 150 L75 145 Q68 142 70 130 Z" 
-                              fill="url(#logoGrad)" filter="url(#logoShadow)"/>
-                        
-                        <!-- Asiento -->
-                        <ellipse cx="115" cy="118" rx="22" ry="7" fill="url(#logoGradDark)" opacity="0.5"/>
-                        
-                        <!-- Manubrio -->
-                        <path d="M145 120 L155 108" stroke="url(#logoGrad)" stroke-width="5" stroke-linecap="round"/>
-                        <circle cx="157" cy="106" r="5" fill="url(#logoGrad)"/>
-                        
-                        <!-- Rueda delantera -->
-                        <circle cx="150" cy="162" r="18" fill="#0f172a"/>
-                        <circle cx="150" cy="162" r="11" fill="#ffffff"/>
-                        <circle cx="150" cy="162" r="5" fill="url(#logoGrad)"/>
-                        
-                        <!-- Rueda trasera -->
-                        <circle cx="92" cy="162" r="18" fill="#0f172a"/>
-                        <circle cx="92" cy="162" r="11" fill="#ffffff"/>
-                        <circle cx="92" cy="162" r="5" fill="url(#logoGrad)"/>
-                        
-                        <!-- Guardabarros delantero -->
-                        <path d="M138 150 Q150 140 162 150" stroke="url(#logoGradDark)" stroke-width="3" fill="none" opacity="0.7"/>
-                        
-                        <!-- Detalle brillante -->
-                        <ellipse cx="100" cy="128" rx="12" ry="3" fill="#ffffff" opacity="0.35" transform="rotate(-10 100 128)"/>
+                <div class="logo-premium-core" style="border:none; background:transparent; box-shadow:none;">
+                    <!-- Logo Delivery SVG Integrado -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="url(#orange-grad-login)" style="width: 180px; height: 180px; filter: drop-shadow(0 15px 25px rgba(255,94,0,0.4)); transform:scale(1.2);">
+                      <defs>
+                        <linearGradient id="orange-grad-login" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="#ff7b00" />
+                          <stop offset="100%" stop-color="#ff3300" />
+                        </linearGradient>
+                      </defs>
+                      <path d="M19.15,8H17V5a1,1,0,0,0-1-1H4A1,1,0,0,0,3,5V16a1,1,0,0,0,1,1H5.13a2.89,2.89,0,0,0,5.74,0h2.26a2.89,2.89,0,0,0,5.74,0H20a1,1,0,0,0,1-1V10A2,2,0,0,0,19.15,8ZM8,18a1,1,0,1,1,1-1A1,1,0,0,1,8,18Zm9,0a1,1,0,1,1,1-1A1,1,0,0,1,17,18Zm2-3h-.13a2.89,2.89,0,0,0-5.74,0H9.87a2.89,2.89,0,0,0-5.74,0H5V6H15v7a1,1,0,0,0,1,1h3Z"/>
                     </svg>
                 </div>
             </div>
@@ -606,11 +470,11 @@
 
             <!-- CAJA DE SUSCRIPCIÓN MODERNA -->
             <div class="subscription-box">
-                <div style="background: var(--gradient-orange-soft); color: var(--primary-orange); padding:8px 20px; border-radius:50px; font-family:'Outfit'; font-weight:800; font-size:0.85rem; display:inline-block; margin-bottom:20px; letter-spacing:1px; border: 1px solid rgba(255,94,0,0.18);">
+                <div style="background: rgba(255, 94, 0, 0.08); color: var(--primary-orange); padding:8px 20px; border-radius:50px; font-family:'Outfit'; font-weight:800; font-size:0.85rem; display:inline-block; margin-bottom:20px; letter-spacing:1px; border: 1px solid rgba(255,94,0,0.15);">
                     🎁 30 DÍAS GRATIS · SIN TARJETA
                 </div>
                 <div style="font-size:3.5rem; font-weight:900; color:var(--text-dark); font-family:'Outfit'; letter-spacing:-2px; line-height:1; margin-bottom:10px;">
-                    <span style="font-size: 2rem; background: var(--gradient-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; vertical-align: top;">$</span>14.000<span style="font-size: 1rem; color:var(--text-gray); font-weight: 600; letter-spacing: 0;">/mes</span>
+                    <span style="font-size: 2rem; color:var(--primary-orange); vertical-align: top;">$</span>14.000<span style="font-size: 1rem; color:var(--text-gray); font-weight: 600; letter-spacing: 0;">/mes</span>
                 </div>
                 <p style="color:var(--text-gray); font-size:1rem; margin:15px 0 25px 0; font-weight:500;">Suscripción mensual fija. Todo incluido.</p>
                 <ul style="list-style:none; padding:0; margin:0 0 25px 0; text-align:left; font-size:1.05rem; color:var(--text-dark); font-weight:600; display:flex; flex-direction:column; gap:12px;">
@@ -637,7 +501,7 @@
                 <h2 style="text-align: center; font-size: 1.3rem; font-weight: 800; margin: 0 0 20px 0; color: var(--text-dark); font-family:'Outfit',sans-serif;">🛡️ YA TENGO CUENTA</h2>
                 <input type="text" id="login-user" placeholder="Nombre del Local" class="input-light" spellcheck="false">
                 <input type="password" id="login-pass" placeholder="PIN de Cajero" class="input-light mask-text" maxlength="4" style="margin-bottom: 24px;">
-                <button id="btn-log" onclick="vibrar(); executeLogin()" style="width:100%; padding:18px; background:rgba(14, 165, 233, 0.08); color:var(--info); font-weight:800; font-size:1.05rem; border:2px solid rgba(14, 165, 233, 0.3); border-radius:18px; text-transform:uppercase; cursor:pointer; transition: 0.25s; font-family:'Outfit',sans-serif;">Abrir Caja</button>
+                <button id="btn-log" onclick="vibrar(); executeLogin()" style="width:100%; padding:18px; background:rgba(14, 165, 233, 0.08); color:var(--info); font-weight:800; font-size:1.05rem; border:2px solid rgba(14, 165, 233, 0.3); border-radius:18px; text-transform:uppercase; cursor:pointer; transition: 0.2s; font-family:'Outfit',sans-serif;">Abrir Caja</button>
             </div>
 
             <div class="footer-tech">
@@ -660,17 +524,17 @@
                 <span style="font-size:0.85rem; color:#64748b; display: block; margin-top: 5px; font-weight: 700; letter-spacing:1px;">ARS / MES</span>
             </div>
 
-            <div style="background: rgba(14, 165, 233, 0.06); padding: 24px 20px; border-radius: 20px; margin-bottom: 24px; border: 1px dashed rgba(14,165,233,0.5); text-align: center;">
+            <div style="background: rgba(14, 165, 233, 0.05); padding: 24px 20px; border-radius: 20px; margin-bottom: 24px; border: 1px dashed #0ea5e9; text-align: center;">
                 <p style="margin: 0 0 12px 0; color: #94a3b8; font-size: 0.95rem;">1. Transferí exactamente $14.000 a este Alias:</p>
-                <div style="background:#0b1120; padding:16px; border-radius:16px; margin-bottom: 20px; border: 1px solid rgba(14,165,233,0.2);">
+                <div style="background:#0b1120; padding:16px; border-radius:16px; margin-bottom: 20px;">
                     <span style="color: white; font-size: 1.2rem; font-weight: 800; letter-spacing: 1px; font-family:'Outfit',sans-serif;">noir.elite.ceo</span>
                 </div>
                 
                 <p style="margin: 0 0 16px 0; color: #94a3b8; font-size: 0.95rem;">2. Subí el comprobante para habilitación automática:</p>
                 
                 <div style="display: flex; gap: 12px;">
-                    <button style="background: linear-gradient(135deg, #0ea5e9, #0284c7); color: white; flex: 1; padding: 16px; border-radius:16px; border:none; font-weight:800; font-family:'Outfit'; font-size: 1rem; box-shadow: 0 12px 28px rgba(14, 165, 233, 0.4); cursor:pointer;" onclick="isPaywallUpload=true; elegirGaleria();">🖼️ GALERÍA</button>
-                    <button style="background: rgba(14, 165, 233, 0.12); border: 1px solid rgba(14,165,233,0.4); color: #0ea5e9; flex: 1; padding: 16px; border-radius:16px; font-weight:800; font-family:'Outfit'; font-size: 1rem; cursor:pointer;" onclick="isPaywallUpload=true; elegirCamara();">📷 CÁMARA</button>
+                    <button style="background: #0ea5e9; color: white; flex: 1; padding: 16px; border-radius:16px; border:none; font-weight:800; font-family:'Outfit'; font-size: 1rem; box-shadow: 0 10px 20px rgba(14, 165, 233, 0.3); cursor:pointer;" onclick="isPaywallUpload=true; elegirGaleria();">🖼️ GALERÍA</button>
+                    <button style="background: rgba(14, 165, 233, 0.1); border: 1px solid #0ea5e9; color: #0ea5e9; flex: 1; padding: 16px; border-radius:16px; font-weight:800; font-family:'Outfit'; font-size: 1rem; cursor:pointer;" onclick="isPaywallUpload=true; elegirCamara();">📷 CÁMARA</button>
                 </div>
             </div>
             
@@ -681,7 +545,7 @@
 
             <p id="ia-status-text" style="display:none; color:#0ea5e9; font-weight:800; margin-bottom: 20px; font-size:1rem; text-transform: uppercase;">🤖 IA Analizando ticket...</p>
             
-            <button style="width:100%; background:#0b1120; border:1px solid rgba(255,255,255,0.1); color:#64748b; padding:18px; border-radius:16px; font-weight:800; font-size:1rem; font-family:'Outfit'; cursor:pointer; transition: 0.25s;" onclick="location.reload()">CERRAR SESIÓN</button>
+            <button style="width:100%; background:#0b1120; border:1px solid rgba(255,255,255,0.1); color:#64748b; padding:18px; border-radius:16px; font-weight:800; font-size:1rem; font-family:'Outfit'; cursor:pointer;" onclick="location.reload()">CERRAR SESIÓN</button>
         </div>
     </div>
 
@@ -692,23 +556,23 @@
             <h3 style="margin:0 0 15px; font-family:'Outfit'; font-size:1.8rem; font-weight:800; line-height:1; letter-spacing: -1px; color:var(--text-dark);">🔒 Bóveda<br>Dueño</h3>
             <p style="color:var(--text-gray); margin-bottom:24px; font-size: 0.95rem;">Ingresá el PIN de administrador para acceder a las finanzas.</p>
             <input type="password" id="pin-input" class="form-input" style="text-align:center; font-size:1.6rem; letter-spacing:15px; padding:20px; font-weight:800; border: 1px solid var(--border-soft);" maxlength="4" placeholder="****" autocomplete="off">
-            <button class="btn-main" style="background:var(--text-dark); box-shadow: 0 12px 30px rgba(15,23,42,0.35);" onclick="vibrar(); verifyAdminPin()">ENTRAR AL PANEL</button>
+            <button class="btn-main" style="background:var(--text-dark); box-shadow: 0 10px 25px rgba(15,23,42,0.3);" onclick="vibrar(); verifyAdminPin()">ENTRAR AL PANEL</button>
         </div>
     </div>
 
-    <!-- VISTA 2: CAJA DEL LOCAL -->
+    <!-- VISTA 2: CAJA DEL LOCAL (FIJA Y SIN SCROLL) -->
     <div id="view-chofer" class="view-container-no-pad" style="display:none; flex-direction:column; height:100dvh; overflow:hidden; padding:12px; box-sizing:border-box; background:var(--bg-app); max-width:500px; margin:0 auto;">
         
         <div class="chofer-top-bar">
             <div class="pill-btn" onclick="vibrar(); toggleDriverGps()" id="btn-gps" style="background:var(--text-dark); color:white;">📍 GPS DELI</div>
-            <div class="pill-btn badge" id="btn-pedidos-web" style="color:var(--primary-orange); border-color:var(--primary-orange); background:rgba(255,94,0,0.06);" onclick="vibrar(); abrirPedidosWeb()">🔔 WEB</div>
-            <div class="pill-btn" style="color:var(--info); border-color:var(--info); background:rgba(14,165,233,0.06);" onclick="vibrar(); document.getElementById('pin-modal').style.display='flex'">⚙️ DUEÑO</div>
+            <div class="pill-btn badge" id="btn-pedidos-web" style="color:var(--primary-orange); border-color:var(--primary-orange); background:rgba(255,94,0,0.05);" onclick="vibrar(); abrirPedidosWeb()">🔔 WEB</div>
+            <div class="pill-btn" style="color:var(--info); border-color:var(--info); background:rgba(14,165,233,0.05);" onclick="vibrar(); document.getElementById('pin-modal').style.display='flex'">⚙️ DUEÑO</div>
         </div>
         
         <div class="calc-display">
             <div id="ticket-success" class="ticket-success">
-                <div style="font-size:2.8rem; margin-bottom:5px;">✅</div>
-                <div style="font-size:1.6rem; font-weight:800; letter-spacing:-1px;">COBRADO</div>
+                <div style="font-size:2.5rem; margin-bottom:5px;">✅</div>
+                <div style="font-size:1.5rem; font-weight:800; letter-spacing:-1px;">COBRADO</div>
             </div>
             <div id="calc-preview" class="calc-hist"></div>
             <div id="calc-total" class="calc-main">0</div>
@@ -721,7 +585,7 @@
         <div class="chofer-action-row">
             <button class="chofer-btn-white" onclick="vibrar(); triggerExpenseModal()">💸 Gastos</button>
             <button class="chofer-btn-white" onclick="vibrar(); abrirModalMotos()">🛵 Repartidores</button>
-            <button class="chofer-btn-white" style="border-color:var(--success); background:rgba(16,185,129,0.06); color:var(--success);" onclick="vibrar(); document.getElementById('ventas-modal').style.display='flex'">🧾 Historial</button>
+            <button class="chofer-btn-white" style="border-color:var(--success); background:rgba(16,185,129,0.05); color:var(--success);" onclick="vibrar(); document.getElementById('ventas-modal').style.display='flex'">🧾 Historial</button>
         </div>
         
         <div class="chofer-keypad">
@@ -740,7 +604,7 @@
             <button class="ckey" onclick="vibrar(); inputCalc('3')">3</button>
             <button class="ckey ckey-op" onclick="vibrar(); inputCalc('-')">-</button>
             
-            <button class="ckey" style="color:var(--primary-orange); background: var(--gradient-orange-soft); border-color: transparent;" onclick="vibrar(); clearCalc()">C</button>
+            <button class="ckey" style="color:var(--primary-orange);" onclick="vibrar(); clearCalc()">C</button>
             <button class="ckey" onclick="vibrar(); inputCalc('0')">0</button>
             <button class="ckey ckey-op" onclick="vibrar(); inputCalc('+')">+</button>
             <button class="ckey ckey-eq" onclick="vibrar(); evalCalc()">=</button>
@@ -757,7 +621,7 @@
             <button class="chofer-pay-btn" onclick="vibrar(); submitSale('EFECTIVO')">💵 EFECTIVO</button>
             <button class="btn-pay-transfer" onclick="vibrar(); abrirSheetTransfVenta()">🏦 TRANSF.</button>
         </div>
-        <button style="flex-shrink:0; width:100%; border-radius:16px; padding:14px; font-weight:800; font-size:1rem; font-family:'Outfit'; text-transform:uppercase; background:linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color:white; border:none; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; box-shadow:0 12px 30px rgba(15,23,42,0.35); transition:0.25s;" onclick="vibrar(); cerrarTurno()">🔒 CERRAR TURNO</button>
+        <button style="flex-shrink:0; width:100%; border-radius:16px; padding:14px; font-weight:800; font-size:1rem; font-family:'Outfit'; text-transform:uppercase; background:var(--text-dark); color:white; border:none; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; box-shadow:0 10px 25px rgba(15,23,42,0.3); transition:0.2s;" onclick="vibrar(); cerrarTurno()">🔒 CERRAR TURNO</button>
     </div>
 
     <!-- VISTA 3: PANEL DUEÑO -->
@@ -769,7 +633,7 @@
                     <span style="font-size:0.85rem; color:var(--text-light); font-weight:800; text-transform:uppercase; letter-spacing:1.5px;">Panel Central</span><br>
                     <span id="lbl-owner" style="font-weight:900; font-size:1.8rem; color:var(--text-dark); font-family:'Outfit'; letter-spacing:-1px; word-wrap:break-word; line-height:1.1; display:block;">LOCAL</span>
                 </div>
-                <button onclick="vibrar(); go('view-chofer')" style="padding:14px 24px; border-radius:50px; border:2px solid var(--border-soft); background:var(--bg-pure); cursor:pointer; font-weight:800; font-size:0.95rem; box-shadow:var(--shadow-soft); flex-shrink:0; margin-top:5px; transition: 0.25s;">Caja</button>
+                <button onclick="vibrar(); go('view-chofer')" style="padding:14px 24px; border-radius:50px; border:2px solid var(--border-soft); background:var(--bg-pure); cursor:pointer; font-weight:800; font-size:0.95rem; box-shadow:var(--shadow-soft); flex-shrink:0; margin-top:5px;">Caja</button>
             </div>
 
             <div class="admin-card" style="border-top:5px solid var(--info);">
@@ -778,34 +642,32 @@
                 </div>
                 <p style="font-size:1rem; color:var(--text-gray); margin-bottom:30px; font-weight:500; line-height:1.6;">Enviá este enlace a tus clientes. Verán tu Menú Súper Premium.</p>
                 <div style="display:flex; gap:10px; margin-bottom:24px;">
-                    <button style="background:var(--gradient-orange); color:white; font-weight:700; border:none; border-radius:14px; flex:1; box-shadow:var(--shadow-orange); padding:16px; cursor:pointer; transition: 0.25s;" onclick="vibrar(); compartirLinkNativo()">📤 COMPARTIR</button>
-                    <button style="background:var(--bg-pure); color:var(--text-dark); font-weight:700; border:2px solid var(--border-soft); border-radius:14px; flex:1; box-shadow:var(--shadow-soft); padding:16px; cursor:pointer; transition: 0.25s;" onclick="vibrar(); copiarLinkExacto()">📄 COPIAR</button>
+                    <button style="background:var(--primary-orange); color:white; font-weight:700; border:none; border-radius:14px; flex:1; box-shadow:var(--shadow-orange); padding:16px;" onclick="vibrar(); compartirLinkNativo()">📤 COMPARTIR</button>
+                    <button style="background:var(--bg-pure); color:var(--text-dark); font-weight:700; border:2px solid var(--border-soft); border-radius:14px; flex:1; box-shadow:var(--shadow-soft); padding:16px;" onclick="vibrar(); copiarLinkExacto()">📄 COPIAR</button>
                 </div>
                 <input type="text" id="store-link-display" readonly style="width:100%; box-sizing:border-box; border:none; background:var(--bg-app); border-radius:20px; font-weight:700; color:var(--info); font-size:0.95rem; padding:18px; text-align:center; outline:none; border:2px dashed var(--info); white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
             </div>
 
             <!-- BALANCE TOTAL -->
-            <div style="background:var(--gradient-orange); color:white; padding:32px 20px; border-radius:var(--radius-lg); text-align:center; box-shadow:var(--shadow-orange-intense); margin-bottom:10px; width:100%; box-sizing:border-box; position: relative; overflow: hidden;">
-                <div style="position: absolute; top: -30px; right: -30px; width: 120px; height: 120px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
-                <div style="position: absolute; bottom: -20px; left: -20px; width: 80px; height: 80px; background: rgba(255,255,255,0.08); border-radius: 50%;"></div>
-                <span style="font-size:0.9rem; font-weight:800; color:rgba(255,255,255,0.92); text-transform:uppercase; letter-spacing:1.5px; position: relative; z-index: 1;">💰 Balance Total (Gran Total)</span>
-                <div id="adm-total-general" style="font-size:3.5rem; font-weight:900; margin-top:16px; font-family:'Outfit'; letter-spacing:-1px; line-height:1; word-wrap:break-word; position: relative; z-index: 1; text-shadow: 0 4px 20px rgba(0,0,0,0.2);">$0</div>
+            <div style="background:var(--gradient-orange); color:white; padding:32px 20px; border-radius:var(--radius-lg); text-align:center; box-shadow:var(--shadow-orange); margin-bottom:10px; width:100%; box-sizing:border-box;">
+                <span style="font-size:0.9rem; font-weight:800; color:rgba(255,255,255,0.9); text-transform:uppercase; letter-spacing:1.5px;">💰 Balance Total (Gran Total)</span>
+                <div id="adm-total-general" style="font-size:3.5rem; font-weight:900; margin-top:16px; font-family:'Outfit'; letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
             </div>
 
             <!-- CAJA MOSTRADOR -->
-            <div style="background:linear-gradient(145deg, #ffffff 0%, #fcfcfc 100%); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(226, 232, 240, 0.7); box-shadow:var(--shadow-float); margin-bottom:10px; width:100%; box-sizing:border-box;">
+            <div style="background:var(--bg-pure); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(0,0,0,0.03); box-shadow:var(--shadow-float); margin-bottom:10px; width:100%; box-sizing:border-box;">
                 <span style="font-size:0.9rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1.5px;">💵 Caja Mostrador</span>
-                <div id="adm-cash" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; letter-spacing:-1px; line-height:1; word-wrap:break-word; color: var(--text-dark);">$0</div>
+                <div id="adm-cash" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
             </div>
 
             <!-- TRANSFERENCIAS -->
-            <div style="background:linear-gradient(145deg, #ffffff 0%, #fcfcfc 100%); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(226, 232, 240, 0.7); box-shadow:var(--shadow-float); margin-bottom:10px; width:100%; box-sizing:border-box;">
+            <div style="background:var(--bg-pure); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(0,0,0,0.03); box-shadow:var(--shadow-float); margin-bottom:10px; width:100%; box-sizing:border-box;">
                 <span style="font-size:0.9rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1.5px;">🏦 Transferencias</span>
                 <div id="adm-transf" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; color:var(--info); letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
             </div>
 
             <!-- PLATA EN MOTO -->
-            <div style="background:linear-gradient(145deg, #ffffff 0%, #fcfcfc 100%); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(226, 232, 240, 0.7); box-shadow:var(--shadow-float); margin-bottom:40px; width:100%; box-sizing:border-box;">
+            <div style="background:var(--bg-pure); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(0,0,0,0.03); box-shadow:var(--shadow-float); margin-bottom:40px; width:100%; box-sizing:border-box;">
                 <span style="font-size:0.9rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1.5px;">🛵 Plata en Repartidores</span>
                 <div id="adm-motos-cash" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; color:var(--primary-orange); letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
             </div>
@@ -816,7 +678,7 @@
                 <p style="font-size:0.95rem; color:var(--text-gray); margin-bottom:20px;">Agregá las motos para seleccionarlas directo desde la caja.</p>
                 <div style="display:flex; gap:10px; margin-bottom: 20px;">
                     <input type="text" id="add-moto-name" class="form-input" style="margin:0; flex:1;" placeholder="Nombre Moto/Chofer">
-                    <button class="btn-main" style="width:auto; padding: 0 20px; background:var(--text-dark); box-shadow: 0 10px 25px rgba(15,23,42,0.3);" onclick="vibrar(); agregarMoto()">AGREGAR</button>
+                    <button class="btn-main" style="width:auto; padding: 0 20px; background:var(--text-dark); box-shadow:none;" onclick="vibrar(); agregarMoto()">AGREGAR</button>
                 </div>
                 <div id="adm-motos-list" style="display:flex; flex-direction:column; gap:8px;"></div>
             </div>
@@ -855,7 +717,7 @@
                 <input type="tel" id="store-wa-input" class="form-input" placeholder="WhatsApp Público (Opcional)">
                 <textarea id="store-desc-input" class="form-input" style="resize:none; padding:20px 24px;" rows="3" placeholder="Slogan (Ej: Tu mejor opción delivery)"></textarea>
                 
-                <button class="btn-main" style="background:var(--text-dark); margin-top:10px; box-shadow: 0 12px 30px rgba(15,23,42,0.3);" id="btn-save-profile" onclick="vibrar(); guardarPerfilTienda()">GUARDAR PERFIL</button>
+                <button class="btn-main" style="background:var(--text-dark); margin-top:10px;" id="btn-save-profile" onclick="vibrar(); guardarPerfilTienda()">GUARDAR PERFIL</button>
             </div>
 
             <!-- CARGAR PLATOS -->
@@ -907,8 +769,8 @@
                 <p id="public-store-desc" style="font-size: 1.05rem; color: var(--text-gray); margin: 0 0 32px 0; font-weight: 500; padding: 0 10px;">Hacé tu pedido online 🛵</p>
                 
                 <div class="social-buttons-row" style="display: flex; gap: 16px; justify-content: center; margin-bottom: 32px; flex-wrap: wrap;">
-                    <a href="#" id="public-whatsapp-btn" target="_blank" style="display: none; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #25D366, #128C7E); color: white; padding: 16px 28px; border-radius: 50px; font-weight: 700; font-size: 1rem; text-decoration: none; box-shadow: 0 12px 30px rgba(37, 211, 102, 0.4); flex: 1; min-width: 140px; transition: 0.25s;">📱 WhatsApp</a>
-                    <a href="#" id="public-maps-btn" target="_blank" style="display: none; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #0f172a, #1e293b); color: white; padding: 16px 28px; border-radius: 50px; font-weight: 700; font-size: 1rem; text-decoration: none; box-shadow: 0 12px 30px rgba(15, 23, 42, 0.25); flex: 1; min-width: 140px; transition: 0.25s;">📍 Ver Mapa</a>
+                    <a href="#" id="public-whatsapp-btn" target="_blank" style="display: none; align-items: center; justify-content: center; gap: 8px; background: #25D366; color: white; padding: 16px 28px; border-radius: 50px; font-weight: 700; font-size: 1rem; text-decoration: none; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); flex: 1; min-width: 140px;">📱 WhatsApp</a>
+                    <a href="#" id="public-maps-btn" target="_blank" style="display: none; align-items: center; justify-content: center; gap: 8px; background: var(--text-dark); color: white; padding: 16px 28px; border-radius: 50px; font-weight: 700; font-size: 1rem; text-decoration: none; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.2); flex: 1; min-width: 140px;">📍 Ver Mapa</a>
                 </div>
 
                 <div style="margin-top: 10px; padding: 0 24px;">
@@ -938,14 +800,14 @@
             <div id="tracking-map-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></div>
             
             <!-- CAJA BUSCADOR COMPACTA ARRIBA -->
-            <div style="position: absolute; top: 20px; left: 20px; width: calc(100% - 40px); box-sizing: border-box; z-index: 1000; background: rgba(255, 255, 255, 0.97); backdrop-filter: blur(20px); padding: 12px; border-radius: 20px; box-shadow: var(--shadow-float); border: 1px solid var(--border-soft); display: flex; gap: 10px; align-items: center; overflow: hidden;">
+            <div style="position: absolute; top: 20px; left: 20px; width: calc(100% - 40px); box-sizing: border-box; z-index: 1000; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); padding: 12px; border-radius: 20px; box-shadow: var(--shadow-float); border: 1px solid var(--border-soft); display: flex; gap: 10px; align-items: center; overflow: hidden;">
                 <div style="font-size: 1.5rem; padding-left: 5px; flex-shrink: 0;">📍</div>
                 <input type="text" id="track-input-code" placeholder="Código TRK..." style="margin:0; padding:12px 14px; border-radius:12px; font-weight:800; font-size:1rem; text-transform:uppercase; background:var(--bg-app); flex:1; border: 1px solid var(--border-soft); outline:none; color:var(--text-dark); min-width: 0;">
-                <button onclick="vibrar(); iniciarRastreoClienteManual()" style="margin:0; padding:12px 18px; border-radius:12px; flex-shrink: 0; font-size:1.2rem; background:var(--gradient-orange); color:white; border:none; font-weight:bold; box-shadow:0 6px 18px rgba(255,94,0,0.4); cursor:pointer;">🔎</button>
+                <button onclick="vibrar(); iniciarRastreoClienteManual()" style="margin:0; padding:12px 18px; border-radius:12px; flex-shrink: 0; font-size:1.2rem; background:var(--gradient-orange); color:white; border:none; font-weight:bold; box-shadow:0 5px 15px rgba(255,94,0,0.3); cursor:pointer;">🔎</button>
             </div>
 
             <!-- RESULTADO FLOTANTE ABAJO -->
-            <div id="tracking-result-box" class="hidden" style="position: absolute; bottom: 100px; left: 20px; right: 20px; z-index: 1000; background: white; padding: 20px; border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.18); border: 1px solid var(--border-soft); display: flex; align-items: center; gap: 16px;">
+            <div id="tracking-result-box" class="hidden" style="position: absolute; bottom: 100px; left: 20px; right: 20px; z-index: 1000; background: white; padding: 20px; border-radius: 24px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); border: 1px solid var(--border-soft); display: flex; align-items: center; gap: 16px;">
                 <div style="font-size: 2.5rem; animation: pulse-deli 1s infinite alternate;">🛵</div>
                 <div>
                     <div style="font-size:1.4rem; font-weight:900; color:var(--text-dark); font-family:'Outfit'; margin-bottom:4px; letter-spacing:-0.5px;" id="track-status-text">Buscando...</div>
@@ -969,10 +831,10 @@
     </div>
 
     <!-- PANTALLA ÉXITO COMPRA -->
-    <div id="order-success-overlay" class="hidden" style="position:fixed; inset:0; background:var(--gradient-orange); color:white; z-index:9999999; display:none; flex-direction:column; align-items:center; justify-content:center; padding:24px; box-shadow: inset 0 0 100px rgba(0,0,0,0.1);">
-        <div style="font-size: 5.5rem; margin-bottom: 24px; animation: pulse-deli 1s infinite; filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));">🛵</div>
-        <h2 style="font-family:'Outfit'; font-size:2.8rem; font-weight:900; margin:0; text-align:center; letter-spacing:-1px; line-height:1.1; text-shadow: 0 4px 20px rgba(0,0,0,0.2);">¡Pedido<br>Confirmado!</h2>
-        <p style="font-size:1.1rem; font-weight:500; margin-top:16px; opacity:0.95;">Conectando con el repartidor...</p>
+    <div id="order-success-overlay" class="hidden" style="position:fixed; inset:0; background:var(--gradient-orange); color:white; z-index:9999999; display:none; flex-direction:column; align-items:center; justify-content:center; padding:24px;">
+        <div style="font-size: 5rem; margin-bottom: 24px; animation: pulse-deli 1s infinite;">🛵</div>
+        <h2 style="font-family:'Outfit'; font-size:2.8rem; font-weight:900; margin:0; text-align:center; letter-spacing:-1px; line-height:1.1;">¡Pedido<br>Confirmado!</h2>
+        <p style="font-size:1.1rem; font-weight:500; margin-top:16px; opacity:0.9;">Conectando con el repartidor...</p>
     </div>
 
     <!-- MODAL CARRITO REDISEÑO PREMIUM -->
@@ -982,7 +844,7 @@
             
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-shrink: 0;">
                 <h2 class="cart-header-title">Tu Compra</h2>
-                <button style="background:var(--border-soft); border:none; width:42px; height:42px; border-radius:50%; font-size:1.1rem; cursor:pointer; color:var(--text-dark); transition: 0.25s;" onclick="vibrar(); document.getElementById('modal-carrito').style.display='none'">✕</button>
+                <button style="background:var(--border-soft); border:none; width:40px; height:40px; border-radius:50%; font-size:1.1rem; cursor:pointer; color:var(--text-dark);" onclick="vibrar(); document.getElementById('modal-carrito').style.display='none'">✕</button>
             </div>
             
             <div style="flex: 1; overflow-y: auto; padding-right: 5px; display: flex; flex-direction: column; padding-bottom: 40px;">
@@ -1020,8 +882,8 @@
 
     <!-- MODAL QUICK VIEW -->
     <div class="modal" id="modal-quick-view" style="align-items: flex-start; padding-top: 5vh;">
-        <div class="modal-content-standard" style="padding:0; overflow-x:hidden; overflow-y:auto; background:linear-gradient(145deg, #ffffff 0%, #fcfcfc 100%); width: 100%; max-width: 500px; max-height: 90vh; margin-top: auto; margin-bottom: auto;">
-            <button style="position:absolute; top:20px; right:20px; z-index:20; background:rgba(255,255,255,0.95); border:none; width:42px; height:42px; border-radius:50%; font-size:1.1rem; color:#0f172a; box-shadow:0 12px 30px rgba(0,0,0,0.2); transition: 0.25s;" onclick="vibrar(); pausarVideoQuickView(); document.getElementById('modal-quick-view').style.display='none'">✕</button>
+        <div class="modal-content-standard" style="padding:0; overflow-x:hidden; overflow-y:auto; background:var(--bg-pure); width: 100%; max-width: 500px; max-height: 90vh; margin-top: auto; margin-bottom: auto;">
+            <button style="position:absolute; top:20px; right:20px; z-index:20; background:rgba(255,255,255,0.95); border:none; width:40px; height:40px; border-radius:50%; font-size:1.1rem; color:#0f172a; box-shadow:0 10px 25px rgba(0,0,0,0.2);" onclick="vibrar(); pausarVideoQuickView(); document.getElementById('modal-quick-view').style.display='none'">✕</button>
             
             <div id="qv-media" style="width: 100%; position:relative; display: flex; flex-direction: column; background: #000;"></div>
             
@@ -1031,37 +893,37 @@
                 <span id="qv-price" style="font-size:1.8rem; font-weight:800; font-family:'Outfit'; letter-spacing:-0.5px; text-align: center; display: block; margin-bottom: 24px; color:var(--text-dark);">$0</span>
                 
                 <div style="display: flex; align-items: center; justify-content: center; gap: 32px; margin: 16px 0 24px;">
-                    <button style="width: 42px; height: 42px; border-radius: 50%; border: 2px solid var(--border-soft); font-size: 1.4rem; font-weight: 500; cursor: pointer; background:white; color:var(--text-dark); transition:0.25s; display:flex; align-items:center; justify-content:center; line-height:1; padding-bottom: 2px;" onclick="vibrar(); cambiarQty(-1)">-</button>
+                    <button style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--border-soft); font-size: 1.4rem; font-weight: 500; cursor: pointer; background:white; color:var(--text-dark); transition:0.2s; display:flex; align-items:center; justify-content:center; line-height:1; padding-bottom: 2px;" onclick="vibrar(); cambiarQty(-1)">-</button>
                     <span id="qv-qty" style="font-size: 1.5rem; font-weight: 700; font-family: 'Outfit';">1</span>
-                    <button style="width: 42px; height: 42px; border-radius: 50%; border: none; background: var(--text-dark); color: white; font-size: 1.4rem; font-weight: 500; cursor: pointer; transition:0.25s; box-shadow:0 10px 20px rgba(15,23,42,0.3); display:flex; align-items:center; justify-content:center; line-height:1; padding-bottom: 2px;" onclick="vibrar(); cambiarQty(1)">+</button>
+                    <button style="width: 40px; height: 40px; border-radius: 50%; border: none; background: var(--text-dark); color: white; font-size: 1.4rem; font-weight: 500; cursor: pointer; transition:0.2s; box-shadow:0 8px 15px rgba(15,23,42,0.3); display:flex; align-items:center; justify-content:center; line-height:1; padding-bottom: 2px;" onclick="vibrar(); cambiarQty(1)">+</button>
                 </div>
-                <button class="btn-main" style="padding: 18px; font-size: 1.05rem; box-shadow: 0 10px 25px rgba(255,94,0,0.35);" onclick="vibrar(); agregarDesdeQuickView()">AGREGAR AL PEDIDO</button>
+                <button class="btn-main" style="padding: 18px; font-size: 1.05rem; box-shadow: 0 8px 20px rgba(255,94,0,0.3);" onclick="vibrar(); agregarDesdeQuickView()">AGREGAR AL PEDIDO</button>
             </div>
         </div>
     </div>
 
     <!-- MODAL PREMIUM CIERRE DE TURNO -->
     <div class="modal" id="cierre-turno-modal">
-        <div class="modal-content-standard" style="padding:32px 24px; background: linear-gradient(145deg, #0f172a 0%, #0b1120 100%); color: white; border-top: 5px solid var(--primary-orange);">
+        <div class="modal-content-standard" style="padding:32px 24px; background: #0f172a; color: white; border-top: 5px solid var(--primary-orange);">
             <button class="modal-close-circle" style="background:rgba(255,255,255,0.1); color:white;" onclick="document.getElementById('cierre-turno-modal').style.display='none'">✕</button>
             <h3 style="margin:0 0 20px; font-family:'Outfit'; font-size:1.8rem; font-weight:800; color:white; letter-spacing:-0.5px;">🔒 Arqueo de Caja</h3>
             <div id="cierre-breakdown" style="margin-bottom: 24px;"></div>
-            <button class="btn-main" style="background:var(--gradient-orange); width:100%; font-size: 1rem; box-shadow: 0 12px 30px rgba(255,94,0,0.4);" onclick="vibrar(); confirmarCierreTurno()">VACIAR CAJA Y AVISAR AL DUEÑO</button>
+            <button class="btn-main" style="background:var(--gradient-orange); width:100%; font-size: 1rem; box-shadow: 0 10px 25px rgba(255,94,0,0.3);" onclick="vibrar(); confirmarCierreTurno()">VACIAR CAJA Y AVISAR AL DUEÑO</button>
         </div>
     </div>
 
     <!-- MODALES CAJA -->
-    <div id="pos-sheet-overlay" class="pos-sheet-overlay" onclick="cerrarPosSheet()"></div><div id="pos-sheet" class="pos-sheet"><div class="pos-sheet-header"><h3 style="margin:0; font-family:'Outfit'; font-size:1.4rem; font-weight:800; color:var(--text-dark);">Seleccionar Plato</h3><button style="background:rgba(0,0,0,0.05); border:none; font-size:1.2rem; color:var(--text-dark); cursor:pointer; width:35px; height:35px; border-radius:50%; display:flex; align-items:center; justify-content:center; transition: 0.25s;" onclick="cerrarPosSheet()">✕</button></div><div id="pos-sheet-grid" class="pos-sheet-body"></div></div>
+    <div id="pos-sheet-overlay" class="pos-sheet-overlay" onclick="cerrarPosSheet()"></div><div id="pos-sheet" class="pos-sheet"><div class="pos-sheet-header"><h3 style="margin:0; font-family:'Outfit'; font-size:1.4rem; font-weight:800; color:var(--text-dark);">Seleccionar Plato</h3><button style="background:rgba(0,0,0,0.05); border:none; font-size:1.2rem; color:var(--text-dark); cursor:pointer; width:35px; height:35px; border-radius:50%; display:flex; align-items:center; justify-content:center;" onclick="cerrarPosSheet()">✕</button></div><div id="pos-sheet-grid" class="pos-sheet-body"></div></div>
     <div class="modal" id="modal-radar-owner"><div class="modal-content-standard" style="padding:32px 24px;"><button class="modal-close-circle" style="background:rgba(0,0,0,0.05);" onclick="document.getElementById('modal-radar-owner').style.display='none'">✕</button><h3 style="margin:0 0 20px; font-family:'Outfit'; font-size:1.5rem; font-weight:800; color:var(--text-dark); letter-spacing:-0.5px;">Radar GPS Chofer</h3><div id="radar-owner-map-container" style="width:100%; height:350px; border-radius:20px; border:1px solid var(--border-soft); background:#e2e8f0; margin-bottom: 20px; z-index:1;"></div><button class="btn-secondary" onclick="vibrar(); actualizarRadarMap()">Actualizar Ubicación Ahora</button></div></div>
-    <div class="modal" id="expense-modal"><div class="modal-content-standard" style="padding:32px 24px;"><button class="modal-close-circle" style="background:rgba(0,0,0,0.05);" onclick="document.getElementById('expense-modal').style.display='none'">✕</button><h3 style="margin:10px 0 16px; font-size:1.6rem; font-weight:800; color:var(--danger); font-family:'Outfit'; letter-spacing:-0.5px;">Registrar Gasto</h3><p id="exp-monto-text" style="font-size:2.8rem; font-weight:300; margin:0 0 24px; font-family:'Outfit'; color:var(--text-dark); letter-spacing:-1px; line-height:1;"></p><input type="text" id="exp-rsn" class="form-input" placeholder="Detalle (Ej: Mercadería)"><button class="btn-main" style="background:var(--danger); box-shadow:0 12px 30px rgba(239,68,68,0.3);" onclick="vibrar(); submitExpense()">Descontar de Caja</button></div></div>
+    <div class="modal" id="expense-modal"><div class="modal-content-standard" style="padding:32px 24px;"><button class="modal-close-circle" style="background:rgba(0,0,0,0.05);" onclick="document.getElementById('expense-modal').style.display='none'">✕</button><h3 style="margin:10px 0 16px; font-size:1.6rem; font-weight:800; color:var(--danger); font-family:'Outfit'; letter-spacing:-0.5px;">Registrar Gasto</h3><p id="exp-monto-text" style="font-size:2.8rem; font-weight:300; margin:0 0 24px; font-family:'Outfit'; color:var(--text-dark); letter-spacing:-1px; line-height:1;"></p><input type="text" id="exp-rsn" class="form-input" placeholder="Detalle (Ej: Mercadería)"><button class="btn-main" style="background:var(--danger); box-shadow:0 10px 25px rgba(239,68,68,0.25);" onclick="vibrar(); submitExpense()">Descontar de Caja</button></div></div>
     
     <div class="modal" id="motos-modal">
         <div class="modal-content" style="width:100%; max-width:500px; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background:var(--bg-app); border:none;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;">
                 <h2 style="margin:0; font-family:'Outfit'; font-size:1.8rem; font-weight:800;">Control Repartidores</h2>
-                <button style="background:rgba(0,0,0,0.05); border:none; font-size:1.1rem; cursor:pointer; width:35px; height:35px; border-radius:50%; transition: 0.25s;" onclick="document.getElementById('motos-modal').style.display='none'">✕</button>
+                <button style="background:rgba(0,0,0,0.05); border:none; font-size:1.1rem; cursor:pointer; width:35px; height:35px; border-radius:50%;" onclick="document.getElementById('motos-modal').style.display='none'">✕</button>
             </div>
-            <div style="background: linear-gradient(145deg, #ffffff 0%, #fcfcfc 100%); border: 1px solid var(--border-soft); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 20px; text-align:center; box-shadow:var(--shadow-soft);">
+            <div style="background: var(--bg-pure); border: 1px solid var(--border-soft); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 20px; text-align:center; box-shadow:var(--shadow-soft);">
                 <p style="margin:0 0 8px; font-weight:700; color:var(--text-light); text-transform:uppercase; font-size:0.85rem;">Total a Rendir (En Calle)</p>
                 <h2 id="motos-total-text" style="font-size:3rem; font-weight:300; font-family:'Outfit'; margin:0; line-height:1; letter-spacing:-1px;">$0</h2>
             </div>
@@ -1069,8 +931,8 @@
         </div>
     </div>
     
-    <div class="modal" id="pedidos-web-modal"><div class="modal-content" style="width:100%; max-width:500px; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background: var(--bg-app); border:none;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;"><h3 style="margin:0; font-size:1.8rem; font-weight:800; font-family:'Outfit'; color:var(--primary-orange); letter-spacing:-0.5px;">Pedidos Web</h3><button style="background:rgba(255,94,0,0.1); border:none; font-size:1.1rem; color:var(--primary-orange); cursor:pointer; width:35px; height:35px; border-radius:50%; transition: 0.25s;" onclick="document.getElementById('pedidos-web-modal').style.display='none'">✕</button></div><div id="pedidos-web-list" style="flex:1; overflow-y:auto; text-align:left; display:flex; flex-direction:column; gap:16px; padding-bottom:40px;"></div></div></div>
-    <div class="modal" id="ventas-modal"><div class="modal-content" style="width:100%; max-width:500px; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background: var(--bg-app); border:none;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;"><h3 style="margin:0; font-size:1.8rem; font-weight:800; font-family:'Outfit'; color:var(--success);">Ventas Diarias</h3><button style="background:rgba(16,185,129,0.1); border:none; font-size:1.1rem; color:var(--success); cursor:pointer; width:35px; height:35px; border-radius:50%; transition: 0.25s;" onclick="document.getElementById('ventas-modal').style.display='none'">✕</button></div><div id="chofer-logs-modal-container" style="flex:1; overflow-y:auto; text-align:left; padding-bottom:40px;"></div></div></div>
+    <div class="modal" id="pedidos-web-modal"><div class="modal-content" style="width:100%; max-width:500px; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background: var(--bg-app); border:none;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;"><h3 style="margin:0; font-size:1.8rem; font-weight:800; font-family:'Outfit'; color:var(--primary-orange); letter-spacing:-0.5px;">Pedidos Web</h3><button style="background:rgba(255,94,0,0.1); border:none; font-size:1.1rem; color:var(--primary-orange); cursor:pointer; width:35px; height:35px; border-radius:50%;" onclick="document.getElementById('pedidos-web-modal').style.display='none'">✕</button></div><div id="pedidos-web-list" style="flex:1; overflow-y:auto; text-align:left; display:flex; flex-direction:column; gap:16px; padding-bottom:40px;"></div></div></div>
+    <div class="modal" id="ventas-modal"><div class="modal-content" style="width:100%; max-width:500px; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background: var(--bg-app); border:none;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;"><h3 style="margin:0; font-size:1.8rem; font-weight:800; font-family:'Outfit'; color:var(--success);">Ventas Diarias</h3><button style="background:rgba(16,185,129,0.1); border:none; font-size:1.1rem; color:var(--success); cursor:pointer; width:35px; height:35px; border-radius:50%;" onclick="document.getElementById('ventas-modal').style.display='none'">✕</button></div><div id="chofer-logs-modal-container" style="flex:1; overflow-y:auto; text-align:left; padding-bottom:40px;"></div></div></div>
 
     <!-- SCRIPT PRINCIPAL -->
     <script>
@@ -1106,6 +968,7 @@
         // ================= FUNCIÓN SEGURA PARA LEER LA CALCULADORA =================
         function getCalcValue() {
             let txt = qs('calc-total') ? qs('calc-total').innerText : "0";
+            // Quitamos el separador de miles para evitar problemas (Ej: 10.000 se vuelve 10000)
             let cleaned = txt.replace(/[^0-9.-]/g, '');
             return parseFloat(cleaned) || 0;
         }
@@ -1190,11 +1053,11 @@
             if(!('speechSynthesis' in window)) return alert("Tu navegador no soporta el asistente de voz.");
             window.speechSynthesis.cancel();
             const speech = new SpeechSynthesisUtterance(); 
-            speech.text = "¡Bienvenido a Pedilo, ya, Premium por Energy Software! La solución tecnológica definitiva para tu comercio gastronómico. Muestra tu negocio en el celular de tus clientes con menú en video vertical formato TikTok de alta definición. Tus clientes hacen sus pedidos en segundos con carrito ágil y siguen a la motito en vivo por GPS satelital. Además, contás con caja registradora inteligente que descuenta stock automáticamente, control de gastos, gestión en vivo de repartidores y panel de métricas. El sistema está diseñado exclusivamente para ventas de contado, garantizando que tengas control exacto de lo que debe entregarte cada repartidor. ¡Sumate a la revolución del delivery!"; 
+            speech.text = "¡Atención dueño de local! Bienvenido a Pedilo Ya Premium. Esta es la herramienta definitiva para multiplicar tus ventas. Imaginate a tus clientes viendo tu comida en videos verticales de alta definición, estilo TikTok. ¡Se les va a hacer agua la boca! Podrán hacer su pedido en tres simples clics con nuestro carrito avanzado, y rastrear al repartidor en vivo por GPS en el mapa. ¿Lo mejor para vos? Cero comisiones por venta. Contás con una caja registradora inteligente que descuenta el stock automático, control estricto de gastos, panel del dueño con métricas, y un sistema impecable para saber exactamente cuánta plata tiene que rendirte cada motito. Todo ilimitado, rápido y sin intermediarios. ¡Sumate a la revolución del delivery y dominá tu zona hoy mismo!"; 
             speech.lang = 'es-AR'; 
-            speech.rate = 1.0; 
+            speech.rate = 1.05; 
             window.speechSynthesis.speak(speech); 
-            showToast("Reproduciendo presentación de voz...");
+            showToast("Reproduciendo presentación...");
         }
 
         async function compressImage(file) {
@@ -1420,7 +1283,7 @@
                 hora: getTucumanTimeFE(), 
                 descripcion: desc,
                 moto_asignada: motoSelected,
-                recibo_url: urlRecibo
+                recibo_url: urlRecibo // <<--- AQUI SE GUARDA LA FOTO
             }]); 
             
             if(selProd && qtyToDeduct > 0) {
@@ -1476,7 +1339,7 @@
         }
 
         function abrirSheetTransfVenta() {
-            let val = getCalcValue();
+            let val = getCalcValue(); // LECTURA SEGURA
             if(val <= 0) return alert("Escribí un monto mayor a 0 en la caja primero."); 
             
             pendingTransferData = { type: 'SALE_TRANSF', amount: val };
@@ -1490,10 +1353,10 @@
         function elegirCamara() { if(qs('foto-input-camara')) qs('foto-input-camara').click(); setTimeout(() => { cerrarSheet(); }, 500); }
         function elegirGaleria() { if(qs('foto-input-galeria')) qs('foto-input-galeria').click(); setTimeout(() => { cerrarSheet(); }, 500); }
 
-        // ================= CIERRE DE TURNO PREMIUM =================
+        // ================= CIERRE DE TURNO PREMIUM (ARQUEO POR MOTO) =================
         async function cerrarTurno() {
             let calcCashMostrador = 0;
-            let calcTransf = 0;
+            let calcTransf = 0; // Agregado para transferencias
             let cashPorMoto = {};
             let totalCash = 0;
             let hitCierre = false;
@@ -1517,10 +1380,12 @@
                         totalCash += pAmt;
                     }
                 } else if (methodStr === 'TRANSFERENCIA') {
+                    // SUMAR TRANSFERENCIAS PARA MOSTRARLAS EN EL ARQUEO
                     calcTransf += pAmt;
                 }
             });
 
+            // CONSTRUIR UI DEL MODAL
             let htmlBreakdown = `
             <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 16px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.1);">
                 <div style="display:flex; justify-content:space-between; margin-bottom: 12px; font-size:1.1rem;">
@@ -1533,13 +1398,13 @@
                 htmlBreakdown += `
                 <div style="display:flex; justify-content:space-between; margin-bottom: 12px; font-size:1.1rem;">
                     <span style="color:#94a3b8; font-weight:600;">🛵 Repartidor: ${moto}</span>
-                    <span style="color:var(--primary-orange-light); font-weight:800; font-family:'Outfit';">$${cashPorMoto[moto].toLocaleString('es-AR')}</span>
+                    <span style="color:var(--primary-orange); font-weight:800; font-family:'Outfit';">$${cashPorMoto[moto].toLocaleString('es-AR')}</span>
                 </div>`;
                 motoMsgText += `\n🛵 *${moto}:* $${cashPorMoto[moto].toLocaleString('es-AR')}`;
             }
             
             htmlBreakdown += `
-                <div style="display:flex; justify-content:space-between; margin-bottom: 12px; font-size:1.1rem; border-top: 1px dashed rgba(255,255,255,0.15); padding-top: 10px;">
+                <div style="display:flex; justify-content:space-between; margin-bottom: 12px; font-size:1.1rem; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 10px;">
                     <span style="color:#94a3b8; font-weight:600;">🏦 Transferencias (No físicas)</span>
                     <span style="color:var(--info); font-weight:800; font-family:'Outfit';">$${calcTransf.toLocaleString('es-AR')}</span>
                 </div>`;
@@ -1547,10 +1412,10 @@
             let retiroTotal = totalCash + calcCashMostrador;
 
             htmlBreakdown += `
-                <div style="height: 1px; background: rgba(255,255,255,0.12); margin: 16px 0;"></div>
+                <div style="height: 1px; background: rgba(255,255,255,0.1); margin: 16px 0;"></div>
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <span style="color:white; font-weight:800; text-transform:uppercase; font-size:0.95rem;">Efectivo A Retirar Total</span>
-                    <span style="color:var(--success); font-weight:900; font-size:2rem; font-family:'Outfit'; text-shadow: 0 2px 15px rgba(16,185,129,0.4);">$${retiroTotal.toLocaleString('es-AR')}</span>
+                    <span style="color:var(--success); font-weight:900; font-size:2rem; font-family:'Outfit';">$${retiroTotal.toLocaleString('es-AR')}</span>
                 </div>
             </div>`;
 
@@ -1639,7 +1504,7 @@
             renderAllData();
         }
 
-        // ================= REPARTIDORES =================
+        // ================= REPARTIDORES (VERSIÓN SEGURA 100%) =================
         async function agregarMoto() {
             let n = qs('add-moto-name') ? qs('add-moto-name').value.trim() : '';
             if(!n) return showToast("Escribí el nombre", "error");
@@ -1681,7 +1546,7 @@
             }
         }
 
-        // ================= PROMOCIONES =================
+        // ================= PROMOCIONES (BANNER OWNER) =================
         function previewPromo(input) {
             if (input.files && input.files[0]) {
                 tempPromoFile = input.files[0];
@@ -1724,7 +1589,7 @@
                                 <img src="${p.img}" style="width:60px; height:40px; object-fit:cover; border-radius:8px; flex-shrink:0;">
                                 <span style="font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${p.title}</span>
                             </div>
-                            <button style="background:#fef2f2; color:var(--danger); border:none; border-radius:8px; padding:8px 12px; font-weight:bold; cursor:pointer; flex-shrink:0; transition: 0.2s;" onclick="vibrar(); eliminarPromo(${idx})">🗑️</button>
+                            <button style="background:#fef2f2; color:var(--danger); border:none; border-radius:8px; padding:8px 12px; font-weight:bold; cursor:pointer; flex-shrink:0;" onclick="vibrar(); eliminarPromo(${idx})">🗑️</button>
                          </div>`;
             });
             setHtml('adm-promo-list', html);
@@ -1857,7 +1722,7 @@
                 if(i.codigo && i.codigo.includes('PLATO-')) {
                     let { img, vid, hasVideo, hasImg } = parseUrlsSeguro(i.foto_url); 
                     
-                    let mediaTag = '<div style="width:100%;height:100%;background:linear-gradient(135deg, #0f172a, #1e293b);display:flex;align-items:center;justify-content:center;font-size:2.5rem;">🍽️</div>';
+                    let mediaTag = '<div style="width:100%;height:100%;background:#0f172a;display:flex;align-items:center;justify-content:center;font-size:2.5rem;">🍽️</div>';
                     if (hasVideo) { mediaTag = `<video src="${vid}" poster="${img}" muted loop playsinline class="lazy-video" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;"></video>`; } 
                     else if (hasImg) { mediaTag = `<img src="${img}" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">`; }
                     
@@ -1886,7 +1751,7 @@
                 htmlMotos += `
                     <div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-app); padding:14px; border-radius:16px; border:1px solid var(--border-soft);">
                         <span style="font-weight:700; font-size:1.05rem; color:var(--text-dark);">🛵 ${m.nombre}</span>
-                        <button onclick="vibrar(); eliminarMoto('${m.id}')" style="background:#fef2f2; color:var(--danger); border:none; padding:8px 12px; border-radius:8px; font-weight:bold; cursor:pointer; transition: 0.2s;">🗑️</button>
+                        <button onclick="vibrar(); eliminarMoto('${m.id}')" style="background:#fef2f2; color:var(--danger); border:none; padding:8px 12px; border-radius:8px; font-weight:bold; cursor:pointer;">🗑️</button>
                     </div>`;
                 htmlSelectMotos += `<option value="${m.nombre}">🛵 ENVIAR CON: ${m.nombre}</option>`;
             });
@@ -1909,14 +1774,14 @@
                 if(l.tipo === 'PEDIDO_WEB') {
                     pedidosWebNuevos++;
                     webLogsHtml += `
-                    <div style="background:linear-gradient(145deg, #ffffff 0%, #fcfcfc 100%); padding:24px; border-radius:var(--radius-lg); border:1px solid rgba(255,94,0,0.22); margin-bottom:20px; box-shadow:var(--shadow-orange); position:relative;">
-                        <span style="position:absolute; top:-12px; left:24px; background:var(--gradient-orange); color:#fff; padding:4px 12px; border-radius:50px; font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:1px; box-shadow: 0 4px 12px rgba(255,94,0,0.35);">NUEVO PEDIDO</span>
+                    <div style="background:var(--bg-pure); padding:24px; border-radius:var(--radius-lg); border:1px solid rgba(255,94,0,0.2); margin-bottom:20px; box-shadow:var(--shadow-orange); position:relative;">
+                        <span style="position:absolute; top:-12px; left:24px; background:var(--primary-orange); color:#fff; padding:4px 12px; border-radius:50px; font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:1px;">NUEVO PEDIDO</span>
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; margin-top:8px;">
                             <div style="font-size:2.2rem; font-weight:300; color:var(--text-dark); font-family:'Outfit'; line-height:1; letter-spacing:-1px;">$${pAmt.toLocaleString('es-AR')}</div>
                             <div style="font-size:0.8rem; font-weight:700; color:var(--text-dark); background:var(--bg-app); border:1px solid var(--border-soft); padding:6px 12px; border-radius:8px;">${methodStr}</div>
                         </div>
                         <div style="font-size:0.95rem; color:var(--text-dark); font-weight:500; white-space:pre-wrap; line-height:1.6; background:var(--bg-app); padding:16px; border-radius:12px; margin-bottom:16px; border:1px solid var(--border-soft);">${l.descripcion}</div>
-                        <button onclick="vibrar(); marcarPedidoWebRealizado('${l.id}')" style="width:100%; background:#fef2f2; color:var(--danger); border:1px dashed #fca5a5; border-radius:14px; padding:16px; font-weight:800; font-family:'Outfit'; font-size:1.05rem; cursor:pointer; transition:0.25s;">✔️ MARCAR COMO ENTREGADO (BORRAR)</button>
+                        <button onclick="vibrar(); marcarPedidoWebRealizado('${l.id}')" style="width:100%; background:#fef2f2; color:var(--danger); border:1px dashed #fca5a5; border-radius:14px; padding:16px; font-weight:800; font-family:'Outfit'; font-size:1.05rem; cursor:pointer; transition:0.2s;">✔️ MARCAR COMO ENTREGADO (BORRAR)</button>
                     </div>`;
                 }
 
@@ -1955,9 +1820,9 @@
                         receiptBtn = `<div style="margin-top:10px; margin-bottom:5px;"><a href="${urlTicket}" target="_blank" style="display:inline-flex; align-items:center; gap:8px; font-size:0.9rem; background:var(--bg-pure); border: 2px solid var(--info); padding:10px 16px; border-radius:14px; color:var(--info); text-decoration:none; font-weight:900; box-shadow: 0 5px 15px rgba(14, 165, 233, 0.2);"><span style="font-size:1.2rem;">📸</span> VER FOTO TICKET</a></div>`;
                     }
                     
-                    let badgeMoto = l.moto_asignada ? `<span style="background:var(--gradient-orange); color:white; padding:2px 6px; border-radius:4px; font-size:0.7rem; margin-left:6px; font-weight:800;">🛵 ${l.moto_asignada}</span>` : '';
+                    let badgeMoto = l.moto_asignada ? `<span style="background:var(--primary-orange); color:white; padding:2px 6px; border-radius:4px; font-size:0.7rem; margin-left:6px; font-weight:800;">🛵 ${l.moto_asignada}</span>` : '';
                     
-                    choferLogsArray.push(`<div style="display:flex; justify-content:space-between; align-items:center; background:linear-gradient(145deg, #ffffff 0%, #fcfcfc 100%); padding:16px; border-radius:var(--radius-md); border:1px solid var(--border-soft); margin-bottom:12px; box-shadow:var(--shadow-soft);">
+                    choferLogsArray.push(`<div style="display:flex; justify-content:space-between; align-items:center; background:var(--bg-pure); padding:16px; border-radius:var(--radius-md); border:1px solid var(--border-soft); margin-bottom:12px; box-shadow:var(--shadow-soft);">
                         <div style="display:flex; align-items:flex-start; gap:16px; flex:1; min-width:0;">
                             <div style="font-size:1.5rem; background:var(--bg-app); width:50px; height:50px; display:flex; align-items:center; justify-content:center; border-radius:14px; flex-shrink:0;">${icon}</div>
                             <div style="flex:1; min-width:0;">
@@ -1989,8 +1854,6 @@
         }
 
         // ================= APP CLIENTE SÚPER PREMIUM =================
-        let menuItems = [];
-        
         async function cargarMenuCliente(localName) {
             targetLocalName = localName.toUpperCase();
             let { data: usr } = await _supabase.from('pediloya_usuarios').select('id, whatsapp, app_data').eq('local', targetLocalName).maybeSingle();
@@ -2154,9 +2017,7 @@
             showToast("Agregado");
         }
 
-        function pausarVideoQuickView() { let vids = document.querySelectorAll('#qv-media video'); vids.forEach(v => v.pause()); }
-
-        // ================= CARRITO =================
+        // ================= CARRITO REDISEÑADO PREMIUM =================
         function updateCartUI() {
             let bar = qs('floating-cart-bar');
             if(!bar) return;
@@ -2293,7 +2154,7 @@
             }
         }
 
-        // ================= CALCULADORA CAJA Y STOCK =================
+        // ================= CALCULADORA CAJA Y STOCK INTELIGENTE =================
         function abrirPosSheet() { if(qs('pos-sheet-overlay')) qs('pos-sheet-overlay').classList.add('open'); if(qs('pos-sheet')) qs('pos-sheet').classList.add('open'); }
         function cerrarPosSheet() { if(qs('pos-sheet-overlay')) qs('pos-sheet-overlay').classList.remove('open'); if(qs('pos-sheet')) qs('pos-sheet').classList.remove('open'); }
         function seleccionarDesdeSheet(code, name, price) { selProd = { codigo: code, nombre: name, precio: price }; expr = price.toString(); isEval = true; setText('calc-total', price); setText('calc-preview', `${name} | $${price}`); cerrarPosSheet(); showToast(`${name} listo`); }
@@ -2317,19 +2178,9 @@
         function abrirRadarDueno() { if(qs('modal-radar-owner')) qs('modal-radar-owner').style.display='flex'; actualizarRadarMap(); setTimeout(actualizarRadarMap, 500); }
         async function actualizarRadarMap() { showToast("Buscando GPS...", "info"); let { data } = await _supabase.from('pediloya_logs').select('descripcion').eq('local_id', currentLocalId).eq('tipo', 'GPS_DELI').order('created_at', {ascending: false}).limit(1).maybeSingle(); if(data) { try { let coords = JSON.parse(data.descripcion); updateLiveMap(coords.lat, coords.lon, 'radar-owner-map-container', true); showToast("Actualizado"); } catch(e) {} } }
         
-        function triggerExpenseModal() { let v = getCalcValue(); if(v <= 0) return alert("Primero escribí el monto en la calculadora."); setText('exp-monto-text', "$" + v.toLocaleString('es-AR')); qs('expense-modal').style.display='flex'; }
-        async function submitExpense() { let rsn = qs('exp-rsn') ? qs('exp-rsn').value.trim() : ''; if(!rsn) return alert("Describí el gasto."); let v = getCalcValue(); await _supabase.from('pediloya_logs').insert([{ local_id: currentLocalId, tipo: 'SALIDA', metodo: 'EFECTIVO', monto: -v, fecha: getTucumanDateFE(), hora: getTucumanTimeFE(), descripcion: `GASTO: ${rsn}` }]); await loadDataFromDB(); qs('expense-modal').style.display='none'; qs('exp-rsn').value=''; clearCalc(); showToast("Gasto registrado."); }
-        async function submitSale(metodo) { let v = getCalcValue(); if(v <= 0) return alert("Escribí un monto mayor a 0."); let desc = selProd ? `Venta: ${selProd.nombre}` : 'Venta de Mostrador'; let motoSelected = qs('chofer-moto-select') ? qs('chofer-moto-select').value : null; let qtyToDeduct = selProd ? Math.max(1, Math.floor(v / selProd.precio)) : 0; mostrarTicketAnimado(); await _supabase.from('pediloya_logs').insert([{ local_id: currentLocalId, tipo: 'VENTA', metodo: metodo, monto: v, fecha: getTucumanDateFE(), hora: getTucumanTimeFE(), descripcion: desc, moto_asignada: motoSelected }]); if(selProd && qtyToDeduct > 0) { let item = dbState.inventory.find(i => i.codigo === selProd.codigo); if(item) { let newStock = Math.max(0, item.stock - qtyToDeduct); await _supabase.from('pediloya_inventario').update({ stock: newStock }).eq('codigo', selProd.codigo); } } await loadDataFromDB(); clearCalc(); showToast(`Venta en ${metodo} registrada.`); }
-        
-        function toggleDriverGps() { if(driverGpsWatchId) { navigator.geolocation.clearWatch(driverGpsWatchId); driverGpsWatchId = null; showToast("GPS detenido"); if(qs('btn-gps')) { qs('btn-gps').style.background = 'var(--text-dark)'; qs('btn-gps').innerText = '📍 GPS DELI'; } } else { if(!navigator.geolocation) return alert("Tu dispositivo no soporta GPS."); driverGpsWatchId = navigator.geolocation.watchPosition(async (pos) => { try { await _supabase.from('pediloya_logs').insert([{ local_id: currentLocalId, tipo: 'GPS_DELI', metodo: 'SISTEMA', monto: 0, fecha: getTucumanDateFE(), hora: getTucumanTimeFE(), descripcion: JSON.stringify({ lat: pos.coords.latitude, lon: pos.coords.longitude }) }]); } catch(e) {} }, (err) => { console.log("GPS Error:", err); }, { enableHighAccuracy: true, maximumAge: 5000, timeout: 10000 }); showToast("GPS activado"); if(qs('btn-gps')) { qs('btn-gps').style.background = 'var(--success)'; qs('btn-gps').innerText = '📍 GPS ACTIVO'; } } }
-        
-        function updateLiveMap(lat, lon, containerId, isRadar) { let container = document.getElementById(containerId); if(!container) return; let map = L.map(containerId, { zoomControl: true }).setView([lat, lon], 15); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map); let customIcon = L.divIcon({ className: 'custom-div-icon', html: `<div style="font-size:2.5rem; animation: pulse-deli 1s infinite alternate; filter: drop-shadow(0 4px 10px rgba(255,94,0,0.5));">🛵</div>`, iconSize: [40, 40], iconAnchor: [20, 20] }); let marker = L.marker([lat, lon], { icon: customIcon }).addTo(map); if(isRadar) { radarMap = map; radarMarker = marker; } else { trackingMap = map; trackingMarker = marker; } }
-        
-        async function iniciarRastreoCliente(codigo, localNombre) { targetLocalName = localNombre.toUpperCase(); let { data: usr } = await _supabase.from('pediloya_usuarios').select('id').eq('local', targetLocalName).maybeSingle(); if(usr) targetLocalId = usr.id; updateLiveMap(-26.8241, -65.2226, 'tracking-map-container', false); setText('track-status-text', 'Buscando pedido...'); setText('track-detail-text', `Código: ${codigo}`); qs('tracking-result-box').classList.remove('hidden'); qs('tracking-result-box').style.display = 'flex'; setTimeout(async () => { let { data } = await _supabase.from('pediloya_logs').select('descripcion').eq('local_id', targetLocalId).eq('tipo', 'GPS_DELI').order('created_at', {ascending: false}).limit(1).maybeSingle(); if(data) { try { let coords = JSON.parse(data.descripcion); if(trackingMarker) trackingMarker.setLatLng([coords.lat, coords.lon]); if(trackingMap) trackingMap.setView([coords.lat, coords.lon], 16); setText('track-status-text', '¡Repartidor en camino!'); setText('track-detail-text', 'Tu pedido está en ruta. Llega en minutos.'); } catch(e) {} } else { setText('track-status-text', 'Pedido confirmado'); setText('track-detail-text', 'El repartidor está por salir.'); } }, 2000); }
-        
-        function iniciarRastreoClienteManual() { let codigo = qs('track-input-code') ? qs('track-input-code').value.trim() : ''; if(!codigo) return showToast("Ingresá el código TRK", "error"); iniciarRastreoCliente(codigo, targetLocalName || ""); }
-        
-        // ================= CONTROL DE REPARTIDORES =================
+        function pausarVideoQuickView() { let vids = document.querySelectorAll('#qv-media video'); vids.forEach(v => v.pause()); }
+
+        // ================= CONTROL DE REPARTIDORES COMPLETADO =================
         window.abrirModalMotos = function() {
             if(qs('motos-modal')) qs('motos-modal').style.display = 'flex';
             renderMotosModal();
@@ -2345,14 +2196,14 @@
             dbState.repartidores.forEach(m => {
                 let aRendir = cashPorMoto[m.nombre] || 0;
                 html += `
-                    <div style="background:linear-gradient(145deg, #ffffff 0%, #fcfcfc 100%); border:1px solid var(--border-soft); border-radius:16px; padding:16px; margin-bottom: 12px; display:flex; justify-content:space-between; align-items:center; box-shadow:var(--shadow-soft);">
+                    <div style="background:var(--bg-pure); border:1px solid var(--border-soft); border-radius:16px; padding:16px; margin-bottom: 12px; display:flex; justify-content:space-between; align-items:center; box-shadow:var(--shadow-soft);">
                         <div>
                             <h4 style="margin:0 0 4px; font-size:1.1rem; color:var(--text-dark); font-family:'Outfit';">🛵 ${m.nombre}</h4>
                             <span style="font-size:0.85rem; color:var(--text-gray); font-weight:600;">Efectivo a rendir</span>
                         </div>
                         <div style="display:flex; align-items:center; gap:12px;">
                             <span style="font-size:1.4rem; font-weight:800; font-family:'Outfit'; color:var(--primary-orange);">$${aRendir.toLocaleString('es-AR')}</span>
-                            <button onclick="vibrar(); rendirPlataMoto('${m.nombre}', ${aRendir})" style="background:linear-gradient(135deg, #10b981, #059669); color:white; border:none; padding:10px 14px; border-radius:12px; font-weight:bold; cursor:pointer; box-shadow:0 6px 18px rgba(16,185,129,0.35); transition: 0.25s;">RECIBIR</button>
+                            <button onclick="vibrar(); rendirPlataMoto('${m.nombre}', ${aRendir})" style="background:var(--success); color:white; border:none; padding:10px 14px; border-radius:12px; font-weight:bold; cursor:pointer; box-shadow:0 4px 10px rgba(16,185,129,0.3);">RECIBIR</button>
                         </div>
                     </div>
                 `;
