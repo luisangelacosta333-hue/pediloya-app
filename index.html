@@ -553,7 +553,7 @@
     <div id="view-chofer" class="view-container-no-pad" style="display:none; flex-direction:column; height:100dvh; overflow:hidden; padding:12px; box-sizing:border-box; background:var(--bg-app); max-width:500px; margin:0 auto;">
         
         <div class="chofer-top-bar">
-            <div class="pill-btn" onclick="vibrar(); toggleDriverGps()" id="btn-gps" style="background:var(--text-dark); color:white;">📍 GPS DELI</div>
+            <div class="pill-btn" onclick="vibrar(); toggleDriverGps()" id="btn-gps" style="background:var(--text-dark); color:white; transition: 0.3s;">📍 GPS DELI</div>
             <div class="pill-btn badge" id="btn-pedidos-web" style="color:var(--primary-orange); border-color:var(--primary-orange); background:rgba(255,94,0,0.05);" onclick="vibrar(); abrirPedidosWeb()">🔔 PEDIDOS</div>
             <div class="pill-btn" style="color:var(--info); border-color:var(--info); background:rgba(14,165,233,0.05);" onclick="vibrar(); document.getElementById('pin-modal').style.display='flex'">⚙️ DUEÑO</div>
         </div>
@@ -942,6 +942,9 @@
 
         let gpsSubscription = null;
         let driverGpsWatchId = null;
+        
+        let isGpsActive = false;
+        let gpsInterval = null;
 
         function vibrar(ms = 40) { if(navigator.vibrate) navigator.vibrate(ms); }
 
@@ -1537,6 +1540,14 @@
             }
         }
 
+        window.eliminarPedidoWeb = async function(idLog) {
+            if(confirm("¿Eliminar este pedido permanentemente? No ocupará espacio.")) {
+                await _supabase.from('pediloya_logs').delete().eq('id', idLog);
+                await loadDataFromDB();
+                showToast("Pedido eliminado", "info");
+            }
+        }
+
         function previewPromo(input) {
             if (input.files && input.files[0]) {
                 tempPromoFile = input.files[0];
@@ -1705,6 +1716,26 @@
             } 
         }
 
+        window.copiarTRK = function(trk) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(trk).then(() => {
+                    showToast("Código " + trk + " copiado");
+                });
+            } else {
+                let tempInput = document.createElement("input");
+                tempInput.value = trk;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                try {
+                    document.execCommand("copy");
+                    showToast("Código " + trk + " copiado");
+                } catch (err) {
+                    showToast("Error al copiar", "error");
+                }
+                document.body.removeChild(tempInput);
+            }
+        };
+
         function renderAllData() {
             let adminMenuHtml = ''; let posMenuHtml = '';
             
@@ -1764,20 +1795,31 @@
                 if(l.tipo === 'PEDIDO_WEB') {
                     pedidosWebNuevos++;
                     
-                    let trkMatch = l.descripcion.match(/\[(TRK\d+)\]/);
-                    let trkCode = trkMatch ? trkMatch[1] : '';
-                    let shareBtn = trkCode ? `<button onclick="vibrar(); compartirTRKWhatsApp('${trkCode}')" style="width:100%; background:#25D366; color:white; border:none; border-radius:14px; padding:14px; font-weight:800; font-family:'Outfit'; font-size:1rem; cursor:pointer; margin-bottom:12px; box-shadow:0 5px 15px rgba(37,211,102,0.3); transition:0.2s;"><span style="font-size:1.2rem; vertical-align:middle; margin-right:6px;">📲</span> COMPARTIR SEGUIMIENTO</button>` : '';
+                    let trkMatch = l.descripcion.match(/TRK\d+/);
+                    let trkCode = trkMatch ? trkMatch[0] : '';
+                    
+                    let actionsHtml = '';
+                    if(trkCode) {
+                        actionsHtml = `
+                        <div style="display:flex; gap:8px; margin-bottom:12px;">
+                            <button onclick="vibrar(); compartirTRKWhatsApp('${trkCode}')" style="flex:1; background:#25D366; color:white; border:none; border-radius:12px; padding:12px; font-weight:800; font-family:'Outfit'; font-size:0.9rem; cursor:pointer; box-shadow:0 4px 10px rgba(37,211,102,0.2);"><span style="font-size:1.1rem; margin-right:4px;">📲</span> ENVIAR LINK</button>
+                            <button onclick="vibrar(); copiarTRK('${trkCode}')" style="flex:1; background:var(--bg-pure); color:var(--text-dark); border:2px solid var(--border-soft); border-radius:12px; padding:12px; font-weight:800; font-family:'Outfit'; font-size:0.9rem; cursor:pointer; box-shadow:var(--shadow-soft);"><span style="font-size:1.1rem; margin-right:4px;">📄</span> COPIAR CÓDIGO</button>
+                        </div>`;
+                    }
 
                     webLogsHtml += `
                     <div style="background:var(--bg-pure); padding:20px; border-radius:var(--radius-lg); border:1px solid rgba(255,94,0,0.2); margin-bottom:20px; box-shadow:var(--shadow-orange); position:relative; overflow:hidden;">
                         <span style="position:absolute; top:0; left:0; width:100%; background:var(--primary-orange); color:#fff; padding:6px 0; font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:1px; text-align:center;">NUEVO PEDIDO</span>
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; margin-top:20px;">
+                        
+                        <button onclick="vibrar(); eliminarPedidoWeb('${l.id}')" style="position:absolute; top:28px; right:12px; background:#fef2f2; color:var(--danger); border:none; border-radius:50%; width:36px; height:36px; font-size:1.2rem; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:10; box-shadow: 0 4px 10px rgba(239,68,68,0.2);">🗑️</button>
+
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; margin-top:20px; padding-right: 40px;">
                             <div style="font-size:2.2rem; font-weight:800; color:var(--text-dark); font-family:'Outfit'; line-height:1; letter-spacing:-1px;">$${pAmt.toLocaleString('es-AR')}</div>
                             <div style="font-size:0.85rem; font-weight:800; color:var(--text-dark); background:var(--bg-app); border:1px solid var(--border-soft); padding:6px 12px; border-radius:8px;">${methodStr}</div>
                         </div>
                         <div style="font-size:0.95rem; color:var(--text-dark); font-weight:500; white-space:pre-wrap; word-break:break-word; line-height:1.6; background:var(--bg-app); padding:16px; border-radius:12px; margin-bottom:16px; border:1px solid var(--border-soft); box-sizing:border-box;">${l.descripcion}</div>
-                        ${shareBtn}
-                        <button onclick="vibrar(); marcarPedidoWebRealizado('${l.id}')" style="width:100%; background:#fef2f2; color:var(--danger); border:1px dashed #fca5a5; border-radius:14px; padding:14px; font-weight:800; font-family:'Outfit'; font-size:1rem; cursor:pointer; transition:0.2s;">✔️ MARCAR COMO ENTREGADO</button>
+                        ${actionsHtml}
+                        <button onclick="vibrar(); marcarPedidoWebRealizado('${l.id}')" style="width:100%; background:#e0f2fe; color:#0284c7; border:1px dashed #7dd3fc; border-radius:14px; padding:14px; font-weight:800; font-family:'Outfit'; font-size:1rem; cursor:pointer; transition:0.2s;">✔️ MARCAR COMO ENTREGADO</button>
                     </div>`;
                 }
 
@@ -2344,4 +2386,3 @@
     </script>
 </body>
 </html>
-
