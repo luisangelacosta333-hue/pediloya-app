@@ -569,7 +569,7 @@
         
         <div class="chofer-top-bar">
             <!-- BOTÓN GPS ACTUALIZADO -->
-            <div class="pill-btn" onclick="vibrar(); toggleDriverGps()" id="btn-gps" style="background:var(--text-dark); color:white; transition: 0.3s;">📍 GPS DELI</div>
+            <div class="pill-btn" onclick="vibrar(); window.toggleDriverGps()" id="btn-gps" style="background:var(--text-dark); color:white; transition: 0.3s;">📍 GPS DELI</div>
             <div class="pill-btn badge" id="btn-pedidos-web" style="color:var(--primary-orange); border-color:var(--primary-orange); background:rgba(255,94,0,0.05);" onclick="vibrar(); abrirPedidosWeb()">🔔 WEB</div>
             <div class="pill-btn" style="color:var(--info); border-color:var(--info); background:rgba(14,165,233,0.05);" onclick="vibrar(); document.getElementById('pin-modal').style.display='flex'">⚙️ DUEÑO</div>
         </div>
@@ -626,6 +626,7 @@
             <button class="chofer-pay-btn" onclick="vibrar(); submitSale('EFECTIVO')">💵 EFECTIVO</button>
             <button class="btn-pay-transfer" onclick="vibrar(); abrirSheetTransfVenta()">🏦 TRANSF.</button>
         </div>
+        <!-- BOTÓN CERRAR TURNO CORREGIDO CON MARGIN-BOTTOM 80PX PARA VISIBILIDAD -->
         <button style="flex-shrink:0; width:100%; border-radius:16px; padding:14px; font-weight:800; font-size:1rem; font-family:'Outfit'; text-transform:uppercase; background:var(--text-dark); color:white; border:none; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; box-shadow:0 10px 25px rgba(15,23,42,0.3); transition:0.2s; margin-bottom: 80px;" onclick="vibrar(); cerrarTurno()">🔒 CERRAR TURNO</button>
     </div>
 
@@ -687,7 +688,8 @@
                 </div>
                 <div id="adm-motos-list" style="display:flex; flex-direction:column; gap:8px;"></div>
                 
-                <button class="btn-main" style="width:100%; margin-top:16px; background:#25D366; box-shadow:0 10px 25px rgba(37,211,102,0.3);" onclick="vibrar(); compartirSeguimientoGlobal()">📍 COMPARTIR SEGUIMIENTO</button>
+                <!-- BOTÓN COMPARTIR SEGUIMIENTO GLOBAL -->
+                <button class="btn-main" style="width:100%; margin-top:16px; background:#25D366; box-shadow:0 10px 25px rgba(37,211,102,0.3);" onclick="vibrar(); compartirSeguimientoGlobal()">📍 COMPARTIR MAPA GENERAL</button>
             </div>
 
             <div class="admin-card" style="border-top:4px solid var(--primary-orange);">
@@ -941,7 +943,7 @@
     <div class="modal" id="pedidos-web-modal"><div class="modal-content" style="width:100%; max-width:500px; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background: var(--bg-app); border:none;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;"><h3 style="margin:0; font-size:1.8rem; font-weight:800; font-family:'Outfit'; color:var(--primary-orange); letter-spacing:-0.5px;">Pedidos Web</h3><button style="background:rgba(255,94,0,0.1); border:none; font-size:1.1rem; color:var(--primary-orange); cursor:pointer; width:35px; height:35px; border-radius:50%;" onclick="document.getElementById('pedidos-web-modal').style.display='none'">✕</button></div><div id="pedidos-web-list" style="flex:1; overflow-y:auto; text-align:left; display:flex; flex-direction:column; gap:16px; padding-bottom:40px;"></div></div></div>
     <div class="modal" id="ventas-modal"><div class="modal-content" style="width:100%; max-width:500px; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background: var(--bg-app); border:none;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;"><h3 style="margin:0; font-size:1.8rem; font-weight:800; font-family:'Outfit'; color:var(--success);">Ventas Diarias</h3><button style="background:rgba(16,185,129,0.1); border:none; font-size:1.1rem; color:var(--success); cursor:pointer; width:35px; height:35px; border-radius:50%;" onclick="document.getElementById('ventas-modal').style.display='none'">✕</button></div><div id="chofer-logs-modal-container" style="flex:1; overflow-y:auto; text-align:left; padding-bottom:40px;"></div></div></div>
 
-    <!-- SCRIPT PRINCIPAL -->
+    <!-- SCRIPT PRINCIPAL LÍMPIO -->
     <script>
         const qs = (id) => document.getElementById(id);
         const setText = (id, txt) => { if(qs(id)) qs(id).innerText = txt; }
@@ -966,8 +968,8 @@
         let pendingTransferData = null;
         let currentCierreData = null; 
         
+        // Variables Globales GPS Optimizado
         let isGpsActive = false;
-        let gpsSubscription = null;
         let driverGpsWatchId = null;
 
         function vibrar(ms = 40) { if(navigator.vibrate) navigator.vibrate(ms); }
@@ -1285,7 +1287,7 @@
                 hora: getTucumanTimeFE(), 
                 descripcion: desc,
                 moto_asignada: motoSelected,
-                recibo_url: urlRecibo
+                recibo_url: urlRecibo // <<--- AQUI SE GUARDA LA FOTO
             }]); 
             
             if(selProd && qtyToDeduct > 0) {
@@ -1340,8 +1342,8 @@
             } 
         }
 
-        function abrirSheetTransfVenta() {
-            let val = getCalcValue();
+        window.abrirSheetTransfVenta = function() {
+            let val = getCalcValue(); // LECTURA SEGURA
             if(val <= 0) return alert("Escribí un monto mayor a 0 en la caja primero."); 
             
             pendingTransferData = { type: 'SALE_TRANSF', amount: val };
@@ -1355,9 +1357,9 @@
         function elegirCamara() { if(qs('foto-input-camara')) qs('foto-input-camara').click(); setTimeout(() => { cerrarSheet(); }, 500); }
         function elegirGaleria() { if(qs('foto-input-galeria')) qs('foto-input-galeria').click(); setTimeout(() => { cerrarSheet(); }, 500); }
 
-        async function cerrarTurno() {
+        window.cerrarTurno = async function() {
             let calcCashMostrador = 0;
-            let calcTransf = 0;
+            let calcTransf = 0; // Agregado para transferencias
             let cashPorMoto = {};
             let totalCash = 0;
             let hitCierre = false;
@@ -1381,10 +1383,12 @@
                         totalCash += pAmt;
                     }
                 } else if (methodStr === 'TRANSFERENCIA') {
+                    // SUMAR TRANSFERENCIAS PARA MOSTRARLAS EN EL ARQUEO
                     calcTransf += pAmt;
                 }
             });
 
+            // CONSTRUIR UI DEL MODAL
             let htmlBreakdown = `
             <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 16px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.1);">
                 <div style="display:flex; justify-content:space-between; margin-bottom: 12px; font-size:1.1rem;">
@@ -1434,7 +1438,7 @@
             if(qs('cierre-turno-modal')) qs('cierre-turno-modal').style.display = 'flex';
         }
 
-        async function confirmarCierreTurno() {
+        window.confirmarCierreTurno = async function() {
             if(!currentCierreData) return;
             let btn = qs('cierre-turno-modal').querySelector('.btn-main');
             if(btn) { btn.innerText = "CERRANDO..."; btn.disabled = true; }
@@ -1503,7 +1507,7 @@
             renderAllData();
         }
 
-        async function agregarMoto() {
+        window.agregarMoto = async function() {
             let n = qs('add-moto-name') ? qs('add-moto-name').value.trim() : '';
             if(!n) return showToast("Escribí el nombre", "error");
             
@@ -1552,7 +1556,7 @@
             }
         }
 
-        async function guardarPromo() {
+        window.guardarPromo = async function() {
             let title = qs('promo-title') ? qs('promo-title').value.trim() : '';
             if(!tempPromoFile || !title) return showToast("Faltan datos de la promo", "error");
             
@@ -1611,7 +1615,7 @@
             } 
         }
 
-        async function guardarPerfilTienda() {
+        window.guardarPerfilTienda = async function() {
             let btn = qs('btn-save-profile');
             if(btn) { btn.innerText = "GUARDANDO..."; btn.disabled = true; }
             
@@ -1959,7 +1963,7 @@
             reobserveVideos();
         }
 
-        function filtrarMenuCliente() { 
+        window.filtrarMenuCliente = function() { 
             let q = qs('public-search') ? qs('public-search').value.toLowerCase().trim() : ''; 
             document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
             if(!q) return renderMenuItems(menuItems); 
@@ -1977,7 +1981,7 @@
             }
         });
 
-        function openQuickView(code) {
+        window.openQuickView = function(code) {
             let item = menuItems.find(i => i.codigo === code); if(!item) return;
             currentQvItem = item; currentQvQty = 1;
             setText('qv-title', item.nombre);
@@ -2006,19 +2010,19 @@
             if(qs('modal-quick-view')) qs('modal-quick-view').style.display = 'flex';
         }
 
-        function cambiarQty(delta) { 
+        window.cambiarQty = function(delta) { 
             currentQvQty = Math.max(1, currentQvQty + delta); 
             setText('qv-qty', currentQvQty);
             setText('qv-price', `$${(currentQvItem.precio * currentQvQty).toLocaleString('es-AR')}`);
         }
 
-        function agregarDesdeQuickView() { 
+        window.agregarDesdeQuickView = function() { 
             for(let i=0; i<currentQvQty; i++) shoppingCart.push(currentQvItem); 
             if(qs('modal-quick-view')) qs('modal-quick-view').style.display = 'none'; 
             updateCartUI(); showToast("Añadido al pedido"); 
         }
 
-        function agregarAlCarritoDirecto(index) {
+        window.agregarAlCarritoDirecto = function(index) {
             shoppingCart.push(menuItems[index]);
             updateCartUI();
             showToast("Agregado");
@@ -2038,7 +2042,7 @@
             }
         }
 
-        function abrirModalCarrito() {
+        window.abrirModalCarrito = function() {
             if(shoppingCart.length === 0) return;
             let html = ''; let total = 0;
             
@@ -2084,14 +2088,14 @@
             }
         }
 
-        function setDeliveryOption(opt) {
+        window.setDeliveryOption = function(opt) {
             isDeliveryOption = (opt === 'delivery');
             if(qs('btn-opt-del')) qs('btn-opt-del').classList.toggle('active', isDeliveryOption);
             if(qs('btn-opt-ret')) qs('btn-opt-ret').classList.toggle('active', !isDeliveryOption);
             if(qs('delivery-address-box')) qs('delivery-address-box').style.display = isDeliveryOption ? 'block' : 'none';
         }
 
-        async function enviarPedido(metodo) {
+        window.enviarPedido = async function(metodo) {
             let dir = qs('order-address') ? qs('order-address').value.trim() : ''; 
             if(isDeliveryOption && !dir) return showToast("Completá tu dirección.", "error");
             let notes = qs('order-notes') ? qs('order-notes').value.trim() : '';
@@ -2141,77 +2145,27 @@
             }
         }
 
-        window.submitSale = async function(metodo) {
-            let val = getCalcValue();
-            if(val <= 0) { showToast("Ingresá un monto mayor a 0", "error"); return; }
-            
-            let desc = selProd ? `Venta: ${selProd.nombre}` : 'Venta de Mostrador'; 
-            let motoSelected = qs('chofer-moto-select') ? qs('chofer-moto-select').value : null;
-            let qtyToDeduct = selProd ? Math.max(1, Math.floor(val / selProd.precio)) : 0;
-            
-            mostrarTicketAnimado();
-
-            await _supabase.from('pediloya_logs').insert([{ 
-                local_id: currentLocalId, 
-                tipo: 'VENTA', 
-                metodo: metodo, 
-                monto: val, 
-                fecha: getTucumanDateFE(), 
-                hora: getTucumanTimeFE(), 
-                descripcion: desc,
-                moto_asignada: motoSelected
-            }]); 
-            
-            if(selProd && qtyToDeduct > 0) {
-                let item = dbState.inventory.find(i => i.codigo === selProd.codigo);
-                if(item) {
-                    let newStock = Math.max(0, item.stock - qtyToDeduct);
-                    await _supabase.from('pediloya_inventario').update({ stock: newStock }).eq('codigo', selProd.codigo);
+        window.switchCustomerTab = function(tab, element) {
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active')); if(element) element.classList.add('active');
+            let fcb = qs('floating-cart-bar');
+            if(tab === 'menu') { 
+                if(qs('customer-tab-menu')) qs('customer-tab-menu').classList.remove('hidden'); 
+                if(qs('customer-tab-track')) qs('customer-tab-track').classList.add('hidden'); 
+                if(fcb) {
+                    fcb.classList.remove('hidden-hard');
+                    updateCartUI();
                 }
+            } else if(tab === 'track') { 
+                if(qs('customer-tab-menu')) qs('customer-tab-menu').classList.add('hidden'); 
+                if(qs('customer-tab-track')) qs('customer-tab-track').classList.remove('hidden'); 
+                if(fcb) fcb.classList.add('hidden-hard'); 
+                if(!trackingMap) updateLiveMap(-26.8241, -65.2226, 'tracking-map-container', false);
+                if(trackingMap) setTimeout(() => trackingMap.invalidateSize(), 300);
             }
-            
-            await loadDataFromDB(); 
-            clearCalc();
-            showToast("Venta registrada.");
-        }
-        
-        window.triggerExpenseModal = function() {
-            let val = getCalcValue();
-            if(val <= 0) { showToast("Escribí el monto del gasto en la caja primero.", "error"); return; }
-            setText('exp-monto-text', `$${val.toLocaleString('es-AR')}`);
-            setVal('exp-rsn', '');
-            if(qs('expense-modal')) qs('expense-modal').style.display='flex';
-        }
-
-        window.submitExpense = async function() {
-            let val = getCalcValue();
-            let rsn = qs('exp-rsn') ? qs('exp-rsn').value.trim() : '';
-            if(!rsn) { showToast("Escribí el detalle del gasto", "error"); return; }
-            
-            await _supabase.from('pediloya_logs').insert([{ 
-                local_id: currentLocalId, 
-                tipo: 'SALIDA', 
-                metodo: 'EFECTIVO', 
-                monto: -val, 
-                fecha: getTucumanDateFE(), 
-                hora: getTucumanTimeFE(), 
-                descripcion: `Gasto: ${rsn}` 
-            }]); 
-            
-            await loadDataFromDB(); 
-            clearCalc();
-            if(qs('expense-modal')) qs('expense-modal').style.display='none';
-            showToast("Gasto registrado.");
-        }
-        
-        window.compartirSeguimientoGlobal = function() {
-            let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}&track=GPS`; 
-            let msg = `Seguí en vivo tu pedido de *${cUser}* desde este enlace de rastreo oficial: ${link}`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
         // ================= SISTEMA DE RASTREO GPS =================
-        function toggleDriverGps() {
+        window.toggleDriverGps = function() {
             let btn = qs('btn-gps');
             if(isGpsActive) {
                 isGpsActive = false;
@@ -2244,7 +2198,7 @@
             }
         }
 
-        function updateLiveMap(lat, lng, containerId, isOwner) {
+        window.updateLiveMap = function(lat, lng, containerId, isOwner) {
             let targetMap = isOwner ? radarMap : trackingMap;
             let targetMarker = isOwner ? radarMarker : trackingMarker;
 
@@ -2268,13 +2222,13 @@
         }
 
         let trackingInterval = null;
-        async function iniciarRastreoClienteManual() {
+        window.iniciarRastreoClienteManual = async function() {
             let code = qs('track-input-code') ? qs('track-input-code').value.trim().toUpperCase() : '';
             if(!code || !targetLocalId) return showToast("Falta código o local", "error");
             iniciarRastreoLoop();
         }
 
-        function iniciarRastreoCliente(code, localName) {
+        window.iniciarRastreoCliente = function(code, localName) {
             if(qs('track-input-code')) qs('track-input-code').value = code;
             cargarMenuCliente(localName).then(() => {
                 iniciarRastreoLoop();
@@ -2309,6 +2263,24 @@
                 if(!trackingMap) updateLiveMap(-26.8241, -65.2226, 'tracking-map-container', false);
             }
         }
+        
+        // Exportando funciones críticas a Window para evitar fallos de Scope
+        window.abrirPedidosWeb = abrirPedidosWeb;
+        window.abrirPosSheet = abrirPosSheet;
+        window.abrirModalMotos = abrirModalMotos;
+        window.triggerExpenseModal = triggerExpenseModal;
+        window.inputCalc = inputCalc;
+        window.clearCalc = clearCalc;
+        window.deleteCalc = deleteCalc;
+        window.evalCalc = evalCalc;
+        window.cerrarSheet = cerrarSheet;
+        window.elegirCamara = elegirCamara;
+        window.elegirGaleria = elegirGaleria;
+        window.registerAccount = registerAccount;
+        window.executeLogin = executeLogin;
+        window.leerCaracteristicasApp = leerCaracteristicasApp;
+        window.processTransferWithPhoto = processTransferWithPhoto;
+
     </script>
 </body>
 </html>
