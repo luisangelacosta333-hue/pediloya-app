@@ -89,7 +89,7 @@
         
         .logo-premium-wrapper { position: relative; width: 220px; height: 220px; margin: -10px auto 20px auto; display: flex; justify-content: center; align-items: center; }
         .logo-premium-rays { position: absolute; inset: -40px; background: conic-gradient(from 0deg, transparent 0%, rgba(255,94,0,0.8) 10%, transparent 20%, transparent 40%, rgba(255,94,0,0.8) 50%, transparent 60%, transparent 80%, rgba(255,94,0,0.8) 90%, transparent 100%); border-radius: 50%; animation: spinRays 8s linear infinite; filter: blur(25px); opacity: 0.8; z-index: 1; }
-        .logo-premium-core { width: 150px; height: 150px; border-radius: 40px; background: var(--bg-pure); border: 3px solid rgba(255,94,0,0.4); display: flex; align-items: center; justify-content: center; position: relative; z-index: 2; box-shadow: 0 30px 60px rgba(255,94,0,0.4), inset 0 0 30px rgba(255, 94, 0, 0.15); animation: floatLogo 4s ease-in-out infinite; }
+        .logo-premium-core { width: 150px; height: 150px; border-radius: 40px; background: transparent; border: none; display: flex; align-items: center; justify-content: center; position: relative; z-index: 2; animation: floatLogo 4s ease-in-out infinite; }
         
         .pedilo-ya-title { font-family: 'Outfit', sans-serif; font-size: 3.6rem; font-weight: 900; color: var(--text-dark); margin: 0 0 16px 0; text-transform: uppercase; letter-spacing: -2.5px; line-height: 1; text-shadow: 0 15px 30px rgba(0,0,0,0.08); }
         .pedilo-ya-title span { background: var(--gradient-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -340,7 +340,7 @@
         <div class="logo-premium-wrapper" style="width: 180px; height: 180px; margin-bottom: 30px;">
             <div class="logo-premium-rays"></div>
             <div class="logo-premium-core" style="width: 120px; height: 120px; border-radius: 30px; border:none; background:transparent; box-shadow:none;">
-                <img src="https://cdn-icons-png.flaticon.com/512/2830/2830305.png" style="width:140px; height:140px; object-fit:contain; filter:drop-shadow(0 15px 25px rgba(255,94,0,0.4)); transform:scale(1.2);">
+                <img src="https://img.icons8.com/fluency/512/food-delivery.png" style="width:140px; height:140px; object-fit:contain; filter:drop-shadow(0 15px 25px rgba(255,94,0,0.4)); transform:scale(1.2);">
             </div>
         </div>
         <div style="font-family:'Outfit'; font-size:3rem; font-weight:900; letter-spacing:-2px; text-transform: uppercase; color:var(--text-dark);">PEDILO<span style="color:var(--primary-orange)">YA</span></div>
@@ -370,7 +370,7 @@
             <div class="logo-premium-wrapper">
                 <div class="logo-premium-rays"></div>
                 <div class="logo-premium-core" style="border:none; background:transparent; box-shadow:none;">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2830/2830305.png" style="width:180px; height:180px; object-fit:contain; filter:drop-shadow(0 15px 25px rgba(255,94,0,0.4)); transform:scale(1.2);">
+                    <img src="https://img.icons8.com/fluency/512/food-delivery.png" style="width:180px; height:180px; object-fit:contain; filter:drop-shadow(0 15px 25px rgba(255,94,0,0.4)); transform:scale(1.2);">
                 </div>
             </div>
             
@@ -1035,11 +1035,11 @@
             if(!('speechSynthesis' in window)) return alert("Tu navegador no soporta el asistente de voz.");
             window.speechSynthesis.cancel();
             const speech = new SpeechSynthesisUtterance(); 
-            speech.text = "¡Bienvenido a Pedilo, ya, Premium por Energy Software! La solución tecnológica definitiva para tu comercio gastronómico. Muestra tu negocio en el celular de tus clientes con menú en video vertical formato TikTok de alta definición. Tus clientes hacen sus pedidos en segundos con carrito ágil y siguen a la motito en vivo por GPS satelital. Además, contás con caja registradora inteligente que descuenta stock automáticamente, control de gastos, gestión en vivo de repartidores y panel de métricas. El sistema está diseñado exclusivamente para ventas de contado, garantizando que tengas control exacto de lo que debe entregarte cada repartidor. ¡Sumate a la revolución del delivery!"; 
+            speech.text = "¡Atención dueño de local! Bienvenido a Pedilo Ya Premium. Esta es la herramienta definitiva para multiplicar tus ventas. Imaginate a tus clientes viendo tu comida en videos verticales de alta definición, estilo TikTok. ¡Se les va a hacer agua la boca! Podrán hacer su pedido en tres simples clics con nuestro carrito avanzado, y rastrear al repartidor en vivo por GPS en el mapa. ¿Lo mejor para vos? Cero comisiones por venta. Contás con una caja registradora inteligente que descuenta el stock automático, control estricto de gastos, panel del dueño con métricas, y un sistema impecable para saber exactamente cuánta plata tiene que rendirte cada motito. Todo ilimitado, rápido y sin intermediarios. ¡Sumate a la revolución del delivery y dominá tu zona hoy mismo!"; 
             speech.lang = 'es-AR'; 
-            speech.rate = 1.0; 
+            speech.rate = 1.05; 
             window.speechSynthesis.speak(speech); 
-            showToast("Reproduciendo presentación de voz...");
+            showToast("Reproduciendo presentación...");
         }
 
         async function compressImage(file) {
