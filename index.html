@@ -625,7 +625,8 @@
             <button class="chofer-pay-btn" onclick="vibrar(); submitSale('EFECTIVO')">💵 EFECTIVO</button>
             <button class="btn-pay-transfer" onclick="vibrar(); abrirSheetTransfVenta()">🏦 TRANSF.</button>
         </div>
-        <button style="flex-shrink:0; width:100%; border-radius:16px; padding:14px; font-weight:800; font-size:1rem; font-family:'Outfit'; text-transform:uppercase; background:var(--text-dark); color:white; border:none; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; box-shadow:0 10px 25px rgba(15,23,42,0.3); transition:0.2s;" onclick="vibrar(); cerrarTurno()">🔒 CERRAR TURNO</button>
+        <!-- BOTÓN CERRAR TURNO CORREGIDO CON MARGIN-BOTTOM 80PX PARA VISIBILIDAD -->
+        <button style="flex-shrink:0; width:100%; border-radius:16px; padding:14px; font-weight:800; font-size:1rem; font-family:'Outfit'; text-transform:uppercase; background:var(--text-dark); color:white; border:none; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; box-shadow:0 10px 25px rgba(15,23,42,0.3); transition:0.2s; margin-bottom: 80px;" onclick="vibrar(); cerrarTurno()">🔒 CERRAR TURNO</button>
     </div>
 
     <!-- VISTA 3: PANEL DUEÑO -->
@@ -685,6 +686,9 @@
                     <button class="btn-main" style="width:auto; padding: 0 20px; background:var(--text-dark); box-shadow:none;" onclick="vibrar(); agregarMoto()">AGREGAR</button>
                 </div>
                 <div id="adm-motos-list" style="display:flex; flex-direction:column; gap:8px;"></div>
+                
+                <!-- BOTÓN COMPARTIR SEGUIMIENTO SOLICITADO -->
+                <button class="btn-main" style="width:100%; margin-top:16px; background:#25D366; box-shadow:0 10px 25px rgba(37,211,102,0.3);" onclick="vibrar(); compartirSeguimientoGlobal()">📍 COMPARTIR SEGUIMIENTO</button>
             </div>
 
             <div class="admin-card" style="border-top:4px solid var(--primary-orange);">
@@ -2174,10 +2178,83 @@
                 setTimeout(() => tkt.classList.remove('show'), 1500);
             }
         }
+        
+        // ================= NUEVO: FUNCIÓN PARA COBRAR =================
+        window.submitSale = async function(metodo) {
+            let val = getCalcValue(); // LECTURA SEGURA TRAS PRESIONAR EL IGUAL
+            if(val <= 0) { showToast("Ingresá un monto mayor a 0", "error"); return; }
+            
+            let desc = selProd ? `Venta: ${selProd.nombre}` : 'Venta de Mostrador'; 
+            let motoSelected = qs('chofer-moto-select') ? qs('chofer-moto-select').value : null;
+            let qtyToDeduct = selProd ? Math.max(1, Math.floor(val / selProd.precio)) : 0;
+            
+            mostrarTicketAnimado();
+
+            await _supabase.from('pediloya_logs').insert([{ 
+                local_id: currentLocalId, 
+                tipo: 'VENTA', 
+                metodo: metodo, 
+                monto: val, 
+                fecha: getTucumanDateFE(), 
+                hora: getTucumanTimeFE(), 
+                descripcion: desc,
+                moto_asignada: motoSelected
+            }]); 
+            
+            if(selProd && qtyToDeduct > 0) {
+                let item = dbState.inventory.find(i => i.codigo === selProd.codigo);
+                if(item) {
+                    let newStock = Math.max(0, item.stock - qtyToDeduct);
+                    await _supabase.from('pediloya_inventario').update({ stock: newStock }).eq('codigo', selProd.codigo);
+                }
+            }
+            
+            await loadDataFromDB(); 
+            clearCalc();
+            showToast("Venta registrada.");
+        }
+        
+        // ================= NUEVO: FUNCIONES PARA REGISTRAR GASTOS =================
+        window.triggerExpenseModal = function() {
+            let val = getCalcValue();
+            if(val <= 0) { showToast("Escribí el monto del gasto en la caja primero.", "error"); return; }
+            setText('exp-monto-text', `$${val.toLocaleString('es-AR')}`);
+            setVal('exp-rsn', '');
+            if(qs('expense-modal')) qs('expense-modal').style.display='flex';
+        }
+
+        window.submitExpense = async function() {
+            let val = getCalcValue();
+            let rsn = qs('exp-rsn') ? qs('exp-rsn').value.trim() : '';
+            if(!rsn) { showToast("Escribí el detalle del gasto", "error"); return; }
+            
+            await _supabase.from('pediloya_logs').insert([{ 
+                local_id: currentLocalId, 
+                tipo: 'SALIDA', 
+                metodo: 'EFECTIVO', 
+                monto: -val, 
+                fecha: getTucumanDateFE(), 
+                hora: getTucumanTimeFE(), 
+                descripcion: `Gasto: ${rsn}` 
+            }]); 
+            
+            await loadDataFromDB(); 
+            clearCalc();
+            if(qs('expense-modal')) qs('expense-modal').style.display='none';
+            showToast("Gasto registrado.");
+        }
 
         function actualizarLinkDisplay() { let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}`; setVal('store-link-display', link); }
         function copiarLinkExacto() { let copyText = qs("store-link-display"); if(copyText){ copyText.select(); copyText.setSelectionRange(0, 99999); try { document.execCommand("copy"); showToast("Link copiado."); } catch(e) { alert("Mantené presionado el link para copiarlo."); } } }
         function compartirLinkNativo() { let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}`; if (navigator.share) { navigator.share({ title: `Menú de ${cUser}`, text: `¡Hacé tu pedido online! 🛵🍔`, url: link }).catch(err => console.log(err)); } else { copiarLinkExacto(); } }
+        
+        // ================= NUEVO: BOTÓN COMPARTIR SEGUIMIENTO SOLICITADO =================
+        window.compartirSeguimientoGlobal = function() {
+            let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}&track=GPS`; 
+            let msg = `Seguí en vivo tu pedido de *${cUser}* desde este enlace de rastreo oficial: ${link}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+        
         function abrirPedidosWeb() { if(qs('pedidos-web-modal')) qs('pedidos-web-modal').style.display='flex'; }
         function abrirRadarDueno() { if(qs('modal-radar-owner')) qs('modal-radar-owner').style.display='flex'; actualizarRadarMap(); setTimeout(actualizarRadarMap, 500); }
         async function actualizarRadarMap() { showToast("Buscando GPS...", "info"); let { data } = await _supabase.from('pediloya_logs').select('descripcion').eq('local_id', currentLocalId).eq('tipo', 'GPS_DELI').order('created_at', {ascending: false}).limit(1).maybeSingle(); if(data) { try { let coords = JSON.parse(data.descripcion); updateLiveMap(coords.lat, coords.lon, 'radar-owner-map-container', true); showToast("Actualizado"); } catch(e) {} } }
