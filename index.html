@@ -204,7 +204,7 @@
         .client-search:focus { border-color: var(--primary-orange); box-shadow: 0 15px 35px rgba(255,94,0,0.1); }
 
         .category-title { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.8rem; margin: 0 0 24px; color: var(--text-dark); padding: 0 24px; letter-spacing: -0.5px;}
-        
+
         .food-grid { display: flex; flex-direction: column; gap: 30px; padding: 0 24px 100px; }
         
         .food-card-large { width: 100%; aspect-ratio: 9 / 16; max-height: 85vh; background: #0f172a; border-radius: 40px; box-shadow: var(--shadow-float); overflow: hidden; cursor: pointer; transition: var(--transition-smooth); position: relative; }
@@ -246,7 +246,6 @@
         .sheet-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999998; display: none; opacity: 0; transition: opacity 0.3s; }
         .sheet-overlay.show { display: block; opacity: 1; }
         
-        /* FIX: ELIMINACIÓN DE ESPACIO BLANCO INFERIOR */
         .bottom-nav { 
             position: fixed; 
             bottom: 0 !important; 
@@ -684,30 +683,38 @@
                     <div id="adm-flash-status" style="margin-top:12px; font-size:0.9rem; font-weight:800; color:var(--danger);"></div>
                 </div>
 
-                <!-- CUPONES INTELIGENTES PREMIUM -->
+                <!-- CÓDIGOS DE PROMOCIÓN MEJORADOS -->
                 <div style="background:#f0fdf4; border:2px dashed var(--success); border-radius:24px; padding:24px;">
-                    <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+                    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
                         <span style="font-size:1.8rem;">🎁</span>
-                        <h4 style="margin:0; font-size:1.4rem; font-family:'Outfit'; font-weight:800; color:var(--success);">Cupones para WhatsApp</h4>
+                        <h4 style="margin:0; font-size:1.5rem; font-family:'Outfit'; font-weight:900; color:var(--success);">Códigos de Promoción</h4>
                     </div>
-                    <p style="font-size:1.05rem; color:var(--text-gray); margin-bottom:24px; font-weight:500; line-height:1.5;">
-                        Fidelizá a tus clientes creando códigos secretos. Por ejemplo, podés crear el código <strong>"PROMO-WHATSAPP"</strong> con 10% de descuento y enviarlo a tus contactos. Tus clientes lo ingresan en el carrito antes de pagar y se aplica automáticamente.
+                    <p style="font-size:1.05rem; color:var(--text-gray); margin-bottom:20px; line-height:1.5; font-weight:500;">
+                        Creá códigos de descuento para compartir por WhatsApp o redes sociales. Cuando el cliente escriba este código en su carrito, se le descontará automáticamente.
                     </p>
                     
                     <div style="display:flex; flex-direction:column; gap:16px; margin-bottom:20px;">
-                        <input type="text" id="cup-code" class="form-input" placeholder="Escribí el Código (Ej: PROMO-WHATSAPP)" style="margin:0; padding:20px; font-size:1.1rem; text-transform:uppercase; background:white; border:2px solid var(--success); border-radius:18px; font-weight:800; color:var(--text-dark);">
-                        
+                        <div>
+                            <label style="font-size:0.95rem; font-weight:800; color:var(--text-dark); margin-bottom:8px; display:block;">Nombre del Código</label>
+                            <input type="text" id="cup-code" class="form-input" placeholder="Ej: PROMO-WHATSAPP" style="margin:0; text-transform:uppercase; background:white; border:2px solid var(--border-soft); font-size:1.1rem; padding:18px;">
+                        </div>
                         <div style="display:flex; gap:12px;">
-                            <input type="number" id="cup-val" class="form-input" placeholder="Valor (Ej: 10)" style="margin:0; flex:2; padding:20px; font-size:1.1rem; background:white; border:2px solid var(--border-soft); border-radius:18px; font-weight:700;">
-                            <select id="cup-type" class="form-input" style="margin:0; flex:1.5; padding:20px 10px; font-size:1.1rem; background:white; border:2px solid var(--border-soft); border-radius:18px; font-weight:800; cursor:pointer;">
-                                <option value="porcentaje">Porcentaje (%)</option>
-                                <option value="monto">Dinero Fijo ($)</option>
-                            </select>
+                            <div style="flex:2;">
+                                <label style="font-size:0.95rem; font-weight:800; color:var(--text-dark); margin-bottom:8px; display:block;">Descuento</label>
+                                <input type="number" id="cup-val" class="form-input" placeholder="Ej: 1500 o 10" style="margin:0; background:white; border:2px solid var(--border-soft); font-size:1.1rem; padding:18px;">
+                            </div>
+                            <div style="flex:1;">
+                                <label style="font-size:0.95rem; font-weight:800; color:var(--text-dark); margin-bottom:8px; display:block;">Tipo</label>
+                                <select id="cup-type" class="form-input" style="margin:0; padding:18px; background:white; border:2px solid var(--border-soft); font-weight:800; font-size:1.1rem;">
+                                    <option value="monto">$ (Pesos)</option>
+                                    <option value="porcentaje">% (Porc.)</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <button class="btn-main" style="background:var(--success); font-size:1.1rem; padding:20px; border-radius:18px; box-shadow:0 10px 25px rgba(16,185,129,0.3);" onclick="vibrar([40]); agregarCupon()">CREAR CÓDIGO DE DESCUENTO</button>
+                    <button class="btn-main" style="background:var(--success); box-shadow:0 10px 25px rgba(16,185,129,0.3); padding:20px; font-size:1.1rem;" onclick="vibrar([40]); agregarCupon()">CREAR CÓDIGO DE PROMOCIÓN</button>
                     
-                    <div id="adm-cupones-list" style="margin-top:24px; display:flex; flex-direction:column; gap:10px;"></div>
+                    <div id="adm-cupones-list" style="margin-top:24px; display:flex; flex-direction:column; gap:12px;"></div>
                 </div>
             </div>
 
@@ -723,28 +730,18 @@
                 <button class="btn-main" style="width:100%; margin-top:16px; background:#25D366; box-shadow:0 10px 25px rgba(37,211,102,0.3);" onclick="vibrar([40]); compartirSeguimientoGlobal()">📍 COMPARTIR SEGUIMIENTO</button>
             </div>
 
-            <!-- BANNERS PROMOCIONALES PREMIUM -->
             <div class="admin-card" style="border-top:4px solid var(--primary-orange);">
-                <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
-                    <span style="font-size:1.8rem;">📢</span>
-                    <h3 style="margin:0; font-size:1.5rem; font-family:'Outfit'; font-weight:800; color:var(--text-dark);">Banners Promocionales</h3>
-                </div>
-                <p style="font-size:1.05rem; color:var(--text-gray); margin-bottom:24px; font-weight:500; line-height:1.5;">
-                    Subí imágenes apaisadas para destacar ofertas especiales en la parte superior de tu menú. Es ideal para mostrar visualmente los combos del día o promociones especiales.
-                </p>
+                <h3 style="margin:0 0 15px; font-size:1.5rem; font-family:'Outfit'; font-weight:800; color:var(--text-dark);">📢 Promociones</h3>
+                <p style="font-size:0.95rem; color:var(--text-gray); margin-bottom:24px;">Subí un banner apaisado para la portada del menú.</p>
                 
-                <input type="text" id="promo-title" class="form-input" placeholder="Título (Ej: Promo Jueves: 2x1 en Burgers)" style="padding:20px; font-size:1.1rem; border:2px solid var(--border-soft); font-weight:700; margin-bottom:16px;">
-                <div class="upload-box-hero" style="min-height:220px; border-radius:24px; border:3px dashed rgba(255,94,0,0.4);" onclick="document.getElementById('input-promo-img').click()">
-                    <div id="placeholder-promo" class="upload-placeholder">
-                        <span class="upload-icon" style="font-size:3rem; margin-bottom:12px;">🖼️</span>
-                        <span class="upload-text" style="font-size:1.2rem;">Tocar para subir banner</span>
-                        <span style="font-size:0.9rem; color:var(--text-light); margin-top:8px;">Formato apaisado recomendado</span>
-                    </div>
+                <input type="text" id="promo-title" class="form-input" placeholder="Ej: Promo Lunes: Pizza + Coca">
+                <div class="upload-box-hero" style="min-height:180px; border-radius:24px; border:3px dashed rgba(255,94,0,0.4);" onclick="document.getElementById('input-promo-img').click()">
+                    <div id="placeholder-promo" class="upload-placeholder"><span class="upload-icon">🖼️</span><span class="upload-text">Subir Banner Promo</span></div>
                     <img id="promo-preview-img" class="upload-media" style="border-radius:24px;">
                 </div>
                 <input type="file" id="input-promo-img" accept="image/*" style="display:none;" onchange="previewPromo(this)">
                 
-                <button class="btn-main" id="btn-save-promo" style="padding:20px; font-size:1.1rem; border-radius:18px; margin-top:20px;" onclick="vibrar([40]); guardarPromo()">PUBLICAR BANNER</button>
+                <button class="btn-main" id="btn-save-promo" onclick="vibrar([40]); guardarPromo()">PUBLICAR PROMO</button>
                 <div id="adm-promo-list" style="margin-top:24px;"></div>
             </div>
 
@@ -762,8 +759,7 @@
                 </div>
                 <input type="file" id="input-store-logo" accept="image/*" style="display:none;" onchange="previewStoreLogo(this)">
                 
-                <input type="text" id="store-address-input" class="form-input" placeholder="Dirección (Ej: Laprida 333)">
-                <input type="text" id="store-hours-input" class="form-input" placeholder="Días y Horarios (Ej: Mar a Dom 20hs a 00hs)">
+                <input type="text" id="store-address-input" class="form-input" placeholder="Laprida 333 Famaillá Tucumán">
                 <input type="tel" id="store-wa-input" class="form-input" placeholder="WhatsApp Público (Opcional)">
                 <textarea id="store-desc-input" class="form-input" style="resize:none; padding:20px 24px;" rows="3" placeholder="Slogan (Ej: Tu mejor opción delivery)"></textarea>
                 
@@ -814,8 +810,7 @@
 
             <div class="storefront-details">
                 <h1 id="public-store-name" style="font-size: 2.2rem; font-family: 'Outfit'; font-weight: 800; color: var(--text-dark); margin: 0 0 10px 0; letter-spacing: -1px; text-transform: uppercase; line-height: 1;">Local</h1>
-                <p id="public-store-address" style="font-size: 1rem; color: var(--text-gray); margin: 0 0 8px 0; font-weight: 600;">📍 Sin dirección</p>
-                <p id="public-store-hours" style="font-size: 1rem; color: var(--text-gray); margin: 0 0 16px 0; font-weight: 600;">🕒 Horarios no especificados</p>
+                <p id="public-store-address" style="font-size: 1rem; color: var(--text-gray); margin: 0 0 16px 0; font-weight: 600;">📍 Sin dirección</p>
                 <p id="public-store-desc" style="font-size: 1.05rem; color: var(--text-gray); margin: 0 0 32px 0; font-weight: 500; padding: 0 10px;">Hacé tu pedido online 🛵</p>
                 
                 <div class="social-buttons-row" style="display: flex; gap: 16px; justify-content: center; margin-bottom: 32px; flex-wrap: wrap;">
@@ -824,7 +819,7 @@
                 </div>
 
                 <div style="margin-top: 10px; padding: 0 24px;">
-                    <input type="text" id="public-search" class="client-search" placeholder="Buscar hamburguesa, lomo..." onkeyup="filtrarMenuCliente()">
+                    <input type="text" id="public-search" class="client-search" placeholder="Buscar producto..." onkeyup="filtrarMenuCliente()">
                 </div>
             </div>
             
@@ -839,9 +834,8 @@
                 <span id="flash-sale-timer" style="background: white; color: var(--danger); padding: 6px 14px; border-radius: 50px; font-size: 1.25rem; font-weight: 900; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); white-space: nowrap;">00:00</span>
             </div>
 
-            <!-- MENÚ ÚNICO SIN CATEGORÍAS HORIZONTALES -->
-            <div class="category-title" style="text-align:center; font-size:2rem; margin-top:10px;">🍽️ Nuestro Menú</div>
-            
+            <div class="category-title">Nuestro Menú</div>
+
             <div class="food-grid" id="customer-food-grid">
                 <p style="text-align:center; width:100%; color:var(--text-light); padding: 40px; font-weight: 500; font-size: 1.1rem;">Cargando menú delicioso...</p>
             </div>
@@ -1010,7 +1004,7 @@
 
         let dbState = { inventory:[], logs:[], repartidores:[] };
         let cUser = "LOCAL_GENERICO", currentLocalId = "", cAdminPin = "0000", expr = "", isEval = false;
-        let shoppingCart = [], storeData = { perfil_url: '', descripcion: '', direccion: '', dias_horarios: '', maps_url: '', whatsapp_publico: '', promos: [], sub_end_date: '', cupones: [], oferta_relampago: null };
+        let shoppingCart = [], storeData = { perfil_url: '', descripcion: '', direccion: '', maps_url: '', whatsapp_publico: '', promos: [], sub_end_date: '', cupones: [], oferta_relampago: null };
         let selProd = null, currentQvItem = null, currentQvQty = 1;
         let targetLocalId = "", targetLocalName = "", targetLocalPhone = "";
         let isDeliveryOption = true;
@@ -1228,7 +1222,7 @@
                 await _supabase.auth.signUp({ email: `${waLimpio}@pediloya.com`, password: pin + "IA" }).catch(e=>console.log(e));
                 
                 let endDate = new Date(); endDate.setDate(endDate.getDate() + 30); 
-                let appDataObj = { perfil_url: '', descripcion: 'Tu mejor opción delivery', direccion: '', dias_horarios: '', maps_url: '', whatsapp_publico: waLimpio, promos: [], sub_end_date: endDate.toISOString(), repartidores: [], cupones: [], oferta_relampago: null };
+                let appDataObj = { perfil_url: '', descripcion: 'Tu mejor opción delivery', direccion: '', maps_url: '', whatsapp_publico: waLimpio, promos: [], sub_end_date: endDate.toISOString(), repartidores: [], cupones: [], oferta_relampago: null };
 
                 let { error } = await _supabase.from('pediloya_usuarios').insert([{ local: local, pin: pin, admin_pin: apin, whatsapp: waLimpio, prov: 'Gastronomia', app_data: appDataObj }]);
                 
@@ -1258,7 +1252,7 @@
                 
                 currentLocalId = data.id; cUser = data.local; targetLocalPhone = data.whatsapp; 
                 cAdminPin = data.admin_pin || "0000";
-                storeData = data.app_data || { perfil_url: '', descripcion: '', direccion: '', dias_horarios: '', maps_url: '', whatsapp_publico: '', promos: [], sub_end_date: '', repartidores: [], cupones: [], oferta_relampago: null };
+                storeData = data.app_data || { perfil_url: '', descripcion: '', direccion: '', maps_url: '', whatsapp_publico: '', promos: [], sub_end_date: '', repartidores: [], cupones: [], oferta_relampago: null };
                 
                 setText('lbl-owner', cUser);
                 await loadDataFromDB(); 
@@ -1612,7 +1606,6 @@
             
             setVal('store-desc-input', storeData.descripcion || '');
             setVal('store-address-input', storeData.direccion || '');
-            setVal('store-hours-input', storeData.dias_horarios || '');
             setVal('store-wa-input', storeData.whatsapp_publico || targetLocalPhone || '');
 
             dbState.repartidores = storeData.repartidores || [];
@@ -1692,12 +1685,12 @@
             cupones.forEach(c => {
                 let displayVal = c.tipo === 'monto' ? `$${c.val.toLocaleString('es-AR')}` : `${c.val}%`;
                 html += `
-                <div style="display:flex; justify-content:space-between; align-items:center; background:white; padding:12px 16px; border-radius:14px; border:1px solid var(--border-soft);">
-                    <div style="font-weight:800; color:var(--text-dark); font-family:'Outfit';">🎟️ ${c.codigo} <span style="color:var(--success); margin-left:8px;">${displayVal} OFF</span></div>
-                    <button onclick="eliminarCupon(${c.id})" style="background:#fee2e2; border:none; color:var(--danger); border-radius:8px; padding:6px 10px; cursor:pointer; font-weight:bold;">🗑️</button>
+                <div style="display:flex; justify-content:space-between; align-items:center; background:white; padding:16px 20px; border-radius:18px; border:2px solid var(--border-soft); box-shadow:var(--shadow-soft);">
+                    <div style="font-weight:900; color:var(--text-dark); font-family:'Outfit'; font-size:1.1rem;">🎟️ ${c.codigo} <span style="color:var(--success); margin-left:12px; font-size:1.2rem;">${displayVal} OFF</span></div>
+                    <button onclick="eliminarCupon(${c.id})" style="background:#fee2e2; border:none; color:var(--danger); border-radius:12px; padding:10px 14px; cursor:pointer; font-weight:bold; font-size:1.1rem;">🗑️</button>
                 </div>`;
             });
-            setHtml('adm-cupones-list', html || '<p style="color:var(--text-gray); font-size:0.9rem; margin:8px 0 0 0;">No hay cupones activos.</p>');
+            setHtml('adm-cupones-list', html || '<p style="color:var(--text-gray); font-size:1.05rem; margin:8px 0 0 0; font-weight:500;">No hay códigos activos.</p>');
         }
 
         window.eliminarCupon = async function(id) {
@@ -1813,12 +1806,12 @@
 
         async function guardarPromo() {
             let title = qs('promo-title') ? qs('promo-title').value.trim() : '';
-            if(!tempPromoFile || !title) return showToast("Faltan datos del banner", "error");
+            if(!tempPromoFile || !title) return showToast("Faltan datos de la promo", "error");
             
             if(qs('btn-save-promo')) { setText('btn-save-promo', "SUBIENDO..."); qs('btn-save-promo').disabled = true; }
             
             let url = await uploadFileDirect(tempPromoFile);
-            if(!url) { if(qs('btn-save-promo')) { setText('btn-save-promo', "PUBLICAR BANNER"); qs('btn-save-promo').disabled = false; } return; }
+            if(!url) { if(qs('btn-save-promo')) { setText('btn-save-promo', "PUBLICAR PROMO"); qs('btn-save-promo').disabled = false; } return; }
             
             let promos = storeData.promos || [];
             promos.push({ id: Date.now(), title: title, img: url });
@@ -1831,8 +1824,8 @@
             if(qs('promo-preview-img')) qs('promo-preview-img').style.display = 'none';
             if(qs('placeholder-promo')) qs('placeholder-promo').style.display = 'flex';
             
-            if(qs('btn-save-promo')) { setText('btn-save-promo', "PUBLICAR BANNER"); qs('btn-save-promo').disabled = false; }
-            showToast("Banner publicado");
+            if(qs('btn-save-promo')) { setText('btn-save-promo', "PUBLICAR PROMO"); qs('btn-save-promo').disabled = false; }
+            showToast("Promo publicada");
             renderPromosListAdmin();
         }
 
@@ -1852,11 +1845,11 @@
         }
 
         window.eliminarPromo = async function(idx) {
-            if(confirm("¿Eliminar banner?")) {
+            if(confirm("¿Eliminar promoción?")) {
                 storeData.promos.splice(idx, 1);
                 await _supabase.from('pediloya_usuarios').update({ app_data: storeData }).eq('id', currentLocalId);
                 renderPromosListAdmin();
-                showToast("Eliminado", "info");
+                showToast("Eliminada", "info");
             }
         }
 
@@ -1882,12 +1875,11 @@
                 }
                 
                 let addr = qs('store-address-input') ? qs('store-address-input').value.trim() : '';
-                let hours = qs('store-hours-input') ? qs('store-hours-input').value.trim() : '';
                 let wa = qs('store-wa-input') ? qs('store-wa-input').value.trim() : '';
                 let desc = qs('store-desc-input') ? qs('store-desc-input').value.trim() : '';
                 let autoMapLink = addr ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cUser + " " + addr)}` : '';
 
-                let newAppData = { ...storeData, perfil_url: urlFinal, descripcion: desc, direccion: addr, dias_horarios: hours, maps_url: autoMapLink, whatsapp_publico: wa };
+                let newAppData = { ...storeData, perfil_url: urlFinal, descripcion: desc, direccion: addr, maps_url: autoMapLink, whatsapp_publico: wa };
                 await _supabase.from('pediloya_usuarios').update({ app_data: newAppData }).eq('id', currentLocalId);
                 storeData = newAppData; 
                 showToast("Perfil guardado.");
@@ -2203,7 +2195,6 @@
                 }
                 
                 setText('public-store-address', sData.direccion ? `📍 ${sData.direccion}` : '📍 Sin dirección registrada');
-                setText('public-store-hours', sData.dias_horarios ? `🕒 ${sData.dias_horarios}` : '🕒 Horarios no especificados');
                 setText('public-store-desc', sData.descripcion || 'Hacé tu pedido online 🛵');
                 
                 let { data: inv } = await _supabase.from('pediloya_inventario').select('*').eq('local_id', usr.id);
@@ -2547,9 +2538,244 @@
                 let item = dbState.inventory.find(i => i.codigo === selProd.codigo);
                 if(item) {
                     let newStock = Math.max(0, item.stock - qtyToDeduct);
-                    await _supabase.from('pediloya_inventario').update({ stock: newStock }).eq('codigo', selProd.codigo);No puedo ayudarte porque soy un modelo de lenguaje que no tiene capacidad para entender lo que me estás pidiendo y responder.
-} 
+                    await _supabase.from('pediloya_inventario').update({ stock: newStock }).eq('codigo', selProd.codigo);
+                }
+            }
+            
+            await loadDataFromDB(); 
+            clearCalc();
+            showToast("Venta registrada.");
+        }
+        
+        window.triggerExpenseModal = function() {
+            let val = getCalcValue();
+            if(val <= 0) { showToast("Escribí el monto del gasto en la caja primero.", "error"); return; }
+            setText('exp-monto-text', `$${val.toLocaleString('es-AR')}`);
+            setVal('exp-rsn', '');
+            if(qs('expense-modal')) qs('expense-modal').style.display='flex';
+        }
+
+        window.submitExpense = async function() {
+            let val = getCalcValue();
+            let rsn = qs('exp-rsn') ? qs('exp-rsn').value.trim() : '';
+            if(!rsn) { showToast("Escribí el detalle del gasto", "error"); return; }
+            
+            await _supabase.from('pediloya_logs').insert([{ 
+                local_id: currentLocalId, 
+                tipo: 'SALIDA', 
+                metodo: 'EFECTIVO', 
+                monto: -val, 
+                fecha: getTucumanDateFE(), 
+                hora: getTucumanTimeFE(), 
+                descripcion: `Gasto: ${rsn}` 
+            }]); 
+            
+            await loadDataFromDB(); 
+            clearCalc();
+            if(qs('expense-modal')) qs('expense-modal').style.display='none';
+            showToast("Gasto registrado.");
+        }
+
+        function actualizarLinkDisplay() { let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}`; setVal('store-link-display', link); }
+        function copiarLinkExacto() { let copyText = qs("store-link-display"); if(copyText){ copyText.select(); copyText.setSelectionRange(0, 99999); try { document.execCommand("copy"); showToast("Link copiado."); } catch(e) { alert("Mantené presionado el link para copiarlo."); } } }
+        function compartirLinkNativo() { let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}`; if (navigator.share) { navigator.share({ title: `Menú de ${cUser}`, text: `¡Hacé tu pedido online! 🛵🍔`, url: link }).catch(err => console.log(err)); } else { copiarLinkExacto(); } }
+        
+        window.compartirSeguimientoGlobal = function() {
+            let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}&track=GPS`; 
+            let msg = `Seguí en vivo tu pedido de *${cUser}* desde este enlace de rastreo oficial: ${link}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        window.compartirTRKWhatsApp = function(trk) {
+            let link = window.location.origin + '/?local=' + encodeURIComponent(cUser) + '&track=' + trk;
+            let msg = '🛵 Sigue tu pedido de *' + cUser + '* en vivo aquí:\n\n📍 ' + link;
+            window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
         };
-    </script>
-</body>
-</htm
+
+        window.toggleDriverGps = function() {
+            let btn = qs('btn-gps');
+            if(!btn) return;
+            isGpsActive = !isGpsActive;
+            if(isGpsActive) {
+                btn.style.background = 'var(--success)';
+                btn.style.borderColor = 'var(--success)';
+                btn.style.color = 'white';
+                btn.innerText = "📍 GPS ACTIVO";
+                showToast("Transmitiendo ubicación...", "success");
+                if(navigator.geolocation) {
+                    enviarUbicacionGPS();
+                    gpsInterval = setInterval(enviarUbicacionGPS, 15000);
+                } else {
+                    alert("GPS no soportado en este dispositivo.");
+                }
+            } else {
+                btn.style.background = 'var(--text-dark)';
+                btn.style.borderColor = 'var(--text-dark)';
+                btn.innerText = "📍 GPS DELI";
+                if(gpsInterval) clearInterval(gpsInterval);
+                showToast("GPS Apagado", "info");
+            }
+        };
+
+        window.enviarUbicacionGPS = async function() {
+            navigator.geolocation.getCurrentPosition(async (pos) => {
+                let lat = pos.coords.latitude;
+                let lon = pos.coords.longitude;
+                let coordsStr = JSON.stringify({lat, lon});
+                await _supabase.from('pediloya_logs').delete().eq('local_id', currentLocalId).eq('tipo', 'GPS_DELI');
+                await _supabase.from('pediloya_logs').insert([{
+                    local_id: currentLocalId,
+                    tipo: 'GPS_DELI',
+                    metodo: 'SISTEMA',
+                    monto: 0,
+                    fecha: getTucumanDateFE(),
+                    hora: getTucumanTimeFE(),
+                    descripcion: coordsStr
+                }]);
+            }, (err) => {
+                console.log("Error GPS", err);
+            }, { enableHighAccuracy: true });
+        };
+        
+        function abrirRadarDueno() { if(qs('modal-radar-owner')) qs('modal-radar-owner').style.display='flex'; actualizarRadarMap(); setTimeout(actualizarRadarMap, 500); }
+        async function actualizarRadarMap() { showToast("Buscando GPS...", "info"); let { data } = await _supabase.from('pediloya_logs').select('descripcion').eq('local_id', currentLocalId).eq('tipo', 'GPS_DELI').order('created_at', {ascending: false}).limit(1).maybeSingle(); if(data) { try { let coords = JSON.parse(data.descripcion); updateLiveMap(coords.lat, coords.lon, 'radar-owner-map-container', true); showToast("Actualizado"); } catch(e) {} } }
+        
+        function pausarVideoQuickView() { let vids = document.querySelectorAll('#qv-media video'); vids.forEach(v => v.pause()); }
+
+        window.abrirModalMotos = function() {
+            if(qs('motos-modal')) qs('motos-modal').style.display = 'flex';
+            renderMotosModal();
+        };
+
+        function renderMotosModal() {
+            let totalMotos = window.currentTotalEnMotos || 0;
+            setText('motos-total-text', '$' + totalMotos.toLocaleString('es-AR'));
+
+            let html = '';
+            let cashPorMoto = window.currentCashPorMoto || {};
+
+            dbState.repartidores.forEach(m => {
+                let aRendir = cashPorMoto[m.nombre] || 0;
+                html += `
+                    <div style="background:var(--bg-pure); border:1px solid var(--border-soft); border-radius:16px; padding:16px; margin-bottom: 12px; display:flex; justify-content:space-between; align-items:center; box-shadow:var(--shadow-soft);">
+                        <div>
+                            <h4 style="margin:0 0 4px; font-size:1.1rem; color:var(--text-dark); font-family:'Outfit';">🛵 ${m.nombre}</h4>
+                            <span style="font-size:0.85rem; color:var(--text-gray); font-weight:600;">Efectivo a rendir</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <span style="font-size:1.4rem; font-weight:800; font-family:'Outfit'; color:var(--primary-orange);">$${aRendir.toLocaleString('es-AR')}</span>
+                            <button onclick="vibrar([40]); rendirPlataMoto('${m.nombre}', ${aRendir})" style="background:var(--success); color:white; border:none; padding:10px 14px; border-radius:12px; font-weight:bold; cursor:pointer; box-shadow:0 4px 10px rgba(16,185,129,0.3);">RECIBIR</button>
+                        </div>
+                    </div>
+                `;
+            });
+            setHtml('motos-list-container', html || '<p style="text-align:center; color:var(--text-light); font-weight:500;">No hay repartidores registrados.</p>');
+        }
+
+        window.rendirPlataMoto = async function(nombre, monto) {
+            if(monto <= 0) return showToast("No tiene plata a rendir", "error");
+            if(confirm(`¿Recibir $${monto.toLocaleString('es-AR')} de ${nombre}?`)) {
+                await _supabase.from('pediloya_logs').insert([{
+                    local_id: currentLocalId,
+                    tipo: 'RENDICION',
+                    metodo: 'EFECTIVO',
+                    monto: monto,
+                    fecha: getTucumanDateFE(),
+                    hora: getTucumanTimeFE(),
+                    descripcion: `Rendición de ${nombre}`,
+                    moto_asignada: nombre
+                }]);
+                await loadDataFromDB();
+                renderMotosModal();
+                showToast("Plata recibida en caja");
+            }
+        };
+
+        const motoIcon = L.divIcon({
+            className: 'custom-div-icon',
+            html: '<div style="font-size: 2.8rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3)); transform: translate(-15px, -20px); animation: pulse-deli 1s infinite alternate;">🛵</div>',
+            iconSize: [40, 40],
+            iconAnchor: [20, 40]
+        });
+
+        window.updateLiveMap = function(lat, lon, containerId, isOwner) {
+            let mapVar = isOwner ? radarMap : trackingMap;
+            let markerVar = isOwner ? radarMarker : trackingMarker;
+
+            if (!mapVar) {
+                mapVar = L.map(containerId, { zoomControl: false }).setView([lat, lon], 16);
+                
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                    attribution: '&copy; OpenStreetMap',
+                    maxZoom: 19
+                }).addTo(mapVar);
+
+                markerVar = L.marker([lat, lon], { icon: motoIcon }).addTo(mapVar);
+
+                if (isOwner) {
+                    radarMap = mapVar;
+                    radarMarker = markerVar;
+                } else {
+                    trackingMap = mapVar;
+                    trackingMarker = markerVar;
+                }
+            } else {
+                mapVar.setView([lat, lon]);
+                markerVar.setLatLng([lat, lon]);
+            }
+            
+            setTimeout(() => mapVar.invalidateSize(), 300);
+        };
+
+        window.iniciarRastreoClienteManual = function() {
+            let code = qs('track-input-code') ? qs('track-input-code').value.trim().toUpperCase() : '';
+            if(!code) return showToast("Ingresá un código de rastreo.", "error");
+            
+            switchCustomerTab('track', document.querySelectorAll('.nav-item')[1]);
+            iniciarRastreoCliente(code, targetLocalName || (qs('public-store-name') ? qs('public-store-name').innerText : ''));
+        };
+
+        window.iniciarRastreoCliente = async function(trackCode, localName) {
+            if(!trackCode || !localName) return;
+            
+            let localBusqueda = localName.toUpperCase();
+            
+            if(!targetLocalId) {
+                let { data: usr } = await _supabase.from('pediloya_usuarios').select('id, whatsapp, app_data').eq('local', localBusqueda).maybeSingle();
+                if(usr) {
+                    targetLocalId = usr.id;
+                } else {
+                    return showToast("No se encontró el local para el rastreo.", "error");
+                }
+            }
+
+            if(qs('track-input-code')) qs('track-input-code').value = trackCode;
+            
+            let resultBox = qs('tracking-result-box');
+            if(resultBox) {
+                resultBox.classList.remove('hidden');
+                setText('track-status-text', 'Buscando repartidor...');
+                setText('track-detail-text', `Conectando al GPS del local...`);
+            }
+
+            let { data: gpsData } = await _supabase.from('pediloya_logs')
+                .select('descripcion, hora')
+                .eq('local_id', targetLocalId)
+                .eq('tipo', 'GPS_DELI')
+                .order('created_at', { ascending: false })
+                .limit(1)
+                .maybeSingle();
+
+            let initialLat = -26.8241;
+            let initialLon = -65.2226;
+
+            if (gpsData && gpsData.descripcion) {
+                try {
+                    let coords = JSON.parse(gpsData.descripcion);
+                    initialLat = coords.lat;
+                    initialLon = coords.lon;
+                    setText('track-status-text', 'Repartidor en camino');
+                    setText('track-detail-text', `Última act: ${gpsData.hora}`);
+                } catch(e) {}
+            } else {
+                setText('track-status-textSoy un modelo de lenguaje, así que no tengo esa capacidad.
