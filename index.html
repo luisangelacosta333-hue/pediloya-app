@@ -344,14 +344,12 @@
     <div id="splash-screen">
         <div class="logo-premium-wrapper">
             <svg class="logo-svg-element" viewBox="0 0 450 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- LETRA P CON LÍNEAS DE VELOCIDAD DELIVERY -->
                 <path d="M 20 95 L 140 95" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
                 <path d="M 50 65 L 125 65" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
                 <path d="M 40 125 L 105 125" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
                 
                 <path d="M 95 180 L 145 30 L 225 30 C 265 30 285 50 280 85 C 275 120 245 140 200 140 L 145 140 L 125 180 Z M 165 105 L 195 105 C 220 105 235 95 238 75 C 240 60 230 52 215 52 L 180 52 Z" fill="#ff5e00"/>
                 
-                <!-- LETRA Y CON LÍNEAS DE VELOCIDAD DELIVERY -->
                 <path d="M 360 65 L 430 65" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
                 <path d="M 350 95 L 415 95" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
                 <path d="M 335 125 L 395 125" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
@@ -412,10 +410,6 @@
 
             <div class="marquee-container">
                 <div class="marquee-content">
-                    <span class="marquee-item">🇦🇷 ORGULLO ARGENTINO</span><span class="marquee-item">•</span>
-                    <span class="marquee-item">⚡ MENÚ EN VIDEO</span><span class="marquee-item">•</span>
-                    <span class="marquee-item">📍 RASTREO SATELLITAL</span><span class="marquee-item">•</span>
-                    <span class="marquee-item">🧮 CAJA INTELIGENTE</span><span class="marquee-item">•</span>
                     <span class="marquee-item">🇦🇷 ORGULLO ARGENTINO</span><span class="marquee-item">•</span>
                     <span class="marquee-item">⚡ MENÚ EN VIDEO</span><span class="marquee-item">•</span>
                     <span class="marquee-item">📍 RASTREO SATELLITAL</span><span class="marquee-item">•</span>
@@ -673,6 +667,50 @@
                 <div id="adm-motos-cash" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; color:var(--primary-orange); letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
             </div>
 
+            <!-- ============================================== -->
+            <!-- NUEVA SECCIÓN MARKETING Y VENTAS AUTOMATIZADAS -->
+            <!-- ============================================== -->
+            <div class="admin-card" style="border-top:4px solid var(--success);">
+                <h3 style="margin:0 0 15px; font-size:1.5rem; font-family:'Outfit'; font-weight:800; color:var(--text-dark);">🚀 Marketing & Ventas</h3>
+                <p style="font-size:0.95rem; color:var(--text-gray); margin-bottom:24px;">Activá ofertas de urgencia y cupones de descuento para explotar tus ventas.</p>
+                
+                <!-- OFERTA RELÁMPAGO -->
+                <div style="background:#fef2f2; border:2px dashed var(--danger); border-radius:24px; padding:20px; margin-bottom:24px;">
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+                        <span style="font-size:1.4rem;">⏰</span>
+                        <h4 style="margin:0; font-size:1.2rem; font-family:'Outfit'; font-weight:800; color:var(--danger);">Oferta Relámpago (30 Minutos)</h4>
+                    </div>
+                    <p style="font-size:0.9rem; color:var(--text-gray); margin-bottom:14px; font-weight:500;">Se muestra un contador regresivo de urgencia en el menú de los clientes.</p>
+                    <input type="text" id="flash-title" class="form-input" placeholder="Ej: 25% OFF en Todas las Pizzas" style="background:white; border: 1px solid var(--border-soft); margin-bottom:12px;">
+                    <div style="display:flex; gap:10px;">
+                        <button class="btn-main" id="btn-flash-sale" style="background:var(--danger); box-shadow:0 10px 25px rgba(239,68,68,0.3); flex:1;" onclick="vibrar([40]); activarOfertaRelampago()">⚡ ACTIVAR POR 30 MIN</button>
+                        <button class="btn-secondary" style="width:auto; padding:0 20px; color:var(--danger); border-color:rgba(239,68,68,0.3);" onclick="vibrar([40]); desactivarOfertaRelampago()">APAGAR</button>
+                    </div>
+                    <div id="adm-flash-status" style="margin-top:12px; font-size:0.9rem; font-weight:800; color:var(--danger);"></div>
+                </div>
+
+                <!-- CUPONES INTELIGENTES -->
+                <div style="background:#f0fdf4; border:2px dashed var(--success); border-radius:24px; padding:20px;">
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+                        <span style="font-size:1.4rem;">🎁</span>
+                        <h4 style="margin:0; font-size:1.2rem; font-family:'Outfit'; font-weight:800; color:var(--success);">Cupones de Descuento</h4>
+                    </div>
+                    <p style="font-size:0.9rem; color:var(--text-gray); margin-bottom:14px; font-weight:500;">Generá códigos para primera compra, clientes fieles o promociones de WhatsApp.</p>
+                    
+                    <div style="display:flex; gap:8px; margin-bottom:12px;">
+                        <input type="text" id="cup-code" class="form-input" placeholder="Código (Ej: BIENVENIDO)" style="margin:0; flex:2; text-transform:uppercase; background:white; border:1px solid var(--border-soft);">
+                        <input type="number" id="cup-val" class="form-input" placeholder="Valor" style="margin:0; flex:1; background:white; border:1px solid var(--border-soft);">
+                        <select id="cup-type" class="form-input" style="margin:0; width:75px; padding:0 8px; background:white; border:1px solid var(--border-soft); font-weight:800;">
+                            <option value="monto">$</option>
+                            <option value="porcentaje">%</option>
+                        </select>
+                    </div>
+                    <button class="btn-main" style="background:var(--success); box-shadow:0 10px 25px rgba(16,185,129,0.3);" onclick="vibrar([40]); agregarCupon()">CREAR CUPÓN</button>
+                    
+                    <div id="adm-cupones-list" style="margin-top:16px; display:flex; flex-direction:column; gap:8px;"></div>
+                </div>
+            </div>
+
             <div class="admin-card">
                 <h3 style="margin:0 0 15px; font-size:1.5rem; font-family:'Outfit'; font-weight:800; color:var(--text-dark);">🛵 Repartidores</h3>
                 <p style="font-size:0.95rem; color:var(--text-gray); margin-bottom:20px;">Agregá las motos para seleccionarlas directo desde la caja.</p>
@@ -780,6 +818,15 @@
             
             <div id="promo-carousel" class="promo-carousel hidden"></div>
 
+            <!-- BANNER OFERTA RELÁMPAGO (FOMO) -->
+            <div id="flash-sale-banner" class="hidden" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; padding: 16px 24px; text-align: center; font-family: 'Outfit'; border-radius: 24px; margin: 0 24px 24px; box-shadow: 0 15px 30px rgba(239, 68, 68, 0.3); display: flex; justify-content: space-between; align-items: center;">
+                <div style="text-align: left; flex: 1; padding-right: 10px;">
+                    <span style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;">🔥 OFERTA RELÁMPAGO</span><br>
+                    <span id="flash-sale-text" style="font-weight: 900; font-size: 1.15rem; line-height: 1.2;">OFERTA</span>
+                </div>
+                <span id="flash-sale-timer" style="background: white; color: var(--danger); padding: 6px 14px; border-radius: 50px; font-size: 1.25rem; font-weight: 900; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); white-space: nowrap;">00:00</span>
+            </div>
+
             <div class="category-title">🔥 Menú Principal</div>
             
             <div class="cat-scroll" id="cat-scroll">
@@ -835,7 +882,7 @@
         <p style="font-size:1.1rem; font-weight:500; margin-top:16px; opacity:0.9;">Conectando con el repartidor...</p>
     </div>
 
-    <!-- MODAL CARRITO REDISEÑO PREMIUM -->
+    <!-- MODAL CARRITO CON CUPONES INTELIGENTES -->
     <div class="modal" id="modal-carrito">
         <div class="modal-content-standard">
             <div class="drag-indicator"></div>
@@ -848,6 +895,18 @@
             <div style="flex: 1; overflow-y: auto; padding-right: 5px; display: flex; flex-direction: column; padding-bottom: 40px;">
                 <div id="cart-items-list" style="margin-bottom: 16px; display: flex; flex-direction: column;"></div>
                 
+                <!-- INPUT CUPÓN DE DESCUENTO -->
+                <div style="display:flex; gap:8px; margin-bottom:12px; flex-shrink:0;">
+                    <input type="text" id="cart-coupon-input" class="form-input" placeholder="🎁 Ingresá tu cupón" style="margin:0; text-transform:uppercase; font-size:0.95rem; background: #f8fafc; border:1px solid var(--border-soft);">
+                    <button class="btn-secondary" style="width:auto; padding:0 20px; font-size:0.9rem;" onclick="vibrar([40]); aplicarCupon()">APLICAR</button>
+                </div>
+                
+                <!-- FILA VISUAL DE DESCUENTO -->
+                <div id="cart-discount-row" class="cart-total-row hidden" style="margin-bottom:8px; margin-top:0; padding:12px 20px; background:rgba(16,185,129,0.1); border:1px dashed var(--success);">
+                    <span class="cart-total-label" style="color:var(--success);">Descuento Cupón</span>
+                    <span class="cart-total-val" id="cart-discount-val" style="color:var(--success); font-size:1.6rem;">-$0</span>
+                </div>
+
                 <div class="cart-total-row" style="flex-shrink: 0;">
                     <span class="cart-total-label">Total a Pagar</span>
                     <span class="cart-total-val" id="cart-final-total">$0</span>
@@ -946,7 +1005,7 @@
 
         let dbState = { inventory:[], logs:[], repartidores:[] };
         let cUser = "LOCAL_GENERICO", currentLocalId = "", cAdminPin = "0000", expr = "", isEval = false;
-        let shoppingCart = [], storeData = { perfil_url: '', descripcion: '', direccion: '', maps_url: '', whatsapp_publico: '', promos: [], sub_end_date: '' };
+        let shoppingCart = [], storeData = { perfil_url: '', descripcion: '', direccion: '', maps_url: '', whatsapp_publico: '', promos: [], sub_end_date: '', cupones: [], oferta_relampago: null };
         let selProd = null, currentQvItem = null, currentQvQty = 1;
         let targetLocalId = "", targetLocalName = "", targetLocalPhone = "";
         let isDeliveryOption = true;
@@ -958,16 +1017,16 @@
         let currentCierreData = null; 
 
         let gpsSubscription = null;
-        let driverGpsWatchId = null;
-        
         let isGpsActive = false;
         let gpsInterval = null;
         
-        // NUEVAS VARIABLES GLOBALES PARA SOLUCIONAR PROBLEMAS DE ALERTAS Y SINCRONIZACIÓN
         let unseenOrdersAlert = false;
         let syncInterval = null;
 
-        // FUNCIÓN DE VIBRACIÓN MODIFICADA PARA PERMITIR PATRONES
+        // MARKETING STATE
+        let cupoAplicado = null;
+        let flashTimerInterval = null;
+
         function vibrar(pattern = 40) { if(navigator.vibrate) navigator.vibrate(pattern); }
 
         function getCalcValue() {
@@ -981,9 +1040,18 @@
             const localParam = urlParams.get('local');
             const trackParam = urlParams.get('track');
             
-            if (trackParam && localParam) { document.title = "Rastreo | Pediloya"; go('view-customer-menu'); switchCustomerTab('track', document.querySelectorAll('.nav-item')[1]); iniciarRastreoCliente(trackParam, localParam); } 
-            else if (localParam) { document.title = "Menú | Pediloya"; go('view-customer-menu'); cargarMenuCliente(localParam); } 
-            else { go('view-login'); }
+            if (trackParam && localParam) { 
+                document.title = "Rastreo | Pediloya"; 
+                go('view-customer-menu'); 
+                switchCustomerTab('track', document.querySelectorAll('.nav-item')[1]); 
+                iniciarRastreoCliente(trackParam, localParam); 
+            } else if (localParam) { 
+                document.title = "Menú | Pediloya"; 
+                go('view-customer-menu'); 
+                cargarMenuCliente(localParam); 
+            } else { 
+                go('view-login'); 
+            }
             
             setupVideoObserver();
         });
@@ -1055,7 +1123,7 @@
             if(!('speechSynthesis' in window)) return alert("Tu navegador no soporta el asistente de voz.");
             window.speechSynthesis.cancel();
             const speech = new SpeechSynthesisUtterance(); 
-            speech.text = "¡Atención dueño de local! Bienvenido a Pedilo Ya Premium. Esta es la herramienta definitiva para multiplicar tus ventas. Imaginate a tus clientes viendo tu comida en videos verticales de alta definición, estilo TikTok. ¡Se les va a hacer agua la boca! Podrán hacer su pedido en tres simples clics con nuestro carrito avanzado, y rastrear al repartidor en vivo por GPS en el mapa. ¿Lo mejor para vos? Cero comisiones por venta. Contás con una caja registradora inteligente que descuenta el stock automático, control estricto de gastos, panel del dueño con métricas, y un sistema impecable para saber exactamente cuánta plata tiene que rendirte cada motito. Todo ilimitado, rápido y sin intermediarios. ¡Sumate a la revolución del delivery y dominá tu zona hoy mismo!"; 
+            speech.text = "¡Atención dueño de local! Bienvenido a Pedilo Ya Premium. Esta es la herramienta definitiva para multiplicar tus ventas. Imaginate a tus clientes viendo tu comida en videos verticales de alta definición, estilo TikTok. Podrán hacer su pedido en tres simples clics con nuestro carrito avanzado, y rastrear al repartidor en vivo por GPS en el mapa. Cero comisiones por venta, control estricto de caja, panel de métricas, ofertas relámpago y cupones de descuento automáticos."; 
             speech.lang = 'es-AR'; 
             speech.rate = 1.05; 
             window.speechSynthesis.speak(speech); 
@@ -1119,7 +1187,7 @@
             document.querySelectorAll('.view-container, .view-container-no-pad').forEach(v => { v.classList.remove('active'); v.style.display = 'none'; }); 
             let target = qs(id);
             if(target) { target.classList.add('active'); target.style.display = 'flex'; window.scrollTo(0,0); }
-            if(id === 'view-admin') { actualizarLinkDisplay(); }
+            if(id === 'view-admin') { actualizarLinkDisplay(); renderOfertaRelampagoAdmin(); renderCuponesAdmin(); }
         }
 
         function showToast(m, type="success") { 
@@ -1150,13 +1218,12 @@
                 if(!local || !pin || !apin || !wa) { alert("Completá todos los campos."); return; }
                 
                 setText('btn-reg', "CARGANDO..."); if(qs('btn-reg')) qs('btn-reg').disabled = true;
-                
                 let waLimpio = wa.replace(/\s+/g, '');
                 
                 await _supabase.auth.signUp({ email: `${waLimpio}@pediloya.com`, password: pin + "IA" }).catch(e=>console.log(e));
                 
                 let endDate = new Date(); endDate.setDate(endDate.getDate() + 30); 
-                let appDataObj = { perfil_url: '', descripcion: 'Tu mejor opción delivery', direccion: '', maps_url: '', whatsapp_publico: waLimpio, promos: [], sub_end_date: endDate.toISOString(), repartidores: [] };
+                let appDataObj = { perfil_url: '', descripcion: 'Tu mejor opción delivery', direccion: '', maps_url: '', whatsapp_publico: waLimpio, promos: [], sub_end_date: endDate.toISOString(), repartidores: [], cupones: [], oferta_relampago: null };
 
                 let { error } = await _supabase.from('pediloya_usuarios').insert([{ local: local, pin: pin, admin_pin: apin, whatsapp: waLimpio, prov: 'Gastronomia', app_data: appDataObj }]);
                 
@@ -1186,31 +1253,29 @@
                 
                 currentLocalId = data.id; cUser = data.local; targetLocalPhone = data.whatsapp; 
                 cAdminPin = data.admin_pin || "0000";
-                storeData = data.app_data || { perfil_url: '', descripcion: '', direccion: '', maps_url: '', whatsapp_publico: '', promos: [], sub_end_date: '', repartidores: [] };
+                storeData = data.app_data || { perfil_url: '', descripcion: '', direccion: '', maps_url: '', whatsapp_publico: '', promos: [], sub_end_date: '', repartidores: [], cupones: [], oferta_relampago: null };
                 
                 setText('lbl-owner', cUser);
                 await loadDataFromDB(); 
-                
                 verificarSuscripcion();
 
                 if(qs('btn-log')) qs('btn-log').disabled = false; setText('btn-log', "Abrir Caja");
                 go('view-chofer'); showToast("¡Bienvenido!");
 
-                // ACTUALIZACIÓN EN TIEMPO REAL (WEBSOCKETS)
+                // WEBSOCKETS EN TIEMPO REAL
                 _supabase.channel('pedidos-nuevos')
                     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'pediloya_logs', filter: `local_id=eq.${currentLocalId}` }, payload => {
                         if(payload.new.tipo === 'PEDIDO_WEB') {
                             if (!dbState.logs.some(l => l.id === payload.new.id)) {
-                                dbState.logs.unshift(payload.new); // Agrega al instante
+                                dbState.logs.unshift(payload.new);
                                 unseenOrdersAlert = true;
                                 showToast("¡NUEVO PEDIDO RECIBIDO!", "orange");
                                 vibrar([300, 100, 300, 100, 500]); 
-                                renderAllData(); // Renderiza de inmediato
+                                renderAllData();
                             }
                         }
                     }).subscribe();
 
-                // POLLING DE RESPALDO: Garantiza que los pedidos entren incluso si el websocket falla en móviles
                 if(syncInterval) clearInterval(syncInterval);
                 syncInterval = setInterval(async () => {
                     if (currentLocalId) {
@@ -1228,10 +1293,10 @@
                                 showToast("¡NUEVO PEDIDO RECIBIDO!", "orange");
                             }
                             dbState.logs = data;
-                            renderAllData(); // Forzamos el redibujado
+                            renderAllData();
                         }
                     }
-                }, 7000); // Revisa cada 7 segundos, garantizando cero atrasos
+                }, 7000);
 
             } catch (err) { alert("Fallo Interno: " + err.message); if(qs('btn-log')) qs('btn-log').disabled = false; setText('btn-log', "Abrir Caja"); }
         }
@@ -1303,7 +1368,7 @@
                     if(statusText) statusText.style.display = 'none';
                 } 
             } catch(e) { 
-                alert("Falló la conexión con la IA de Vercel."); 
+                alert("Falló la conexión con la IA."); 
                 if(scanBox) scanBox.style.display = 'none';
                 if(statusText) statusText.style.display = 'none';
             } 
@@ -1315,7 +1380,6 @@
         async function emitPendingTransferHTTP(urlRecibo) {
             if(!pendingTransferData) return;
             let val = pendingTransferData.amount;
-            
             let desc = selProd ? `Venta: ${selProd.nombre}` : 'Venta de Mostrador'; 
             let motoSelected = qs('chofer-moto-select') ? qs('chofer-moto-select').value : null;
             let qtyToDeduct = selProd ? Math.max(1, Math.floor(val / selProd.precio)) : 0;
@@ -1405,10 +1469,9 @@
             let calcCashMostrador = 0;
             let calcTransf = 0;
             let cashPorMoto = {};
-            let totalEnMotos = 0; // REPARADO: Solo suma lo de las motos
+            let totalEnMotos = 0;
             let hitCierre = false;
 
-            // FIX 1: LÓGICA DE CIERRE EXACTAMENTE IGUAL AL PANEL PRINCIPAL
             dbState.logs.forEach(l => {
                 if (hitCierre) return;
                 if (l.tipo === 'CIERRE_TURNO' || (l.descripcion && l.descripcion.toUpperCase().includes('CIERRE DE TURNO'))) { hitCierre = true; return; }
@@ -1549,8 +1612,143 @@
             dbState.repartidores = storeData.repartidores || [];
 
             renderPromosListAdmin();
+            renderCuponesAdmin();
+            renderOfertaRelampagoAdmin();
             renderAllData();
         }
+
+        // ============================================
+        // FUNCIONES DE MARKETING (OFERTAS Y CUPONES)
+        // ============================================
+        async function activarOfertaRelampago() {
+            let titulo = qs('flash-title') ? qs('flash-title').value.trim() : '';
+            if(!titulo) return showToast("Escribí el título de la oferta", "error");
+            
+            let btn = qs('btn-flash-sale');
+            if(btn) { btn.innerText = "ACTIVANDO..."; btn.disabled = true; }
+
+            let endTime = new Date();
+            endTime.setMinutes(endTime.getMinutes() + 30); // 30 minutos
+
+            let nuevaAppData = { ...storeData, oferta_relampago: { titulo: titulo, fin: endTime.toISOString() } };
+            await _supabase.from('pediloya_usuarios').update({ app_data: nuevaAppData }).eq('id', currentLocalId);
+            storeData = nuevaAppData;
+            
+            if(qs('flash-title')) qs('flash-title').value = '';
+            if(btn) { btn.innerText = "⚡ ACTIVAR POR 30 MIN"; btn.disabled = false; }
+            showToast("¡Oferta de 30 min activada!", "orange");
+            renderOfertaRelampagoAdmin();
+        }
+
+        async function desactivarOfertaRelampago() {
+            let nuevaAppData = { ...storeData, oferta_relampago: null };
+            await _supabase.from('pediloya_usuarios').update({ app_data: nuevaAppData }).eq('id', currentLocalId);
+            storeData = nuevaAppData;
+            showToast("Oferta finalizada", "info");
+            renderOfertaRelampagoAdmin();
+        }
+
+        function renderOfertaRelampagoAdmin() {
+            let box = qs('adm-flash-status');
+            if(!box) return;
+            if(storeData.oferta_relampago && new Date(storeData.oferta_relampago.fin) > new Date()) {
+                let minsLeft = Math.ceil((new Date(storeData.oferta_relampago.fin) - new Date()) / 60000);
+                box.innerHTML = `🟢 Activa: <strong>${storeData.oferta_relampago.titulo}</strong> (Quedan ~${minsLeft} min)`;
+            } else {
+                box.innerHTML = `⚪ Sin oferta activa en este momento.`;
+            }
+        }
+
+        async function agregarCupon() {
+            let code = qs('cup-code') ? qs('cup-code').value.trim().toUpperCase() : '';
+            let val = parseFloat(qs('cup-val') ? qs('cup-val').value : '0');
+            let tipo = qs('cup-type') ? qs('cup-type').value : 'monto';
+
+            if(!code || isNaN(val) || val <= 0) return showToast("Completá código y valor válido", "error");
+
+            let cupones = storeData.cupones || [];
+            if(cupones.some(c => c.codigo === code)) return showToast("Ese código ya existe", "error");
+
+            cupones.push({ id: Date.now(), codigo: code, val: val, tipo: tipo });
+            let nuevaAppData = { ...storeData, cupones: cupones };
+            await _supabase.from('pediloya_usuarios').update({ app_data: nuevaAppData }).eq('id', currentLocalId);
+            storeData = nuevaAppData;
+
+            if(qs('cup-code')) qs('cup-code').value = '';
+            if(qs('cup-val')) qs('cup-val').value = '';
+            renderCuponesAdmin();
+            showToast("Cupón creado con éxito");
+        }
+
+        function renderCuponesAdmin() {
+            let cupones = storeData.cupones || [];
+            let html = '';
+            cupones.forEach(c => {
+                let displayVal = c.tipo === 'monto' ? `$${c.val.toLocaleString('es-AR')}` : `${c.val}%`;
+                html += `
+                <div style="display:flex; justify-content:space-between; align-items:center; background:white; padding:12px 16px; border-radius:14px; border:1px solid var(--border-soft);">
+                    <div style="font-weight:800; color:var(--text-dark); font-family:'Outfit';">🎟️ ${c.codigo} <span style="color:var(--success); margin-left:8px;">${displayVal} OFF</span></div>
+                    <button onclick="eliminarCupon(${c.id})" style="background:#fee2e2; border:none; color:var(--danger); border-radius:8px; padding:6px 10px; cursor:pointer; font-weight:bold;">🗑️</button>
+                </div>`;
+            });
+            setHtml('adm-cupones-list', html || '<p style="color:var(--text-gray); font-size:0.9rem; margin:8px 0 0 0;">No hay cupones activos.</p>');
+        }
+
+        window.eliminarCupon = async function(id) {
+            if(confirm("¿Eliminar este cupón?")) {
+                let cupones = (storeData.cupones || []).filter(c => c.id !== id);
+                let nuevaAppData = { ...storeData, cupones: cupones };
+                await _supabase.from('pediloya_usuarios').update({ app_data: nuevaAppData }).eq('id', currentLocalId);
+                storeData = nuevaAppData;
+                renderCuponesAdmin();
+                showToast("Cupón eliminado", "info");
+            }
+        }
+
+        function chequearOfertaRelampago() {
+            if(flashTimerInterval) clearInterval(flashTimerInterval);
+            let banner = qs('flash-sale-banner');
+            if(!storeData.oferta_relampago) { if(banner) banner.classList.add('hidden'); return; }
+
+            let endTime = new Date(storeData.oferta_relampago.fin).getTime();
+            
+            flashTimerInterval = setInterval(() => {
+                let now = new Date().getTime();
+                let distance = endTime - now;
+
+                if (distance <= 0) {
+                    clearInterval(flashTimerInterval);
+                    if(banner) banner.classList.add('hidden');
+                    return;
+                }
+
+                let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                setText('flash-sale-text', storeData.oferta_relampago.titulo);
+                setText('flash-sale-timer', `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`);
+                if(banner) banner.classList.remove('hidden');
+            }, 1000);
+        }
+
+        window.aplicarCupon = function() {
+            let input = qs('cart-coupon-input');
+            let code = input ? input.value.trim().toUpperCase() : '';
+            if(!code) return showToast("Ingresá un código", "error");
+            
+            let cupones = storeData.cupones || [];
+            let cup = cupones.find(c => c.codigo === code);
+            
+            if(cup) {
+                cupoAplicado = cup;
+                showToast(`¡Cupón ${code} aplicado!`);
+                abrirModalCarrito(); 
+            } else {
+                cupoAplicado = null;
+                showToast("Cupón inválido o inexistente", "error");
+                abrirModalCarrito();
+            }
+        };
 
         async function agregarMoto() {
             let n = qs('add-moto-name') ? qs('add-moto-name').value.trim() : '';
@@ -1561,7 +1759,6 @@
             nuevosRepartidores.push({ id: nuevoId, nombre: n });
             
             let newAppData = { ...storeData, repartidores: nuevosRepartidores };
-            
             dbState.repartidores = nuevosRepartidores;
             storeData = newAppData;
             qs('add-moto-name').value = '';
@@ -1575,7 +1772,6 @@
             if(confirm("¿Eliminar este repartidor?")) {
                 let nuevosRepartidores = (storeData.repartidores || []).filter(r => r.id !== id);
                 let newAppData = { ...storeData, repartidores: nuevosRepartidores };
-                
                 dbState.repartidores = nuevosRepartidores;
                 storeData = newAppData;
                 renderAllData();
@@ -1594,7 +1790,7 @@
         }
 
         window.eliminarPedidoWeb = async function(idLog) {
-            if(confirm("¿Eliminar este pedido permanentemente? No ocupará espacio.")) {
+            if(confirm("¿Eliminar este pedido permanentemente?")) {
                 await _supabase.from('pediloya_logs').delete().eq('id', idLog);
                 await loadDataFromDB();
                 showToast("Pedido eliminado", "info");
@@ -1942,7 +2138,6 @@
             let btnWeb = qs('btn-pedidos-web'); 
             if(btnWeb) { 
                 if(unseenOrdersAlert && pedidosWebNuevos > 0) {
-                    // BOTÓN NARANJA DE ALERTA PARA DUEÑO (NO ROJO) Y TITILANDO
                     btnWeb.style.background = 'var(--gradient-orange)';
                     btnWeb.style.color = 'white';
                     btnWeb.style.borderColor = 'var(--primary-orange)';
@@ -1950,7 +2145,6 @@
                     btnWeb.style.animation = 'pulse-deli 1s infinite';
                     btnWeb.classList.add('active'); 
                 } else {
-                    // ESTADO NORMAL (DEJA DE TITILAR CUANDO YA LO TOCÓ)
                     btnWeb.style.background = 'rgba(255,94,0,0.05)';
                     btnWeb.style.color = 'var(--primary-orange)';
                     btnWeb.style.borderColor = 'var(--primary-orange)';
@@ -1963,8 +2157,8 @@
         }
 
         function abrirPedidosWeb() { 
-            unseenOrdersAlert = false; // Se apaga la alerta visual
-            renderAllData(); // Forzamos el redibujado para que el botón vuelva a la normalidad
+            unseenOrdersAlert = false;
+            renderAllData();
             if(qs('pedidos-web-modal')) qs('pedidos-web-modal').style.display='flex'; 
         }
 
@@ -2011,12 +2205,10 @@
             }
             
             renderPromosCliente();
+            chequearOfertaRelampago();
             renderMenuItems(menuItems);
         }
 
-        // ============================================
-        // FIX: FUNCIÓN PARA COMPARTIR EL PLATO NATIVO
-        // ============================================
         window.compartirPlato = function(nombre, precio) {
             let link = window.location.href.split('?')[0] + '?local=' + encodeURIComponent(targetLocalName);
             let msg = `¡Mirá este plato! 🍔\n*${nombre}* a $${precio.toLocaleString('es-AR')} en *${targetLocalName}*.\n\nPedilo acá: ${link}`;
@@ -2063,7 +2255,6 @@
                     if (hasVideo) { mediaHtml = `<video src="${vid}" poster="${img}" muted loop playsinline class="lazy-video" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;"></video>`; } 
                     else if (hasImg) { mediaHtml = `<img src="${img}" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">`; }
 
-                    /* FIX: SE AGREGÓ EL BOTÓN DE COMPARTIR EN LAS FOOD CARDS */
                     html += `
                     <div class="food-card-large" onclick="vibrar([40]); openQuickView('${item.codigo}')">
                         <div class="food-img-large">${mediaHtml}</div>
@@ -2155,12 +2346,18 @@
         function updateCartUI() {
             let bar = qs('floating-cart-bar');
             if(!bar) return;
-            let total = shoppingCart.reduce((acc, curr) => acc + curr.precio, 0);
+            let totalBruto = shoppingCart.reduce((acc, curr) => acc + curr.precio, 0);
+            
+            let descuento = 0;
+            if(cupoAplicado) {
+                descuento = cupoAplicado.tipo === 'monto' ? cupoAplicado.val : totalBruto * (cupoAplicado.val / 100);
+            }
+            let totalFinal = Math.max(0, totalBruto - descuento);
             
             if(shoppingCart.length > 0) { 
                 bar.classList.remove('hidden'); 
                 setText('fcb-qty', shoppingCart.length);
-                setText('fcb-total', "$" + total.toLocaleString('es-AR'));
+                setText('fcb-total', "$" + totalFinal.toLocaleString('es-AR'));
             } else { 
                 bar.classList.add('hidden'); 
             }
@@ -2168,13 +2365,13 @@
 
         function abrirModalCarrito() {
             if(shoppingCart.length === 0) return;
-            let html = ''; let total = 0;
+            let html = ''; let totalBruto = 0;
             
             let counts = {};
             shoppingCart.forEach(item => {
                 if(!counts[item.codigo]) counts[item.codigo] = { item: item, qty: 0 };
                 counts[item.codigo].qty++;
-                total += parseFloat(item.precio);
+                totalBruto += parseFloat(item.precio);
             });
 
             Object.values(counts).forEach(group => {
@@ -2197,8 +2394,21 @@
                 </div>`;
             });
 
+            // APLICACIÓN DEL DESCUENTO DEL CUPÓN
+            let descuento = 0;
+            if(cupoAplicado) {
+                descuento = cupoAplicado.tipo === 'monto' ? parseFloat(cupoAplicado.val) : totalBruto * (parseFloat(cupoAplicado.val) / 100);
+                if(qs('cart-discount-row')) qs('cart-discount-row').classList.remove('hidden');
+                setText('cart-discount-val', `-$${descuento.toLocaleString('es-AR')}`);
+            } else {
+                if(qs('cart-discount-row')) qs('cart-discount-row').classList.add('hidden');
+            }
+
+            let totalFinal = Math.max(0, totalBruto - descuento);
+
             setHtml('cart-items-list', html); 
-            setText('cart-final-total', "$" + total.toLocaleString('es-AR')); 
+            setText('cart-final-total', "$" + totalFinal.toLocaleString('es-AR')); 
+            updateCartUI();
             if(qs('modal-carrito')) qs('modal-carrito').style.display = 'flex';
         }
 
@@ -2224,10 +2434,17 @@
             if(isDeliveryOption && !dir) return showToast("Completá tu dirección.", "error");
             let notes = qs('order-notes') ? qs('order-notes').value.trim() : '';
             
-            let total = shoppingCart.reduce((sum, item) => sum + parseFloat(item.precio), 0); 
+            let totalBruto = shoppingCart.reduce((sum, item) => sum + parseFloat(item.precio), 0); 
+            let descuento = 0;
+            if(cupoAplicado) {
+                descuento = cupoAplicado.tipo === 'monto' ? parseFloat(cupoAplicado.val) : totalBruto * (parseFloat(cupoAplicado.val) / 100);
+            }
+            let totalFinal = Math.max(0, totalBruto - descuento);
+
             let orderId = 'TRK' + Date.now().toString().slice(-5);
             let dirFinal = isDeliveryOption ? dir : "RETIRO EN LOCAL";
-            let desc = `NUEVO PEDIDO [${orderId}]\nDir: ${dirFinal}\nNotas: ${notes}\nDetalle:\n`; 
+            let cuponInfo = cupoAplicado ? `\n🎟️ Cupón: [${cupoAplicado.codigo}] (-$${descuento.toLocaleString('es-AR')})` : '';
+            let desc = `NUEVO PEDIDO [${orderId}]\nDir: ${dirFinal}${cuponInfo}\nNotas: ${notes}\nDetalle:\n`; 
             
             let itemsCount = {}; shoppingCart.forEach(i => { itemsCount[i.nombre] = (itemsCount[i.nombre]||0)+1; });
             for (let [nombre, qty] of Object.entries(itemsCount)) { desc += `- ${qty}x ${nombre}\n`; } 
@@ -2237,16 +2454,20 @@
                 if(p) { let nuevoStock = Math.max(0, p.stock - qty); await _supabase.from('pediloya_inventario').update({ stock: nuevoStock }).eq('codigo', p.codigo); }
             }
 
-            await _supabase.from('pediloya_logs').insert([{ local_id: targetLocalId, tipo: 'PEDIDO_WEB', metodo: metodo, monto: total, fecha: getTucumanDateFE(), hora: getTucumanTimeFE(), descripcion: desc }]);
+            await _supabase.from('pediloya_logs').insert([{ local_id: targetLocalId, tipo: 'PEDIDO_WEB', metodo: metodo, monto: totalFinal, fecha: getTucumanDateFE(), hora: getTucumanTimeFE(), descripcion: desc }]);
             
             if(qs('modal-carrito')) qs('modal-carrito').style.display = 'none'; 
-            shoppingCart = []; updateCartUI();
+            shoppingCart = []; 
+            let cupoUsado = cupoAplicado ? cupoAplicado.codigo : null;
+            cupoAplicado = null; 
+            if(qs('cart-coupon-input')) qs('cart-coupon-input').value = '';
+            updateCartUI();
             
             let num = targetLocalPhone ? String(targetLocalPhone).replace(/\D/g, '') : '';
             if(num.length === 10) num = '549' + num;
             if(num) {
                 let trackLink = `${window.location.origin}/?track=${orderId}&local=${encodeURIComponent(targetLocalName)}`;
-                let msgWa = `*¡NUEVO PEDIDO WEB!* 🛵\n\n*Total:* $${total.toLocaleString('es-AR')}\n*Pago:* ${metodo}\n*Dirección:* ${dirFinal}\n\n*Detalle:*\n`; 
+                let msgWa = `*¡NUEVO PEDIDO WEB!* 🛵\n\n*Total:* $${totalFinal.toLocaleString('es-AR')}${cupoUsado ? ` _(Cupón ${cupoUsado} aplicado)_` : ''}\n*Pago:* ${metodo}\n*Dirección:* ${dirFinal}\n\n*Detalle:*\n`; 
                 for (let [nombre, qty] of Object.entries(itemsCount)) { msgWa += `- ${qty}x ${nombre}\n`; } 
                 msgWa += `\n*Aclaraciones:* ${notes}\n\n*Link Rastreo:* ${trackLink}`; 
                 window.open(`https://wa.me/${num}?text=${encodeURIComponent(msgWa)}`, '_blank');
@@ -2454,4 +2675,149 @@
                             <span style="font-size:0.85rem; color:var(--text-gray); font-weight:600;">Efectivo a rendir</span>
                         </div>
                         <div style="display:flex; align-items:center; gap:12px;">
-                            <span style="font-size:1.4rem; font-weight:800; font-family:'Outfit'; color:var(--primary-orange);">$${aRendir.toLocaleString('es-No puedo ayudarte porque solo soy un modelo de lenguaje y no lo entiendo.
+                            <span style="font-size:1.4rem; font-weight:800; font-family:'Outfit'; color:var(--primary-orange);">$${aRendir.toLocaleString('es-AR')}</span>
+                            <button onclick="vibrar([40]); rendirPlataMoto('${m.nombre}', ${aRendir})" style="background:var(--success); color:white; border:none; padding:10px 14px; border-radius:12px; font-weight:bold; cursor:pointer; box-shadow:0 4px 10px rgba(16,185,129,0.3);">RECIBIR</button>
+                        </div>
+                    </div>
+                `;
+            });
+            setHtml('motos-list-container', html || '<p style="text-align:center; color:var(--text-light); font-weight:500;">No hay repartidores registrados.</p>');
+        }
+
+        window.rendirPlataMoto = async function(nombre, monto) {
+            if(monto <= 0) return showToast("No tiene plata a rendir", "error");
+            if(confirm(`¿Recibir $${monto.toLocaleString('es-AR')} de ${nombre}?`)) {
+                await _supabase.from('pediloya_logs').insert([{
+                    local_id: currentLocalId,
+                    tipo: 'RENDICION',
+                    metodo: 'EFECTIVO',
+                    monto: monto,
+                    fecha: getTucumanDateFE(),
+                    hora: getTucumanTimeFE(),
+                    descripcion: `Rendición de ${nombre}`,
+                    moto_asignada: nombre
+                }]);
+                await loadDataFromDB();
+                renderMotosModal();
+                showToast("Plata recibida en caja");
+            }
+        };
+
+        const motoIcon = L.divIcon({
+            className: 'custom-div-icon',
+            html: '<div style="font-size: 2.8rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3)); transform: translate(-15px, -20px); animation: pulse-deli 1s infinite alternate;">🛵</div>',
+            iconSize: [40, 40],
+            iconAnchor: [20, 40]
+        });
+
+        window.updateLiveMap = function(lat, lon, containerId, isOwner) {
+            let mapVar = isOwner ? radarMap : trackingMap;
+            let markerVar = isOwner ? radarMarker : trackingMarker;
+
+            if (!mapVar) {
+                mapVar = L.map(containerId, { zoomControl: false }).setView([lat, lon], 16);
+                
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                    attribution: '&copy; OpenStreetMap',
+                    maxZoom: 19
+                }).addTo(mapVar);
+
+                markerVar = L.marker([lat, lon], { icon: motoIcon }).addTo(mapVar);
+
+                if (isOwner) {
+                    radarMap = mapVar;
+                    radarMarker = markerVar;
+                } else {
+                    trackingMap = mapVar;
+                    trackingMarker = markerVar;
+                }
+            } else {
+                mapVar.setView([lat, lon]);
+                markerVar.setLatLng([lat, lon]);
+            }
+            
+            setTimeout(() => mapVar.invalidateSize(), 300);
+        };
+
+        window.iniciarRastreoClienteManual = function() {
+            let code = qs('track-input-code') ? qs('track-input-code').value.trim().toUpperCase() : '';
+            if(!code) return showToast("Ingresá un código de rastreo.", "error");
+            
+            switchCustomerTab('track', document.querySelectorAll('.nav-item')[1]);
+            iniciarRastreoCliente(code, targetLocalName || (qs('public-store-name') ? qs('public-store-name').innerText : ''));
+        };
+
+        window.iniciarRastreoCliente = async function(trackCode, localName) {
+            if(!trackCode || !localName) return;
+            
+            let localBusqueda = localName.toUpperCase();
+            
+            if(!targetLocalId) {
+                let { data: usr } = await _supabase.from('pediloya_usuarios').select('id, whatsapp, app_data').eq('local', localBusqueda).maybeSingle();
+                if(usr) {
+                    targetLocalId = usr.id;
+                } else {
+                    return showToast("No se encontró el local para el rastreo.", "error");
+                }
+            }
+
+            if(qs('track-input-code')) qs('track-input-code').value = trackCode;
+            
+            let resultBox = qs('tracking-result-box');
+            if(resultBox) {
+                resultBox.classList.remove('hidden');
+                setText('track-status-text', 'Buscando repartidor...');
+                setText('track-detail-text', `Conectando al GPS del local...`);
+            }
+
+            let { data: gpsData } = await _supabase.from('pediloya_logs')
+                .select('descripcion, hora')
+                .eq('local_id', targetLocalId)
+                .eq('tipo', 'GPS_DELI')
+                .order('created_at', { ascending: false })
+                .limit(1)
+                .maybeSingle();
+
+            let initialLat = -26.8241;
+            let initialLon = -65.2226;
+
+            if (gpsData && gpsData.descripcion) {
+                try {
+                    let coords = JSON.parse(gpsData.descripcion);
+                    initialLat = coords.lat;
+                    initialLon = coords.lon;
+                    setText('track-status-text', 'Repartidor en camino');
+                    setText('track-detail-text', `Última act: ${gpsData.hora}`);
+                } catch(e) {}
+            } else {
+                setText('track-status-text', 'Esperando GPS');
+                setText('track-detail-text', 'El repartidor aún no inició el viaje.');
+            }
+
+            updateLiveMap(initialLat, initialLon, 'tracking-map-container', false);
+
+            if(gpsSubscription) {
+                _supabase.removeChannel(gpsSubscription);
+            }
+
+            gpsSubscription = _supabase.channel('public:pediloya_logs:gps_cliente')
+                .on('postgres_changes', { 
+                    event: 'INSERT', 
+                    schema: 'public', 
+                    table: 'pediloya_logs', 
+                    filter: `local_id=eq.${targetLocalId}` 
+                }, payload => {
+                    if(payload.new.tipo === 'GPS_DELI') {
+                        try {
+                            let coords = JSON.parse(payload.new.descripcion);
+                            updateLiveMap(coords.lat, coords.lon, 'tracking-map-container', false);
+                            setText('track-status-text', 'Repartidor en movimiento 🛵');
+                            setText('track-detail-text', `Ubicación en vivo (${payload.new.hora})`);
+                        } catch(e) {}
+                    }
+                }).subscribe();
+        };
+
+    </script>
+</body>
+</html>
