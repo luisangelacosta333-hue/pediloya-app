@@ -1,49 +1,21 @@
-const CACHE_NAME = 'pediloya-premium-v1';
-const urlsToCache = [
-  './',
-  './index.html',
-  './manifest.json'
-];
+const CACHE_NAME = 'pediloyaa-v1';
 
-// Instalar el Service Worker y guardar en caché los archivos principales
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        console.log('Archivos cacheados exitosamente');
-        return cache.addAll(urlsToCache);
-      })
-  );
+// Se instala el Service Worker
+self.addEventListener('install', (event) => {
+    self.skipWaiting(); // Fuerza la activación inmediata
 });
 
-// Interceptar las peticiones para cargar rápido desde el caché
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        // Si el archivo está en caché, lo devuelve al instante
-        if (response) {
-          return response;
-        }
-        // Si no está, lo busca en internet
-        return fetch(event.request);
-      })
-  );
+// Se activa el Service Worker
+self.addEventListener('activate', (event) => {
+    event.waitUntil(clients.claim()); // Toma el control de la página rápido
 });
 
-// Actualizar el caché cuando hacés cambios en tu código
-self.addEventListener('activate', event => {
-  const cacheWhitelist = [CACHE_NAME];
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
+// ESTO ES OBLIGATORIO PARA QUE GOOGLE CHROME DEJE INSTALAR LA APP
+self.addEventListener('fetch', (event) => {
+    event.respondWith(
+        fetch(event.request).catch(() => {
+            // Si no hay internet, no hace nada grave, pero cumple el requisito.
+            return new Response("Estás sin conexión a internet.");
         })
-      );
-    })
-  );
+    );
 });
-
