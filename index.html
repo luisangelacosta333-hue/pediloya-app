@@ -1725,13 +1725,23 @@
             cupones.forEach(c => {
                 let displayVal = c.tipo === 'monto' ? `$${c.val.toLocaleString('es-AR')}` : `${c.val}%`;
                 html += `
-                <div style="display:flex; justify-content:space-between; align-items:center; background:white; padding:12px 16px; border-radius:14px; border:1px solid var(--border-soft); margin-bottom:8px;">
-                    <div style="font-weight:800; color:var(--text-dark); font-family:'Outfit';">🎟️ ${c.codigo} <span style="color:var(--success); margin-left:8px;">${displayVal} OFF</span></div>
-                    <button onclick="eliminarCupon(${c.id})" style="background:#fee2e2; border:none; color:var(--danger); border-radius:8px; padding:6px 10px; cursor:pointer; font-weight:bold;">🗑️</button>
+                <div style="display:flex; flex-direction:column; background:white; padding:16px; border-radius:14px; border:1px solid var(--border-soft); margin-bottom:8px;">
+                    <div style="font-weight:800; color:var(--text-dark); font-family:'Outfit'; word-break: break-word; line-height: 1.3;">🎟️ ${c.codigo} <span style="color:var(--success); margin-left:8px; display:inline-block;">${displayVal} OFF</span></div>
+                    
+                    <div style="display:flex; gap:8px; margin-top: 14px;">
+                        <button onclick="vibrar([40]); compartirCupon('${c.codigo}', '${displayVal}')" style="flex:1; background:#25D366; color:white; border:none; border-radius:10px; padding:10px; font-weight:800; font-family:'Outfit'; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:0 4px 10px rgba(37,211,102,0.2);"><span style="font-size:1.2rem;">📱</span> COMPARTIR</button>
+                        <button onclick="vibrar([40]); eliminarCupon(${c.id})" style="background:#fee2e2; border:none; color:var(--danger); border-radius:10px; padding:10px 16px; cursor:pointer; font-weight:bold;">🗑️</button>
+                    </div>
                 </div>`;
             });
             setHtml('adm-cupones-list', html || '<p style="color:var(--text-gray); font-size:0.9rem; margin:8px 0 0 0;">No hay cupones activos.</p>');
         }
+
+        window.compartirCupon = function(codigo, descuento) {
+            let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}`; 
+            let msg = `¡Hola! Te regalo un cupón de descuento para tu próximo pedido en *${cUser}* 🍔🛵\n\n🎁 Ingresá el código: *${codigo}* al finalizar tu compra y obtené *${descuento} OFF* de regalo.\n\nPedí ahora acá: ${link}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+        };
 
         window.eliminarCupon = async function(id) {
             if(confirm("¿Eliminar este cupón?")) {
