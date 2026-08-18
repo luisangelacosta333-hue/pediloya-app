@@ -2,7 +2,7 @@
   "name": "Pedilo Ya Premium",
   "short_name": "PediloYaa",
   "description": "La Revolución Gastronómica",
-  "start_url": "./",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#f8fafc",
   "theme_color": "#ff5e00",
