@@ -634,13 +634,13 @@
                 <button onclick="vibrar([40]); go('view-chofer')" style="padding:14px 24px; border-radius:50px; border:2px solid var(--border-soft); background:var(--bg-pure); cursor:pointer; font-weight:800; font-size:0.95rem; box-shadow:var(--shadow-soft); flex-shrink:0; margin-top:5px;">Caja</button>
             </div>
 
-            <!-- TARJETA DÍAS RESTANTES LICENCIA -->
-            <div class="admin-card" id="admin-sub-card" style="border-top:5px solid var(--primary-orange); display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; background: linear-gradient(135deg, #0f172a, #1e293b); color: white; margin-bottom: 30px;">
+            <!-- TARJETA DÍAS RESTANTES LICENCIA (MÁS CHICA) -->
+            <div class="admin-card" id="admin-sub-card" style="border-top:4px solid var(--primary-orange); display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; background: #0f172a; color: white; margin-bottom: 20px; border-radius: 20px;">
                 <div>
-                    <span style="font-size: 0.85rem; font-weight: 700; color: #94a3b8; text-transform: uppercase;">Estado de Licencia</span>
-                    <div id="admin-sub-days" style="font-size: 1.8rem; font-weight: 900; font-family: 'Outfit'; line-height: 1.2; margin-top:4px;">Calculando...</div>
+                    <span style="font-size: 0.75rem; font-weight: 700; color: #94a3b8; text-transform: uppercase;">Estado de Licencia</span>
+                    <div id="admin-sub-days" style="font-size: 1.4rem; font-weight: 900; font-family: 'Outfit'; line-height: 1.2; margin-top:2px;">30 Días Gratis</div>
                 </div>
-                <div style="font-size: 2.5rem; animation: pulseGlow 2s infinite;">⏳</div>
+                <div style="font-size: 1.6rem;">⏳</div>
             </div>
 
             <div class="admin-card" style="border-top:5px solid var(--info);">
@@ -697,25 +697,25 @@
                     <div id="adm-flash-status" style="margin-top:12px; font-size:0.9rem; font-weight:800; color:var(--danger);"></div>
                 </div>
 
-                <!-- CUPONES INTELIGENTES -->
-                <div style="background:#f0fdf4; border:2px dashed var(--success); border-radius:24px; padding:20px;">
+                <!-- CUPONES INTELIGENTES (TAMAÑOS CORREGIDOS) -->
+                <div style="background:#f0fdf4; border:2px dashed var(--success); border-radius:24px; padding:16px;">
                     <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
                         <span style="font-size:1.4rem;">🎁</span>
                         <h4 style="margin:0; font-size:1.2rem; font-family:'Outfit'; font-weight:800; color:var(--success);">Cupones de Descuento</h4>
                     </div>
-                    <p style="font-size:0.9rem; color:var(--text-gray); margin-bottom:14px; font-weight:500;">Generá códigos para primera compra, clientes fieles o promociones de WhatsApp.</p>
+                    <p style="font-size:0.85rem; color:var(--text-gray); margin-bottom:14px; font-weight:500;">Generá códigos para primera compra o para enviar por WhatsApp.</p>
                     
                     <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
-                        <input type="text" id="cup-code" class="form-input" placeholder="Código (Ej: BIENVENIDO)" style="margin:0; width:100%; text-transform:uppercase; background:white; border:1px solid var(--border-soft);">
+                        <input type="text" id="cup-code" class="form-input" placeholder="CÓDIGO (Ej: DESC10)" style="margin:0; padding:14px; width:100%; text-transform:uppercase; background:white; border:1px solid var(--border-soft);">
                         <div style="display:flex; gap:10px;">
-                            <input type="number" id="cup-val" class="form-input" placeholder="Valor" style="margin:0; flex:1; background:white; border:1px solid var(--border-soft);">
-                            <select id="cup-type" class="form-input" style="margin:0; flex:1; padding:0 12px; background:white; border:1px solid var(--border-soft); font-weight:800;">
-                                <option value="monto">$ Monto</option>
-                                <option value="porcentaje">% Porcentaje</option>
+                            <input type="number" id="cup-val" class="form-input" placeholder="Valor" style="margin:0; padding:14px; flex:1; background:white; border:1px solid var(--border-soft);">
+                            <select id="cup-type" class="form-input" style="margin:0; padding:0; width:70px; flex-shrink:0; text-align:center; background:white; border:1px solid var(--border-soft); font-weight:800;">
+                                <option value="monto">$</option>
+                                <option value="porcentaje">%</option>
                             </select>
                         </div>
                     </div>
-                    <button class="btn-main" style="background:var(--success); box-shadow:0 10px 25px rgba(16,185,129,0.3);" onclick="vibrar([40]); agregarCupon()">CREAR CUPÓN</button>
+                    <button class="btn-main" style="background:var(--success); padding:14px; font-size:1rem; box-shadow:0 8px 20px rgba(16,185,129,0.2);" onclick="vibrar([40]); agregarCupon()">CREAR CUPÓN</button>
                     
                     <div id="adm-cupones-list" style="margin-top:16px; display:flex; flex-direction:column; gap:8px;"></div>
                 </div>
@@ -1000,7 +1000,6 @@
     
     <div class="modal" id="pedidos-web-modal"><div class="modal-content" style="width:100%; max-width:500px; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background: var(--bg-app); border:none;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;"><h3 style="margin:0; font-size:1.8rem; font-weight:800; font-family:'Outfit'; color:var(--primary-orange); letter-spacing:-0.5px;">Pedidos Web</h3><button style="background:rgba(255,94,0,0.1); border:none; font-size:1.1rem; color:var(--primary-orange); cursor:pointer; width:35px; height:35px; border-radius:50%;" onclick="document.getElementById('pedidos-web-modal').style.display='none'">✕</button></div><div id="pedidos-web-list" style="flex:1; overflow-y:auto; text-align:left; display:flex; flex-direction:column; gap:16px; padding-bottom:40px;"></div></div></div>
     <div class="modal" id="ventas-modal"><div class="modal-content" style="width:100%; max-width:500px; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background: var(--bg-app); border:none;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;"><h3 style="margin:0; font-size:1.8rem; font-weight:800; font-family:'Outfit'; color:var(--success);">Ventas Diarias</h3><button style="background:rgba(16,185,129,0.1); border:none; font-size:1.1rem; color:var(--success); cursor:pointer; width:35px; height:35px; border-radius:50%;" onclick="document.getElementById('ventas-modal').style.display='none'">✕</button></div><div id="chofer-logs-modal-container" style="flex:1; overflow-y:auto; text-align:left; padding-bottom:40px;"></div></div></div>
-
     <!-- SCRIPT PRINCIPAL -->
     <script>
         const qs = (id) => document.getElementById(id);
@@ -1345,7 +1344,7 @@
             let displayEl = qs('admin-sub-days');
             if(displayEl) {
                 if(daysLeft > 0) {
-                    displayEl.innerHTML = `${daysLeft} Días Restantes`;
+                    displayEl.innerHTML = `${daysLeft} Días Gratis`;
                     displayEl.style.color = '#10b981'; 
                 } else {
                     displayEl.innerHTML = `Licencia Expirada`;
