@@ -130,7 +130,7 @@
         .pill-btn { background: var(--bg-pure); border-radius: 50px; padding: 10px 10px; font-size: 0.75rem; font-weight: 800; color: var(--text-gray); box-shadow: var(--shadow-soft); cursor: pointer; border: 1px solid var(--border-soft); text-transform: uppercase; font-family:'Outfit'; letter-spacing: 0.5px; transition:0.2s; flex: 1; text-align: center; white-space: nowrap;}
         .pill-btn:active { transform: scale(0.95); }
         
-        /* DISEÑO DE CALCULADORA ULTRA PREMIUM APLICADO */
+        /* DISEÑO CALCULADORA ULTRA PREMIUM */
         .calc-display { flex: 1; display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-end; min-height: 70px; padding: 16px 24px; background: #ffffff; border-radius: var(--radius-lg); margin-bottom: 10px; box-shadow: 0 10px 30px rgba(255,94,0,0.1); border: 1px solid rgba(255,94,0,0.15); position: relative; overflow: hidden; }
         .calc-main { font-size: 3.5rem; font-weight: 900; color: var(--primary-orange); line-height: 1; font-family: 'Outfit', sans-serif; word-break: break-all; letter-spacing: -2px; z-index:2;}
         .calc-hist { font-size: 1.1rem; color: var(--text-light); font-weight: 600; min-height: 1.5rem; margin-bottom: 8px; z-index:2;}
@@ -142,8 +142,8 @@
         .btn-sheet-trigger:active { transform: scale(0.97); background: #f8fafc; }
 
         .chofer-action-row { flex-shrink: 0; display: flex; gap: 8px; margin-bottom: 10px; }
-        .chofer-btn-white { background: var(--bg-pure); border: 1px solid var(--border-soft); border-radius: 14px; padding: 12px 6px; flex: 1; font-weight: 800; font-size: 0.9rem; color: var(--text-dark); box-shadow: 0 4px 10px rgba(0,0,0,0.04); cursor: pointer; font-family: 'Outfit', sans-serif; text-transform:uppercase; transition:0.2s; display: flex; justify-content: center; align-items: center; gap: 6px;}
-        .chofer-btn-white:active { transform: scale(0.95); background: #f1f5f9; }
+        .chofer-btn-white { background: rgba(255,94,0,0.05); border: 1px solid rgba(255,94,0,0.3); border-radius: 14px; padding: 12px 6px; flex: 1; font-weight: 800; font-size: 0.9rem; color: var(--primary-orange); box-shadow: 0 4px 10px rgba(0,0,0,0.04); cursor: pointer; font-family: 'Outfit', sans-serif; text-transform:uppercase; transition:0.2s; display: flex; justify-content: center; align-items: center; gap: 6px;}
+        .chofer-btn-white:active { transform: scale(0.95); background: rgba(255,94,0,0.1); }
         
         .chofer-keypad { flex-shrink: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 10px; }
         .ckey { background: #ffffff; border: 1px solid var(--border-soft); border-radius: 16px; height: 7.5vh; min-height: 50px; max-height: 70px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 700; color: #1e293b; box-shadow: 0 4px 6px rgba(0,0,0,0.02); cursor: pointer; font-family: 'Outfit', sans-serif; transition: 0.1s;}
@@ -510,6 +510,10 @@
                 <p class="footer-sub">Soluciones Tecnológicas & Automatización</p>
                 <p class="footer-copy">© 2026 Argentina · Todos los derechos reservados</p>
             </div>
+            
+            <!-- BOTÓN ENERGY (AHORA DENTRO DEL LANDING, NO FLOTA EN LA CAJA) -->
+            <a href="https://wa.me/5493813339146?text=Hola,%20quiero%20mi%20app%20con%20dominio%20propio%20con%20la%20empresa%20Energy" target="_blank" style="position:absolute; bottom:20px; left:50%; transform:translateX(-50%); background:#25D366; color:white; padding:14px 24px; border-radius:50px; font-weight:800; text-decoration:none; box-shadow:0 4px 15px rgba(37,211,102,0.4); z-index:99; font-family:'Outfit', sans-serif; white-space:nowrap; font-size:1rem; text-align:center;">🚀 Adquiere tu App Propia con Energy</a>
+            
         </div>
     </div>
 
@@ -583,10 +587,11 @@
             <span style="font-size:1.4rem;">🍔</span> CATÁLOGO DE PRODUCTOS
         </button>
         
+        <!-- BOTONES CON DISEÑO PREMIUM NARANJA -->
         <div class="chofer-action-row">
-            <button class="chofer-btn-white" onclick="vibrar([40]); triggerExpenseModal()">💸 Gastos</button>
-            <button class="chofer-btn-white" onclick="vibrar([40]); abrirModalMotos()">🛵 Repartidores</button>
-            <button class="chofer-btn-white" style="border-color:var(--success); background:rgba(16,185,129,0.05); color:var(--success);" onclick="vibrar([40]); document.getElementById('ventas-modal').style.display='flex'">🧾 Historial</button>
+            <button class="chofer-btn-white" style="border-color:rgba(255,94,0,0.3); background:rgba(255,94,0,0.05); color:var(--primary-orange);" onclick="vibrar([40]); triggerExpenseModal()">💸 Gastos</button>
+            <button class="chofer-btn-white" style="border-color:rgba(255,94,0,0.3); background:rgba(255,94,0,0.05); color:var(--primary-orange);" onclick="vibrar([40]); abrirModalMotos()">🛵 Repartidores</button>
+            <button class="chofer-btn-white" style="border-color:rgba(255,94,0,0.3); background:rgba(255,94,0,0.05); color:var(--primary-orange);" onclick="vibrar([40]); document.getElementById('ventas-modal').style.display='flex'">🧾 Historial</button>
         </div>
         
         <div class="chofer-keypad">
@@ -699,7 +704,7 @@
                     <div id="adm-flash-status" style="margin-top:12px; font-size:0.9rem; font-weight:800; color:var(--danger);"></div>
                 </div>
 
-                <!-- CUPONES INTELIGENTES (TAMAÑOS CORREGIDOS) -->
+                <!-- CUPONES INTELIGENTES -->
                 <div style="background:#f0fdf4; border:2px dashed var(--success); border-radius:24px; padding:16px;">
                     <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
                         <span style="font-size:1.4rem;">🎁</span>
@@ -1054,7 +1059,12 @@
                 btnEnergy.target = '_blank';
                 btnEnergy.innerHTML = '🚀 Adquiere tu App Propia con Energy';
                 btnEnergy.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#25D366; color:white; padding:14px 24px; border-radius:50px; font-weight:800; text-decoration:none; box-shadow:0 4px 15px rgba(37,211,102,0.4); z-index:9999; font-family:"Outfit", sans-serif; white-space:nowrap; font-size:1rem; text-align:center; transition: all 0.3s ease;';
-                document.body.appendChild(btnEnergy);
+                
+                // Asegurarnos de que SOLO se inyecte en el view-login
+                let loginView = document.getElementById('view-login');
+                if(loginView) {
+                    loginView.appendChild(btnEnergy);
+                }
             }
 
             if (trackParam && localParam) { 
@@ -1073,7 +1083,7 @@
             setupVideoObserver();
         });
 
-                async function compressVideo(file, maxSeconds = 15) {
+        async function compressVideo(file, maxSeconds = 15) {
             return new Promise((resolve) => {
                 if (!file.type.startsWith('video/')) return resolve(file);
                 try {
@@ -2939,4 +2949,3 @@
     </script>
 </body>
 </html>
-
