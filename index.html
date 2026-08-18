@@ -210,9 +210,10 @@
         .cat-pill { padding: 10px 20px; background: var(--bg-pure); border: 1px solid var(--border-soft); border-radius: 50px; font-weight: 700; font-size: 0.95rem; white-space: nowrap; cursor: pointer; box-shadow: var(--shadow-soft); transition: 0.2s; scroll-snap-align: start; color: var(--text-gray);}
         .cat-pill.active { background: var(--text-dark); color: white; border-color: var(--text-dark); }
 
-        .food-grid { display: flex; flex-direction: column; gap: 30px; padding: 0 24px 100px; }
+        /* MODIFICACIÓN 1: Videos full width a lo ancho de la pantalla sin bordes redondeados */
+        .food-grid { display: flex; flex-direction: column; gap: 12px; padding: 0 0 100px 0; }
         
-        .food-card-large { width: 100%; aspect-ratio: 9 / 16; max-height: 85vh; background: #0f172a; border-radius: 40px; box-shadow: var(--shadow-float); overflow: hidden; cursor: pointer; transition: var(--transition-smooth); position: relative; }
+        .food-card-large { width: 100%; aspect-ratio: 9 / 16; max-height: 85vh; background: #0f172a; border-radius: 0; box-shadow: none; overflow: hidden; cursor: pointer; transition: var(--transition-smooth); position: relative; border-top: 1px solid #1e293b; border-bottom: 1px solid #1e293b; }
         .food-card-large:active { transform: scale(0.98); }
         .food-img-large { width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: center; font-size: 4rem; }
         .food-img-large img, .food-img-large video { width: 100%; height: 100%; object-fit: cover; position: absolute; inset:0; }
@@ -226,8 +227,9 @@
         .add-btn-float { pointer-events: all; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 500; font-size: 1.8rem; box-shadow: 0 8px 20px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.3); line-height: 1; padding-bottom: 2px; margin-left: auto; transition:0.2s;}
         .add-btn-float:active { transform: scale(0.9); background: white; color: black; }
 
-        .floating-cart-bar { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); width: calc(100% - 48px); max-width: 450px; background: var(--text-dark); color: white; padding: 18px 24px; border-radius: 28px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 20px 50px rgba(15,23,42,0.5); z-index: 999; cursor: pointer; transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1); animation: slideUpCartBar 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        @keyframes slideUpCartBar { from { bottom: -100px; } to { bottom: 80px; } }
+        /* Ajuste de altura del botón flotante para la nueva barra inferior más fina */
+        .floating-cart-bar { position: fixed; bottom: 65px; left: 50%; transform: translateX(-50%); width: calc(100% - 48px); max-width: 450px; background: var(--text-dark); color: white; padding: 18px 24px; border-radius: 28px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 20px 50px rgba(15,23,42,0.5); z-index: 999; cursor: pointer; transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1); animation: slideUpCartBar 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes slideUpCartBar { from { bottom: -100px; } to { bottom: 65px; } }
         .floating-cart-bar:active { transform: translateX(-50%) scale(0.96); }
         .fcb-left { display: flex; align-items: center; gap: 16px; font-family: 'Outfit'; font-weight: 700; font-size: 1rem; text-transform: uppercase;}
         .fcb-qty { background: var(--primary-orange); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 800;}
@@ -251,6 +253,7 @@
         .sheet-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999998; display: none; opacity: 0; transition: opacity 0.3s; }
         .sheet-overlay.show { display: block; opacity: 1; }
         
+        /* MODIFICACIÓN 2: Botonera más fina, pegada abajo, con iconos más pequeños */
         .bottom-nav { 
             position: fixed; 
             bottom: 0 !important; 
@@ -263,15 +266,16 @@
             border-top: 1px solid var(--border-soft); 
             display: flex; 
             justify-content: space-around; 
-            padding: 10px 10px calc(15px + env(safe-area-inset-bottom, 0px)); 
+            align-items: center;
+            padding: 6px 10px calc(6px + env(safe-area-inset-bottom, 0px)); 
             z-index: 1000; 
             box-sizing: border-box;
             margin-bottom: 0;
         }
-        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--text-gray); font-size: 0.8rem; font-weight: 800; cursor: pointer; text-transform: uppercase; position:relative; transition: 0.3s;}
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-gray); font-size: 0.75rem; font-weight: 800; cursor: pointer; text-transform: uppercase; position:relative; transition: 0.3s;}
         .nav-item.active { color: var(--primary-orange); }
-        .nav-item.active .nav-icon { transform: translateY(-5px) scale(1.15); }
-        .nav-icon { font-size: 1.5rem; transition: 0.3s; }
+        .nav-item.active .nav-icon { transform: translateY(-3px) scale(1.1); }
+        .nav-icon { font-size: 1.3rem; transition: 0.3s; }
 
         .toast { position: fixed; top: 40px; left: 50%; transform: translateX(-50%) translateY(-20px) scale(0.95); background: rgba(15, 23, 42, 0.95); color: white; padding: 16px 24px; border-radius: 50px; font-weight: 600; opacity: 0; transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); z-index: 99999999; font-size: 1rem; pointer-events: none; box-shadow: 0 20px 50px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; gap: 12px; min-width: max-content; white-space: nowrap; backdrop-filter: blur(10px);}
         .toast.ver { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
@@ -709,13 +713,13 @@
                         <input type="text" id="cup-code" class="form-input" placeholder="CÓDIGO (Ej: DESC10)" style="margin:0; padding:14px; width:100%; text-transform:uppercase; background:white; border:1px solid var(--border-soft);">
                         <div style="display:flex; gap:10px;">
                             <input type="number" id="cup-val" class="form-input" placeholder="Valor" style="margin:0; padding:14px; flex:1; background:white; border:1px solid var(--border-soft);">
-                            <select id="cup-type" class="form-input" style="margin:0; padding:0; width:70px; flex-shrink:0; text-align:center; background:white; border:1px solid var(--border-soft); font-weight:800;">
+                            <select id="cup-type" class="form-input" style="margin:0; padding:0; width: 70px; flex-shrink:0; text-align:center; background:white; border:1px solid var(--border-soft); font-weight:800;">
                                 <option value="monto">$</option>
                                 <option value="porcentaje">%</option>
                             </select>
                         </div>
                     </div>
-                    <button class="btn-main" style="background:var(--success); padding:14px; font-size:1rem; box-shadow:0 8px 20px rgba(16,185,129,0.2);" onclick="vibrar([40]); agregarCupon()">CREAR CUPÓN</button>
+                    <button class="btn-main" style="background:var(--success); padding:14px; font-size: 1rem; box-shadow:0 8px 20px rgba(16,185,129,0.2);" onclick="vibrar([40]); agregarCupon()">CREAR CUPÓN</button>
                     
                     <div id="adm-cupones-list" style="margin-top:16px; display:flex; flex-direction:column; gap:8px;"></div>
                 </div>
