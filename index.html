@@ -1197,7 +1197,7 @@
             document.querySelectorAll('.view-container, .view-container-no-pad').forEach(v => { v.classList.remove('active'); v.style.display = 'none'; }); 
             let target = qs(id);
             if(target) { target.classList.add('active'); target.style.display = 'flex'; window.scrollTo(0,0); }
-            if(id === 'view-admin') { actualizarLinkDisplay(); renderOfertaRelampagoAdmin(); renderCuponesAdmin(); }
+            if(id === 'view-admin') { actualizarLinkDisplay(); renderOfertaRelampagoAdmin(); renderCuponesAdmin(); renderDiasRestantes(); }
         }
 
         function showToast(m, type="success") { 
@@ -2598,7 +2598,7 @@
             showToast("Venta registrada.");
         }
         
-                window.triggerExpenseModal = function() {
+        window.triggerExpenseModal = function() {
             let val = getCalcValue();
             if(val <= 0) { showToast("Escribí el monto del gasto en la caja primero.", "error"); return; }
             setText('exp-monto-text', `$${val.toLocaleString('es-AR')}`);
@@ -2860,4 +2860,3 @@
     </script>
 </body>
 </html>
-
