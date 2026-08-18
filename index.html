@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -252,7 +251,6 @@
         .sheet-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999998; display: none; opacity: 0; transition: opacity 0.3s; }
         .sheet-overlay.show { display: block; opacity: 1; }
         
-        /* FIX: ELIMINACIÓN DE ESPACIO BLANCO INFERIOR */
         .bottom-nav { 
             position: fixed; 
             bottom: 0 !important; 
@@ -628,12 +626,21 @@
     <div id="view-admin" class="view-container view-container-no-pad" style="width:100%; max-width:100vw; overflow-x:hidden;">
         <div class="admin-container">
             
-            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:30px; gap:10px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:20px; gap:10px;">
                 <div style="flex:1; overflow:hidden;">
                     <span style="font-size:0.85rem; color:var(--text-light); font-weight:800; text-transform:uppercase; letter-spacing:1.5px;">Panel Central</span><br>
                     <span id="lbl-owner" style="font-weight:900; font-size:1.8rem; color:var(--text-dark); font-family:'Outfit'; letter-spacing:-1px; word-wrap:break-word; line-height:1.1; display:block;">LOCAL</span>
                 </div>
                 <button onclick="vibrar([40]); go('view-chofer')" style="padding:14px 24px; border-radius:50px; border:2px solid var(--border-soft); background:var(--bg-pure); cursor:pointer; font-weight:800; font-size:0.95rem; box-shadow:var(--shadow-soft); flex-shrink:0; margin-top:5px;">Caja</button>
+            </div>
+
+            <!-- TARJETA DÍAS RESTANTES LICENCIA -->
+            <div class="admin-card" id="admin-sub-card" style="border-top:5px solid var(--primary-orange); display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; background: linear-gradient(135deg, #0f172a, #1e293b); color: white; margin-bottom: 30px;">
+                <div>
+                    <span style="font-size: 0.85rem; font-weight: 700; color: #94a3b8; text-transform: uppercase;">Estado de Licencia</span>
+                    <div id="admin-sub-days" style="font-size: 1.8rem; font-weight: 900; font-family: 'Outfit'; line-height: 1.2; margin-top:4px;">Calculando...</div>
+                </div>
+                <div style="font-size: 2.5rem; animation: pulseGlow 2s infinite;">⏳</div>
             </div>
 
             <div class="admin-card" style="border-top:5px solid var(--info);">
@@ -669,7 +676,7 @@
             </div>
 
             <!-- ============================================== -->
-            <!-- NUEVA SECCIÓN MARKETING Y VENTAS AUTOMATIZADAS -->
+            <!-- SECCIÓN MARKETING Y VENTAS AUTOMATIZADAS -->
             <!-- ============================================== -->
             <div class="admin-card" style="border-top:4px solid var(--success);">
                 <h3 style="margin:0 0 15px; font-size:1.5rem; font-family:'Outfit'; font-weight:800; color:var(--text-dark);">🚀 Marketing & Ventas</h3>
@@ -698,13 +705,15 @@
                     </div>
                     <p style="font-size:0.9rem; color:var(--text-gray); margin-bottom:14px; font-weight:500;">Generá códigos para primera compra, clientes fieles o promociones de WhatsApp.</p>
                     
-                    <div style="display:flex; gap:8px; margin-bottom:12px;">
-                        <input type="text" id="cup-code" class="form-input" placeholder="Código (Ej: BIENVENIDO)" style="margin:0; flex:2; text-transform:uppercase; background:white; border:1px solid var(--border-soft);">
-                        <input type="number" id="cup-val" class="form-input" placeholder="Valor" style="margin:0; flex:1; background:white; border:1px solid var(--border-soft);">
-                        <select id="cup-type" class="form-input" style="margin:0; width:75px; padding:0 8px; background:white; border:1px solid var(--border-soft); font-weight:800;">
-                            <option value="monto">$</option>
-                            <option value="porcentaje">%</option>
-                        </select>
+                    <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
+                        <input type="text" id="cup-code" class="form-input" placeholder="Código (Ej: BIENVENIDO)" style="margin:0; width:100%; text-transform:uppercase; background:white; border:1px solid var(--border-soft);">
+                        <div style="display:flex; gap:10px;">
+                            <input type="number" id="cup-val" class="form-input" placeholder="Valor" style="margin:0; flex:1; background:white; border:1px solid var(--border-soft);">
+                            <select id="cup-type" class="form-input" style="margin:0; flex:1; padding:0 12px; background:white; border:1px solid var(--border-soft); font-weight:800;">
+                                <option value="monto">$ Monto</option>
+                                <option value="porcentaje">% Porcentaje</option>
+                            </select>
+                        </div>
                     </div>
                     <button class="btn-main" style="background:var(--success); box-shadow:0 10px 25px rgba(16,185,129,0.3);" onclick="vibrar([40]); agregarCupon()">CREAR CUPÓN</button>
                     
@@ -830,12 +839,9 @@
 
             <div class="category-title">🔥 Menú Principal</div>
             
+            <!-- FILTROS REDUCIDOS A UN SOLO MENÚ COMO SE PIDIÓ -->
             <div class="cat-scroll" id="cat-scroll">
-                <div class="cat-pill active">🔥 Todo</div>
-                <div class="cat-pill">🍕 Pizzas</div>
-                <div class="cat-pill">🍔 Burgers</div>
-                <div class="cat-pill">🍟 Papas</div>
-                <div class="cat-pill">🥤 Bebidas</div>
+                <div class="cat-pill active">Menú Completo</div>
             </div>
 
             <div class="food-grid" id="customer-food-grid">
@@ -962,11 +968,14 @@
 
     <!-- MODAL PREMIUM CIERRE DE TURNO -->
     <div class="modal" id="cierre-turno-modal">
-        <div class="modal-content-standard" style="padding:32px 24px; background: #0f172a; color: white; border-top: 5px solid var(--primary-orange);">
-            <button class="modal-close-circle" style="background:rgba(255,255,255,0.1); color:white;" onclick="document.getElementById('cierre-turno-modal').style.display='none'">✕</button>
-            <h3 style="margin:0 0 20px; font-family:'Outfit'; font-size:1.8rem; font-weight:800; color:white; letter-spacing:-0.5px;">🔒 Arqueo de Caja</h3>
-            <div id="cierre-breakdown" style="margin-bottom: 24px;"></div>
-            <button class="btn-main" style="background:var(--gradient-orange); width:100%; font-size: 1rem; box-shadow: 0 10px 25px rgba(255,94,0,0.3);" onclick="vibrar([40]); confirmarCierreTurno()">VACIAR CAJA Y AVISAR AL DUEÑO</button>
+        <div class="modal-content-standard" style="padding:32px 24px; background: #0f172a; color: white; border: 2px solid rgba(255,255,255,0.1); border-radius: 36px; max-width: 400px;">
+            <button class="modal-close-circle" style="background:rgba(255,255,255,0.1); color:white; top: 25px; right: 25px;" onclick="document.getElementById('cierre-turno-modal').style.display='none'">✕</button>
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom: 24px;">
+                <span style="font-size: 2rem;">🔒</span>
+                <h3 style="margin:0; font-family:'Outfit'; font-size:2rem; font-weight:900; color:white; letter-spacing:-0.5px;">Arqueo de Caja</h3>
+            </div>
+            <div id="cierre-breakdown" style="margin-bottom: 16px;"></div>
+            <button class="btn-main" style="background:var(--gradient-orange); width:100%; font-size: 1.1rem; border-radius: 16px; padding: 20px; box-shadow: 0 10px 25px rgba(255,94,0,0.3);" onclick="vibrar([40]); confirmarCierreTurno()">VACIAR CAJA Y AVISAR AL DUEÑO</button>
         </div>
     </div>
 
@@ -1325,6 +1334,26 @@
             }
         }
 
+        // FUNCION PARA ACTUALIZAR DIAS RESTANTES EN PANEL ADMIN
+        function renderDiasRestantes() {
+            if(!storeData.sub_end_date) return;
+            let end = new Date(storeData.sub_end_date);
+            let today = new Date();
+            let diffTime = end - today;
+            let daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            let displayEl = qs('admin-sub-days');
+            if(displayEl) {
+                if(daysLeft > 0) {
+                    displayEl.innerHTML = `${daysLeft} Días Restantes`;
+                    displayEl.style.color = '#10b981'; 
+                } else {
+                    displayEl.innerHTML = `Licencia Expirada`;
+                    displayEl.style.color = '#ef4444'; 
+                }
+            }
+        }
+
         async function ejecutarValidacionPaywallIA(base64str) { 
             let scanBox = qs('ai-scanner-box');
             let statusText = qs('ia-status-text');
@@ -1498,36 +1527,45 @@
                 }
             });
 
+            let retiroTotal = calcCashMostrador + totalEnMotos;
+
             let htmlBreakdown = `
-            <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 16px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.1);">
-                <div style="display:flex; justify-content:space-between; margin-bottom: 12px; font-size:1.1rem;">
-                    <span style="color:#94a3b8; font-weight:600;">🏪 Mostrador (Caja)</span>
-                    <span style="color:white; font-weight:800; font-family:'Outfit';">$${calcCashMostrador.toLocaleString('es-AR')}</span>
+            <div style="background: #1e293b; padding: 24px; border-radius: 20px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.05);">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 16px; font-size:1.15rem;">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span style="font-size:1.3rem;">🏪</span>
+                        <span style="color:#94a3b8; font-weight:600; line-height:1.2;">Mostrador<br><span style="font-size:0.85rem;">(Caja)</span></span>
+                    </div>
+                    <span style="color:white; font-weight:900; font-family:'Outfit'; font-size:1.3rem;">$${calcCashMostrador.toLocaleString('es-AR')}</span>
                 </div>`;
             
             let motoMsgText = "";
             for (let moto in cashPorMoto) {
                 htmlBreakdown += `
-                <div style="display:flex; justify-content:space-between; margin-bottom: 12px; font-size:1.1rem;">
-                    <span style="color:#94a3b8; font-weight:600;">🛵 Repartidor: ${moto}</span>
-                    <span style="color:var(--primary-orange); font-weight:800; font-family:'Outfit';">$${cashPorMoto[moto].toLocaleString('es-AR')}</span>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 16px; font-size:1.15rem;">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span style="font-size:1.3rem;">🛵</span>
+                        <span style="color:#94a3b8; font-weight:600; line-height:1.2;">Repartidor<br><span style="font-size:0.85rem;">${moto}</span></span>
+                    </div>
+                    <span style="color:var(--primary-orange); font-weight:900; font-family:'Outfit'; font-size:1.3rem;">$${cashPorMoto[moto].toLocaleString('es-AR')}</span>
                 </div>`;
                 motoMsgText += `\n🛵 *${moto}:* $${cashPorMoto[moto].toLocaleString('es-AR')}`;
             }
             
             htmlBreakdown += `
-                <div style="display:flex; justify-content:space-between; margin-bottom: 12px; font-size:1.1rem; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 10px;">
-                    <span style="color:#94a3b8; font-weight:600;">🏦 Transferencias (No físicas)</span>
-                    <span style="color:var(--info); font-weight:800; font-family:'Outfit';">$${calcTransf.toLocaleString('es-AR')}</span>
-                </div>`;
-
-            let retiroTotal = calcCashMostrador + totalEnMotos;
-
-            htmlBreakdown += `
                 <div style="height: 1px; background: rgba(255,255,255,0.1); margin: 16px 0;"></div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px; font-size:1.15rem;">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span style="font-size:1.3rem;">🏦</span>
+                        <span style="color:#94a3b8; font-weight:600; line-height:1.2;">Transferencias<br><span style="font-size:0.85rem;">(No físicas)</span></span>
+                    </div>
+                    <span style="color:#38bdf8; font-weight:900; font-family:'Outfit'; font-size:1.3rem;">$${calcTransf.toLocaleString('es-AR')}</span>
+                </div>
+                
+                <div style="height: 1px; background: rgba(255,255,255,0.1); margin: 20px 0;"></div>
                 <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <span style="color:white; font-weight:800; text-transform:uppercase; font-size:0.95rem;">Efectivo A Retirar Total</span>
-                    <span style="color:var(--success); font-weight:900; font-size:2rem; font-family:'Outfit';">$${retiroTotal.toLocaleString('es-AR')}</span>
+                    <span style="color:white; font-weight:800; text-transform:uppercase; font-size:0.95rem; line-height:1.2;">EFECTIVO A<br>RETIRAR<br>TOTAL</span>
+                    <span style="color:#10b981; font-weight:900; font-size:2.2rem; font-family:'Outfit';">$${retiroTotal.toLocaleString('es-AR')}</span>
                 </div>
             </div>`;
 
@@ -1616,6 +1654,7 @@
             renderCuponesAdmin();
             renderOfertaRelampagoAdmin();
             renderAllData();
+            renderDiasRestantes();
         }
 
         // ============================================
@@ -1629,7 +1668,7 @@
             if(btn) { btn.innerText = "ACTIVANDO..."; btn.disabled = true; }
 
             let endTime = new Date();
-            endTime.setMinutes(endTime.getMinutes() + 30); // 30 minutos
+            endTime.setMinutes(endTime.getMinutes() + 30); 
 
             let nuevaAppData = { ...storeData, oferta_relampago: { titulo: titulo, fin: endTime.toISOString() } };
             await _supabase.from('pediloya_usuarios').update({ app_data: nuevaAppData }).eq('id', currentLocalId);
@@ -1687,7 +1726,7 @@
             cupones.forEach(c => {
                 let displayVal = c.tipo === 'monto' ? `$${c.val.toLocaleString('es-AR')}` : `${c.val}%`;
                 html += `
-                <div style="display:flex; justify-content:space-between; align-items:center; background:white; padding:12px 16px; border-radius:14px; border:1px solid var(--border-soft);">
+                <div style="display:flex; justify-content:space-between; align-items:center; background:white; padding:12px 16px; border-radius:14px; border:1px solid var(--border-soft); margin-bottom:8px;">
                     <div style="font-weight:800; color:var(--text-dark); font-family:'Outfit';">🎟️ ${c.codigo} <span style="color:var(--success); margin-left:8px;">${displayVal} OFF</span></div>
                     <button onclick="eliminarCupon(${c.id})" style="background:#fee2e2; border:none; color:var(--danger); border-radius:8px; padding:6px 10px; cursor:pointer; font-weight:bold;">🗑️</button>
                 </div>`;
@@ -2291,9 +2330,8 @@
             if(e.target.classList.contains('cat-pill')) {
                 document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
                 e.target.classList.add('active');
-                let cat = e.target.innerText.replace(/[^\w\s]/gi, '').trim().toLowerCase();
-                if(cat === 'todo') { renderMenuItems(menuItems); } 
-                else { let f = menuItems.filter(i => i.nombre.toLowerCase().includes(cat) || (i.descripcion && i.descripcion.toLowerCase().includes(cat))); renderMenuItems(f); }
+                // Al haber solo "Menú Completo", renderizamos todo el menú siempre
+                renderMenuItems(menuItems);
             }
         });
 
@@ -2560,7 +2598,7 @@
             showToast("Venta registrada.");
         }
         
-        window.triggerExpenseModal = function() {
+                window.triggerExpenseModal = function() {
             let val = getCalcValue();
             if(val <= 0) { showToast("Escribí el monto del gasto en la caja primero.", "error"); return; }
             setText('exp-monto-text', `$${val.toLocaleString('es-AR')}`);
@@ -2822,3 +2860,4 @@
     </script>
 </body>
 </html>
+
