@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -805,7 +807,8 @@
             <div id="adm-menu-list"></div>
         </div>
     </div>
-    <!-- MODAL SELECCIONAR CHOFER GPS -->
+
+    <!-- MODAL SELECCIONAR CHOFER GPS (RESTAURADO) -->
     <div class="modal" id="modal-select-moto-gps">
         <div class="modal-content-standard" style="padding:32px 24px; text-align:center;">
             <button class="modal-close-circle" style="background:rgba(0,0,0,0.05);" onclick="document.getElementById('modal-select-moto-gps').style.display='none'">✕</button>
@@ -1010,13 +1013,13 @@
         let pendingTransferData = null;
         let currentCierreData = null; 
 
-        // GPS VARIABLES (AHORA CON BROADCAST)
+        // GPS VARIABLES
         let currentGpsMoto = null;
         let gpsSubscription = null;
-        let gpsChannel = null; // NUEVO: Canal para transmitir por el aire
+        let gpsChannel = null; 
         let isGpsActive = false;
         let gpsInterval = null;
-        let radarSubscription = null; // NUEVO: Canal para el radar del dueño
+        let radarSubscription = null; 
         
         let unseenOrdersAlert = false;
         let syncInterval = null;
@@ -1259,7 +1262,7 @@
                 if(qs('btn-log')) qs('btn-log').disabled = false; setText('btn-log', "Abrir Caja");
                 go('view-chofer'); showToast("¡Bienvenido!");
 
-                // WEBSOCKETS EN TIEMPO REAL (Dejamos SOLAMENTE este, borramos el setInterval mata-servidores)
+                // WEBSOCKETS EN TIEMPO REAL
                 _supabase.channel('pedidos-nuevos')
                     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'pediloya_logs', filter: `local_id=eq.${currentLocalId}` }, payload => {
                         if(payload.new.tipo === 'PEDIDO_WEB') {
@@ -1590,15 +1593,67 @@
             }
         }
 
+        // ==========================================
+        // LA SOLUCION DEFINITIVA PARA LA BASE DE DATOS
+        // ==========================================
         async function loadDataFromDB() {
             if (!currentLocalId) return;
-            const [inv, log] = await Promise.all([
-                _supabase.from('pediloya_inventario').select('*').eq('local_id', currentLocalId),
-                _supabase.from('pediloya_logs').select('*').eq('local_id', currentLocalId).order('created_at', {ascending: false}).limit(200)
-            ]);
-            dbState.inventory = inv.data || []; 
-            dbState.logs = log.data || [];
+
+            // 1. Traer inventario
+            const { data: inv } = await _supabase.from('pediloya_inventario').select('*').eq('local_id', currentLocalId);
+            dbState.inventory = inv || [];
+
+            // 2. Traer el último cierre de turno
+            const { data: lastCierre } = await _supabase.from('pediloya_logs')
+                .select('created_at')
+                .eq('local_id', currentLocalId)
+                .eq('tipo', 'CIERRE_TURNO')
+                .order('created_at', { ascending: false })
+                .limit(1)
+                .maybeSingle();
+
+            let turnoLogs = [];
+            let webLogs = [];
+
+            // 3. Traer los movimientos SOLAMENTE DESDE el último cierre
+            if (lastCierre && lastCierre.created_at) {
+                const { data: tLogs } = await _supabase.from('pediloya_logs')
+                    .select('*')
+                    .eq('local_id', currentLocalId)
+                    .gte('created_at', lastCierre.created_at)
+                    .order('created_at', { ascending: false });
+                turnoLogs = tLogs || [];
+            } else {
+                // Si es un local nuevo y nunca hizo cierre, le damos un margen de seguridad amplio
+                const { data: tLogs } = await _supabase.from('pediloya_logs')
+                    .select('*')
+                    .eq('local_id', currentLocalId)
+                    .order('created_at', { ascending: false })
+                    .limit(1000);
+                turnoLogs = tLogs || [];
+            }
+
+            // 4. Traer siempre los pedidos web pendientes (por si quedaron colgados de antes)
+            const { data: wLogs } = await _supabase.from('pediloya_logs')
+                .select('*')
+                .eq('local_id', currentLocalId)
+                .eq('tipo', 'PEDIDO_WEB')
+                .order('created_at', { ascending: false });
+            webLogs = wLogs || [];
+
+            // Unir todo y evitar datos duplicados
+            let allLogs = [...turnoLogs];
+            webLogs.forEach(wLog => {
+                if(!allLogs.some(l => l.id === wLog.id)) {
+                    allLogs.push(wLog);
+                }
+            });
+
+            // Ordenar por fecha del más nuevo al más viejo
+            allLogs.sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
+            dbState.logs = allLogs;
             
+            // --- CARGA DE PERFIL Y DATOS DEL LOCAL ---
             if(storeData.perfil_url) {
                 setImgSrc('store-logo-preview', storeData.perfil_url);
                 if(qs('placeholder-perfil')) qs('placeholder-perfil').style.display = 'none';
@@ -2639,6 +2694,7 @@
             window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
+        // RESTAURADO: Recibe choferAsignado para mostrar en el mensaje
         window.compartirTRKWhatsApp = function(trk, choferAsignado) {
             let link = window.location.origin + '/?local=' + encodeURIComponent(cUser) + '&track=' + trk;
             let choferMsg = choferAsignado && choferAsignado !== 'undefined' ? ` con *${choferAsignado}*` : '';
