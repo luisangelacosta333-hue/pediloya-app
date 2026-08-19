@@ -262,26 +262,27 @@
 
         
 
-        /* ================= CALCULADORA PREMIUM EXACTA A LA FOTO ================= */
+        /* ================= CALCULADORA PREMIUM (HALO NARANJA) ================= */
         .calc-display { 
             flex: 1; display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-end; 
             min-height: 110px; padding: 16px 24px; 
-            background: #111827; 
-            border-radius: 40px; 
+            background: #111520; 
+            border-radius: 32px; 
             margin-bottom: 15px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15); 
+            border: 2px solid var(--primary-orange); 
+            box-shadow: 0 0 25px rgba(255, 94, 0, 0.2); 
             position: relative; overflow: hidden; 
         }
-        .calc-main { font-size: 4.5rem; font-weight: 300; color: #ffffff; line-height: 1; font-family: 'Outfit', sans-serif; word-break: break-all; letter-spacing: -2px; z-index:2; }
+        .calc-main { font-size: 4.5rem; font-weight: 300; color: #ffffff; line-height: 1; font-family: 'Outfit', sans-serif; word-break: break-all; letter-spacing: -2px; z-index:2; text-shadow: 0 0 20px rgba(255, 94, 0, 0.6); }
         .calc-hist { font-size: 1.1rem; color: #94a3b8; font-weight: 500; min-height: 1.5rem; margin-bottom: 8px; z-index:2; }
-        
+
         .ticket-success { position: absolute; inset: 0; background: var(--success); color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Outfit'; z-index: 5; opacity: 0; pointer-events: none; transition: 0.3s; transform: translateY(100%); }
 
         .ticket-success.show { opacity: 1; transform: translateY(0); pointer-events: all; }
 
  
 
-        .btn-sheet-trigger { flex-shrink: 0; width: 100%; padding: 14px; background: #ffffff; color: var(--primary-orange); font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.1rem; border: 1px solid rgba(255,94,0,0.2); border-radius: 16px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; display:flex; justify-content:center; align-items:center; gap:12px; transition:0.2s; box-shadow: 0 4px 10px rgba(255,94,0,0.05);}
+        .btn-sheet-trigger { flex-shrink: 0; width: 100%; padding: 16px; background: #ffffff; color: var(--primary-orange); font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.15rem; border: 1px solid rgba(255,94,0,0.3); border-radius: 20px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; display:flex; justify-content:center; align-items:center; gap:12px; transition:0.2s; box-shadow: 0 4px 10px rgba(255,94,0,0.05);}
 
         .btn-sheet-trigger:active { transform: scale(0.97); }
 
@@ -297,15 +298,15 @@
 
         .chofer-keypad { flex-shrink: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 15px; }
 
-        .ckey { background: #ffffff; border: none; border-radius: 18px; height: 7.5vh; min-height: 55px; max-height: 75px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 700; color: var(--text-dark); box-shadow: 0 4px 10px rgba(0,0,0,0.04); cursor: pointer; font-family: 'Outfit', sans-serif; transition: 0.1s; }
+        .ckey { background: #ffffff; border: 1px solid rgba(0,0,0,0.05); border-radius: 18px; height: 7.5vh; min-height: 55px; max-height: 75px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 700; color: var(--text-dark); box-shadow: 0 4px 10px rgba(0,0,0,0.04); cursor: pointer; font-family: 'Outfit', sans-serif; transition: 0.1s;}
 
         .ckey:active { transform: scale(0.92); background: #f1f5f9; }
 
-        .ckey-op { color: var(--primary-orange); font-size: 2.8rem; background: #fff5f0; }
+        .ckey-op { color: var(--primary-orange); font-size: 2.8rem; background: #ffffff; border: 1px solid rgba(0,0,0,0.05);}
+        
+        .ckey-del { color: var(--danger); border: 2px solid var(--danger); background: #ffffff; font-size:0; display:flex; align-items:center; justify-content:center;}
 
-        .ckey-del { color: var(--danger); border: 2px solid var(--danger); background: #ffffff; }
-
-        .ckey-eq { background: var(--gradient-orange); color: white; border: none; font-size: 2.8rem; box-shadow: 0 10px 25px rgba(255, 94, 0, 0.4); font-weight: 400; }
+        .ckey-eq { background: var(--gradient-orange); color: white; border: none; font-size: 2.8rem; box-shadow: 0 10px 25px rgba(255,94,0,0.4); font-weight: 400; }
 
         
 
@@ -315,7 +316,7 @@
 
         .chofer-pay-btn:active { transform: scale(0.95); }
 
-        .btn-pay-transfer { flex:1; border-radius: 20px; padding:18px 10px; font-weight:900; font-size:1.2rem; font-family:'Outfit'; text-transform: uppercase; background:#0ea5e9; color:white; border:none; box-shadow:0 8px 20px rgba(14,165,233,0.3); cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; transition:0.2s; text-shadow: 0 2px 5px rgba(0,0,0,0.2);}
+        .btn-pay-transfer { flex:1; border-radius:20px; padding:18px 10px; font-weight:900; font-size:1.2rem; font-family:'Outfit'; text-transform: uppercase; background:#0ea5e9; color:white; border:none; box-shadow:0 8px 20px rgba(14,165,233,0.3); cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; transition:0.2s; text-shadow: 0 2px 5px rgba(0,0,0,0.2);}
 
         .btn-pay-transfer:active { transform: scale(0.95); }
 
@@ -983,12 +984,12 @@
 
             </div>
 
-            <!-- BOTÓN WHATSAPP COMERCIAL -->
+            <!-- BOTÓN WHATSAPP COMERCIAL AÑADIDO Y OPTIMIZADO -->
             <div style="background: var(--bg-pure); border-radius: 36px; padding: 40px 28px; margin-bottom: 32px; box-shadow: 0 25px 50px rgba(0,0,0,0.05); text-align: center; border: 1px solid var(--border-soft);">
                 <h3 style="font-family:'Outfit', sans-serif; font-size: 1.6rem; font-weight: 900; color: var(--text-dark); text-transform: uppercase; margin: 0 0 16px; line-height: 1.2;">🚀 TENÉ TU PROPIA APP PERSONALIZADA</h3>
                 <p style="font-size: 0.95rem; color: var(--text-gray); line-height: 1.6; font-weight: 500; margin: 0 0 24px;">¿Querés tu propia plataforma gastronómica o comercial con tu marca, logotipo y dominio propio? Dejá de pagar comisiones abusivas a otras apps, fideliza a tus clientes y automatiza tu delivery con una aplicación exclusiva para tu negocio.</p>
                 <a href="https://wa.me/5493815110171?text=Hola!%20Quiero%20mi%20propia%20App%20Personalizada" target="_blank" style="width: 100%; padding: 18px; background: #25D366; color: white; font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.05rem; border: none; border-radius: 18px; cursor: pointer; text-transform: uppercase; display: flex; justify-content: center; align-items: center; gap: 8px; text-decoration: none; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);">
-                    📱 CONTACTANOS PARA TU APP PROPIA
+                    📱 CONTACTANOS AL 381 51 101 71
                 </a>
             </div>
 
@@ -1160,8 +1161,8 @@
 
         
 
-        <!-- CALCULADORA PREMIUM -->
-        <div class="calc-display" style="background: #111827; border-radius: 40px; margin-bottom: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); min-height: 110px; border: none;">
+        <!-- CALCULADORA PREMIUM (HALO NARANJA COMO LA FOTO) -->
+        <div class="calc-display" style="background:#111827; border-radius:40px; margin-bottom:15px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); min-height:110px; border:none; padding:16px 24px;">
 
             <div id="ticket-success" class="ticket-success">
 
@@ -1171,15 +1172,15 @@
 
             </div>
 
-            <div id="calc-preview" class="calc-hist" style="color:#94a3b8;"></div>
+            <div id="calc-preview" class="calc-hist" style="color:#94a3b8; font-size:1.1rem; font-weight:500; min-height:1.5rem; margin-bottom:8px; z-index:2;"></div>
 
-            <div id="calc-total" class="calc-main" style="color:#ffffff;">0</div>
+            <div id="calc-total" class="calc-main" style="font-size:4.5rem; font-weight:300; color:#ffffff; line-height:1; font-family:'Outfit', sans-serif; word-break:break-all; letter-spacing:-2px; z-index:2;">0</div>
 
         </div>
 
         
 
-        <button class="btn-sheet-trigger" onclick="vibrar([40]); abrirPosSheet()" style="background:#ffffff; border:1px solid rgba(255,94,0,0.2); color:var(--primary-orange); box-shadow: 0 4px 10px rgba(255,94,0,0.05);">
+        <button class="btn-sheet-trigger" onclick="vibrar([40]); abrirPosSheet()" style="background:#ffffff; border:1px solid rgba(255,94,0,0.2); color:var(--primary-orange); font-family:'Outfit', sans-serif; font-weight:800; font-size:1.1rem; border-radius:16px; cursor:pointer; text-transform:uppercase; letter-spacing:1px; margin-bottom:15px; display:flex; justify-content:center; align-items:center; gap:12px; transition:0.2s; box-shadow:0 4px 10px rgba(255,94,0,0.05); padding:14px; width:100%; flex-shrink:0;">
 
             <span style="font-size:1.4rem;">🍔</span> CATÁLOGO DE PRODUCTOS
 
@@ -1187,59 +1188,61 @@
 
         
 
-        <div class="chofer-action-row" style="margin-bottom:12px;">
+        <!-- BOTONES DE ACCIÓN (MISMO COLOR BLANCO/NARANJA) -->
+        <div class="chofer-action-row" style="flex-shrink:0; display:flex; gap:8px; margin-bottom:15px;">
 
-            <button class="chofer-btn-white" style="background:#ffffff; border:1px solid rgba(255,94,0,0.2); color:var(--primary-orange);" onclick="vibrar([40]); triggerExpenseModal()">💸 Gastos</button>
+            <button class="chofer-btn-white" onclick="vibrar([40]); triggerExpenseModal()" style="background:#ffffff; border:1px solid rgba(255,94,0,0.2); border-radius:16px; padding:12px 6px; flex:1; font-weight:800; font-size:0.85rem; color:var(--primary-orange); box-shadow:0 4px 10px rgba(255,94,0,0.05); cursor:pointer; font-family:'Outfit', sans-serif; text-transform:uppercase; transition:0.2s; display:flex; justify-content:center; align-items:center; gap:6px;">💸 GASTOS</button>
 
-            <button class="chofer-btn-white" style="background:#ffffff; border:1px solid rgba(255,94,0,0.2); color:var(--primary-orange);" onclick="vibrar([40]); abrirModalMotos()">🛵 Motos</button>
+            <button class="chofer-btn-white" onclick="vibrar([40]); abrirModalMotos()" style="background:#ffffff; border:1px solid rgba(255,94,0,0.2); border-radius:16px; padding:12px 6px; flex:1; font-weight:800; font-size:0.85rem; color:var(--primary-orange); box-shadow:0 4px 10px rgba(255,94,0,0.05); cursor:pointer; font-family:'Outfit', sans-serif; text-transform:uppercase; transition:0.2s; display:flex; justify-content:center; align-items:center; gap:6px;">🛵 MOTOS</button>
 
-            <button class="chofer-btn-white" style="background:#ffffff; border:1px solid rgba(255,94,0,0.2); color:var(--primary-orange);" onclick="vibrar([40]); document.getElementById('ventas-modal').style.display='flex'">🧾 Historial</button>
+            <button class="chofer-btn-white" onclick="vibrar([40]); document.getElementById('ventas-modal').style.display='flex'" style="background:#ffffff; border:1px solid rgba(255,94,0,0.2); border-radius:16px; padding:12px 6px; flex:1; font-weight:800; font-size:0.85rem; color:var(--primary-orange); box-shadow:0 4px 10px rgba(255,94,0,0.05); cursor:pointer; font-family:'Outfit', sans-serif; text-transform:uppercase; transition:0.2s; display:flex; justify-content:center; align-items:center; gap:6px;">🧾 HISTORIAL</button>
 
         </div>
 
         
 
-        <div class="chofer-keypad" style="margin-bottom:12px; gap:10px;">
+        <!-- TECLADO NUMÉRICO LIMPIO Y BORRAR EN ROJO -->
+        <div class="chofer-keypad" style="flex-shrink:0; display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; margin-bottom:15px;">
 
-            <button class="ckey" style="background:#ffffff; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.04);" onclick="vibrar([40]); inputCalc('7')">7</button>
+            <button class="ckey" onclick="vibrar([40]); inputCalc('7')" style="background:#ffffff; border:none; border-radius:18px; height:7.5vh; min-height:55px; max-height:75px; display:flex; align-items:center; justify-content:center; font-size:2.2rem; font-weight:700; color:var(--text-dark); box-shadow:0 4px 10px rgba(0,0,0,0.04); cursor:pointer; font-family:'Outfit', sans-serif; transition:0.1s;">7</button>
 
-            <button class="ckey" style="background:#ffffff; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.04);" onclick="vibrar([40]); inputCalc('8')">8</button>
+            <button class="ckey" onclick="vibrar([40]); inputCalc('8')" style="background:#ffffff; border:none; border-radius:18px; height:7.5vh; min-height:55px; max-height:75px; display:flex; align-items:center; justify-content:center; font-size:2.2rem; font-weight:700; color:var(--text-dark); box-shadow:0 4px 10px rgba(0,0,0,0.04); cursor:pointer; font-family:'Outfit', sans-serif; transition:0.1s;">8</button>
 
-            <button class="ckey" style="background:#ffffff; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.04);" onclick="vibrar([40]); inputCalc('9')">9</button>
+            <button class="ckey" onclick="vibrar([40]); inputCalc('9')" style="background:#ffffff; border:none; border-radius:18px; height:7.5vh; min-height:55px; max-height:75px; display:flex; align-items:center; justify-content:center; font-size:2.2rem; font-weight:700; color:var(--text-dark); box-shadow:0 4px 10px rgba(0,0,0,0.04); cursor:pointer; font-family:'Outfit', sans-serif; transition:0.1s;">9</button>
 
-            <button class="ckey ckey-del" style="background:#ffffff; color:var(--danger); border:2px solid var(--danger); font-size:0; display:flex; align-items:center; justify-content:center;" onclick="vibrar([40]); deleteCalc()">
+            <button class="ckey ckey-del" onclick="vibrar([40]); deleteCalc()" style="background:#ffffff; color:var(--danger); border:2px solid var(--danger); border-radius:18px; height:7.5vh; min-height:55px; max-height:75px; display:flex; align-items:center; justify-content:center; font-size:0; cursor:pointer; transition:0.1s;">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"></path><line x1="18" y1="9" x2="12" y2="15"></line><line x1="12" y1="9" x2="18" y2="15"></line></svg>
             </button>
 
             
 
-            <button class="ckey" style="background:#ffffff; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.04);" onclick="vibrar([40]); inputCalc('4')">4</button>
+            <button class="ckey" onclick="vibrar([40]); inputCalc('4')" style="background:#ffffff; border:none; border-radius:18px; height:7.5vh; min-height:55px; max-height:75px; display:flex; align-items:center; justify-content:center; font-size:2.2rem; font-weight:700; color:var(--text-dark); box-shadow:0 4px 10px rgba(0,0,0,0.04); cursor:pointer; font-family:'Outfit', sans-serif; transition:0.1s;">4</button>
 
-            <button class="ckey" style="background:#ffffff; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.04);" onclick="vibrar([40]); inputCalc('5')">5</button>
+            <button class="ckey" onclick="vibrar([40]); inputCalc('5')" style="background:#ffffff; border:none; border-radius:18px; height:7.5vh; min-height:55px; max-height:75px; display:flex; align-items:center; justify-content:center; font-size:2.2rem; font-weight:700; color:var(--text-dark); box-shadow:0 4px 10px rgba(0,0,0,0.04); cursor:pointer; font-family:'Outfit', sans-serif; transition:0.1s;">5</button>
 
-            <button class="ckey" style="background:#ffffff; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.04);" onclick="vibrar([40]); inputCalc('6')">6</button>
+            <button class="ckey" onclick="vibrar([40]); inputCalc('6')" style="background:#ffffff; border:none; border-radius:18px; height:7.5vh; min-height:55px; max-height:75px; display:flex; align-items:center; justify-content:center; font-size:2.2rem; font-weight:700; color:var(--text-dark); box-shadow:0 4px 10px rgba(0,0,0,0.04); cursor:pointer; font-family:'Outfit', sans-serif; transition:0.1s;">6</button>
 
-            <button class="ckey ckey-op" style="background:#fff5f0; border:none;" onclick="vibrar([40]); inputCalc('×')">×</button>
-
-            
-
-            <button class="ckey" style="background:#ffffff; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.04);" onclick="vibrar([40]); inputCalc('1')">1</button>
-
-            <button class="ckey" style="background:#ffffff; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.04);" onclick="vibrar([40]); inputCalc('2')">2</button>
-
-            <button class="ckey" style="background:#ffffff; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.04);" onclick="vibrar([40]); inputCalc('3')">3</button>
-
-            <button class="ckey ckey-op" style="background:#fff5f0; border:none;" onclick="vibrar([40]); inputCalc('-')">-</button>
+            <button class="ckey ckey-op" onclick="vibrar([40]); inputCalc('×')" style="background:#fff5f0; color:var(--primary-orange); border:none; border-radius:18px; height:7.5vh; min-height:55px; max-height:75px; display:flex; align-items:center; justify-content:center; font-size:2.8rem; cursor:pointer; transition:0.1s;">×</button>
 
             
 
-            <button class="ckey" style="background:#ffffff; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.04); color:var(--primary-orange); font-weight:900;" onclick="vibrar([40]); clearCalc()">C</button>
+            <button class="ckey" onclick="vibrar([40]); inputCalc('1')" style="background:#ffffff; border:none; border-radius:18px; height:7.5vh; min-height:55px; max-height:75px; display:flex; align-items:center; justify-content:center; font-size:2.2rem; font-weight:700; color:var(--text-dark); box-shadow:0 4px 10px rgba(0,0,0,0.04); cursor:pointer; font-family:'Outfit', sans-serif; transition:0.1s;">1</button>
 
-            <button class="ckey" style="background:#ffffff; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.04);" onclick="vibrar([40]); inputCalc('0')">0</button>
+            <button class="ckey" onclick="vibrar([40]); inputCalc('2')" style="background:#ffffff; border:none; border-radius:18px; height:7.5vh; min-height:55px; max-height:75px; display:flex; align-items:center; justify-content:center; font-size:2.2rem; font-weight:700; color:var(--text-dark); box-shadow:0 4px 10px rgba(0,0,0,0.04); cursor:pointer; font-family:'Outfit', sans-serif; transition:0.1s;">2</button>
 
-            <button class="ckey ckey-op" style="background:#fff5f0; border:none;" onclick="vibrar([40]); inputCalc('+')">+</button>
+            <button class="ckey" onclick="vibrar([40]); inputCalc('3')" style="background:#ffffff; border:none; border-radius:18px; height:7.5vh; min-height:55px; max-height:75px; display:flex; align-items:center; justify-content:center; font-size:2.2rem; font-weight:700; color:var(--text-dark); box-shadow:0 4px 10px rgba(0,0,0,0.04); cursor:pointer; font-family:'Outfit', sans-serif; transition:0.1s;">3</button>
 
-            <button class="ckey ckey-eq" style="background:var(--gradient-orange); color:white; border:none; font-weight:400; box-shadow:0 10px 25px rgba(255,94,0,0.4);" onclick="vibrar([40]); evalCalc()">=</button>
+            <button class="ckey ckey-op" onclick="vibrar([40]); inputCalc('-')" style="background:#fff5f0; color:var(--primary-orange); border:none; border-radius:18px; height:7.5vh; min-height:55px; max-height:75px; display:flex; align-items:center; justify-content:center; font-size:2.8rem; cursor:pointer; transition:0.1s;">-</button>
+
+            
+
+            <button class="ckey" onclick="vibrar([40]); clearCalc()" style="background:#ffffff; border:none; border-radius:18px; height:7.5vh; min-height:55px; max-height:75px; display:flex; align-items:center; justify-content:center; font-size:2.2rem; color:var(--primary-orange); font-weight:900; box-shadow:0 4px 10px rgba(0,0,0,0.04); cursor:pointer; font-family:'Outfit', sans-serif; transition:0.1s;">C</button>
+
+            <button class="ckey" onclick="vibrar([40]); inputCalc('0')" style="background:#ffffff; border:none; border-radius:18px; height:7.5vh; min-height:55px; max-height:75px; display:flex; align-items:center; justify-content:center; font-size:2.2rem; font-weight:700; color:var(--text-dark); box-shadow:0 4px 10px rgba(0,0,0,0.04); cursor:pointer; font-family:'Outfit', sans-serif; transition:0.1s;">0</button>
+
+            <button class="ckey ckey-op" onclick="vibrar([40]); inputCalc('+')" style="background:#fff5f0; color:var(--primary-orange); border:none; border-radius:18px; height:7.5vh; min-height:55px; max-height:75px; display:flex; align-items:center; justify-content:center; font-size:2.8rem; cursor:pointer; transition:0.1s;">+</button>
+
+            <button class="ckey ckey-eq" onclick="vibrar([40]); evalCalc()" style="background:var(--gradient-orange); color:white; border:none; border-radius:18px; height:7.5vh; min-height:55px; max-height:75px; display:flex; align-items:center; justify-content:center; font-size:2.8rem; font-weight:400; box-shadow:0 10px 25px rgba(255,94,0,0.4); cursor:pointer; transition:0.1s;">=</button>
 
         </div>
 
@@ -1247,7 +1250,7 @@
 
         <div style="flex-shrink:0; margin-bottom: 8px;">
 
-            <select id="chofer-moto-select" class="form-input" style="padding: 14px; margin-bottom: 0; background: #ffffff; border: 1px solid rgba(255,94,0,0.2); color: var(--primary-orange); cursor: pointer; font-weight: 800; text-align: center; border-radius: 12px;">
+            <select id="chofer-moto-select" class="form-input" style="padding: 14px; margin-bottom: 0; background: #ffffff; border: 1px solid rgba(255,94,0,0.2); color: var(--text-dark); cursor: pointer; font-weight: 800; text-align: center; border-radius: 12px; font-size:1rem; box-shadow:0 4px 10px rgba(0,0,0,0.04);">
 
                 <option value="">🏪 ENVIAR A: MOSTRADOR (CAJA)</option>
 
@@ -1257,11 +1260,11 @@
 
         
 
-        <div class="chofer-pay-row">
+        <div class="chofer-pay-row" style="flex-shrink:0; display:flex; gap:12px; margin-bottom:4px;">
 
-            <button class="chofer-pay-btn" onclick="vibrar([40]); submitSale('EFECTIVO')">💵 EFECTIVO</button>
+            <button class="chofer-pay-btn" onclick="vibrar([40]); submitSale('EFECTIVO')" style="flex:1; border-radius:20px; padding:18px 10px; font-weight:900; font-size:1.2rem; font-family:'Outfit', sans-serif; text-transform:uppercase; background:#10b981; color:white; border:none; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; transition:0.2s; box-shadow:0 8px 20px rgba(16,185,129,0.3); text-shadow:0 2px 5px rgba(0,0,0,0.2);">💵 EFECTIVO</button>
 
-            <button class="btn-pay-transfer" onclick="vibrar([40]); abrirSheetTransfVenta()">🏦 TRANSF.</button>
+            <button class="btn-pay-transfer" onclick="vibrar([40]); abrirSheetTransfVenta()" style="flex:1; border-radius:20px; padding:18px 10px; font-weight:900; font-size:1.2rem; font-family:'Outfit', sans-serif; text-transform:uppercase; background:#0ea5e9; color:white; border:none; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; transition:0.2s; box-shadow:0 8px 20px rgba(14,165,233,0.3); text-shadow:0 2px 5px rgba(0,0,0,0.2);">🏦 TRANSF.</button>
 
         </div>
 
