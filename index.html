@@ -805,6 +805,16 @@
             <div id="adm-menu-list"></div>
         </div>
     </div>
+    <!-- MODAL SELECCIONAR CHOFER GPS (RESTAURADO) -->
+    <div class="modal" id="modal-select-moto-gps">
+        <div class="modal-content-standard" style="padding:32px 24px; text-align:center;">
+            <button class="modal-close-circle" style="background:rgba(0,0,0,0.05);" onclick="document.getElementById('modal-select-moto-gps').style.display='none'">✕</button>
+            <h3 style="margin:0 0 20px; font-family:'Outfit'; font-size:1.6rem; font-weight:800; color:var(--text-dark);">Seleccionar Chofer</h3>
+            <p style="color:var(--text-gray); font-size:0.95rem; margin-bottom:20px;">¿Qué moto llevará este celular para transmitir GPS?</p>
+            <div id="motos-gps-list" style="display:flex; flex-direction:column; gap:10px;"></div>
+        </div>
+    </div>
+
     <!-- VISTA 4: MENU CLIENTE WEB 9:16 PREMIUM -->
     <div id="view-customer-menu" class="view-container view-container-no-pad">
         <div id="customer-tab-menu" class="customer-container">
@@ -1004,6 +1014,7 @@
     
     <div class="modal" id="pedidos-web-modal"><div class="modal-content" style="width:100%; max-width:500px; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background: var(--bg-app); border:none;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;"><h3 style="margin:0; font-size:1.8rem; font-weight:800; font-family:'Outfit'; color:var(--primary-orange); letter-spacing:-0.5px;">Pedidos Web</h3><button style="background:rgba(255,94,0,0.1); border:none; font-size:1.1rem; color:var(--primary-orange); cursor:pointer; width:35px; height:35px; border-radius:50%;" onclick="document.getElementById('pedidos-web-modal').style.display='none'">✕</button></div><div id="pedidos-web-list" style="flex:1; overflow-y:auto; text-align:left; display:flex; flex-direction:column; gap:16px; padding-bottom:40px;"></div></div></div>
     <div class="modal" id="ventas-modal"><div class="modal-content" style="width:100%; max-width:500px; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background: var(--bg-app); border:none;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;"><h3 style="margin:0; font-size:1.8rem; font-weight:800; font-family:'Outfit'; color:var(--success);">Ventas Diarias</h3><button style="background:rgba(16,185,129,0.1); border:none; font-size:1.1rem; color:var(--success); cursor:pointer; width:35px; height:35px; border-radius:50%;" onclick="document.getElementById('ventas-modal').style.display='none'">✕</button></div><div id="chofer-logs-modal-container" style="flex:1; overflow-y:auto; text-align:left; padding-bottom:40px;"></div></div></div>
+    
     <!-- SCRIPT PRINCIPAL -->
     <script>
         const qs = (id) => document.getElementById(id);
@@ -1029,6 +1040,9 @@
         let pendingTransferData = null;
         let currentCierreData = null; 
 
+        // RESTAURADO: Variable fundamental para el GPS
+        let currentGpsMoto = null;
+        
         let gpsSubscription = null;
         let isGpsActive = false;
         let gpsInterval = null;
@@ -1415,7 +1429,6 @@
             let val = pendingTransferData.amount;
             let desc = selProd ? `Venta: ${selProd.nombre}` : 'Venta de Mostrador'; 
             
-            // Corrección: Aseguramos valor nulo real si el select está vacío
             let motoEl = qs('chofer-moto-select');
             let motoSelected = (motoEl && motoEl.value.trim() !== '') ? motoEl.value.trim() : null;
             
@@ -1838,6 +1851,14 @@
             }
         }
 
+        // RESTAURADO: Función para asignar pedidos a motos
+        window.asignarMotoAPedido = async function(idLog, motoNombre) {
+            if(!motoNombre) return;
+            await _supabase.from('pediloya_logs').update({ moto_asignada: motoNombre }).eq('id', idLog);
+            await loadDataFromDB();
+            showToast(`Asignado a ${motoNombre}`);
+        }
+
         window.marcarPedidoWebRealizado = async function(idLog) {
             if(confirm("¿Marcar este pedido como entregado y borrarlo de la lista?")) {
                 await _supabase.from('pediloya_logs').update({ tipo: 'PEDIDO_WEB_OK' }).eq('id', idLog);
@@ -2042,6 +2063,7 @@
             }
         };
 
+        // RESTAURADO: El renderAllData modificado con la lógica de Asignación y el selector
         function renderAllData() {
             let adminMenuHtml = ''; let posMenuHtml = '';
             
@@ -2103,12 +2125,23 @@
                     
                     let trkMatch = l.descripcion.match(/TRK\d+/);
                     let trkCode = trkMatch ? trkMatch[0] : '';
+                    let choferAsignado = l.moto_asignada || '';
                     
+                    // RESTAURADO: Selectores de Asignación y acciones
+                    let asignacionHtml = '';
+                    if(choferAsignado) {
+                        asignacionHtml = `<div style="background:#dcfce7; color:#15803d; padding:12px; border-radius:12px; font-weight:800; font-family:'Outfit'; text-align:center; margin-bottom:12px;">✅ EN CAMINO CON: ${choferAsignado}</div>`;
+                    } else {
+                        let options = `<option value="">🛵 ASIGNAR REPARTIDOR...</option>`;
+                        dbState.repartidores.forEach(r => { options += `<option value="${r.nombre}">${r.nombre}</option>`; });
+                        asignacionHtml = `<select onchange="vibrar([40]); asignarMotoAPedido('${l.id}', this.value)" style="width:100%; padding:12px; border-radius:12px; border:1px solid var(--border-soft); background:#f8fafc; font-weight:700; margin-bottom:12px;">${options}</select>`;
+                    }
+
                     let actionsHtml = '';
                     if(trkCode) {
                         actionsHtml = `
                         <div style="display:flex; gap:8px; margin-bottom:12px;">
-                            <button onclick="vibrar([40]); compartirTRKWhatsApp('${trkCode}')" style="flex:1; background:#25D366; color:white; border:none; border-radius:12px; padding:12px; font-weight:800; font-family:'Outfit'; font-size:0.9rem; cursor:pointer; box-shadow:0 4px 10px rgba(37,211,102,0.2);"><span style="font-size:1.1rem; margin-right:4px;">📍</span> COMPARTIR MAPA GPS</button>
+                            <button onclick="vibrar([40]); compartirTRKWhatsApp('${trkCode}', '${choferAsignado}')" style="flex:1; background:#25D366; color:white; border:none; border-radius:12px; padding:12px; font-weight:800; font-family:'Outfit'; font-size:0.9rem; cursor:pointer; box-shadow:0 4px 10px rgba(37,211,102,0.2);"><span style="font-size:1.1rem; margin-right:4px;">📍</span> COMPARTIR MAPA GPS</button>
                             <button onclick="vibrar([40]); copiarTRK('${trkCode}')" style="flex:1; background:var(--bg-pure); color:var(--text-dark); border:2px solid var(--border-soft); border-radius:12px; padding:12px; font-weight:800; font-family:'Outfit'; font-size:0.9rem; cursor:pointer; box-shadow:var(--shadow-soft);"><span style="font-size:1.1rem; margin-right:4px;">📄</span> COPIAR TRK</button>
                         </div>`;
                     }
@@ -2124,6 +2157,7 @@
                             <div style="font-size:0.85rem; font-weight:800; color:var(--text-dark); background:var(--bg-app); border:1px solid var(--border-soft); padding:6px 12px; border-radius:8px;">${methodStr}</div>
                         </div>
                         <div style="font-size:0.95rem; color:var(--text-dark); font-weight:500; white-space:pre-wrap; word-break:break-word; line-height:1.6; background:var(--bg-app); padding:16px; border-radius:12px; margin-bottom:16px; border:1px solid var(--border-soft); box-sizing:border-box;">${l.descripcion}</div>
+                        ${asignacionHtml}
                         ${actionsHtml}
                         <button onclick="vibrar([40]); marcarPedidoWebRealizado('${l.id}')" style="width:100%; background:#e0f2fe; color:#0284c7; border:1px dashed #7dd3fc; border-radius:14px; padding:14px; font-weight:800; font-family:'Outfit'; font-size:1rem; cursor:pointer; transition:0.2s;">✔️ MARCAR COMO ENTREGADO</button>
                     </div>`;
@@ -2662,43 +2696,69 @@
             window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
-        window.compartirTRKWhatsApp = function(trk) {
+        // RESTAURADO: Recibe choferAsignado para mostrar en el mensaje
+        window.compartirTRKWhatsApp = function(trk, choferAsignado) {
             let link = window.location.origin + '/?local=' + encodeURIComponent(cUser) + '&track=' + trk;
-            let msg = '🛵 Sigue tu pedido de *' + cUser + '* en vivo aquí:\n\n📍 ' + link;
+            let choferMsg = choferAsignado && choferAsignado !== 'undefined' ? ` con *${choferAsignado}*` : '';
+            let msg = `🛵 ¡Tu pedido va en camino${choferMsg}!\nSeguí la moto satelitalmente en vivo acá:\n\n📍 ${link}`;
             window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
         };
 
+        // RESTAURADO: toggleDriverGps abre el modal de las motos
         window.toggleDriverGps = function() {
-            let btn = qs('btn-gps');
-            if(!btn) return;
-            isGpsActive = !isGpsActive;
             if(isGpsActive) {
-                btn.style.background = 'var(--success)';
-                btn.style.borderColor = 'var(--success)';
-                btn.style.color = 'white';
-                btn.innerText = "📍 GPS ACTIVO";
-                showToast("Transmitiendo ubicación...", "success");
-                if(navigator.geolocation) {
-                    enviarUbicacionGPS();
-                    gpsInterval = setInterval(enviarUbicacionGPS, 15000);
-                } else {
-                    alert("GPS no soportado en este dispositivo.");
+                isGpsActive = false;
+                let btn = qs('btn-gps');
+                if(btn) {
+                    btn.style.background = 'var(--text-dark)';
+                    btn.style.borderColor = 'var(--text-dark)';
+                    btn.style.color = 'white';
+                    btn.innerText = "📍 GPS DELI";
                 }
-            } else {
-                btn.style.background = 'var(--text-dark)';
-                btn.style.borderColor = 'var(--text-dark)';
-                btn.innerText = "📍 GPS DELI";
                 if(gpsInterval) clearInterval(gpsInterval);
                 showToast("GPS Apagado", "info");
+                currentGpsMoto = null;
+            } else {
+                let html = '';
+                dbState.repartidores.forEach(m => {
+                    html += `<button class="chofer-btn-white" style="width:100%; margin-bottom:10px; padding:16px; font-size:1.1rem; box-shadow:none; border:2px solid var(--border-soft);" onclick="activarGpsParaMoto('${m.nombre}')">🛵 Transmitir como ${m.nombre}</button>`;
+                });
+                setHtml('motos-gps-list', html || '<p style="color:var(--text-gray); font-weight:500;">No hay motos cargadas. Agregalas desde el panel de Dueño.</p>');
+                if(qs('modal-select-moto-gps')) qs('modal-select-moto-gps').style.display = 'flex';
             }
         };
 
+        // RESTAURADO: Función para que el repartidor active el GPS en su teléfono
+        window.activarGpsParaMoto = function(nombre) {
+            currentGpsMoto = nombre;
+            isGpsActive = true;
+            if(qs('modal-select-moto-gps')) qs('modal-select-moto-gps').style.display = 'none';
+            
+            let btn = qs('btn-gps');
+            if(btn) {
+                btn.style.background = 'var(--success)';
+                btn.style.borderColor = 'var(--success)';
+                btn.style.color = 'white';
+                btn.innerText = `📍 GPS: ${nombre}`;
+            }
+            showToast(`Transmitiendo GPS como ${nombre}`, "success");
+            if(navigator.geolocation) {
+                enviarUbicacionGPS();
+                gpsInterval = setInterval(enviarUbicacionGPS, 15000);
+            } else {
+                alert("GPS no soportado en este dispositivo.");
+            }
+        };
+
+        // RESTAURADO: Envía la moto seleccionada al Supabase
         window.enviarUbicacionGPS = async function() {
+            if(!currentGpsMoto) return;
             navigator.geolocation.getCurrentPosition(async (pos) => {
                 let lat = pos.coords.latitude;
                 let lon = pos.coords.longitude;
-                let coordsStr = JSON.stringify({lat, lon});
-                await _supabase.from('pediloya_logs').delete().eq('local_id', currentLocalId).eq('tipo', 'GPS_DELI');
+                let coordsStr = JSON.stringify({lat, lon, moto_nombre: currentGpsMoto});
+                
+                await _supabase.from('pediloya_logs').delete().eq('local_id', currentLocalId).eq('tipo', 'GPS_DELI').eq('moto_asignada', currentGpsMoto);
                 await _supabase.from('pediloya_logs').insert([{
                     local_id: currentLocalId,
                     tipo: 'GPS_DELI',
@@ -2706,7 +2766,8 @@
                     monto: 0,
                     fecha: getTucumanDateFE(),
                     hora: getTucumanTimeFE(),
-                    descripcion: coordsStr
+                    descripcion: coordsStr,
+                    moto_asignada: currentGpsMoto
                 }]);
             }, (err) => {
                 console.log("Error GPS", err);
@@ -2811,6 +2872,7 @@
             iniciarRastreoCliente(code, targetLocalName || (qs('public-store-name') ? qs('public-store-name').innerText : ''));
         };
 
+        // RESTAURADO: Lógica para que el cliente solo vea la moto asignada a su pedido
         window.iniciarRastreoCliente = async function(trackCode, localName) {
             if(!trackCode || !localName) return;
             
@@ -2834,13 +2896,25 @@
                 setText('track-detail-text', `Conectando al GPS del local...`);
             }
 
-            let { data: gpsData } = await _supabase.from('pediloya_logs')
-                .select('descripcion, hora')
+            let { data: pedidoData } = await _supabase.from('pediloya_logs')
+                .select('moto_asignada')
+                .eq('local_id', targetLocalId)
+                .ilike('descripcion', `%${trackCode}%`)
+                .maybeSingle();
+
+            let motoDelPedido = pedidoData ? pedidoData.moto_asignada : null;
+
+            let gpsQuery = _supabase.from('pediloya_logs')
+                .select('descripcion, hora, moto_asignada')
                 .eq('local_id', targetLocalId)
                 .eq('tipo', 'GPS_DELI')
-                .order('created_at', { ascending: false })
-                .limit(1)
-                .maybeSingle();
+                .order('created_at', { ascending: false });
+
+            if(motoDelPedido) {
+                gpsQuery = gpsQuery.eq('moto_asignada', motoDelPedido);
+            }
+
+            let { data: gpsData } = await gpsQuery.limit(1).maybeSingle();
 
             let initialLat = -26.8241;
             let initialLon = -65.2226;
@@ -2850,7 +2924,7 @@
                     let coords = JSON.parse(gpsData.descripcion);
                     initialLat = coords.lat;
                     initialLon = coords.lon;
-                    setText('track-status-text', 'Repartidor en camino');
+                    setText('track-status-text', motoDelPedido ? `En camino (${motoDelPedido}) 🛵` : 'Repartidor en camino');
                     setText('track-detail-text', `Última act: ${gpsData.hora}`);
                 } catch(e) {}
             } else {
@@ -2872,12 +2946,14 @@
                     filter: `local_id=eq.${targetLocalId}` 
                 }, payload => {
                     if(payload.new.tipo === 'GPS_DELI') {
-                        try {
-                            let coords = JSON.parse(payload.new.descripcion);
-                            updateLiveMap(coords.lat, coords.lon, 'tracking-map-container', false);
-                            setText('track-status-text', 'Repartidor en movimiento 🛵');
-                            setText('track-detail-text', `Ubicación en vivo (${payload.new.hora})`);
-                        } catch(e) {}
+                        if(!motoDelPedido || payload.new.moto_asignada === motoDelPedido) {
+                            try {
+                                let coords = JSON.parse(payload.new.descripcion);
+                                updateLiveMap(coords.lat, coords.lon, 'tracking-map-container', false);
+                                setText('track-status-text', motoDelPedido ? `En camino (${motoDelPedido}) 🛵` : 'Repartidor en movimiento 🛵');
+                                setText('track-detail-text', `Ubicación en vivo (${payload.new.hora})`);
+                            } catch(e) {}
+                        }
                     }
                 }).subscribe();
         };
