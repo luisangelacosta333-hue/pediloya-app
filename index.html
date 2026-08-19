@@ -144,12 +144,10 @@
         .chofer-btn-white { background: var(--bg-pure); border: 1px solid var(--border-soft); border-radius: 12px; padding: 12px 6px; flex: 1; font-weight: 800; font-size: 0.9rem; color: var(--text-dark); box-shadow: var(--shadow-soft); cursor: pointer; font-family: 'Outfit', sans-serif; text-transform:uppercase; transition:0.2s; display: flex; justify-content: center; align-items: center; gap: 6px;}
         .chofer-btn-white:active { transform: scale(0.95); background: #f1f5f9; }
         
-        /* DISEÑO CALCULADORA PREMIUM NARANJA SUTIL */
         .chofer-keypad { flex-shrink: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 10px; }
-        .ckey { background: var(--bg-pure); border: 2px solid #fed7aa; border-radius: 20px; height: 7.5vh; min-height: 50px; max-height: 70px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 700; color: var(--primary-orange); box-shadow: 0 4px 10px rgba(255,94,0,0.08); cursor: pointer; font-family: 'Outfit', sans-serif; transition: 0.1s;}
-        .ckey:active { transform: scale(0.92); background: #ffedd5; }
-        .ckey-op { background: var(--primary-orange); color: white; border-color: transparent; box-shadow: 0 4px 15px rgba(255,94,0,0.2);}
-        .ckey-del { background: #ef4444; color: white; border-color: transparent; box-shadow: 0 4px 15px rgba(239,68,68,0.2);}
+        .ckey { background: var(--bg-pure); border: 1px solid var(--border-soft); border-radius: 20px; height: 7.5vh; min-height: 50px; max-height: 70px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 600; color: var(--text-dark); box-shadow: 0 4px 10px rgba(0,0,0,0.02); cursor: pointer; font-family: 'Outfit', sans-serif; transition: 0.1s;}
+        .ckey:active { transform: scale(0.92); background: #f1f5f9; }
+        .ckey-op { color: var(--primary-orange); font-size: 2.5rem; background: rgba(255,94,0,0.05); border-color: transparent;}
         .ckey-eq { background: var(--gradient-orange); color: white; border: none; font-size: 2.5rem; box-shadow: var(--shadow-orange); font-weight: 300; }
         
         .chofer-pay-row { flex-shrink: 0; display: flex; gap: 12px; margin-bottom: 4px; }
@@ -339,10 +337,13 @@
                     <path d="M 20 95 L 140 95" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
                     <path d="M 50 65 L 125 65" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
                     <path d="M 40 125 L 105 125" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
+                    
                     <path d="M 95 180 L 145 30 L 225 30 C 265 30 285 50 280 85 C 275 120 245 140 200 140 L 145 140 L 125 180 Z M 165 105 L 195 105 C 220 105 235 95 238 75 C 240 60 230 52 215 52 L 180 52 Z" fill="#ff5e00"/>
+                    
                     <path d="M 360 65 L 430 65" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
                     <path d="M 350 95 L 415 95" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
                     <path d="M 335 125 L 395 125" stroke="#ff5e00" stroke-width="16" stroke-linecap="round"/>
+                    
                     <path d="M 285 50 L 320 50 L 360 115 L 410 50 L 445 50 L 365 140 L 345 180 L 310 180 L 335 130 Z" fill="#ff5e00"/>
                 </svg>
             </div>
@@ -454,18 +455,15 @@
                 <button id="btn-log" onclick="vibrar([40]); executeLogin()" style="width:100%; padding:18px; background:rgba(14, 165, 233, 0.08); color:var(--info); font-weight:800; font-size:1.05rem; border:2px solid rgba(14, 165, 233, 0.3); border-radius:18px; text-transform:uppercase; cursor:pointer; transition: 0.2s; font-family:'Outfit',sans-serif;">Abrir Caja</button>
             </div>
 
-            <div class="glass-card-light" style="border-top: 4px solid #25D366; margin-bottom:30px; text-align:center;">
-                <h2 style="font-size: 1.4rem; font-weight: 800; margin: 0 0 10px 0; color: var(--text-dark); letter-spacing: -0.5px; font-family:'Outfit',sans-serif;">🚀 CREA TU PROPIA APP</h2>
-                <p style="color: var(--text-gray); font-size: 0.95rem; margin-bottom: 24px; font-weight: 500;">Obtené una aplicación idéntica a esta para tu negocio. Totalmente personalizada con tu marca.</p>
-                <a href="https://wa.me/5493815110171?text=Hola,%20quiero%20crear%20mi%20propia%20App%20Personalizada%20con%20Energy" target="_blank" style="display:flex; align-items:center; justify-content:center; gap:8px; background:#25D366; color:white; padding:18px; border-radius:18px; font-weight:800; font-family:'Outfit'; text-decoration:none; font-size:1.05rem; box-shadow:0 10px 25px rgba(37,211,102,0.3); text-transform:uppercase;">
-                    📱 CONTACTAR A ENERGY
-                </a>
-            </div>
-
-            <div class="footer-tech">
+            <!-- BOTÓN WHATSAPP PARA CONTACTO DE APPS PERSONALIZADAS -->
+            <div class="footer-tech" style="padding-bottom: 30px;">
                 <div class="footer-brand">ENERGY <span>SOFTWARE</span></div>
                 <p class="footer-sub">Soluciones Tecnológicas & Automatización</p>
                 <p class="footer-copy">© 2026 Argentina · Todos los derechos reservados</p>
+                
+                <a href="https://wa.me/5493815110171?text=Hola,%20quiero%20crear%20mi%20propia%20App%20Personalizada%20con%20Energy" target="_blank" style="display:inline-flex; align-items:center; justify-content:center; gap:8px; background:#25D366; color:white; padding:14px 20px; border-radius:50px; font-weight:800; font-family:'Outfit'; text-decoration:none; font-size:0.95rem; margin-top:20px; box-shadow:0 8px 20px rgba(37,211,102,0.3); text-transform:uppercase; transition: 0.3s;">
+                    📱 Contactar a Energy
+                </a>
             </div>
         </div>
     </div>
@@ -546,6 +544,7 @@
             <button class="chofer-btn-white" style="border-color:var(--success); background:rgba(16,185,129,0.05); color:var(--success);" onclick="vibrar([40]); document.getElementById('ventas-modal').style.display='flex'">🧾 Historial</button>
         </div>
         
+        <!-- DISEÑO CALCULADORA PREMIUM NARANJA SUTIL -->
         <div class="chofer-keypad">
             <button class="ckey" onclick="vibrar([40]); inputCalc('7')">7</button>
             <button class="ckey" onclick="vibrar([40]); inputCalc('8')">8</button>
@@ -562,7 +561,7 @@
             <button class="ckey" onclick="vibrar([40]); inputCalc('3')">3</button>
             <button class="ckey ckey-op" onclick="vibrar([40]); inputCalc('-')">-</button>
             
-            <button class="ckey" style="color:var(--primary-orange);" onclick="vibrar([40]); clearCalc()">C</button>
+            <button class="ckey" style="color:var(--primary-orange); background:white;" onclick="vibrar([40]); clearCalc()">C</button>
             <button class="ckey" onclick="vibrar([40]); inputCalc('0')">0</button>
             <button class="ckey ckey-op" onclick="vibrar([40]); inputCalc('+')">+</button>
             <button class="ckey ckey-eq" onclick="vibrar([40]); evalCalc()">=</button>
@@ -1407,8 +1406,13 @@
         async function emitPendingTransferHTTP(urlRecibo) {
             if(!pendingTransferData) return;
             let val = pendingTransferData.amount;
-            let desc = selProd ? `Venta: ${selProd.nombre}` : 'Venta de Mostrador'; 
+            
             let motoSelected = qs('chofer-moto-select') ? qs('chofer-moto-select').value : null;
+            let orderId = motoSelected ? 'TRK-' + motoSelected.replace(/\s+/g, '').toUpperCase() + '-' + Date.now().toString().slice(-3) : '';
+
+            let desc = selProd ? `Venta: ${selProd.nombre}` : 'Venta de Mostrador'; 
+            if(orderId) desc += ` [${orderId}]`; 
+
             let qtyToDeduct = selProd ? Math.max(1, Math.floor(val / selProd.precio)) : 0;
             
             mostrarTicketAnimado();
@@ -1437,10 +1441,16 @@
             clearCalc();
             cerrarSheet();
             pendingTransferData = null;
-            showToast("Venta registrada con foto.");
+            
+            if(motoSelected && orderId) {
+                alert(`✅ VENTA ASIGNADA A: ${motoSelected}\n📍 CÓDIGO GPS: ${orderId}\n\nEl sistema ya enlazó este código con el GPS de ${motoSelected}.`);
+                setTimeout(() => compartirTRKWhatsApp(orderId), 800);
+            } else {
+                showToast("Venta registrada con foto.");
+            }
         }
 
-        function processTransferWithPhoto(e) { 
+        window.processTransferWithPhoto = function(e) { 
             const f = e.target.files[0]; 
             if(!f) return; 
             
@@ -1477,20 +1487,43 @@
             } 
         }
 
-        function abrirSheetTransfVenta() {
+        // ============================================
+        // CORRECCIÓN BOTÓN TRANSFERENCIA EN CAJA
+        // ============================================
+        window.abrirSheetTransfVenta = function() {
             let val = getCalcValue();
-            if(val <= 0) return alert("Escribí un monto mayor a 0 en la caja primero."); 
+            if(val <= 0) {
+                showToast("⚠️ Escribí un monto mayor a 0 en la caja", "error");
+                return;
+            } 
             
             pendingTransferData = { type: 'SALE_TRANSF', amount: val };
             isPaywallUpload = false;
             
-            if(qs('sheet-overlay')) qs('sheet-overlay').classList.add('show'); 
-            if(qs('native-bottom-sheet')) qs('native-bottom-sheet').classList.add('show');
+            let overlay = qs('sheet-overlay');
+            let bs = qs('native-bottom-sheet');
+            if(overlay) overlay.classList.add('show'); 
+            if(bs) bs.classList.add('show');
         }
 
-        function cerrarSheet() { if(qs('sheet-overlay')) qs('sheet-overlay').classList.remove('show'); if(qs('native-bottom-sheet')) qs('native-bottom-sheet').classList.remove('show'); }
-        function elegirCamara() { if(qs('foto-input-camara')) qs('foto-input-camara').click(); setTimeout(() => { cerrarSheet(); }, 500); }
-        function elegirGaleria() { if(qs('foto-input-galeria')) qs('foto-input-galeria').click(); setTimeout(() => { cerrarSheet(); }, 500); }
+        window.cerrarSheet = function() { 
+            let overlay = qs('sheet-overlay');
+            let bs = qs('native-bottom-sheet');
+            if(overlay) overlay.classList.remove('show'); 
+            if(bs) bs.classList.remove('show'); 
+        }
+
+        window.elegirCamara = function() { 
+            let inputCam = qs('foto-input-camara');
+            if(inputCam) inputCam.click(); 
+            setTimeout(() => { cerrarSheet(); }, 500); 
+        }
+
+        window.elegirGaleria = function() { 
+            let inputGal = qs('foto-input-galeria');
+            if(inputGal) inputGal.click(); 
+            setTimeout(() => { cerrarSheet(); }, 500); 
+        }
 
         async function cerrarTurno() {
             let calcCashMostrador = 0;
@@ -2029,7 +2062,9 @@
             }
         };
 
-        // --- LÓGICA DE ASIGNACIÓN DE MOTO PARA PEDIDOS WEB ---
+        // ============================================
+        // LÓGICA DE ASIGNACIÓN DE MOTO PARA PEDIDOS WEB
+        // ============================================
         window.asignarMotoYCopiar = async function(logId, trkCode) {
             let select = qs('moto-assign-' + logId);
             if(!select || !select.value) return showToast("Seleccioná un repartidor primero", "error");
@@ -2105,7 +2140,7 @@
                 if(l.tipo === 'PEDIDO_WEB') {
                     pedidosWebNuevos++;
                     
-                    let trkMatch = l.descripcion.match(/TRK\d+/);
+                    let trkMatch = l.descripcion.match(/TRK-\w+-\d+/) || l.descripcion.match(/TRK\d+/);
                     let trkCode = trkMatch ? trkMatch[0] : '';
                     
                     let actionsHtml = '';
@@ -2599,7 +2634,7 @@
         
         window.submitSale = async function(metodo) {
             let val = getCalcValue(); 
-            if(val <= 0) { showToast("Ingresá un monto mayor a 0", "error"); return; }
+            if(val <= 0) { showToast("⚠️ Escribí un monto mayor a 0", "error"); return; }
             
             let desc = selProd ? `Venta: ${selProd.nombre}` : 'Venta de Mostrador'; 
             let motoSelected = qs('chofer-moto-select') ? qs('chofer-moto-select').value : null;
@@ -2633,7 +2668,7 @@
         
         window.triggerExpenseModal = function() {
             let val = getCalcValue();
-            if(val <= 0) { showToast("Escribí el monto del gasto en la caja primero.", "error"); return; }
+            if(val <= 0) { showToast("⚠️ Escribí el monto del gasto en la caja primero.", "error"); return; }
             setText('exp-monto-text', `$${val.toLocaleString('es-AR')}`);
             setVal('exp-rsn', '');
             if(qs('expense-modal')) qs('expense-modal').style.display='flex';
@@ -2676,6 +2711,9 @@
             window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
         };
 
+        // ============================================
+        // LÓGICA DE GPS DEL CADETE CORREGIDA Y BLINDADA
+        // ============================================
         window.toggleDriverGps = function() {
             let btn = qs('btn-gps');
             let selectMoto = qs('chofer-moto-select');
@@ -2687,19 +2725,22 @@
                 return;
             }
 
+            if (!navigator.geolocation) {
+                showToast("⚠️ Tu celular no soporta GPS o el navegador lo bloquea.", "error");
+                return;
+            }
+
             isGpsActive = !isGpsActive;
+            
             if(isGpsActive) {
                 btn.style.background = 'var(--success)';
                 btn.style.borderColor = 'var(--success)';
                 btn.style.color = 'white';
                 btn.innerText = "📍 GPS ACTIVO";
-                showToast(`Transmitiendo ubicación para ${selectMoto.value}...`, "success");
-                if(navigator.geolocation) {
-                    enviarUbicacionGPS();
-                    gpsInterval = setInterval(enviarUbicacionGPS, 15000);
-                } else {
-                    alert("GPS no soportado en este dispositivo.");
-                }
+                showToast(`GPS Conectado para ${selectMoto.value}...`, "success");
+                
+                enviarUbicacionGPS(); // Manda la primera de inmediato
+                gpsInterval = setInterval(enviarUbicacionGPS, 10000); // Actualiza cada 10 seg
             } else {
                 btn.style.background = 'var(--text-dark)';
                 btn.style.borderColor = 'var(--text-dark)';
@@ -2711,12 +2752,14 @@
 
         window.enviarUbicacionGPS = async function() {
             let miNombreMoto = qs('chofer-moto-select') ? qs('chofer-moto-select').value : 'MOTO_GENERICA';
+            
             navigator.geolocation.getCurrentPosition(async (pos) => {
                 let lat = pos.coords.latitude;
                 let lon = pos.coords.longitude;
                 let coordsStr = JSON.stringify({lat, lon});
                 
                 await _supabase.from('pediloya_logs').delete().eq('local_id', currentLocalId).eq('tipo', 'GPS_DELI').eq('moto_asignada', miNombreMoto);
+                
                 await _supabase.from('pediloya_logs').insert([{
                     local_id: currentLocalId,
                     tipo: 'GPS_DELI',
@@ -2729,7 +2772,20 @@
                 }]);
             }, (err) => {
                 console.log("Error GPS", err);
-            }, { enableHighAccuracy: true });
+                showToast("⚠️ Error de GPS. Activá la ubicación en tu celular.", "error");
+                
+                // Si falla, apagar el botón visualmente para no confundir
+                if(isGpsActive) {
+                    isGpsActive = false;
+                    if(gpsInterval) clearInterval(gpsInterval);
+                    let btn = qs('btn-gps');
+                    if(btn) {
+                        btn.style.background = 'var(--text-dark)';
+                        btn.style.borderColor = 'var(--text-dark)';
+                        btn.innerText = "📍 GPS DELI";
+                    }
+                }
+            }, { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }); // Se fuerza la máxima precisión
         };
         
         function abrirRadarDueno() { if(qs('modal-radar-owner')) qs('modal-radar-owner').style.display='flex'; actualizarRadarMap(); setTimeout(actualizarRadarMap, 500); }
