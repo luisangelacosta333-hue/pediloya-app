@@ -42,9 +42,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
-        /* =========================================================
-           DISEÑO ULTRA PREMIUM 9:16 & GLASSMORPHISM SAAS
-        ========================================================= */
+        /* DISEÑO ULTRA PREMIUM */
         :root { 
             --bg-pure: #ffffff; --bg-app: #f8fafc; --text-dark: #0f172a; --text-gray: #475569; --text-light: #94a3b8;
             --border-soft: #e2e8f0; --primary-orange: #ff5e00; --gradient-orange: linear-gradient(135deg, #ff7b00, #ff3300);
@@ -145,7 +143,6 @@
         .chofer-btn-white { background: var(--bg-pure); border: 1px solid var(--border-soft); border-radius: 12px; padding: 12px 6px; flex: 1; font-weight: 800; font-size: 0.9rem; color: var(--text-dark); box-shadow: var(--shadow-soft); cursor: pointer; font-family: 'Outfit', sans-serif; text-transform:uppercase; transition:0.2s; display: flex; justify-content: center; align-items: center; gap: 6px;}
         .chofer-btn-white:active { transform: scale(0.95); background: #f1f5f9; }
         
-        /* DISEÑO CALCULADORA PREMIUM NARANJA SUTIL */
         .chofer-keypad { flex-shrink: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 10px; }
         .ckey { background: var(--bg-pure); border: 2px solid #fed7aa; border-radius: 20px; height: 7.5vh; min-height: 50px; max-height: 70px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 700; color: var(--primary-orange); box-shadow: 0 4px 10px rgba(255,94,0,0.08); cursor: pointer; font-family: 'Outfit', sans-serif; transition: 0.1s;}
         .ckey:active { transform: scale(0.92); background: #ffedd5; }
@@ -213,7 +210,6 @@
         .cat-pill { padding: 10px 20px; background: var(--bg-pure); border: 1px solid var(--border-soft); border-radius: 50px; font-weight: 700; font-size: 0.95rem; white-space: nowrap; cursor: pointer; box-shadow: var(--shadow-soft); transition: 0.2s; scroll-snap-align: start; color: var(--text-gray);}
         .cat-pill.active { background: var(--text-dark); color: white; border-color: var(--text-dark); }
 
-        /* MODIFICACIÓN 1: Videos full width a lo ancho de la pantalla sin bordes redondeados */
         .food-grid { display: flex; flex-direction: column; gap: 12px; padding: 0 0 100px 0; }
         
         .food-card-large { width: 100%; aspect-ratio: 9 / 16; max-height: 85vh; background: #0f172a; border-radius: 0; box-shadow: none; overflow: hidden; cursor: pointer; transition: var(--transition-smooth); position: relative; border-top: 1px solid #1e293b; border-bottom: 1px solid #1e293b; }
@@ -230,7 +226,6 @@
         .add-btn-float { pointer-events: all; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 500; font-size: 1.8rem; box-shadow: 0 8px 20px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.3); line-height: 1; padding-bottom: 2px; margin-left: auto; transition:0.2s;}
         .add-btn-float:active { transform: scale(0.9); background: white; color: black; }
 
-        /* Ajuste de altura del botón flotante para la nueva barra inferior más fina */
         .floating-cart-bar { position: fixed; bottom: 65px; left: 50%; transform: translateX(-50%); width: calc(100% - 48px); max-width: 450px; background: var(--text-dark); color: white; padding: 18px 24px; border-radius: 28px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 20px 50px rgba(15,23,42,0.5); z-index: 999; cursor: pointer; transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1); animation: slideUpCartBar 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         @keyframes slideUpCartBar { from { bottom: -100px; } to { bottom: 65px; } }
         .floating-cart-bar:active { transform: translateX(-50%) scale(0.96); }
@@ -246,17 +241,6 @@
         .scanner-line { position:absolute; top:0; left:0; width:100%; height:4px; background:var(--success); box-shadow:0 0 15px var(--success); animation: scan 2s linear infinite; }
         @keyframes scan { 0% {top:0;} 50% {top:100%;} 100% {top:0;} }
 
-        #native-bottom-sheet { position: fixed; bottom: -100%; left: 0; width: 100%; background: rgba(15, 23, 42, 0.98); border-radius: 32px 32px 0 0; z-index: 9999999; transition: bottom 0.4s cubic-bezier(0.3, 1, 0.3, 1); padding: 20px 25px 50px 25px; box-shadow: 0 -15px 50px rgba(0,0,0,0.8); border-top: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(20px);}
-        #native-bottom-sheet.show { bottom: 0; }
-        .sheet-drag { width: 60px; height: 6px; background: rgba(255,255,255,0.3); border-radius: 10px; margin: 0 auto 30px auto; }
-        .sheet-options-row { display: flex; gap: 40px; justify-content: center; }
-        .sheet-btn { display: flex; flex-direction: column; align-items: center; gap: 12px; border: none; background: transparent; cursor: pointer; color: white; font-size: 1rem; font-weight: 700; padding: 0; transition: 0.2s;}
-        .sheet-btn:active { transform: scale(0.9); }
-        .sheet-btn-icon { width: 75px; height: 75px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: #0ea5e9; box-shadow: 0 10px 25px rgba(0,0,0,0.3);}
-        .sheet-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999998; display: none; opacity: 0; transition: opacity 0.3s; }
-        .sheet-overlay.show { display: block; opacity: 1; }
-        
-        /* MODIFICACIÓN 2: Botonera más fina, pegada abajo, con iconos más pequeños */
         .bottom-nav { 
             position: fixed; 
             bottom: 0 !important; 
@@ -365,10 +349,6 @@
                     <span class="marquee-item">⚡ MENÚ EN VIDEO</span><span class="marquee-item">•</span>
                     <span class="marquee-item">📍 RASTREO SATELLITAL</span><span class="marquee-item">•</span>
                     <span class="marquee-item">🧮 CAJA INTELIGENTE</span><span class="marquee-item">•</span>
-                    <span class="marquee-item">🇦🇷 ORGULLO ARGENTINO</span><span class="marquee-item">•</span>
-                    <span class="marquee-item">⚡ MENÚ EN VIDEO</span><span class="marquee-item">•</span>
-                    <span class="marquee-item">📍 RASTREO SATELLITAL</span><span class="marquee-item">•</span>
-                    <span class="marquee-item">🧮 CAJA INTELIGENTE</span><span class="marquee-item">•</span>
                 </div>
             </div>
 
@@ -455,7 +435,7 @@
                 <button id="btn-log" onclick="vibrar([40]); executeLogin()" style="width:100%; padding:18px; background:rgba(14, 165, 233, 0.08); color:var(--info); font-weight:800; font-size:1.05rem; border:2px solid rgba(14, 165, 233, 0.3); border-radius:18px; text-transform:uppercase; cursor:pointer; transition: 0.2s; font-family:'Outfit',sans-serif;">Abrir Caja</button>
             </div>
 
-            <!-- SECCIÓN EXPLICATIVA PARA TENER SU PROPIA APP PERSONALIZADA CON DOMINIO PROPIO -->
+            <!-- SECCIÓN EXPLICATIVA PARA TENER SU PROPIA APP PERSONALIZADA -->
             <div class="glass-card-light" style="border-top: 4px solid #25D366; margin-bottom:30px; text-align:center;">
                 <h2 style="font-size: 1.4rem; font-weight: 800; margin: 0 0 10px 0; color: var(--text-dark); letter-spacing: -0.5px; font-family:'Outfit',sans-serif;">🚀 TENÉ TU PROPIA APP PERSONALIZADA</h2>
                 <p style="color: var(--text-gray); font-size: 0.95rem; margin-bottom: 20px; font-weight: 500; line-height: 1.5;">
@@ -495,9 +475,12 @@
                 <p style="margin: 0 0 16px 0; color: #94a3b8; font-size: 0.95rem;">2. Subí el comprobante para habilitación automática:</p>
                 
                 <div style="display: flex; gap: 12px;">
-                    <button style="background: #0ea5e9; color: white; flex: 1; padding: 16px; border-radius:16px; border:none; font-weight:800; font-family:'Outfit'; font-size: 1rem; box-shadow: 0 10px 20px rgba(14, 165, 233, 0.3); cursor:pointer;" onclick="isPaywallUpload=true; elegirGaleria();">🖼️ GALERÍA</button>
-                    <button style="background: rgba(14, 165, 233, 0.1); border: 1px solid #0ea5e9; color: #0ea5e9; flex: 1; padding: 16px; border-radius:16px; font-weight:800; font-family:'Outfit'; font-size: 1rem; cursor:pointer;" onclick="isPaywallUpload=true; elegirCamara();">📷 CÁMARA</button>
+                    <button style="background: #0ea5e9; color: white; flex: 1; padding: 16px; border-radius:16px; border:none; font-weight:800; font-family:'Outfit'; font-size: 1rem; box-shadow: 0 10px 20px rgba(14, 165, 233, 0.3); cursor:pointer;" onclick="document.getElementById('paywall-foto-galeria').click()">🖼️ GALERÍA</button>
+                    <button style="background: rgba(14, 165, 233, 0.1); border: 1px solid #0ea5e9; color: #0ea5e9; flex: 1; padding: 16px; border-radius:16px; font-weight:800; font-family:'Outfit'; font-size: 1rem; cursor:pointer;" onclick="document.getElementById('paywall-foto-camara').click()">📷 CÁMARA</button>
                 </div>
+
+                <input type="file" id="paywall-foto-galeria" accept="image/*" style="display:none;" onchange="procesarFotoPaywall(event)">
+                <input type="file" id="paywall-foto-camara" accept="image/*" capture="environment" style="display:none;" onchange="procesarFotoPaywall(event)">
             </div>
             
             <div class="scanner-container" id="ai-scanner-box">
@@ -526,7 +509,7 @@
     <div id="view-chofer" class="view-container-no-pad" style="display:none; flex-direction:column; height:100dvh; overflow:hidden; padding:12px; box-sizing:border-box; background:var(--bg-app); max-width:500px; margin:0 auto;">
         
         <div class="chofer-top-bar">
-            <!-- GPS LISTO PARA CSS Y JS -->
+            <!-- GPS CON CLASE ACTIVA -->
             <div class="pill-btn" onclick="vibrar([40]); toggleDriverGps()" id="btn-gps" style="background:var(--text-dark); color:white; transition: 0.3s;">📍 GPS DELI</div>
             <div class="pill-btn badge" id="btn-pedidos-web" style="color:var(--primary-orange); border-color:var(--primary-orange); background:rgba(255,94,0,0.05);" onclick="vibrar([40]); abrirPedidosWeb()">🔔 PEDIDOS</div>
             <div class="pill-btn" style="color:var(--info); border-color:var(--info); background:rgba(14,165,233,0.05);" onclick="vibrar([40]); document.getElementById('pin-modal').style.display='flex'">⚙️ DUEÑO</div>
@@ -581,7 +564,7 @@
         
         <div class="chofer-pay-row">
             <button class="chofer-pay-btn" onclick="vibrar([40]); submitSale('EFECTIVO')">💵 EFECTIVO</button>
-            <!-- BOTON TRANSFERENCIA REFERENCIADO -->
+            <!-- ESTE BOTÓN AHORA ABRE EL MODAL DE TRANSFERENCIA -->
             <button class="btn-pay-transfer" onclick="vibrar([40]); abrirSheetTransfVenta()">🏦 TRANSF.</button>
         </div>
         <button style="flex-shrink:0; width:100%; border-radius:16px; padding:14px; font-weight:800; font-size:1rem; font-family:'Outfit'; text-transform:uppercase; background:var(--text-dark); color:white; border:none; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; box-shadow:0 10px 25px rgba(15,23,42,0.3); transition:0.2s; margin-bottom: 0px;" onclick="vibrar([40]); cerrarTurno()">🔒 CERRAR TURNO</button>
@@ -599,7 +582,7 @@
                 <button onclick="vibrar([40]); go('view-chofer')" style="padding:14px 24px; border-radius:50px; border:2px solid var(--border-soft); background:var(--bg-pure); cursor:pointer; font-weight:800; font-size:0.95rem; box-shadow:var(--shadow-soft); flex-shrink:0; margin-top:5px;">Caja</button>
             </div>
 
-            <!-- TARJETA DÍAS RESTANTES LICENCIA (MÁS CHICA) -->
+            <!-- TARJETA DÍAS RESTANTES LICENCIA -->
             <div class="admin-card" id="admin-sub-card" style="border-top:4px solid var(--primary-orange); display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; background: #0f172a; color: white; margin-bottom: 20px; border-radius: 20px;">
                 <div>
                     <span style="font-size: 0.75rem; font-weight: 700; color: #94a3b8; text-transform: uppercase;">Estado de Licencia</span>
@@ -640,14 +623,11 @@
                 <div id="adm-motos-cash" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; color:var(--primary-orange); letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
             </div>
 
-            <!-- ============================================== -->
             <!-- SECCIÓN MARKETING Y VENTAS AUTOMATIZADAS -->
-            <!-- ============================================== -->
             <div class="admin-card" style="border-top:4px solid var(--success);">
                 <h3 style="margin:0 0 15px; font-size:1.5rem; font-family:'Outfit'; font-weight:800; color:var(--text-dark);">🚀 Marketing & Ventas</h3>
                 <p style="font-size:0.95rem; color:var(--text-gray); margin-bottom:24px;">Activá ofertas de urgencia y cupones de descuento para explotar tus ventas.</p>
                 
-                <!-- OFERTA RELÁMPAGO -->
                 <div style="background:#fef2f2; border:2px dashed var(--danger); border-radius:24px; padding:20px; margin-bottom:24px;">
                     <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
                         <span style="font-size:1.4rem;">⏰</span>
@@ -662,7 +642,6 @@
                     <div id="adm-flash-status" style="margin-top:12px; font-size:0.9rem; font-weight:800; color:var(--danger);"></div>
                 </div>
 
-                <!-- CUPONES INTELIGENTES (TAMAÑOS CORREGIDOS) -->
                 <div style="background:#f0fdf4; border:2px dashed var(--success); border-radius:24px; padding:16px;">
                     <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
                         <span style="font-size:1.4rem;">🎁</span>
@@ -793,7 +772,6 @@
             
             <div id="promo-carousel" class="promo-carousel hidden"></div>
 
-            <!-- BANNER OFERTA RELÁMPAGO (FOMO) -->
             <div id="flash-sale-banner" class="hidden" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; padding: 16px 24px; text-align: center; font-family: 'Outfit'; border-radius: 24px; margin: 0 24px 24px; box-shadow: 0 15px 30px rgba(239, 68, 68, 0.3); display: flex; justify-content: space-between; align-items: center;">
                 <div style="text-align: left; flex: 1; padding-right: 10px;">
                     <span style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;">🔥 OFERTA RELÁMPAGO</span><br>
@@ -804,7 +782,6 @@
 
             <div class="category-title">🔥 Menú Principal</div>
             
-            <!-- FILTROS REDUCIDOS A UN SOLO MENÚ COMO SE PIDIÓ -->
             <div class="cat-scroll" id="cat-scroll">
                 <div class="cat-pill active">Menú Completo</div>
             </div>
@@ -815,7 +792,6 @@
         </div>
 
         <div id="customer-tab-track" class="hidden customer-container" style="padding: 0; height: 100vh; width: 100%; position: relative; overflow: hidden; background: #e2e8f0;">
-            <!-- MAPA FULL SCREEN PARA RASTREO -->
             <div id="tracking-map-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></div>
             
             <div style="position: absolute; top: 20px; left: 20px; width: calc(100% - 40px); box-sizing: border-box; z-index: 1000; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); padding: 12px; border-radius: 20px; box-shadow: var(--shadow-float); border: 1px solid var(--border-soft); display: flex; gap: 10px; align-items: center; overflow: hidden;">
@@ -867,13 +843,11 @@
             <div style="flex: 1; overflow-y: auto; padding-right: 5px; display: flex; flex-direction: column; padding-bottom: 40px;">
                 <div id="cart-items-list" style="margin-bottom: 16px; display: flex; flex-direction: column;"></div>
                 
-                <!-- INPUT CUPÓN DE DESCUENTO -->
                 <div style="display:flex; gap:8px; margin-bottom:12px; flex-shrink:0;">
                     <input type="text" id="cart-coupon-input" class="form-input" placeholder="🎁 Ingresá tu cupón" style="margin:0; text-transform:uppercase; font-size:0.95rem; background: #f8fafc; border:1px solid var(--border-soft);">
                     <button class="btn-secondary" style="width:auto; padding:0 20px; font-size:0.9rem;" onclick="vibrar([40]); aplicarCupon()">APLICAR</button>
                 </div>
                 
-                <!-- FILA VISUAL DE DESCUENTO -->
                 <div id="cart-discount-row" class="cart-total-row hidden" style="margin-bottom:8px; margin-top:0; padding:12px 20px; background:rgba(16,185,129,0.1); border:1px dashed var(--success);">
                     <span class="cart-total-label" style="color:var(--success);">Descuento Cupón</span>
                     <span class="cart-total-val" id="cart-discount-val" style="color:var(--success); font-size:1.6rem;">-$0</span>
@@ -1007,14 +981,36 @@
         </div>
     </div>
 
-    <!-- NUEVO: MODAL COBRO POR TRANSFERENCIA EN CAJA -->
+    <!-- MODAL DEFINITIVO: COBRO POR TRANSFERENCIA EN CAJA (CON CÁMARA/GALERÍA INTEGRADOS) -->
     <div class="modal" id="transf-modal">
         <div class="modal-content-standard" style="padding:32px 24px;">
             <button class="modal-close-circle" style="background:rgba(0,0,0,0.05);" onclick="document.getElementById('transf-modal').style.display='none'">✕</button>
             <h3 style="margin:10px 0 16px; font-size:1.6rem; font-weight:800; color:var(--info); font-family:'Outfit'; letter-spacing:-0.5px;">Cobro por Transferencia</h3>
-            <p id="transf-monto-text" style="font-size:2.8rem; font-weight:300; margin:0 0 24px; font-family:'Outfit'; color:var(--text-dark); letter-spacing:-1px; line-height:1;"></p>
-            <input type="text" id="transf-ref" class="form-input" placeholder="Referencia / Alias del Cliente">
-            <button class="btn-main" style="background:var(--info); box-shadow:0 10px 25px rgba(14,165,233,0.25);" onclick="vibrar([40]); submitSale('TRANSFERENCIA')">Confirmar Transferencia</button>
+            <p id="transf-monto-text" style="font-size:2.8rem; font-weight:300; margin:0 0 16px; font-family:'Outfit'; color:var(--text-dark); letter-spacing:-1px; line-height:1;"></p>
+            
+            <input type="text" id="transf-ref" class="form-input" placeholder="Referencia / Alias del Cliente" style="margin-bottom:12px;">
+            
+            <!-- Botones de Captura de Comprobante -->
+            <div style="display:flex; gap:10px; margin-bottom: 16px;">
+                <button class="btn-secondary" style="padding:14px; font-size:0.95rem; border-color:var(--info); color:var(--info); display:flex; align-items:center; justify-content:center; gap:8px;" onclick="document.getElementById('foto-transf-galeria').click()">
+                    <span style="font-size:1.2rem;">🖼️</span> Galería
+                </button>
+                <button class="btn-secondary" style="padding:14px; font-size:0.95rem; border-color:var(--info); color:var(--info); display:flex; align-items:center; justify-content:center; gap:8px;" onclick="document.getElementById('foto-transf-camara').click()">
+                    <span style="font-size:1.2rem;">📷</span> Cámara
+                </button>
+            </div>
+
+            <!-- Previsualización de la foto antes de confirmar -->
+            <div id="transf-preview-box" style="display:none; margin-bottom:20px; text-align:center; background:#f8fafc; border-radius:16px; padding:10px; border:1px dashed var(--border-soft);">
+                <span style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-gray); margin-bottom:8px; text-transform:uppercase;">Comprobante adjunto</span>
+                <img id="transf-preview-img" src="" style="max-width:100%; max-height:180px; border-radius:12px; object-fit:contain;">
+            </div>
+            
+            <!-- Inputs ocultos para celular -->
+            <input type="file" id="foto-transf-galeria" accept="image/*" style="display:none;" onchange="previewTransferPhoto(event)">
+            <input type="file" id="foto-transf-camara" accept="image/*" capture="environment" style="display:none;" onchange="previewTransferPhoto(event)">
+
+            <button id="btn-confirm-transf" class="btn-main" style="background:var(--info); box-shadow:0 10px 25px rgba(14,165,233,0.25);" onclick="vibrar([40]); confirmarTransferenciaConFoto()">CONFIRMAR TRANSFERENCIA</button>
         </div>
     </div>
 
@@ -1041,8 +1037,9 @@
 
         let tempImgFile = null; let tempVidFile = null; let tempLogoFile = null; let tempPromoFile = null;
         let trackingMap = null, trackingMarker = null, radarMap = null, radarMarker = null;
+        
         let isPaywallUpload = false;
-        let pendingTransferData = null;
+        let tempTransferFile = null; // Guardará temporalmente la foto del comprobante
         let currentCierreData = null; 
 
         let gpsSubscription = null;
@@ -1370,6 +1367,39 @@
             }
         }
 
+        // ============================================
+        // 📸 LÓGICA DE FOTO PARA PAYWALL DE LA IA
+        // ============================================
+        window.elegirCamara = function() { let inputCam = qs('foto-input-camara'); if(inputCam) inputCam.click(); }
+        window.elegirGaleria = function() { let inputGal = qs('foto-input-galeria'); if(inputGal) inputGal.click(); }
+
+        window.processPaywallPhoto = function(e) { 
+            const f = e.target.files[0]; 
+            if(!f) return; 
+            
+            let imgEl = qs('ai-receipt-img');
+            if(imgEl) imgEl.src = URL.createObjectURL(f);
+
+            const r = new FileReader(); 
+            r.readAsDataURL(f); 
+            r.onload = ev => { 
+                const img = new Image(); 
+                img.src = ev.target.result; 
+                img.onload = async () => { 
+                    const c = document.createElement('canvas'); 
+                    let targetWidth = 800; 
+                    let scale = targetWidth / img.width; 
+                    if(scale > 1) scale = 1;
+                    c.width = img.width * scale; 
+                    c.height = img.height * scale; 
+                    c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); 
+                    let base64 = c.toDataURL('image/jpeg', 0.65); 
+                    
+                    ejecutarValidacionPaywallIA(base64); 
+                } 
+            } 
+        }
+
         async function ejecutarValidacionPaywallIA(base64str) { 
             let scanBox = qs('ai-scanner-box');
             let statusText = qs('ia-status-text');
@@ -1423,39 +1453,8 @@
             if(qs('foto-input-galeria')) qs('foto-input-galeria').value = ""; 
         }
 
-        window.processTransferWithPhoto = function(e) { 
-            const f = e.target.files[0]; 
-            if(!f) return; 
-            
-            if(isPaywallUpload) {
-                let imgEl = qs('ai-receipt-img');
-                if(imgEl) imgEl.src = URL.createObjectURL(f);
-            }
-
-            const r = new FileReader(); 
-            r.readAsDataURL(f); 
-            r.onload = ev => { 
-                const img = new Image(); 
-                img.src = ev.target.result; 
-                img.onload = async () => { 
-                    const c = document.createElement('canvas'); 
-                    let targetWidth = 800; 
-                    let scale = targetWidth / img.width; 
-                    if(scale > 1) scale = 1;
-                    c.width = img.width * scale; 
-                    c.height = img.height * scale; 
-                    c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); 
-                    let base64 = c.toDataURL('image/jpeg', 0.65); 
-                    
-                    if (isPaywallUpload) { 
-                        ejecutarValidacionPaywallIA(base64); 
-                    }
-                } 
-            } 
-        }
-
         // =======================================================
-        // FUNCIÓN ARREGLADA: ABRIR MODAL PARA TRANSFERENCIA
+        // 🏦 LÓGICA DE TRANSFERENCIA DE VENTAS CON CÁMARA/GALERÍA
         // =======================================================
         window.abrirSheetTransfVenta = function() {
             let val = getCalcValue();
@@ -1464,31 +1463,444 @@
                 return;
             }
             
-            // Llenamos el modal con los datos
             setText('transf-monto-text', `$${val.toLocaleString('es-AR')}`);
-            setVal('transf-ref', ''); // Limpiamos el campo de referencia
+            setVal('transf-ref', '');
+            clearTransfFoto();
             
-            // Abrimos el modal nativo
             if(qs('transf-modal')) qs('transf-modal').style.display = 'flex';
         }
 
-        window.cerrarSheet = function() { 
-            let overlay = qs('sheet-overlay');
-            let bs = qs('native-bottom-sheet');
-            if(overlay) overlay.classList.remove('show'); 
-            if(bs) bs.classList.remove('show'); 
+        window.previewTransfFoto = function(e) {
+            if(e.target.files && e.target.files[0]) {
+                tempTransferFile = e.target.files[0];
+                qs('transf-img-preview').src = URL.createObjectURL(tempTransferFile);
+                qs('transf-preview-box').style.display = 'block';
+            }
         }
 
-        window.elegirCamara = function() { 
-            let inputCam = qs('foto-input-camara');
-            if(inputCam) inputCam.click(); 
-            setTimeout(() => { window.cerrarSheet(); }, 500); 
+        window.clearTransfFoto = function() {
+            tempTransferFile = null;
+            if(qs('transf-img-preview')) qs('transf-img-preview').src = '';
+            if(qs('transf-preview-box')) qs('transf-preview-box').style.display = 'none';
+            if(qs('foto-transf-camara')) qs('foto-transf-camara').value = '';
+            if(qs('foto-transf-galeria')) qs('foto-transf-galeria').value = '';
         }
 
-        window.elegirGaleria = function() { 
-            let inputGal = qs('foto-input-galeria');
-            if(inputGal) inputGal.click(); 
-            setTimeout(() => { window.cerrarSheet(); }, 500); 
+        window.procesarVentaTransferencia = async function() {
+            let val = getCalcValue();
+            if(val <= 0) return;
+
+            let btn = qs('btn-confirm-transf');
+            if(btn) {
+                btn.innerText = "SUBIENDO TICKET...";
+                btn.disabled = true;
+            }
+
+            let urlComprobante = null;
+            if(tempTransferFile) {
+                urlComprobante = await uploadFileDirect(tempTransferFile);
+                if(!urlComprobante) {
+                    showToast("Error al subir comprobante", "error");
+                    if(btn) { btn.innerText = "Confirmar Transferencia"; btn.disabled = false; }
+                    return;
+                }
+            }
+
+            let ref = qs('transf-ref') ? qs('transf-ref').value.trim() : '';
+            let desc = selProd ? `Venta: ${selProd.nombre}` : 'Venta de Mostrador'; 
+            if(ref) desc += ` [Ref: ${ref}]`;
+
+            let motoSelected = qs('chofer-moto-select') ? qs('chofer-moto-select').value : null;
+            let qtyToDeduct = selProd ? Math.max(1, Math.floor(val / selProd.precio)) : 0;
+
+            mostrarTicketAnimado();
+
+            await _supabase.from('pediloya_logs').insert([{ 
+                local_id: currentLocalId, 
+                tipo: 'VENTA', 
+                metodo: 'TRANSFERENCIA', 
+                monto: val, 
+                fecha: getTucumanDateFE(), 
+                hora: getTucumanTimeFE(), 
+                descripcion: desc,
+                moto_asignada: motoSelected,
+                recibo_url: urlComprobante
+            }]);
+
+            if(selProd && qtyToDeduct > 0) {
+                let item = dbState.inventory.find(i => i.codigo === selProd.codigo);
+                if(item) {
+                    let newStock = Math.max(0, item.stock - qtyToDeduct);
+                    await _supabase.from('pediloya_inventario').update({ stock: newStock }).eq('codigo', selProd.codigo);
+                }
+            }
+
+            await loadDataFromDB(); 
+            clearCalc();
+            if(qs('transf-modal')) qs('transf-modal').style.display = 'none';
+            if(btn) { btn.innerText = "Confirmar Transferencia"; btn.disabled = false; }
+            
+            let orderId = motoSelected ? 'TRK-' + motoSelected.replace(/\s+/g, '').toUpperCase() + '-' + Date.now().toString().slice(-3) : '';
+            if(motoSelected && orderId) {
+                alert(`✅ VENTA ASIGNADA A: ${motoSelected}\n📍 CÓDIGO GPS: ${orderId}\n\nEl sistema ya enlazó este código con el GPS de ${motoSelected}.`);
+                setTimeout(() => compartirTRKWhatsApp(orderId), 800);
+            } else {
+                showToast("Transferencia registrada exitosamente.");
+            }
+        }
+
+        // ============================================
+        // 📍 LÓGICA DEL GPS TOTALMENTE INDEPENDIENTE
+        // ============================================
+        window.toggleDriverGps = function() {
+            let btn = qs('btn-gps');
+            let selectMoto = qs('chofer-moto-select');
+            
+            if(!btn) return;
+            
+            if (!selectMoto || selectMoto.value === "") {
+                showToast("⚠️ Seleccioná tu moto en la caja antes de prender el GPS", "error");
+                return;
+            }
+
+            if (!navigator.geolocation) {
+                showToast("⚠️ Tu celular no soporta GPS.", "error");
+                return;
+            }
+
+            isGpsActive = !isGpsActive;
+            
+            if(isGpsActive) {
+                btn.classList.add('active-gps'); 
+                btn.innerText = "📍 GPS ACTIVO";
+                showToast(`GPS Conectado para ${selectMoto.value}...`, "success");
+                
+                enviarUbicacionGPS(); 
+                if(gpsInterval) clearInterval(gpsInterval);
+                gpsInterval = setInterval(enviarUbicacionGPS, 10000); 
+            } else {
+                btn.classList.remove('active-gps'); 
+                btn.innerText = "📍 GPS DELI";
+                if(gpsInterval) clearInterval(gpsInterval);
+                showToast("GPS Apagado", "info");
+            }
+        };
+
+        window.enviarUbicacionGPS = async function() {
+            let miNombreMoto = qs('chofer-moto-select') ? qs('chofer-moto-select').value : 'MOTO_GENERICA';
+            
+            navigator.geolocation.getCurrentPosition(async (pos) => {
+                let lat = pos.coords.latitude;
+                let lon = pos.coords.longitude;
+                let coordsStr = JSON.stringify({lat, lon});
+                
+                await _supabase.from('pediloya_logs').delete().eq('local_id', currentLocalId).eq('tipo', 'GPS_DELI').eq('moto_asignada', miNombreMoto);
+                
+                await _supabase.from('pediloya_logs').insert([{
+                    local_id: currentLocalId,
+                    tipo: 'GPS_DELI',
+                    metodo: 'SISTEMA',
+                    monto: 0,
+                    fecha: getTucumanDateFE(),
+                    hora: getTucumanTimeFE(),
+                    descripcion: coordsStr,
+                    moto_asignada: miNombreMoto
+                }]);
+            }, (err) => {
+                console.log("Error de señal GPS: ", err);
+            }, { enableHighAccuracy: true, timeout: 8000, maximumAge: 0 }); 
+        };
+
+        function abrirRadarDueno() { if(qs('modal-radar-owner')) qs('modal-radar-owner').style.display='flex'; actualizarRadarMap(); setTimeout(actualizarRadarMap, 500); }
+        async function actualizarRadarMap() { showToast("Buscando GPS...", "info"); let { data } = await _supabase.from('pediloya_logs').select('descripcion').eq('local_id', currentLocalId).eq('tipo', 'GPS_DELI').order('created_at', {ascending: false}).limit(1).maybeSingle(); if(data) { try { let coords = JSON.parse(data.descripcion); updateLiveMap(coords.lat, coords.lon, 'radar-owner-map-container', true); showToast("Actualizado"); } catch(e) {} } }
+        
+
+        // ============================================
+        // OTRAS FUNCIONES (Caja, Carrito, Turno, etc)
+        // ============================================
+        function pausarVideoQuickView() { let vids = document.querySelectorAll('#qv-media video'); vids.forEach(v => v.pause()); }
+
+        window.abrirModalMotos = function() {
+            if(qs('motos-modal')) qs('motos-modal').style.display = 'flex';
+            renderMotosModal();
+        };
+
+        function renderMotosModal() {
+            let totalMotos = window.currentTotalEnMotos || 0;
+            setText('motos-total-text', '$' + totalMotos.toLocaleString('es-AR'));
+
+            let html = '';
+            let cashPorMoto = window.currentCashPorMoto || {};
+
+            dbState.repartidores.forEach(m => {
+                let aRendir = cashPorMoto[m.nombre] || 0;
+                html += `
+                    <div style="background:var(--bg-pure); border:1px solid var(--border-soft); border-radius:16px; padding:16px; margin-bottom: 12px; display:flex; justify-content:space-between; align-items:center; box-shadow:var(--shadow-soft);">
+                        <div>
+                            <h4 style="margin:0 0 4px; font-size:1.1rem; color:var(--text-dark); font-family:'Outfit';">🛵 ${m.nombre}</h4>
+                            <span style="font-size:0.85rem; color:var(--text-gray); font-weight:600;">Efectivo a rendir</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <span style="font-size:1.4rem; font-weight:800; font-family:'Outfit'; color:var(--primary-orange);">$${aRendir.toLocaleString('es-AR')}</span>
+                            <button onclick="vibrar([40]); rendirPlataMoto('${m.nombre}', ${aRendir})" style="background:var(--success); color:white; border:none; padding:10px 14px; border-radius:12px; font-weight:bold; cursor:pointer; box-shadow:0 4px 10px rgba(16,185,129,0.3);">RECIBIR</button>
+                        </div>
+                    </div>
+                `;
+            });
+            setHtml('motos-list-container', html || '<p style="text-align:center; color:var(--text-light); font-weight:500;">No hay repartidores registrados.</p>');
+        }
+
+        window.rendirPlataMoto = async function(nombre, monto) {
+            if(monto <= 0) return showToast("No tiene plata a rendir", "error");
+            if(confirm(`¿Recibir $${monto.toLocaleString('es-AR')} de ${nombre}?`)) {
+                await _supabase.from('pediloya_logs').insert([{
+                    local_id: currentLocalId,
+                    tipo: 'RENDICION',
+                    metodo: 'EFECTIVO',
+                    monto: monto,
+                    fecha: getTucumanDateFE(),
+                    hora: getTucumanTimeFE(),
+                    descripcion: `Rendición de ${nombre}`,
+                    moto_asignada: nombre
+                }]);
+                await loadDataFromDB();
+                renderMotosModal();
+                showToast("Plata recibida en caja");
+            }
+        };
+
+        const motoIcon = L.divIcon({
+            className: 'custom-div-icon',
+            html: '<div style="font-size: 2.8rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3)); transform: translate(-15px, -20px); animation: pulse-deli 1s infinite alternate;">🛵</div>',
+            iconSize: [40, 40],
+            iconAnchor: [20, 40]
+        });
+
+        window.updateLiveMap = function(lat, lon, containerId, isOwner) {
+            let mapVar = isOwner ? radarMap : trackingMap;
+            let markerVar = isOwner ? radarMarker : trackingMarker;
+
+            if (!mapVar) {
+                mapVar = L.map(containerId, { zoomControl: false }).setView([lat, lon], 16);
+                
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                    attribution: '&copy; OpenStreetMap',
+                    maxZoom: 19
+                }).addTo(mapVar);
+
+                markerVar = L.marker([lat, lon], { icon: motoIcon }).addTo(mapVar);
+
+                if (isOwner) {
+                    radarMap = mapVar;
+                    radarMarker = markerVar;
+                } else {
+                    trackingMap = mapVar;
+                    trackingMarker = markerVar;
+                }
+            } else {
+                mapVar.setView([lat, lon]);
+                markerVar.setLatLng([lat, lon]);
+            }
+            
+            setTimeout(() => mapVar.invalidateSize(), 300);
+        };
+
+        window.iniciarRastreoClienteManual = function() {
+            let code = qs('track-input-code') ? qs('track-input-code').value.trim().toUpperCase() : '';
+            if(!code) return showToast("Ingresá un código de rastreo.", "error");
+            
+            switchCustomerTab('track', document.querySelectorAll('.nav-item')[1]);
+            iniciarRastreoCliente(code, targetLocalName || (qs('public-store-name') ? qs('public-store-name').innerText : ''));
+        };
+
+        window.iniciarRastreoCliente = async function(trackCode, localName) {
+            if(!trackCode || !localName) return;
+            
+            let localBusqueda = localName.toUpperCase();
+            
+            if(!targetLocalId) {
+                let { data: usr } = await _supabase.from('pediloya_usuarios').select('id, whatsapp, app_data').eq('local', localBusqueda).maybeSingle();
+                if(usr) {
+                    targetLocalId = usr.id;
+                } else {
+                    return showToast("No se encontró el local para el rastreo.", "error");
+                }
+            }
+
+            if(qs('track-input-code')) qs('track-input-code').value = trackCode;
+            
+            let resultBox = qs('tracking-result-box');
+            if(resultBox) {
+                resultBox.classList.remove('hidden');
+                setText('track-status-text', 'Buscando repartidor...');
+                setText('track-detail-text', `Conectando al sistema...`);
+            }
+
+            let { data: pedidos } = await _supabase.from('pediloya_logs')
+                .select('*')
+                .eq('local_id', targetLocalId)
+                .like('descripcion', `%${trackCode}%`);
+
+            let motoDelPedido = null;
+            if (pedidos && pedidos.length > 0) {
+                let pedidoEncontrado = pedidos.find(p => p.moto_asignada != null);
+                if (pedidoEncontrado) motoDelPedido = pedidoEncontrado.moto_asignada;
+            }
+
+            if (!motoDelPedido) {
+                setText('track-status-text', 'Preparando pedido 🍔');
+                setText('track-detail-text', 'Tu pedido se está preparando. Aún no salió.');
+                updateLiveMap(-26.8241, -65.2226, 'tracking-map-container', false);
+                return;
+            }
+
+            setText('track-status-text', `Buscando a ${motoDelPedido}...`);
+
+            let { data: gpsData } = await _supabase.from('pediloya_logs')
+                .select('descripcion, hora')
+                .eq('local_id', targetLocalId)
+                .eq('tipo', 'GPS_DELI')
+                .eq('moto_asignada', motoDelPedido) 
+                .order('created_at', { ascending: false })
+                .limit(1)
+                .maybeSingle();
+
+            let initialLat = -26.8241;
+            let initialLon = -65.2226;
+
+            if (gpsData && gpsData.descripcion) {
+                try {
+                    let coords = JSON.parse(gpsData.descripcion);
+                    initialLat = coords.lat;
+                    initialLon = coords.lon;
+                    setText('track-status-text', `🛵 ${motoDelPedido} en camino`);
+                    setText('track-detail-text', `Última act: ${gpsData.hora}`);
+                } catch(e) {}
+            } else {
+                setText('track-status-text', `Asignado a ${motoDelPedido}`);
+                setText('track-detail-text', 'Esperando GPS del repartidor.');
+            }
+
+            updateLiveMap(initialLat, initialLon, 'tracking-map-container', false);
+
+            if(gpsSubscription) {
+                _supabase.removeChannel(gpsSubscription);
+            }
+
+            gpsSubscription = _supabase.channel('public:pediloya_logs:gps_cliente')
+                .on('postgres_changes', { 
+                    event: 'INSERT', 
+                    schema: 'public', 
+                    table: 'pediloya_logs', 
+                    filter: `local_id=eq.${targetLocalId}` 
+                }, payload => {
+                    if(payload.new.tipo === 'GPS_DELI' && payload.new.moto_asignada === motoDelPedido) {
+                        try {
+                            let coords = JSON.parse(payload.new.descripcion);
+                            updateLiveMap(coords.lat, coords.lon, 'tracking-map-container', false);
+                            setText('track-status-text', `🛵 ${motoDelPedido} en movimiento`);
+                            setText('track-detail-text', `Ubicación en vivo (${payload.new.hora})`);
+                        } catch(e) {}
+                    }
+                }).subscribe();
+        };
+
+        function switchCustomerTab(tab, element) {
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active')); if(element) element.classList.add('active');
+            let fcb = qs('floating-cart-bar');
+            if(tab === 'menu') { 
+                if(qs('customer-tab-menu')) qs('customer-tab-menu').classList.remove('hidden'); 
+                if(qs('customer-tab-track')) qs('customer-tab-track').classList.add('hidden'); 
+                if(fcb) {
+                    fcb.classList.remove('hidden-hard');
+                    updateCartUI();
+                }
+            } else if(tab === 'track') { 
+                if(qs('customer-tab-menu')) qs('customer-tab-menu').classList.add('hidden'); 
+                if(qs('customer-tab-track')) qs('customer-tab-track').classList.remove('hidden'); 
+                if(fcb) fcb.classList.add('hidden-hard'); 
+                if(!trackingMap) updateLiveMap(-26.8241, -65.2226, 'tracking-map-container', false);
+                if(trackingMap) setTimeout(() => trackingMap.invalidateSize(), 300);
+            }
+        }
+
+        function abrirPosSheet() { if(qs('pos-sheet-overlay')) qs('pos-sheet-overlay').classList.add('open'); if(qs('pos-sheet')) qs('pos-sheet').classList.add('open'); }
+        function cerrarPosSheet() { if(qs('pos-sheet-overlay')) qs('pos-sheet-overlay').classList.remove('open'); if(qs('pos-sheet')) qs('pos-sheet').classList.remove('open'); }
+        function seleccionarDesdeSheet(code, name, price) { selProd = { codigo: code, nombre: name, precio: price }; expr = price.toString(); isEval = true; setText('calc-total', price); setText('calc-preview', `${name} | $${price}`); cerrarPosSheet(); showToast(`${name} listo`); }
+        function inputCalc(val) { if(expr.length > 20) return; if(isEval && !['+','-','×','÷'].includes(val)) { expr = ""; isEval = false; selProd = null; } expr += val; setText('calc-preview', expr.replace(/\*/g, '×').replace(/\//g, '÷')); let temp = eval(expr.replace(/×/g, '*').replace(/÷/g, '/').replace(/[+\-*/]$/, '')); setText('calc-total', temp !== undefined ? temp : expr); }
+        function evalCalc() { let res = eval(expr.replace(/×/g, '*').replace(/÷/g, '/'))||0; setText('calc-total', res); expr = res.toString(); setText('calc-preview', selProd ? `${selProd.nombre} | $${res}` : ""); isEval = true; }
+        function deleteCalc() { expr = expr.slice(0, -1); setText('calc-preview', expr); setText('calc-total', eval(expr.replace(/×/g, '*'))||0); selProd = null; }
+        function clearCalc() { expr = ""; isEval = false; setText('calc-preview', ""); setText('calc-total', "0"); selProd = null; }
+        
+        function mostrarTicketAnimado() {
+            let tkt = qs('ticket-success');
+            if(tkt) {
+                tkt.classList.add('show');
+                setTimeout(() => tkt.classList.remove('show'), 1500);
+            }
+        }
+
+        window.submitSale = async function(metodo) {
+            let val = getCalcValue(); 
+            if(val <= 0) { showToast("Ingresá un monto mayor a 0", "error"); return; }
+            
+            let desc = selProd ? `Venta: ${selProd.nombre}` : 'Venta de Mostrador'; 
+            let motoSelected = qs('chofer-moto-select') ? qs('chofer-moto-select').value : null;
+            let qtyToDeduct = selProd ? Math.max(1, Math.floor(val / selProd.precio)) : 0;
+            
+            mostrarTicketAnimado();
+
+            await _supabase.from('pediloya_logs').insert([{ 
+                local_id: currentLocalId, 
+                tipo: 'VENTA', 
+                metodo: metodo, 
+                monto: val, 
+                fecha: getTucumanDateFE(), 
+                hora: getTucumanTimeFE(), 
+                descripcion: desc,
+                moto_asignada: motoSelected
+            }]); 
+            
+            if(selProd && qtyToDeduct > 0) {
+                let item = dbState.inventory.find(i => i.codigo === selProd.codigo);
+                if(item) {
+                    let newStock = Math.max(0, item.stock - qtyToDeduct);
+                    await _supabase.from('pediloya_inventario').update({ stock: newStock }).eq('codigo', selProd.codigo);
+                }
+            }
+            
+            await loadDataFromDB(); 
+            clearCalc();
+            showToast("Venta registrada.");
+        }
+
+        window.triggerExpenseModal = function() {
+            let val = getCalcValue();
+            if(val <= 0) { showToast("Escribí el monto del gasto en la caja primero.", "error"); return; }
+            setText('exp-monto-text', `$${val.toLocaleString('es-AR')}`);
+            setVal('exp-rsn', '');
+            if(qs('expense-modal')) qs('expense-modal').style.display='flex';
+        }
+
+        window.submitExpense = async function() {
+            let val = getCalcValue();
+            let rsn = qs('exp-rsn') ? qs('exp-rsn').value.trim() : '';
+            if(!rsn) { showToast("Escribí el detalle del gasto", "error"); return; }
+            
+            await _supabase.from('pediloya_logs').insert([{ 
+                local_id: currentLocalId, 
+                tipo: 'SALIDA', 
+                metodo: 'EFECTIVO', 
+                monto: -val, 
+                fecha: getTucumanDateFE(), 
+                hora: getTucumanTimeFE(), 
+                descripcion: `Gasto: ${rsn}` 
+            }]); 
+            
+            await loadDataFromDB(); 
+            clearCalc();
+            if(qs('expense-modal')) qs('expense-modal').style.display='none';
+            showToast("Gasto registrado.");
         }
 
         async function cerrarTurno() {
@@ -2591,164 +3003,9 @@
                 setTimeout(() => tkt.classList.remove('show'), 1500);
             }
         }
-        
-        // =======================================================
-        // FUNCIÓN ARREGLADA: REGISTRO DE VENTA (EFVO O TRANSF)
-        // =======================================================
-        window.submitSale = async function(metodo) {
-            let val = getCalcValue(); 
-            if(val <= 0) { showToast("Ingresá un monto mayor a 0", "error"); return; }
-            
-            let desc = selProd ? `Venta: ${selProd.nombre}` : 'Venta de Mostrador'; 
-            
-            // Si el método es transferencia, concatenamos el alias o referencia si el cajero lo escribió
-            if(metodo === 'TRANSFERENCIA') {
-                let ref = qs('transf-ref') ? qs('transf-ref').value.trim() : '';
-                if(ref) desc += ` [Ref: ${ref}]`;
-                
-                if(qs('transf-modal')) qs('transf-modal').style.display = 'none'; // cerramos el modal
-            }
 
-            let motoSelected = qs('chofer-moto-select') ? qs('chofer-moto-select').value : null;
-            let qtyToDeduct = selProd ? Math.max(1, Math.floor(val / selProd.precio)) : 0;
-            
-            mostrarTicketAnimado();
-
-            await _supabase.from('pediloya_logs').insert([{ 
-                local_id: currentLocalId, 
-                tipo: 'VENTA', 
-                metodo: metodo, 
-                monto: val, 
-                fecha: getTucumanDateFE(), 
-                hora: getTucumanTimeFE(), 
-                descripcion: desc,
-                moto_asignada: motoSelected
-            }]); 
-            
-            if(selProd && qtyToDeduct > 0) {
-                let item = dbState.inventory.find(i => i.codigo === selProd.codigo);
-                if(item) {
-                    let newStock = Math.max(0, item.stock - qtyToDeduct);
-                    await _supabase.from('pediloya_inventario').update({ stock: newStock }).eq('codigo', selProd.codigo);
-                }
-            }
-            
-            await loadDataFromDB(); 
-            clearCalc();
-            showToast("Venta registrada.");
-        }
-        
-        window.triggerExpenseModal = function() {
-            let val = getCalcValue();
-            if(val <= 0) { showToast("Escribí el monto del gasto en la caja primero.", "error"); return; }
-            setText('exp-monto-text', `$${val.toLocaleString('es-AR')}`);
-            setVal('exp-rsn', '');
-            if(qs('expense-modal')) qs('expense-modal').style.display='flex';
-        }
-
-        window.submitExpense = async function() {
-            let val = getCalcValue();
-            let rsn = qs('exp-rsn') ? qs('exp-rsn').value.trim() : '';
-            if(!rsn) { showToast("Escribí el detalle del gasto", "error"); return; }
-            
-            await _supabase.from('pediloya_logs').insert([{ 
-                local_id: currentLocalId, 
-                tipo: 'SALIDA', 
-                metodo: 'EFECTIVO', 
-                monto: -val, 
-                fecha: getTucumanDateFE(), 
-                hora: getTucumanTimeFE(), 
-                descripcion: `Gasto: ${rsn}` 
-            }]); 
-            
-            await loadDataFromDB(); 
-            clearCalc();
-            if(qs('expense-modal')) qs('expense-modal').style.display='none';
-            showToast("Gasto registrado.");
-        }
-
-        function actualizarLinkDisplay() { let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}`; setVal('store-link-display', link); }
-        function copiarLinkExacto() { let copyText = qs("store-link-display"); if(copyText){ copyText.select(); copyText.setSelectionRange(0, 99999); try { document.execCommand("copy"); showToast("Link copiado."); } catch(e) { alert("Mantené presionado el link para copiarlo."); } } }
-        function compartirLinkNativo() { let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}`; if (navigator.share) { navigator.share({ title: `Menú de ${cUser}`, text: `¡Hacé tu pedido online! 🛵🍔`, url: link }).catch(err => console.log(err)); } else { copiarLinkExacto(); } }
-        
-        window.compartirSeguimientoGlobal = function() {
-            let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}&track=GPS`; 
-            let msg = `Seguí en vivo tu pedido de *${cUser}* desde este enlace de rastreo oficial: ${link}`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
-        }
-
-        window.compartirTRKWhatsApp = function(trk) {
-            let link = window.location.origin + '/?local=' + encodeURIComponent(cUser) + '&track=' + trk;
-            let msg = '🛵 Sigue tu pedido de *' + cUser + '* en vivo aquí:\n\n📍 ' + link;
-            window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
-        };
-
-        // ============================================
-        // FUNCIÓN ARREGLADA: GPS DEL CADETE / REPARTIDOR
-        // ============================================
-        window.toggleDriverGps = function() {
-            let btn = qs('btn-gps');
-            let selectMoto = qs('chofer-moto-select');
-            
-            if(!btn) return;
-            
-            if (!selectMoto || selectMoto.value === "") {
-                showToast("⚠️ Seleccioná tu moto en la caja antes de prender el GPS", "error");
-                return;
-            }
-
-            if (!navigator.geolocation) {
-                showToast("⚠️ Tu celular no soporta GPS o el navegador lo bloquea.", "error");
-                return;
-            }
-
-            isGpsActive = !isGpsActive;
-            
-            if(isGpsActive) {
-                btn.classList.add('active-gps'); // Activa el CSS parpadeante verde que pusimos en el Bloque 1
-                btn.innerText = "📍 GPS ACTIVO";
-                showToast(`GPS Conectado para ${selectMoto.value}...`, "success");
-                
-                enviarUbicacionGPS(); 
-                if(gpsInterval) clearInterval(gpsInterval);
-                gpsInterval = setInterval(enviarUbicacionGPS, 10000); 
-            } else {
-                btn.classList.remove('active-gps'); // Apaga el estilo verde
-                btn.innerText = "📍 GPS DELI";
-                if(gpsInterval) clearInterval(gpsInterval);
-                showToast("GPS Apagado", "info");
-            }
-        };
-
-        window.enviarUbicacionGPS = async function() {
-            let miNombreMoto = qs('chofer-moto-select') ? qs('chofer-moto-select').value : 'MOTO_GENERICA';
-            
-            navigator.geolocation.getCurrentPosition(async (pos) => {
-                let lat = pos.coords.latitude;
-                let lon = pos.coords.longitude;
-                let coordsStr = JSON.stringify({lat, lon});
-                
-                // Actualiza en la base de datos la ubicación para esa moto
-                await _supabase.from('pediloya_logs').delete().eq('local_id', currentLocalId).eq('tipo', 'GPS_DELI').eq('moto_asignada', miNombreMoto);
-                
-                await _supabase.from('pediloya_logs').insert([{
-                    local_id: currentLocalId,
-                    tipo: 'GPS_DELI',
-                    metodo: 'SISTEMA',
-                    monto: 0,
-                    fecha: getTucumanDateFE(),
-                    hora: getTucumanTimeFE(),
-                    descripcion: coordsStr,
-                    moto_asignada: miNombreMoto
-                }]);
-            }, (err) => {
-                console.log("Error temporal de señal GPS: ", err);
-                // Si hay un error de conexión no apagamos el botón, simplemente esperamos al próximo ciclo
-            }, { enableHighAccuracy: true, timeout: 8000, maximumAge: 0 }); 
-        };
-        
-        function abrirRadarDueno() { if(qs('modal-radar-owner')) qs('modal-radar-owner').style.display='flex'; actualizarRadarMap(); setTimeout(actualizarRadarMap, 500); }
-        async function actualizarRadarMap() { showToast("Buscando GPS...", "info"); let { data } = await _supabase.from('pediloya_logs').select('descripcion').eq('local_id', currentLocalId).eq('tipo', 'GPS_DELI').order('created_at', {ascending: false}).limit(1).maybeSingle(); if(data) { try { let coords = JSON.parse(data.descripcion); updateLiveMap(coords.lat, coords.lon, 'radar-owner-map-container', true); showToast("Actualizado"); } catch(e) {} } }
+        window.abrirRadarDueno = function() { if(qs('modal-radar-owner')) qs('modal-radar-owner').style.display='flex'; actualizarRadarMap(); setTimeout(actualizarRadarMap, 500); }
+        window.actualizarRadarMap = async function() { showToast("Buscando GPS...", "info"); let { data } = await _supabase.from('pediloya_logs').select('descripcion').eq('local_id', currentLocalId).eq('tipo', 'GPS_DELI').order('created_at', {ascending: false}).limit(1).maybeSingle(); if(data) { try { let coords = JSON.parse(data.descripcion); updateLiveMap(coords.lat, coords.lon, 'radar-owner-map-container', true); showToast("Actualizado"); } catch(e) {} } }
         
         function pausarVideoQuickView() { let vids = document.querySelectorAll('#qv-media video'); vids.forEach(v => v.pause()); }
 
