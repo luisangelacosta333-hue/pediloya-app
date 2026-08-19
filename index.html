@@ -1659,7 +1659,7 @@
     
     <div class="modal" id="pedidos-web-modal"><div class="modal-content-standard" style="width:100%; max-width:500px; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background: var(--bg-app); border:none;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;"><h3 style="margin:0; font-size:1.8rem; font-weight:800; font-family:'Outfit'; color:var(--primary-orange); letter-spacing:-0.5px;">Pedidos Web</h3><button style="background:rgba(255,94,0,0.1); border:none; font-size:1.1rem; color:var(--primary-orange); cursor:pointer; width:35px; height:35px; border-radius:50%;" onclick="document.getElementById('pedidos-web-modal').style.display='none'">✕</button></div><div id="pedidos-web-list" style="flex:1; overflow-y:auto; text-align:left; display:flex; flex-direction:column; gap:16px; padding-bottom:40px;"></div></div></div>
     <div class="modal" id="ventas-modal"><div class="modal-content-standard" style="width:100%; max-width:500px; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background: var(--bg-app); border:none;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;"><h3 style="margin:0; font-size:1.8rem; font-weight:800; font-family:'Outfit'; color:var(--success);">Ventas Diarias</h3><button style="background:rgba(16,185,129,0.1); border:none; font-size:1.1rem; color:var(--success); cursor:pointer; width:35px; height:35px; border-radius:50%;" onclick="document.getElementById('ventas-modal').style.display='none'">✕</button></div><div id="chofer-logs-modal-container" style="flex:1; overflow-y:auto; text-align:left; padding-bottom:40px;"></div></div></div>
-    
+
     <!-- SCRIPT PRINCIPAL -->
     <script>
         const qs = (id) => document.getElementById(id);
@@ -1725,6 +1725,88 @@
             
             setupVideoObserver();
         });
+
+        // ============================================
+        // LÓGICA DE CALCULADORA RESTAURADA 
+        // ============================================
+        window.inputCalc = function(val) { 
+            if(expr.length > 20) return; 
+            if(isEval && !['+','-','×','÷'].includes(val)) { expr = ""; isEval = false; selProd = null; } 
+            expr += val; 
+            setText('calc-preview', expr.replace(/\*/g, '×').replace(/\//g, '÷')); 
+            let temp;
+            try { temp = eval(expr.replace(/×/g, '*').replace(/÷/g, '/').replace(/[+\-*/]$/, '')); } catch(e){}
+            setText('calc-total', temp !== undefined ? temp : expr); 
+        };
+
+        window.evalCalc = function() { 
+            let res = 0;
+            try { res = eval(expr.replace(/×/g, '*').replace(/÷/g, '/'))||0; } catch(e){}
+            setText('calc-total', res); 
+            expr = res.toString(); 
+            setText('calc-preview', selProd ? `${selProd.nombre} | $${res}` : ""); 
+            isEval = true; 
+        };
+
+        window.deleteCalc = function() { 
+            expr = expr.slice(0, -1); 
+            setText('calc-preview', expr); 
+            let temp = 0;
+            try { temp = eval(expr.replace(/×/g, '*'))||0; } catch(e){}
+            setText('calc-total', temp); 
+            selProd = null; 
+        };
+
+        window.clearCalc = function() { 
+            expr = ""; 
+            isEval = false; 
+            setText('calc-preview', ""); 
+            setText('calc-total', "0"); 
+            selProd = null; 
+        };
+
+        window.mostrarTicketAnimado = function() {
+            let tkt = qs('ticket-success');
+            if(tkt) {
+                tkt.classList.add('show');
+                setTimeout(() => tkt.classList.remove('show'), 1500);
+            }
+        };
+
+        // ESTA ES LA FUNCIÓN ORIGINAL RESTAURADA INTACTA PARA QUE FUNCIONE EL EFECTIVO
+        window.submitSale = async function(metodo) {
+            let val = getCalcValue(); 
+            if(val <= 0) { showToast("Ingresá un monto mayor a 0", "error"); return; }
+            
+            let desc = selProd ? `Venta: ${selProd.nombre}` : 'Venta de Mostrador'; 
+            let motoSelected = qs('chofer-moto-select') ? qs('chofer-moto-select').value : null;
+            let qtyToDeduct = selProd ? Math.max(1, Math.floor(val / selProd.precio)) : 0;
+            
+            mostrarTicketAnimado();
+
+            await _supabase.from('pediloya_logs').insert([{ 
+                local_id: currentLocalId, 
+                tipo: 'VENTA', 
+                metodo: metodo, 
+                monto: val, 
+                fecha: getTucumanDateFE(), 
+                hora: getTucumanTimeFE(), 
+                descripcion: desc,
+                moto_asignada: motoSelected
+            }]); 
+            
+            if(selProd && qtyToDeduct > 0) {
+                let item = dbState.inventory.find(i => i.codigo === selProd.codigo);
+                if(item) {
+                    let newStock = Math.max(0, item.stock - qtyToDeduct);
+                    await _supabase.from('pediloya_inventario').update({ stock: newStock }).eq('codigo', selProd.codigo);
+                }
+            }
+            
+            await loadDataFromDB(); 
+            clearCalc();
+            showToast("Venta registrada.");
+        }
 
         async function compressVideo(file, maxSeconds = 15) {
             return new Promise((resolve) => {
@@ -3241,14 +3323,6 @@
         function abrirPosSheet() { if(qs('pos-sheet-overlay')) qs('pos-sheet-overlay').classList.add('open'); if(qs('pos-sheet')) qs('pos-sheet').classList.add('open'); }
         function cerrarPosSheet() { if(qs('pos-sheet-overlay')) qs('pos-sheet-overlay').classList.remove('open'); if(qs('pos-sheet')) qs('pos-sheet').classList.remove('open'); }
         function seleccionarDesdeSheet(code, name, price) { selProd = { codigo: code, nombre: name, precio: price }; expr = price.toString(); isEval = true; setText('calc-total', price); setText('calc-preview', `${name} | $${price}`); cerrarPosSheet(); showToast(`${name} listo`); }
-        
-        function mostrarTicketAnimado() {
-            let tkt = qs('ticket-success');
-            if(tkt) {
-                tkt.classList.add('show');
-                setTimeout(() => tkt.classList.remove('show'), 1500);
-            }
-        }
         
         window.triggerExpenseModal = function() {
             let val = getCalcValue();
