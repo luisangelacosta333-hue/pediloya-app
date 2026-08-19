@@ -216,13 +216,6 @@
 
  
 
-        /* ================= BANNER WHATSAPP (RESTORED) ================= */
-        .custom-app-card { background: var(--bg-pure); border-radius: 36px; padding: 40px 28px; margin-bottom: 32px; border: 2px solid var(--border-soft); box-shadow: 0 25px 50px rgba(0,0,0,0.05); text-align: center; }
-        .custom-app-title { font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 900; color: var(--text-dark); text-transform: uppercase; margin: 0 0 16px; line-height: 1.2; }
-        .custom-app-desc { font-size: 0.98rem; color: var(--text-gray); line-height: 1.6; font-weight: 500; margin: 0 0 24px; }
-        .btn-custom-app { width: 100%; padding: 18px; background: #25D366; color: white; font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.05rem; border: none; border-radius: 20px; cursor: pointer; text-transform: uppercase; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); display: flex; justify-content: center; align-items: center; gap: 8px; text-decoration: none; transition: 0.2s;}
-        .btn-custom-app:active { transform: scale(0.96); }
-
         .input-light { width:100%; padding:20px 24px; border: 1px solid var(--border-soft); border-radius:18px; margin-bottom:16px; font-size:1.05rem; background: var(--bg-app); color:var(--text-dark); outline:none; box-shadow: inset 0 2px 10px rgba(0,0,0,0.01); transition: all 0.3s; font-weight: 500; }
 
         .input-light:focus { border-color: var(--primary-orange); box-shadow: 0 0 0 4px rgba(255, 94, 0, 0.1), inset 0 2px 10px rgba(0,0,0,0.01); background: var(--bg-pure); }
@@ -269,34 +262,26 @@
 
         
 
-        /* ================= CALCULADORA Y UI PREMIUM (EXACTA A FOTO) ================= */
+        /* ================= CALCULADORA PREMIUM EXACTA A LA FOTO ================= */
         .calc-display { 
             flex: 1; display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-end; 
             min-height: 110px; padding: 16px 24px; 
-            background: #111520; 
+            background: #111827; 
             border-radius: 40px; 
             margin-bottom: 15px; 
-            border: 2px solid var(--primary-orange); 
-            box-shadow: 0 0 25px rgba(255, 94, 0, 0.25); 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15); 
             position: relative; overflow: hidden; 
         }
-        .calc-main { 
-            font-size: 4.5rem; font-weight: 300; color: #ffffff; line-height: 1; 
-            font-family: 'Outfit', sans-serif; word-break: break-all; letter-spacing: -2px; z-index:2;
-            text-shadow: 0 0 20px rgba(255, 94, 0, 0.6);
-        }
-        .calc-hist { 
-            font-size: 1.1rem; color: #cbd5e1; font-weight: 500; min-height: 1.5rem; 
-            margin-bottom: 8px; z-index:2; 
-        }
-
+        .calc-main { font-size: 4.5rem; font-weight: 300; color: #ffffff; line-height: 1; font-family: 'Outfit', sans-serif; word-break: break-all; letter-spacing: -2px; z-index:2; }
+        .calc-hist { font-size: 1.1rem; color: #94a3b8; font-weight: 500; min-height: 1.5rem; margin-bottom: 8px; z-index:2; }
+        
         .ticket-success { position: absolute; inset: 0; background: var(--success); color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Outfit'; z-index: 5; opacity: 0; pointer-events: none; transition: 0.3s; transform: translateY(100%); }
 
         .ticket-success.show { opacity: 1; transform: translateY(0); pointer-events: all; }
 
  
 
-        .btn-sheet-trigger { flex-shrink: 0; width: 100%; padding: 16px; background: #ffffff; color: var(--primary-orange); font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.15rem; border: 1px solid rgba(255,94,0,0.3); border-radius: 20px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; display:flex; justify-content:center; align-items:center; gap:12px; transition:0.2s; box-shadow: 0 4px 15px rgba(255,94,0,0.08);}
+        .btn-sheet-trigger { flex-shrink: 0; width: 100%; padding: 14px; background: #ffffff; color: var(--primary-orange); font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.1rem; border: 1px solid rgba(255,94,0,0.2); border-radius: 16px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; display:flex; justify-content:center; align-items:center; gap:12px; transition:0.2s; box-shadow: 0 4px 10px rgba(255,94,0,0.05);}
 
         .btn-sheet-trigger:active { transform: scale(0.97); }
 
@@ -304,7 +289,7 @@
 
         .chofer-action-row { flex-shrink: 0; display: flex; gap: 8px; margin-bottom: 15px; }
 
-        .chofer-btn-white { background: #ffffff; border: 1px solid rgba(255,94,0,0.3); border-radius: 16px; padding: 12px 6px; flex: 1; font-weight: 800; font-size: 0.85rem; color: var(--primary-orange); box-shadow: 0 4px 10px rgba(255,94,0,0.1); cursor: pointer; font-family: 'Outfit', sans-serif; text-transform:uppercase; transition:0.2s; display: flex; justify-content: center; align-items: center; gap: 6px;}
+        .chofer-btn-white { background: #ffffff; border: 1px solid rgba(255,94,0,0.2); border-radius: 16px; padding: 12px 6px; flex: 1; font-weight: 800; font-size: 0.85rem; color: var(--primary-orange); box-shadow: 0 4px 10px rgba(255,94,0,0.05); cursor: pointer; font-family: 'Outfit', sans-serif; text-transform:uppercase; transition:0.2s; display: flex; justify-content: center; align-items: center; gap: 6px;}
 
         .chofer-btn-white:active { transform: scale(0.95); background: rgba(255, 94, 0, 0.05); }
 
@@ -312,25 +297,25 @@
 
         .chofer-keypad { flex-shrink: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 15px; }
 
-        .ckey { background: #ffffff; border: 1px solid rgba(0,0,0,0.05); border-radius: 20px; height: 7.5vh; min-height: 55px; max-height: 75px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 700; color: var(--text-dark); box-shadow: 0 4px 10px rgba(0,0,0,0.04); cursor: pointer; font-family: 'Outfit', sans-serif; transition: 0.1s;}
+        .ckey { background: #ffffff; border: none; border-radius: 18px; height: 7.5vh; min-height: 55px; max-height: 75px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 700; color: var(--text-dark); box-shadow: 0 4px 10px rgba(0,0,0,0.04); cursor: pointer; font-family: 'Outfit', sans-serif; transition: 0.1s; }
 
         .ckey:active { transform: scale(0.92); background: #f1f5f9; }
 
-        .ckey-op { color: var(--primary-orange); font-size: 2.8rem; background: #ffffff; border: 1px solid rgba(0,0,0,0.05);}
+        .ckey-op { color: var(--primary-orange); font-size: 2.8rem; background: #fff5f0; }
 
         .ckey-del { color: var(--danger); border: 2px solid var(--danger); background: #ffffff; }
 
-        .ckey-eq { background: var(--gradient-orange); color: white; border: none; font-size: 2.8rem; box-shadow: var(--shadow-orange); font-weight: 400; }
+        .ckey-eq { background: var(--gradient-orange); color: white; border: none; font-size: 2.8rem; box-shadow: 0 10px 25px rgba(255, 94, 0, 0.4); font-weight: 400; }
 
         
 
         .chofer-pay-row { flex-shrink: 0; display: flex; gap: 12px; margin-bottom: 8px; }
 
-        .chofer-pay-btn { flex: 1; border-radius: 20px; padding: 18px 10px; font-weight: 900; font-size: 1.2rem; font-family: 'Outfit', sans-serif; text-transform: uppercase; background: #10b981; color: white; border: none; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: 0.2s; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3); text-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .chofer-pay-btn { flex: 1; border-radius: 20px; padding: 18px 10px; font-weight: 900; font-size: 1.2rem; font-family: 'Outfit', sans-serif; text-transform: uppercase; background:#10b981; color:white; border:none; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; transition:0.2s; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3); text-shadow: 0 2px 5px rgba(0,0,0,0.2);}
 
         .chofer-pay-btn:active { transform: scale(0.95); }
 
-        .btn-pay-transfer { flex:1; border-radius: 20px; padding:18px 10px; font-weight:900; font-size:1.2rem; font-family:'Outfit'; text-transform: uppercase; background:#0ea5e9; color:white; border:none; box-shadow: 0 8px 20px rgba(14,165,233,0.3); cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; transition:0.2s; text-shadow: 0 2px 5px rgba(0,0,0,0.2);}
+        .btn-pay-transfer { flex:1; border-radius: 20px; padding:18px 10px; font-weight:900; font-size:1.2rem; font-family:'Outfit'; text-transform: uppercase; background:#0ea5e9; color:white; border:none; box-shadow:0 8px 20px rgba(14,165,233,0.3); cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; transition:0.2s; text-shadow: 0 2px 5px rgba(0,0,0,0.2);}
 
         .btn-pay-transfer:active { transform: scale(0.95); }
 
@@ -998,11 +983,11 @@
 
             </div>
 
-            <!-- BOTÓN DE WHATSAPP RECUPERADO Y OPTIMIZADO -->
-            <div class="custom-app-card">
-                <h3 class="custom-app-title">🚀 TENÉ TU PROPIA APP PERSONALIZADA</h3>
-                <p class="custom-app-desc">¿Querés tu propia plataforma gastronómica o comercial con tu marca, logotipo y dominio propio? Dejá de pagar comisiones abusivas a otras apps, fideliza a tus clientes y automatiza tu delivery con una aplicación exclusiva para tu negocio.</p>
-                <a href="https://wa.me/5493815555555?text=Hola!%20Quiero%20mi%20propia%20App%20Personalizada" target="_blank" class="btn-custom-app">
+            <!-- BOTÓN WHATSAPP COMERCIAL -->
+            <div style="background: var(--bg-pure); border-radius: 36px; padding: 40px 28px; margin-bottom: 32px; box-shadow: 0 25px 50px rgba(0,0,0,0.05); text-align: center; border: 1px solid var(--border-soft);">
+                <h3 style="font-family:'Outfit', sans-serif; font-size: 1.6rem; font-weight: 900; color: var(--text-dark); text-transform: uppercase; margin: 0 0 16px; line-height: 1.2;">🚀 TENÉ TU PROPIA APP PERSONALIZADA</h3>
+                <p style="font-size: 0.95rem; color: var(--text-gray); line-height: 1.6; font-weight: 500; margin: 0 0 24px;">¿Querés tu propia plataforma gastronómica o comercial con tu marca, logotipo y dominio propio? Dejá de pagar comisiones abusivas a otras apps, fideliza a tus clientes y automatiza tu delivery con una aplicación exclusiva para tu negocio.</p>
+                <a href="https://wa.me/5493815110171?text=Hola!%20Quiero%20mi%20propia%20App%20Personalizada" target="_blank" style="width: 100%; padding: 18px; background: #25D366; color: white; font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.05rem; border: none; border-radius: 18px; cursor: pointer; text-transform: uppercase; display: flex; justify-content: center; align-items: center; gap: 8px; text-decoration: none; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);">
                     📱 CONTACTANOS PARA TU APP PROPIA
                 </a>
             </div>
@@ -1159,24 +1144,24 @@
 
     <!-- VISTA 2: CAJA DEL LOCAL -->
 
-    <div id="view-chofer" class="view-container-no-pad" style="display:none; flex-direction:column; height:100dvh; overflow:hidden; padding:16px 12px; box-sizing:border-box; background:var(--bg-app); max-width:500px; margin:0 auto;">
+    <div id="view-chofer" class="view-container-no-pad" style="display:none; flex-direction:column; height:100dvh; overflow:hidden; padding:12px; box-sizing:border-box; background:var(--bg-app); max-width:500px; margin:0 auto;">
 
         
 
-        <div class="chofer-top-bar" style="margin-bottom: 16px;">
+        <div class="chofer-top-bar">
 
-            <div class="pill-btn" onclick="vibrar([40]); toggleDriverGps()" id="btn-gps" style="background:#0f172a; color:white; border:none;">📍 GPS DELI</div>
+            <div class="pill-btn" onclick="vibrar([40]); toggleDriverGps()" id="btn-gps" style="background:var(--text-dark); color:white; transition: 0.3s;">📍 GPS DELI</div>
 
-            <div class="pill-btn badge" id="btn-pedidos-web" style="color:var(--primary-orange); border:1px solid rgba(255,94,0,0.3); background:#ffffff;" onclick="vibrar([40]); abrirPedidosWeb()">🔔 PEDIDOS</div>
+            <div class="pill-btn badge" id="btn-pedidos-web" style="color:var(--primary-orange); border-color:var(--primary-orange); background:rgba(255,94,0,0.05);" onclick="vibrar([40]); abrirPedidosWeb()">🔔 PEDIDOS</div>
 
-            <div class="pill-btn" style="color:#0ea5e9; border:1px solid rgba(14,165,233,0.3); background:#ffffff;" onclick="vibrar([40]); document.getElementById('pin-modal').style.display='flex'">⚙️ DUEÑO</div>
+            <div class="pill-btn" style="color:var(--info); border-color:var(--info); background:rgba(14,165,233,0.05);" onclick="vibrar([40]); document.getElementById('pin-modal').style.display='flex'">⚙️ DUEÑO</div>
 
         </div>
 
         
 
-        <!-- CALCULADORA ULTRA PREMIUM -->
-        <div class="calc-display" style="background:#111520; border:2px solid var(--primary-orange); border-radius:32px; box-shadow:0 0 25px rgba(255,94,0,0.2); padding:16px 24px; min-height:100px;">
+        <!-- CALCULADORA PREMIUM -->
+        <div class="calc-display" style="background: #111827; border-radius: 40px; margin-bottom: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); min-height: 110px; border: none;">
 
             <div id="ticket-success" class="ticket-success">
 
@@ -1194,7 +1179,7 @@
 
         
 
-        <button class="btn-sheet-trigger" onclick="vibrar([40]); abrirPosSheet()" style="background:#ffffff; color:var(--primary-orange); border:1px solid rgba(255,94,0,0.3); border-radius:20px; box-shadow:0 4px 10px rgba(255,94,0,0.05); margin-bottom:12px; font-size:1.15rem; padding:16px;">
+        <button class="btn-sheet-trigger" onclick="vibrar([40]); abrirPosSheet()" style="background:#ffffff; border:1px solid rgba(255,94,0,0.2); color:var(--primary-orange); box-shadow: 0 4px 10px rgba(255,94,0,0.05);">
 
             <span style="font-size:1.4rem;">🍔</span> CATÁLOGO DE PRODUCTOS
 
@@ -1204,11 +1189,11 @@
 
         <div class="chofer-action-row" style="margin-bottom:12px;">
 
-            <button class="chofer-btn-white" onclick="vibrar([40]); triggerExpenseModal()">💸 GASTOS</button>
+            <button class="chofer-btn-white" style="background:#ffffff; border:1px solid rgba(255,94,0,0.2); color:var(--primary-orange);" onclick="vibrar([40]); triggerExpenseModal()">💸 Gastos</button>
 
-            <button class="chofer-btn-white" onclick="vibrar([40]); abrirModalMotos()">🛵 MOTOS</button>
+            <button class="chofer-btn-white" style="background:#ffffff; border:1px solid rgba(255,94,0,0.2); color:var(--primary-orange);" onclick="vibrar([40]); abrirModalMotos()">🛵 Motos</button>
 
-            <button class="chofer-btn-white" onclick="vibrar([40]); document.getElementById('ventas-modal').style.display='flex'">🧾 HISTORIAL</button>
+            <button class="chofer-btn-white" style="background:#ffffff; border:1px solid rgba(255,94,0,0.2); color:var(--primary-orange);" onclick="vibrar([40]); document.getElementById('ventas-modal').style.display='flex'">🧾 Historial</button>
 
         </div>
 
@@ -1216,51 +1201,53 @@
 
         <div class="chofer-keypad" style="margin-bottom:12px; gap:10px;">
 
-            <button class="ckey" onclick="vibrar([40]); inputCalc('7')">7</button>
+            <button class="ckey" style="background:#ffffff; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.04);" onclick="vibrar([40]); inputCalc('7')">7</button>
 
-            <button class="ckey" onclick="vibrar([40]); inputCalc('8')">8</button>
+            <button class="ckey" style="background:#ffffff; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.04);" onclick="vibrar([40]); inputCalc('8')">8</button>
 
-            <button class="ckey" onclick="vibrar([40]); inputCalc('9')">9</button>
+            <button class="ckey" style="background:#ffffff; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.04);" onclick="vibrar([40]); inputCalc('9')">9</button>
 
-            <button class="ckey ckey-del" style="color:var(--danger); border:2px solid var(--danger); background:#ffffff;" onclick="vibrar([40]); deleteCalc()">⌫</button>
-
-            
-
-            <button class="ckey" onclick="vibrar([40]); inputCalc('4')">4</button>
-
-            <button class="ckey" onclick="vibrar([40]); inputCalc('5')">5</button>
-
-            <button class="ckey" onclick="vibrar([40]); inputCalc('6')">6</button>
-
-            <button class="ckey ckey-op" style="background:#ffffff;" onclick="vibrar([40]); inputCalc('×')">×</button>
+            <button class="ckey ckey-del" style="background:#ffffff; color:var(--danger); border:2px solid var(--danger); font-size:0; display:flex; align-items:center; justify-content:center;" onclick="vibrar([40]); deleteCalc()">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"></path><line x1="18" y1="9" x2="12" y2="15"></line><line x1="12" y1="9" x2="18" y2="15"></line></svg>
+            </button>
 
             
 
-            <button class="ckey" onclick="vibrar([40]); inputCalc('1')">1</button>
+            <button class="ckey" style="background:#ffffff; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.04);" onclick="vibrar([40]); inputCalc('4')">4</button>
 
-            <button class="ckey" onclick="vibrar([40]); inputCalc('2')">2</button>
+            <button class="ckey" style="background:#ffffff; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.04);" onclick="vibrar([40]); inputCalc('5')">5</button>
 
-            <button class="ckey" onclick="vibrar([40]); inputCalc('3')">3</button>
+            <button class="ckey" style="background:#ffffff; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.04);" onclick="vibrar([40]); inputCalc('6')">6</button>
 
-            <button class="ckey ckey-op" style="background:#ffffff;" onclick="vibrar([40]); inputCalc('-')">-</button>
+            <button class="ckey ckey-op" style="background:#fff5f0; border:none;" onclick="vibrar([40]); inputCalc('×')">×</button>
 
             
 
-            <button class="ckey" style="color:var(--primary-orange);" onclick="vibrar([40]); clearCalc()">C</button>
+            <button class="ckey" style="background:#ffffff; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.04);" onclick="vibrar([40]); inputCalc('1')">1</button>
 
-            <button class="ckey" onclick="vibrar([40]); inputCalc('0')">0</button>
+            <button class="ckey" style="background:#ffffff; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.04);" onclick="vibrar([40]); inputCalc('2')">2</button>
 
-            <button class="ckey ckey-op" style="background:#ffffff;" onclick="vibrar([40]); inputCalc('+')">+</button>
+            <button class="ckey" style="background:#ffffff; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.04);" onclick="vibrar([40]); inputCalc('3')">3</button>
 
-            <button class="ckey ckey-eq" style="background:var(--gradient-orange); color:white; border:none; box-shadow:0 8px 20px rgba(255,94,0,0.4);" onclick="vibrar([40]); evalCalc()">=</button>
+            <button class="ckey ckey-op" style="background:#fff5f0; border:none;" onclick="vibrar([40]); inputCalc('-')">-</button>
+
+            
+
+            <button class="ckey" style="background:#ffffff; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.04); color:var(--primary-orange); font-weight:900;" onclick="vibrar([40]); clearCalc()">C</button>
+
+            <button class="ckey" style="background:#ffffff; border:none; box-shadow:0 4px 10px rgba(0,0,0,0.04);" onclick="vibrar([40]); inputCalc('0')">0</button>
+
+            <button class="ckey ckey-op" style="background:#fff5f0; border:none;" onclick="vibrar([40]); inputCalc('+')">+</button>
+
+            <button class="ckey ckey-eq" style="background:var(--gradient-orange); color:white; border:none; font-weight:400; box-shadow:0 10px 25px rgba(255,94,0,0.4);" onclick="vibrar([40]); evalCalc()">=</button>
 
         </div>
 
  
 
-        <div style="flex-shrink:0; margin-bottom: 12px;">
+        <div style="flex-shrink:0; margin-bottom: 8px;">
 
-            <select id="chofer-moto-select" class="form-input" style="padding: 14px; margin-bottom: 0; background: #ffffff; border: 1px solid rgba(255,94,0,0.3); color: var(--primary-orange); cursor: pointer; font-weight: 800; text-align: center; box-shadow: 0 4px 10px rgba(255,94,0,0.05); border-radius:16px;">
+            <select id="chofer-moto-select" class="form-input" style="padding: 14px; margin-bottom: 0; background: #ffffff; border: 1px solid rgba(255,94,0,0.2); color: var(--primary-orange); cursor: pointer; font-weight: 800; text-align: center; border-radius: 12px;">
 
                 <option value="">🏪 ENVIAR A: MOSTRADOR (CAJA)</option>
 
@@ -1270,15 +1257,15 @@
 
         
 
-        <div class="chofer-pay-row" style="margin-bottom:12px;">
+        <div class="chofer-pay-row">
 
-            <button class="chofer-pay-btn" style="background:#10b981; color:white; box-shadow:0 8px 20px rgba(16,185,129,0.3);" onclick="vibrar([40]); submitSale('EFECTIVO')">💵 EFECTIVO</button>
+            <button class="chofer-pay-btn" onclick="vibrar([40]); submitSale('EFECTIVO')">💵 EFECTIVO</button>
 
-            <button class="btn-pay-transfer" style="background:#0ea5e9; color:white; box-shadow:0 8px 20px rgba(14,165,233,0.3);" onclick="vibrar([40]); abrirSheetTransfVenta()">🏦 TRANSF.</button>
+            <button class="btn-pay-transfer" onclick="vibrar([40]); abrirSheetTransfVenta()">🏦 TRANSF.</button>
 
         </div>
 
-        <button style="flex-shrink:0; width:100%; border-radius:20px; padding:16px; font-weight:800; font-size:1.1rem; font-family:'Outfit'; text-transform:uppercase; background:#0f172a; color:white; border:none; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; box-shadow:0 10px 25px rgba(15,23,42,0.3);" onclick="vibrar([40]); cerrarTurno()">🔒 CERRAR TURNO</button>
+        <button style="flex-shrink:0; width:100%; border-radius:16px; padding:14px; font-weight:800; font-size:1rem; font-family:'Outfit'; text-transform:uppercase; background:var(--text-dark); color:white; border:none; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; box-shadow:0 10px 25px rgba(15,23,42,0.3); transition:0.2s; margin-bottom: 0px;" onclick="vibrar([40]); cerrarTurno()">🔒 CERRAR TURNO</button>
 
     </div>
     <!-- VISTA 3: PANEL DUEÑO -->
