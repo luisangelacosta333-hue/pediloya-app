@@ -129,6 +129,7 @@
         .chofer-top-bar { display: flex; justify-content: center; align-items: center; margin-bottom: 10px; gap: 6px; flex-shrink: 0; }
         .pill-btn { background: var(--bg-pure); border-radius: 50px; padding: 10px 10px; font-size: 0.75rem; font-weight: 800; color: var(--text-gray); box-shadow: var(--shadow-soft); cursor: pointer; border: 1px solid var(--border-soft); text-transform: uppercase; font-family:'Outfit'; letter-spacing: 0.5px; transition:0.2s; flex: 1; text-align: center; white-space: nowrap;}
         .pill-btn:active { transform: scale(0.95); }
+        .pill-btn.active-gps { background: var(--success); color: white; border-color: var(--success); box-shadow: 0 0 15px rgba(16,185,129,0.4); animation: pulseGlow 2s infinite; }
         
         .calc-display { flex: 1; display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-end; min-height: 70px; padding: 12px 24px; background: var(--bg-pure); border-radius: var(--radius-lg); margin-bottom: 10px; box-shadow: var(--shadow-float); border: 1px solid var(--border-soft); position: relative; overflow: hidden; }
         .calc-main { font-size: 3.5rem; font-weight: 300; color: var(--text-dark); line-height: 1; font-family: 'Outfit', sans-serif; word-break: break-all; letter-spacing: -2px; z-index:2;}
@@ -525,6 +526,7 @@
     <div id="view-chofer" class="view-container-no-pad" style="display:none; flex-direction:column; height:100dvh; overflow:hidden; padding:12px; box-sizing:border-box; background:var(--bg-app); max-width:500px; margin:0 auto;">
         
         <div class="chofer-top-bar">
+            <!-- GPS LISTO PARA CSS Y JS -->
             <div class="pill-btn" onclick="vibrar([40]); toggleDriverGps()" id="btn-gps" style="background:var(--text-dark); color:white; transition: 0.3s;">📍 GPS DELI</div>
             <div class="pill-btn badge" id="btn-pedidos-web" style="color:var(--primary-orange); border-color:var(--primary-orange); background:rgba(255,94,0,0.05);" onclick="vibrar([40]); abrirPedidosWeb()">🔔 PEDIDOS</div>
             <div class="pill-btn" style="color:var(--info); border-color:var(--info); background:rgba(14,165,233,0.05);" onclick="vibrar([40]); document.getElementById('pin-modal').style.display='flex'">⚙️ DUEÑO</div>
@@ -579,6 +581,7 @@
         
         <div class="chofer-pay-row">
             <button class="chofer-pay-btn" onclick="vibrar([40]); submitSale('EFECTIVO')">💵 EFECTIVO</button>
+            <!-- BOTON TRANSFERENCIA REFERENCIADO -->
             <button class="btn-pay-transfer" onclick="vibrar([40]); abrirSheetTransfVenta()">🏦 TRANSF.</button>
         </div>
         <button style="flex-shrink:0; width:100%; border-radius:16px; padding:14px; font-weight:800; font-size:1rem; font-family:'Outfit'; text-transform:uppercase; background:var(--text-dark); color:white; border:none; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; box-shadow:0 10px 25px rgba(15,23,42,0.3); transition:0.2s; margin-bottom: 0px;" onclick="vibrar([40]); cerrarTurno()">🔒 CERRAR TURNO</button>
@@ -812,7 +815,7 @@
         </div>
 
         <div id="customer-tab-track" class="hidden customer-container" style="padding: 0; height: 100vh; width: 100%; position: relative; overflow: hidden; background: #e2e8f0;">
-            <!-- MAPA FULL SCREEN -->
+            <!-- MAPA FULL SCREEN PARA RASTREO -->
             <div id="tracking-map-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;"></div>
             
             <div style="position: absolute; top: 20px; left: 20px; width: calc(100% - 40px); box-sizing: border-box; z-index: 1000; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); padding: 12px; border-radius: 20px; box-shadow: var(--shadow-float); border: 1px solid var(--border-soft); display: flex; gap: 10px; align-items: center; overflow: hidden;">
@@ -1003,6 +1006,20 @@
             <div id="chofer-logs-modal-container" style="flex:1; overflow-y:auto; text-align:left; padding-bottom:40px;"></div>
         </div>
     </div>
+
+    <!-- NUEVO: MODAL COBRO POR TRANSFERENCIA EN CAJA -->
+    <div class="modal" id="transf-modal">
+        <div class="modal-content-standard" style="padding:32px 24px;">
+            <button class="modal-close-circle" style="background:rgba(0,0,0,0.05);" onclick="document.getElementById('transf-modal').style.display='none'">✕</button>
+            <h3 style="margin:10px 0 16px; font-size:1.6rem; font-weight:800; color:var(--info); font-family:'Outfit'; letter-spacing:-0.5px;">Cobro por Transferencia</h3>
+            <p id="transf-monto-text" style="font-size:2.8rem; font-weight:300; margin:0 0 24px; font-family:'Outfit'; color:var(--text-dark); letter-spacing:-1px; line-height:1;"></p>
+            <input type="text" id="transf-ref" class="form-input" placeholder="Referencia / Alias del Cliente">
+            <button class="btn-main" style="background:var(--info); box-shadow:0 10px 25px rgba(14,165,233,0.25);" onclick="vibrar([40]); submitSale('TRANSFERENCIA')">Confirmar Transferencia</button>
+        </div>
+    </div>
+
+</body>
+</html>
     <!-- SCRIPT PRINCIPAL -->
     <script>
         const qs = (id) => document.getElementById(id);
@@ -1406,53 +1423,6 @@
             if(qs('foto-input-galeria')) qs('foto-input-galeria').value = ""; 
         }
 
-        async function emitPendingTransferHTTP(urlRecibo) {
-            if(!pendingTransferData) return;
-            let val = pendingTransferData.amount;
-            
-            let motoSelected = qs('chofer-moto-select') ? qs('chofer-moto-select').value : null;
-            let orderId = motoSelected ? 'TRK-' + motoSelected.replace(/\s+/g, '').toUpperCase() + '-' + Date.now().toString().slice(-3) : '';
-
-            let desc = selProd ? `Venta: ${selProd.nombre}` : 'Venta de Mostrador'; 
-            if(orderId) desc += ` [${orderId}]`; 
-
-            let qtyToDeduct = selProd ? Math.max(1, Math.floor(val / selProd.precio)) : 0;
-            
-            mostrarTicketAnimado();
-
-            await _supabase.from('pediloya_logs').insert([{ 
-                local_id: currentLocalId, 
-                tipo: 'VENTA', 
-                metodo: 'TRANSFERENCIA', 
-                monto: val, 
-                fecha: getTucumanDateFE(), 
-                hora: getTucumanTimeFE(), 
-                descripcion: desc,
-                moto_asignada: motoSelected,
-                recibo_url: urlRecibo
-            }]); 
-            
-            if(selProd && qtyToDeduct > 0) {
-                let item = dbState.inventory.find(i => i.codigo === selProd.codigo);
-                if(item) {
-                    let newStock = Math.max(0, item.stock - qtyToDeduct);
-                    await _supabase.from('pediloya_inventario').update({ stock: newStock }).eq('codigo', selProd.codigo);
-                }
-            }
-            
-            await loadDataFromDB(); 
-            clearCalc();
-            window.cerrarSheet();
-            pendingTransferData = null;
-            
-            if(motoSelected && orderId) {
-                alert(`✅ VENTA ASIGNADA A: ${motoSelected}\n📍 CÓDIGO GPS: ${orderId}\n\nEl sistema ya enlazó este código con el GPS de ${motoSelected}.`);
-                setTimeout(() => compartirTRKWhatsApp(orderId), 800);
-            } else {
-                showToast("Venta registrada con foto.");
-            }
-        }
-
         window.processTransferWithPhoto = function(e) { 
             const f = e.target.files[0]; 
             if(!f) return; 
@@ -1460,8 +1430,6 @@
             if(isPaywallUpload) {
                 let imgEl = qs('ai-receipt-img');
                 if(imgEl) imgEl.src = URL.createObjectURL(f);
-            } else if (pendingTransferData) {
-                setText('calc-preview', "SUBIENDO TICKET...");
             }
 
             const r = new FileReader(); 
@@ -1481,32 +1449,27 @@
                     
                     if (isPaywallUpload) { 
                         ejecutarValidacionPaywallIA(base64); 
-                    } else if (pendingTransferData && pendingTransferData.type === 'SALE_TRANSF') {
-                        let urlLiviana = await uploadFileDirect(f);
-                        setText('calc-preview', "");
-                        emitPendingTransferHTTP(urlLiviana);
                     }
                 } 
             } 
         }
 
-        // ==========================================
-        // CORRECCIÓN BOTÓN TRANSFERENCIA EN CAJA
-        // ==========================================
+        // =======================================================
+        // FUNCIÓN ARREGLADA: ABRIR MODAL PARA TRANSFERENCIA
+        // =======================================================
         window.abrirSheetTransfVenta = function() {
             let val = getCalcValue();
             if(val <= 0) {
-                showToast("⚠️ Escribí un monto mayor a 0 en la caja primero.", "error");
+                showToast("⚠️ Escribí el monto en la calculadora primero.", "error");
                 return;
-            } 
+            }
             
-            pendingTransferData = { type: 'SALE_TRANSF', amount: val };
-            isPaywallUpload = false;
+            // Llenamos el modal con los datos
+            setText('transf-monto-text', `$${val.toLocaleString('es-AR')}`);
+            setVal('transf-ref', ''); // Limpiamos el campo de referencia
             
-            let overlay = qs('sheet-overlay');
-            let bs = qs('native-bottom-sheet');
-            if(overlay) overlay.classList.add('show'); 
-            if(bs) bs.classList.add('show');
+            // Abrimos el modal nativo
+            if(qs('transf-modal')) qs('transf-modal').style.display = 'flex';
         }
 
         window.cerrarSheet = function() { 
@@ -2629,11 +2592,23 @@
             }
         }
         
+        // =======================================================
+        // FUNCIÓN ARREGLADA: REGISTRO DE VENTA (EFVO O TRANSF)
+        // =======================================================
         window.submitSale = async function(metodo) {
             let val = getCalcValue(); 
             if(val <= 0) { showToast("Ingresá un monto mayor a 0", "error"); return; }
             
             let desc = selProd ? `Venta: ${selProd.nombre}` : 'Venta de Mostrador'; 
+            
+            // Si el método es transferencia, concatenamos el alias o referencia si el cajero lo escribió
+            if(metodo === 'TRANSFERENCIA') {
+                let ref = qs('transf-ref') ? qs('transf-ref').value.trim() : '';
+                if(ref) desc += ` [Ref: ${ref}]`;
+                
+                if(qs('transf-modal')) qs('transf-modal').style.display = 'none'; // cerramos el modal
+            }
+
             let motoSelected = qs('chofer-moto-select') ? qs('chofer-moto-select').value : null;
             let qtyToDeduct = selProd ? Math.max(1, Math.floor(val / selProd.precio)) : 0;
             
@@ -2709,7 +2684,7 @@
         };
 
         // ============================================
-        // LÓGICA DE GPS DEL CADETE CORREGIDA Y BLINDADA
+        // FUNCIÓN ARREGLADA: GPS DEL CADETE / REPARTIDOR
         // ============================================
         window.toggleDriverGps = function() {
             let btn = qs('btn-gps');
@@ -2730,17 +2705,15 @@
             isGpsActive = !isGpsActive;
             
             if(isGpsActive) {
-                btn.style.background = 'var(--success)';
-                btn.style.borderColor = 'var(--success)';
-                btn.style.color = 'white';
+                btn.classList.add('active-gps'); // Activa el CSS parpadeante verde que pusimos en el Bloque 1
                 btn.innerText = "📍 GPS ACTIVO";
                 showToast(`GPS Conectado para ${selectMoto.value}...`, "success");
                 
                 enviarUbicacionGPS(); 
+                if(gpsInterval) clearInterval(gpsInterval);
                 gpsInterval = setInterval(enviarUbicacionGPS, 10000); 
             } else {
-                btn.style.background = 'var(--text-dark)';
-                btn.style.borderColor = 'var(--text-dark)';
+                btn.classList.remove('active-gps'); // Apaga el estilo verde
                 btn.innerText = "📍 GPS DELI";
                 if(gpsInterval) clearInterval(gpsInterval);
                 showToast("GPS Apagado", "info");
@@ -2755,6 +2728,7 @@
                 let lon = pos.coords.longitude;
                 let coordsStr = JSON.stringify({lat, lon});
                 
+                // Actualiza en la base de datos la ubicación para esa moto
                 await _supabase.from('pediloya_logs').delete().eq('local_id', currentLocalId).eq('tipo', 'GPS_DELI').eq('moto_asignada', miNombreMoto);
                 
                 await _supabase.from('pediloya_logs').insert([{
@@ -2768,20 +2742,9 @@
                     moto_asignada: miNombreMoto
                 }]);
             }, (err) => {
-                console.log("Error GPS", err);
-                showToast("⚠️ Error de GPS. Activá la ubicación en tu celular.", "error");
-                
-                if(isGpsActive) {
-                    isGpsActive = false;
-                    if(gpsInterval) clearInterval(gpsInterval);
-                    let btn = qs('btn-gps');
-                    if(btn) {
-                        btn.style.background = 'var(--text-dark)';
-                        btn.style.borderColor = 'var(--text-dark)';
-                        btn.innerText = "📍 GPS DELI";
-                    }
-                }
-            }, { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }); 
+                console.log("Error temporal de señal GPS: ", err);
+                // Si hay un error de conexión no apagamos el botón, simplemente esperamos al próximo ciclo
+            }, { enableHighAccuracy: true, timeout: 8000, maximumAge: 0 }); 
         };
         
         function abrirRadarDueno() { if(qs('modal-radar-owner')) qs('modal-radar-owner').style.display='flex'; actualizarRadarMap(); setTimeout(actualizarRadarMap, 500); }
@@ -2975,5 +2938,3 @@
         };
 
     </script>
-</body>
-</html>
