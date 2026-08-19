@@ -188,7 +188,7 @@
         .promo-img-box img { width: 100%; height: 100%; object-fit: cover; }
         .promo-info { position: relative; width: 100%; background: var(--bg-pure); padding: 20px 24px; z-index: 2; text-align: left; border-top: 1px solid var(--border-soft);}
         .promo-badge { display: inline-block; background: var(--gradient-orange); color: white; padding: 8px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(255,94,0,0.3);}
-        .promo-title { font-family: 'Outfit'; font-size: 1.8rem; font-weight: 900; color: var(--text-dark); margin: 0; letter-spacing: -0.5px; line-height: 1.1; word-wrap: break-word;}
+        .promo-title { font-family: 'Outfit'; font-size: 2.2rem; font-weight: 900; background: var(--gradient-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; letter-spacing: -1px; line-height: 1.1; word-wrap: break-word; text-shadow: 0 5px 15px rgba(255,94,0,0.15);}
 
         .customer-container { max-width: 500px; margin: 0 auto; width: 100%; position: relative;}
         
@@ -204,7 +204,7 @@
         .client-search { width: 100%; padding: 20px 24px 20px 60px; background: var(--bg-pure) url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3ccircle cx='11' cy='11' r='8'%3e%3c/circle%3e%3cline x1='21' y1='21' x2='16.65' y2='16.65'%3e%3c/line%3e%3c/svg%3e") no-repeat 24px center; background-size: 22px; border: 2px solid transparent; border-radius: 50px; font-size: 1rem; font-weight:500; outline:none; transition:0.3s; box-shadow: 0 10px 30px rgba(0,0,0,0.05);}
         .client-search:focus { border-color: var(--primary-orange); box-shadow: 0 15px 35px rgba(255,94,0,0.1); }
 
-        .category-title { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.8rem; margin: 0 0 24px; color: var(--text-dark); padding: 0 24px; letter-spacing: -0.5px;}
+        .category-title { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 2.2rem; margin: 0 0 24px; color: var(--text-dark); padding: 0 24px; letter-spacing: -1px; text-transform: uppercase;}
         
         .cat-scroll { display: flex; overflow-x: auto; gap: 12px; padding: 0 24px 20px; scrollbar-width: none; scroll-snap-type: x mandatory;}
         .cat-scroll::-webkit-scrollbar { display: none; }
@@ -219,10 +219,10 @@
         .food-img-large img, .food-img-large video { width: 100%; height: 100%; object-fit: cover; position: absolute; inset:0; }
         
         .food-info-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 40%, transparent 100%); padding: 120px 24px 24px; display: flex; justify-content: space-between; align-items: flex-end; color: white; pointer-events: none;}
-        .food-title-large { font-size: 1.4rem; font-weight: 700; color: white; margin-bottom: 6px; font-family: 'Outfit'; line-height: 1.2; letter-spacing: 0px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;}
+        .food-title-large { font-size: 1.6rem; font-weight: 800; color: white; margin-bottom: 6px; font-family: 'Outfit'; line-height: 1.1; letter-spacing: -0.5px; text-shadow: 0 4px 15px rgba(0,0,0,0.9); overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;}
         .food-desc-large { font-size: 0.95rem; color: rgba(255,255,255,0.85); margin-bottom: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4; font-weight: 400; text-shadow: 0 2px 8px rgba(0,0,0,0.8);}
         
-        .food-price-large { font-size: 1.4rem; font-weight: 800; color: var(--primary-orange); font-family: 'Outfit'; letter-spacing: -0.5px; margin-bottom: 0; margin-top: 8px; text-shadow: 0 2px 10px rgba(0,0,0,0.6); text-align: left;}
+        .food-price-large { font-size: 1.8rem; font-weight: 900; color: var(--primary-orange); font-family: 'Outfit'; letter-spacing: -1px; margin-bottom: 0; margin-top: 8px; text-shadow: 0 4px 15px rgba(0,0,0,0.9); text-align: left; background: var(--gradient-orange); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
         
         .add-btn-float { pointer-events: all; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 500; font-size: 1.8rem; box-shadow: 0 8px 20px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.3); line-height: 1; padding-bottom: 2px; margin-left: auto; transition:0.2s;}
         .add-btn-float:active { transform: scale(0.9); background: white; color: black; }
@@ -512,7 +512,7 @@
             </div>
             
             <!-- BOTÓN ENERGY (AHORA DENTRO DEL LANDING, NO FLOTA EN LA CAJA) -->
-            <a href="https://wa.me/5493813339146?text=Hola,%20quiero%20mi%20app%20con%20dominio%20propio%20con%20la%20empresa%20Energy" target="_blank" style="position:absolute; bottom:20px; left:50%; transform:translateX(-50%); background:#25D366; color:white; padding:14px 24px; border-radius:50px; font-weight:800; text-decoration:none; box-shadow:0 4px 15px rgba(37,211,102,0.4); z-index:99; font-family:'Outfit', sans-serif; white-space:nowrap; font-size:1rem; text-align:center;">🚀 Adquiere tu App Propia con Energy</a>
+            <a href="https://wa.me/5493816092676?text=Hola,%20quiero%20mi%20app%20con%20dominio%20propio%20con%20la%20empresa%20Energy" target="_blank" style="position:absolute; bottom:20px; left:50%; transform:translateX(-50%); background:#25D366; color:white; padding:14px 24px; border-radius:50px; font-weight:800; text-decoration:none; box-shadow:0 4px 15px rgba(37,211,102,0.4); z-index:99; font-family:'Outfit', sans-serif; white-space:nowrap; font-size:1rem; text-align:center;">🚀 Adquiere tu App Propia con Energy</a>
             
         </div>
     </div>
@@ -1004,8 +1004,7 @@
     <div class="modal" id="pedidos-web-modal"><div class="modal-content" style="width:100%; max-width:500px; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background: var(--bg-app); border:none;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;"><h3 style="margin:0; font-size:1.8rem; font-weight:800; font-family:'Outfit'; color:var(--primary-orange); letter-spacing:-0.5px;">Pedidos Web</h3><button style="background:rgba(255,94,0,0.1); border:none; font-size:1.1rem; color:var(--primary-orange); cursor:pointer; width:35px; height:35px; border-radius:50%;" onclick="document.getElementById('pedidos-web-modal').style.display='none'">✕</button></div><div id="pedidos-web-list" style="flex:1; overflow-y:auto; text-align:left; display:flex; flex-direction:column; gap:16px; padding-bottom:40px;"></div></div></div>
     <div class="modal" id="ventas-modal"><div class="modal-content" style="width:100%; max-width:500px; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background: var(--bg-app); border:none;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;"><h3 style="margin:0; font-size:1.8rem; font-weight:800; font-family:'Outfit'; color:var(--success);">Ventas Diarias</h3><button style="background:rgba(16,185,129,0.1); border:none; font-size:1.1rem; color:var(--success); cursor:pointer; width:35px; height:35px; border-radius:50%;" onclick="document.getElementById('ventas-modal').style.display='none'">✕</button></div><div id="chofer-logs-modal-container" style="flex:1; overflow-y:auto; text-align:left; padding-bottom:40px;"></div></div></div>
     
-    <!-- SCRIPT PRINCIPAL -->
-    <script>
+        <script>
         const qs = (id) => document.getElementById(id);
         const setText = (id, txt) => { if(qs(id)) qs(id).innerText = txt; }
         const setHtml = (id, html) => { if(qs(id)) qs(id).innerHTML = html; }
@@ -1052,15 +1051,14 @@
             const localParam = urlParams.get('local');
             const trackParam = urlParams.get('track');
             
-            // INYECCIÓN: Botón Energy para el Landing Page
+            // INYECCIÓN: Botón Energy para el Landing Page (NÚMERO ACTUALIZADO)
             if (!localParam && !trackParam) {
                 let btnEnergy = document.createElement('a');
-                btnEnergy.href = 'https://wa.me/5493813339146?text=Hola,%20quiero%20mi%20app%20con%20dominio%20propio%20con%20la%20empresa%20Energy';
+                btnEnergy.href = 'https://wa.me/5493816092676?text=Hola,%20quiero%20mi%20app%20con%20dominio%20propio%20con%20la%20empresa%20Energy';
                 btnEnergy.target = '_blank';
                 btnEnergy.innerHTML = '🚀 Adquiere tu App Propia con Energy';
                 btnEnergy.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#25D366; color:white; padding:14px 24px; border-radius:50px; font-weight:800; text-decoration:none; box-shadow:0 4px 15px rgba(37,211,102,0.4); z-index:9999; font-family:"Outfit", sans-serif; white-space:nowrap; font-size:1rem; text-align:center; transition: all 0.3s ease;';
                 
-                // Asegurarnos de que SOLO se inyecte en el view-login
                 let loginView = document.getElementById('view-login');
                 if(loginView) {
                     loginView.appendChild(btnEnergy);
@@ -1424,17 +1422,18 @@
         }
 
         // ==============================================================
-        // MÓDULO FIX: TRANSFERENCIA CON TRK DE MOTO AUTOMÁTICO
+        // LÓGICA GPS ACTUALIZADA: TRANSFERENCIA
         // ==============================================================
         async function emitPendingTransferHTTP(urlRecibo) {
             if(!pendingTransferData) return;
             let val = pendingTransferData.amount;
             
             let motoSelected = qs('chofer-moto-select') ? qs('chofer-moto-select').value : null;
-            let orderId = motoSelected ? 'TRK' + Date.now().toString().slice(-5) : '';
+            // Genera el código incluyendo el nombre de la moto para sincronización directa
+            let orderId = motoSelected ? 'TRK-' + motoSelected.replace(/\s+/g, '').toUpperCase() + '-' + Date.now().toString().slice(-3) : '';
 
             let desc = selProd ? `Venta: ${selProd.nombre}` : 'Venta de Mostrador'; 
-            if(orderId) desc += ` [${orderId}]`; // Código de GPS incrustado
+            if(orderId) desc += ` [${orderId}]`; 
 
             let qtyToDeduct = selProd ? Math.max(1, Math.floor(val / selProd.precio)) : 0;
             
@@ -1466,7 +1465,8 @@
             pendingTransferData = null;
             
             if(motoSelected && orderId) {
-                showToast(`Venta asignada a ${motoSelected}. TRK generado.`);
+                // Alerta clara para que sepas qué código darle al repartidor/cliente
+                alert(`✅ VENTA ASIGNADA A: ${motoSelected}\n📍 CÓDIGO GPS: ${orderId}\n\nEl sistema ya enlazó este código con el GPS de ${motoSelected}.`);
                 setTimeout(() => compartirTRKWhatsApp(orderId), 800);
             } else {
                 showToast("Venta registrada con foto.");
@@ -2121,8 +2121,8 @@
                 if(l.tipo === 'PEDIDO_WEB') {
                     pedidosWebNuevos++;
                     
-                    let trkMatch = l.descripcion.match(/TRK\d+/);
-                    let trkCode = trkMatch ? trkMatch[0] : '';
+                    let trkMatch = l.descripcion.match(/TRK-\w+-\d+/);
+                    let trkCode = trkMatch ? trkMatch[0] : (l.descripcion.match(/TRK\d+/) ? l.descripcion.match(/TRK\d+/)[0] : '');
                     
                     let actionsHtml = '';
                     if(trkCode) {
@@ -2371,6 +2371,9 @@
             }
         });
 
+        // ==============================================================
+        // FIX LÓGICA DE VIDEO EN QUICK VIEW (CARRITO)
+        // ==============================================================
         function openQuickView(code) {
             let item = menuItems.find(i => i.codigo === code); if(!item) return;
             currentQvItem = item; currentQvQty = 1;
@@ -2382,14 +2385,9 @@
             let { img, vid, hasVideo, hasImg } = parseUrlsSeguro(item.foto_url);
             let mediaHtml = '';
 
-            if(hasVideo && hasImg) {
-                mediaHtml = `
-                <video src="${vid}" autoplay muted loop playsinline style="width:100%; height: 60vh; object-fit: cover; display: block;"></video>
-                <div style="background: #0f172a; padding: 14px; text-align:center;"><p style="color:#e2e8f0; font-size:0.85rem; margin:0; font-weight:800; text-transform:uppercase; letter-spacing:1px;">👇 Deslizá para ver foto 👇</p></div>
-                <img src="${img}" style="width:100%; height: 60vh; object-fit: cover; display: block;">
-                `;
-            } else if (hasVideo) {
-                mediaHtml = `<video src="${vid}" autoplay muted loop playsinline style="width:100%; height: 60vh; object-fit: cover; display: block;"></video>`;
+            // Acá ya no dividimos en dos, si tiene video se muestra reproduciéndose impecable.
+            if (hasVideo) {
+                mediaHtml = `<video src="${vid}" poster="${img}" autoplay muted loop playsinline style="width:100%; height: 60vh; object-fit: cover; display: block;"></video>`;
             } else if (hasImg) {
                 mediaHtml = `<img src="${img}" style="width:100%; height: 60vh; object-fit: cover; display: block;">`;
             } else {
@@ -2515,6 +2513,7 @@
             }
             let totalFinal = Math.max(0, totalBruto - descuento);
 
+            // Generamos el TRK
             let orderId = 'TRK' + Date.now().toString().slice(-5);
             let dirFinal = isDeliveryOption ? dir : "RETIRO EN LOCAL";
             let cuponInfo = cupoAplicado ? `\n🎟️ Cupón: [${cupoAplicado.codigo}] (-$${descuento.toLocaleString('es-AR')})` : '';
@@ -2599,53 +2598,6 @@
             }
         }
         
-        // ==============================================================
-        // MÓDULO FIX: VENTA EN EFECTIVO CON TRK DE MOTO AUTOMÁTICO
-        // ==============================================================
-        window.submitSale = async function(metodo) {
-            let val = getCalcValue(); 
-            if(val <= 0) { showToast("Ingresá un monto mayor a 0", "error"); return; }
-            
-            let motoSelected = qs('chofer-moto-select') ? qs('chofer-moto-select').value : null;
-            let orderId = motoSelected ? 'TRK' + Date.now().toString().slice(-5) : '';
-
-            let desc = selProd ? `Venta: ${selProd.nombre}` : 'Venta de Mostrador'; 
-            if(orderId) desc += ` [${orderId}]`; // Código de GPS incrustado
-
-            let qtyToDeduct = selProd ? Math.max(1, Math.floor(val / selProd.precio)) : 0;
-            
-            mostrarTicketAnimado();
-
-            await _supabase.from('pediloya_logs').insert([{ 
-                local_id: currentLocalId, 
-                tipo: 'VENTA', 
-                metodo: metodo, 
-                monto: val, 
-                fecha: getTucumanDateFE(), 
-                hora: getTucumanTimeFE(), 
-                descripcion: desc,
-                moto_asignada: motoSelected
-            }]); 
-            
-            if(selProd && qtyToDeduct > 0) {
-                let item = dbState.inventory.find(i => i.codigo === selProd.codigo);
-                if(item) {
-                    let newStock = Math.max(0, item.stock - qtyToDeduct);
-                    await _supabase.from('pediloya_inventario').update({ stock: newStock }).eq('codigo', selProd.codigo);
-                }
-            }
-            
-            await loadDataFromDB(); 
-            clearCalc();
-            
-            if(motoSelected && orderId) {
-                showToast(`Venta asignada a ${motoSelected}. TRK generado.`);
-                setTimeout(() => compartirTRKWhatsApp(orderId), 800);
-            } else {
-                showToast("Venta registrada.");
-            }
-        }
-        
         window.triggerExpenseModal = function() {
             let val = getCalcValue();
             if(val <= 0) { showToast("Escribí el monto del gasto en la caja primero.", "error"); return; }
@@ -2691,9 +2643,6 @@
             window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
         };
 
-        // ==============================================================
-        // MÓDULO FIX: GPS CHOFER GUARDA SU NOMBRE EN BASE DE DATOS
-        // ==============================================================
         window.toggleDriverGps = function() {
             let btn = qs('btn-gps');
             let selectMoto = qs('chofer-moto-select');
@@ -2848,9 +2797,6 @@
             iniciarRastreoCliente(code, targetLocalName || (qs('public-store-name') ? qs('public-store-name').innerText : ''));
         };
 
-        // ==============================================================
-        // MÓDULO FIX: CLIENTE RASTREA EXACTAMENTE A LA MOTO ASIGNADA
-        // ==============================================================
         window.iniciarRastreoCliente = async function(trackCode, localName) {
             if(!trackCode || !localName) return;
             
@@ -2874,7 +2820,6 @@
                 setText('track-detail-text', `Conectando al sistema...`);
             }
 
-            // PASO 1: Saber a qué moto se le asignó ESTE código TRK
             let { data: pedidos } = await _supabase.from('pediloya_logs')
                 .select('*')
                 .eq('local_id', targetLocalId)
@@ -2893,14 +2838,13 @@
                 return;
             }
 
-            // PASO 2: Buscar el GPS de ESA MOTO exclusivamente
             setText('track-status-text', `Buscando a ${motoDelPedido}...`);
 
             let { data: gpsData } = await _supabase.from('pediloya_logs')
                 .select('descripcion, hora')
                 .eq('local_id', targetLocalId)
                 .eq('tipo', 'GPS_DELI')
-                .eq('moto_asignada', motoDelPedido) // Filtro exacto por la moto
+                .eq('moto_asignada', motoDelPedido) 
                 .order('created_at', { ascending: false })
                 .limit(1)
                 .maybeSingle();
@@ -2927,7 +2871,6 @@
                 _supabase.removeChannel(gpsSubscription);
             }
 
-            // PASO 3: Escuchar EN VIVO solo el GPS de ESA MOTO
             gpsSubscription = _supabase.channel('public:pediloya_logs:gps_cliente')
                 .on('postgres_changes', { 
                     event: 'INSERT', 
@@ -2949,3 +2892,4 @@
     </script>
 </body>
 </html>
+
