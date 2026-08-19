@@ -899,7 +899,7 @@
     <!-- PANTALLA ÉXITO COMPRA -->
     <div id="order-success-overlay" class="hidden" style="position:fixed; inset:0; background:var(--gradient-orange); color:white; z-index:9999999; display:none; flex-direction:column; align-items:center; justify-content:center; padding:24px;">
         <div style="font-size: 5rem; margin-bottom: 24px; animation: pulse-deli 1s infinite;">🛵</div>
-        <h2 style="font-family:'Outfit'; font-size:2.8rem; font-weight:900; margin:0; text-align:center; letter-spacing:-1px; line-height:1.1;">¡Pedido<br>Confirmado!</h2>
+        <h2 style="font-family:'Outfit'; font-size:2.8rem; font-weight:900; margin:0; text-align:center; letter-spacing:-1px; line-height:1.1;">¡Pedido<br>Realizado!</h2>
         <p style="font-size:1.1rem; font-weight:500; margin-top:16px; opacity:0.9;">Conectando con el repartidor...</p>
     </div>
 
@@ -992,9 +992,28 @@
         // PARCHE QUIRÚRGICO: Recuperar conexión al desbloquear el celular
         document.addEventListener("visibilitychange", () => {
             if (document.visibilityState === "visible" && typeof currentLocalId !== 'undefined' && currentLocalId) {
-                loadDataFromDB(); // Recupera pedidos perdidos mientras la pantalla estuvo apagada
+                loadDataFromDB(); // Recupera pedidos perdidos
+                setupRealtimePedidos(); // Reconecta el socket por si se durmió
             }
         });
+
+        function setupRealtimePedidos() {
+            if(window.pedidosChannel) {
+                _supabase.removeChannel(window.pedidosChannel);
+            }
+            window.pedidosChannel = _supabase.channel('pedidos-nuevos-' + currentLocalId)
+                .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'pediloya_logs', filter: `local_id=eq.${currentLocalId}` }, payload => {
+                    if(payload.new.tipo === 'PEDIDO_WEB') {
+                        if (!dbState.logs.some(l => l.id === payload.new.id)) {
+                            dbState.logs.unshift(payload.new);
+                            unseenOrdersAlert = true;
+                            showToast("¡NUEVO PEDIDO RECIBIDO!", "orange");
+                            vibrar([300, 100, 300, 100, 500]); 
+                            renderAllData();
+                        }
+                    }
+                }).subscribe();
+        }
 
         const qs = (id) => document.getElementById(id);
         const setText = (id, txt) => { if(qs(id)) qs(id).innerText = txt; }
@@ -1268,19 +1287,7 @@
                 if(qs('btn-log')) qs('btn-log').disabled = false; setText('btn-log', "Abrir Caja");
                 go('view-chofer'); showToast("¡Bienvenido!");
 
-                // WEBSOCKETS EN TIEMPO REAL
-                _supabase.channel('pedidos-nuevos')
-                    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'pediloya_logs', filter: `local_id=eq.${currentLocalId}` }, payload => {
-                        if(payload.new.tipo === 'PEDIDO_WEB') {
-                            if (!dbState.logs.some(l => l.id === payload.new.id)) {
-                                dbState.logs.unshift(payload.new);
-                                unseenOrdersAlert = true;
-                                showToast("¡NUEVO PEDIDO RECIBIDO!", "orange");
-                                vibrar([300, 100, 300, 100, 500]); 
-                                renderAllData();
-                            }
-                        }
-                    }).subscribe();
+                setupRealtimePedidos(); // Se activa el Realtime
 
             } catch (err) { alert("Fallo Interno: " + err.message); if(qs('btn-log')) qs('btn-log').disabled = false; setText('btn-log', "Abrir Caja"); }
         }
@@ -2163,8 +2170,9 @@
                         </div>`;
                     }
 
+                    // CORRECCIÓN FLEX-SHRINK: Agregamos flex-shrink:0 para que no se aplasten
                     webLogsHtml += `
-                    <div style="background:var(--bg-pure); padding:20px; border-radius:var(--radius-lg); border:1px solid rgba(255,94,0,0.2); margin-bottom:20px; box-shadow:var(--shadow-orange); position:relative; overflow:hidden;">
+                    <div style="background:var(--bg-pure); padding:20px; border-radius:var(--radius-lg); border:1px solid rgba(255,94,0,0.2); margin-bottom:20px; box-shadow:var(--shadow-orange); position:relative; overflow:hidden; flex-shrink: 0;">
                         <span style="position:absolute; top:0; left:0; width:100%; background:var(--primary-orange); color:#fff; padding:6px 0; font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:1px; text-align:center;">NUEVO PEDIDO</span>
                         
                         <button onclick="vibrar([40]); eliminarPedidoWeb('${l.id}')" style="position:absolute; top:28px; right:12px; background:#fef2f2; color:var(--danger); border:none; border-radius:50%; width:36px; height:36px; font-size:1.2rem; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:10; box-shadow: 0 4px 10px rgba(239,68,68,0.2);">🗑️</button>
@@ -2551,9 +2559,10 @@
             let orderId = 'TRK' + Date.now().toString().slice(-5);
             let dirFinal = isDeliveryOption ? dir : "RETIRO EN LOCAL";
             let cuponInfo = cupoAplicado ? `\n🎟️ Cupón: [${cupoAplicado.codigo}] (-$${descuento.toLocaleString('es-AR')})` : '';
-            let desc = `NUEVO PEDIDO [${orderId}]\nDir: ${dirFinal}${cuponInfo}\nNotas: ${notes}\nDetalle:\n`; 
             
             let itemsCount = {}; shoppingCart.forEach(i => { itemsCount[i.nombre] = (itemsCount[i.nombre]||0)+1; });
+            
+            let desc = `NUEVO PEDIDO [${orderId}]\nDir: ${dirFinal}${cuponInfo}\nNotas: ${notes}\nDetalle:\n`; 
             for (let [nombre, qty] of Object.entries(itemsCount)) { desc += `- ${qty}x ${nombre}\n`; } 
             
             for (let [nombre, qty] of Object.entries(itemsCount)) {
@@ -2570,30 +2579,44 @@
             if(qs('cart-coupon-input')) qs('cart-coupon-input').value = '';
             updateCartUI();
             
-            let num = targetLocalPhone ? String(targetLocalPhone).replace(/\D/g, '') : '';
-            if(num.length === 10) num = '549' + num;
-            if(num) {
+            let numLimpio = targetLocalPhone ? String(targetLocalPhone).replace(/\D/g, '') : '';
+            if(numLimpio.length === 10) numLimpio = '549' + numLimpio;
+            
+            let msgWa = '';
+            if(numLimpio) {
                 let trackLink = `${window.location.origin}/?track=${orderId}&local=${encodeURIComponent(targetLocalName)}`;
-                let msgWa = `*¡NUEVO PEDIDO WEB!* 🛵\n\n*Total:* $${totalFinal.toLocaleString('es-AR')}${cupoUsado ? ` _(Cupón ${cupoUsado} aplicado)_` : ''}\n*Pago:* ${metodo}\n*Dirección:* ${dirFinal}\n\n*Detalle:*\n`; 
+                msgWa = `*¡NUEVO PEDIDO WEB!* 🛵\n\n*Total:* $${totalFinal.toLocaleString('es-AR')}${cupoUsado ? ` _(Cupón ${cupoUsado} aplicado)_` : ''}\n*Pago:* ${metodo}\n*Dirección:* ${dirFinal}\n\n*Detalle:*\n`; 
                 for (let [nombre, qty] of Object.entries(itemsCount)) { msgWa += `- ${qty}x ${nombre}\n`; } 
                 msgWa += `\n*Aclaraciones:* ${notes}\n\n*Link Rastreo:* ${trackLink}`; 
-                window.open(`https://wa.me/${num}?text=${encodeURIComponent(msgWa)}`, '_blank');
             }
 
             let overlay = qs('order-success-overlay');
             if(overlay) {
                 overlay.classList.remove('hidden');
                 overlay.style.display = 'flex';
+                // CORRECCIÓN: Modificamos el texto para que diga Pedido Realizado
+                let h2Title = overlay.querySelector('h2');
+                if(h2Title) h2Title.innerHTML = '¡Pedido<br>Realizado!';
+                
                 setTimeout(() => {
+                    overlay.style.display = 'none'; 
+                    overlay.classList.add('hidden');
                     switchCustomerTab('track', document.querySelectorAll('.nav-item')[1]); 
                     if(qs('track-input-code')) qs('track-input-code').value = orderId; 
                     iniciarRastreoClienteManual();
-                    overlay.style.display = 'none'; overlay.classList.add('hidden');
+                    
+                    // CORRECCIÓN: Mandar a WhatsApp RECIÉN AHORA, para que el cartel se vea los 2.5 seg
+                    if(numLimpio) {
+                        window.open(`https://wa.me/${numLimpio}?text=${encodeURIComponent(msgWa)}`, '_blank');
+                    }
                 }, 2500); 
             } else {
                 switchCustomerTab('track', document.querySelectorAll('.nav-item')[1]); 
                 if(qs('track-input-code')) qs('track-input-code').value = orderId; 
                 iniciarRastreoClienteManual();
+                if(numLimpio) {
+                    window.open(`https://wa.me/${numLimpio}?text=${encodeURIComponent(msgWa)}`, '_blank');
+                }
             }
         }
 
