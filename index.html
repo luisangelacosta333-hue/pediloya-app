@@ -2747,68 +2747,58 @@
                 showToast("GPS Apagado", "info");
                 currentGpsMoto = null;
             } else {
-                let html = '';
-                dbState.repartidores.forEach(m => {
-                    html += `<button class="chofer-btn-white" style="width:100%; margin-bottom:10px; padding:16px; font-size:1.1rem; box-shadow:none; border:2px solid var(--border-soft);" onclick="activarGpsParaMoto('${m.nombre}')">🛵 Transmitir como ${m.nombre}</button>`;
-                });
-                setHtml('motos-gps-list', html || '<p style="color:var(--text-gray); font-weight:500;">No hay motos cargadas. Agregalas desde el panel de Dueño.</p>');
-                if(qs('modal-select-moto-gps')) qs('modal-select-moto-gps').style.display = 'flex';
+                if (!navigator.geolocation) {
+                    alert("Tu dispositivo no soporta GPS.");
+                    return;
+                }
+
+                showToast("Solicitando permiso de GPS...", "info");
+                
+                navigator.geolocation.getCurrentPosition(
+                    function(pos) {
+                        let html = '';
+                        dbState.repartidores.forEach(m => {
+                            html += `<button class="chofer-btn-white" style="width:100%; margin-bottom:10px; padding:16px; font-size:1.1rem; box-shadow:none; border:2px solid var(--border-soft);" onclick="activarGpsParaMoto('${m.nombre}')">🛵 Transmitir como ${m.nombre}</button>`;
+                        });
+                        setHtml('motos-gps-list', html || '<p style="color:var(--text-gray); font-weight:500;">No hay motos cargadas. Agregalas desde el panel de Dueño.</p>');
+                        if(qs('modal-select-moto-gps')) qs('modal-select-moto-gps').style.display = 'flex';
+                    },
+                    function(err) {
+                        alert("⚠️ No se pudo acceder al GPS. Asegurate de tocar 'Permitir' cuando el navegador te pregunte o revisá el candadito de la barra de direcciones.");
+                    },
+                    { enableHighAccuracy: true } 
+                );
             }
         };
 
         // ============================================
-        // RESTAURACIÓN DE LA FUNCIÓN ORIGINAL QUE FUNCIONABA PERFECTO
+        // ACTIVAR LA TRANSMISIÓN (EL PERMISO YA FUE DADO)
         // ============================================
         window.activarGpsParaMoto = function(nombre) {
-            // SE PIDE EL PERMISO PRIMERO INMEDIATAMENTE AL TOCAR EL BOTÓN
-            if (!navigator.geolocation) {
-                alert("Tu dispositivo no soporta GPS.");
-                return;
-            }
-            
             if(qs('modal-select-moto-gps')) qs('modal-select-moto-gps').style.display = 'none';
 
-            navigator.geolocation.getCurrentPosition(
-                function(pos) {
-                    // SI ACEPTAN EL CARTEL DE GOOGLE, RECIÉN AHÍ CONECTA
-                    currentGpsMoto = nombre;
-                    isGpsActive = true;
-                    
-                    let btn = qs('btn-gps');
-                    if(btn) {
-                        btn.style.background = 'var(--success)';
-                        btn.style.borderColor = 'var(--success)';
-                        btn.style.color = 'white';
-                        btn.innerText = `📍 GPS: ${nombre}`;
-                    }
-                    showToast(`Conectado. Transmitiendo como ${nombre}...`, "success");
-                    
-                    if(gpsChannel) _supabase.removeChannel(gpsChannel);
-                    gpsChannel = _supabase.channel('gps-local-' + currentLocalId);
-                    
-                    gpsChannel.subscribe(async (status) => {
-                        if (status === 'SUBSCRIBED') {
-                            gpsChannel.send({
-                                type: 'broadcast',
-                                event: 'location_update',
-                                payload: {
-                                    lat: pos.coords.latitude,
-                                    lon: pos.coords.longitude,
-                                    moto_nombre: nombre,
-                                    hora: getTucumanTimeFE()
-                                }
-                            });
-                            
-                            if(gpsInterval) clearInterval(gpsInterval);
-                            gpsInterval = setInterval(enviarUbicacionGPS, 15000);
-                        }
-                    });
-                },
-                function(err) {
-                    alert("⚠️ No se pudo acceder al GPS. Asegurate de tocar 'Permitir' cuando el navegador te pregunte o revisá el candadito de la barra de direcciones.");
-                },
-                { enableHighAccuracy: true } 
-            );
+            currentGpsMoto = nombre;
+            isGpsActive = true;
+            
+            let btn = qs('btn-gps');
+            if(btn) {
+                btn.style.background = 'var(--success)';
+                btn.style.borderColor = 'var(--success)';
+                btn.style.color = 'white';
+                btn.innerText = `📍 GPS: ${nombre}`;
+            }
+            showToast(`Conectado. Transmitiendo como ${nombre}...`, "success");
+            
+            if(gpsChannel) _supabase.removeChannel(gpsChannel);
+            gpsChannel = _supabase.channel('gps-local-' + currentLocalId);
+            
+            gpsChannel.subscribe(async (status) => {
+                if (status === 'SUBSCRIBED') {
+                    enviarUbicacionGPS(); 
+                    if(gpsInterval) clearInterval(gpsInterval);
+                    gpsInterval = setInterval(enviarUbicacionGPS, 15000);
+                }
+            });
         };
 
         window.enviarUbicacionGPS = async function() {
