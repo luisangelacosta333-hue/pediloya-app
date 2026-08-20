@@ -2762,7 +2762,28 @@
             }
         };
 
+        // ============================================
+        // CORRECCIÓN: PIDE PERMISO INMEDIATAMENTE PARA FORZAR EL NAVEGADOR
+        // ============================================
         window.activarGpsParaMoto = function(nombre) {
+            if(!navigator.geolocation) return alert("GPS no soportado en este dispositivo.");
+
+            navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                    iniciarTransmisionReal(nombre, pos);
+                },
+                (err) => {
+                    if (err.code === 1) {
+                        alert("⚠️ Permiso denegado. Tocá el candadito en la barra de direcciones de Chrome, andá a 'Permisos' y permití la Ubicación.");
+                    } else {
+                        iniciarTransmisionReal(nombre, null);
+                    }
+                },
+                { enableHighAccuracy: false, timeout: 5000 } 
+            );
+        };
+
+        function iniciarTransmisionReal(nombre, posInicial) {
             currentGpsMoto = nombre;
             isGpsActive = true;
             if(qs('modal-select-moto-gps')) qs('modal-select-moto-gps').style.display = 'none';
@@ -2782,52 +2803,43 @@
             gpsChannel.subscribe(async (status) => {
                 if (status === 'SUBSCRIBED') {
                     showToast(`Transmitiendo GPS como ${nombre}`, "success");
-                    if(navigator.geolocation) {
-                        enviarUbicacionGPS();
-                        gpsInterval = setInterval(enviarUbicacionGPS, 15000);
-                    } else {
-                        alert("GPS no soportado en este dispositivo.");
+                    
+                    if (posInicial) {
+                        enviarPosicionPayload(posInicial);
                     }
-                }
-            });
-        };
-
-        // ============================================
-        // GPS INTELIGENTE: NO SPAMEA ERRORES SI TARDA
-        // ============================================
-        window.enviarUbicacionGPS = async function() {
-            if(!currentGpsMoto || !gpsChannel) return;
-            navigator.geolocation.getCurrentPosition(async (pos) => {
-                let payload = {
-                    lat: pos.coords.latitude,
-                    lon: pos.coords.longitude,
-                    moto_nombre: currentGpsMoto,
-                    hora: getTucumanTimeFE()
-                };
-                
-                gpsChannel.send({
-                    type: 'broadcast',
-                    event: 'location_update',
-                    payload: payload
-                });
-            }, (err) => {
-                console.log("Error GPS", err.code, err.message);
-                if (err.code === 1) { // 1 = PERMISO DENEGADO
-                    showToast("⚠️ Permiso de GPS denegado por el navegador.", "error");
-                    vibrar([200, 200, 200]);
                     
                     if(gpsInterval) clearInterval(gpsInterval);
-                    if(gpsChannel) { _supabase.removeChannel(gpsChannel); gpsChannel = null; }
-                    isGpsActive = false;
-                    let btn = qs('btn-gps');
-                    if(btn) { btn.style.background = 'var(--text-dark)'; btn.style.borderColor = 'var(--text-dark)'; btn.style.color = 'white'; btn.innerText = "📍 GPS DELI"; }
-                    currentGpsMoto = null;
-                } else if (err.code === 3) { // 3 = TIMEOUT (Tarda en encontrar señal)
-                    console.log("Buscando señal GPS fuerte..."); // Silencioso
-                } else { // 2 = POSITION UNAVAILABLE (Problema de red o ubicación)
-                    console.log("Señal GPS inestable temporalmente."); // Silencioso
+                    enviarUbicacionGPS();
+                    gpsInterval = setInterval(enviarUbicacionGPS, 15000);
                 }
-            }, { enableHighAccuracy: true, timeout: 14000, maximumAge: 10000 });
+            });
+        }
+
+        function enviarPosicionPayload(pos) {
+            if(!currentGpsMoto || !gpsChannel) return;
+            let payload = {
+                lat: pos.coords.latitude,
+                lon: pos.coords.longitude,
+                moto_nombre: currentGpsMoto,
+                hora: getTucumanTimeFE()
+            };
+            gpsChannel.send({
+                type: 'broadcast',
+                event: 'location_update',
+                payload: payload
+            });
+        }
+
+        // GPS: Totalmente silencioso en segundo plano. Si falla no molesta.
+        window.enviarUbicacionGPS = async function() {
+            if(!currentGpsMoto || !gpsChannel) return;
+            navigator.geolocation.getCurrentPosition(
+                enviarPosicionPayload, 
+                (err) => {
+                    console.log("Buscando satélite (reintento silencioso)...");
+                }, 
+                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+            );
         };
         
         function abrirRadarDueno() { 
