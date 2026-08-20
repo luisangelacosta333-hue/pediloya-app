@@ -1002,6 +1002,23 @@
     <div class="modal" id="pedidos-web-modal"><div class="modal-content" style="width:100%; max-width:500px; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background: var(--bg-app); border:none;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;"><h3 style="margin:0; font-size:1.8rem; font-weight:800; font-family:'Outfit'; color:var(--primary-orange); letter-spacing:-0.5px;">Pedidos Web</h3><button style="background:rgba(255,94,0,0.1); border:none; font-size:1.1rem; color:var(--primary-orange); cursor:pointer; width:35px; height:35px; border-radius:50%;" onclick="document.getElementById('pedidos-web-modal').style.display='none'">✕</button></div><div id="pedidos-web-list" style="flex:1; overflow-y:auto; text-align:left; display:flex; flex-direction:column; gap:16px; padding-bottom:40px;"></div></div></div>
     <div class="modal" id="ventas-modal"><div class="modal-content" style="width:100%; max-width:500px; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background: var(--bg-app); border:none;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;"><h3 style="margin:0; font-size:1.8rem; font-weight:800; font-family:'Outfit'; color:var(--success);">Ventas Diarias</h3><button style="background:rgba(16,185,129,0.1); border:none; font-size:1.1rem; color:var(--success); cursor:pointer; width:35px; height:35px; border-radius:50%;" onclick="document.getElementById('ventas-modal').style.display='none'">✕</button></div><div id="chofer-logs-modal-container" style="flex:1; overflow-y:auto; text-align:left; padding-bottom:40px;"></div></div></div>
     
+    <!-- MODAL GENERADOR DE QR -->
+    <div class="modal" id="modal-qr">
+        <div class="modal-content-standard" style="padding:32px 24px; text-align:center;">
+            <button class="modal-close-circle" style="background:rgba(0,0,0,0.05);" onclick="document.getElementById('modal-qr').style.display='none'">✕</button>
+            <h3 style="margin:0 0 10px; font-family:'Outfit'; font-size:1.6rem; font-weight:800; color:var(--text-dark);">Tu Código QR</h3>
+            <p style="color:var(--text-gray); font-size:0.95rem; margin-bottom:20px;">Imprimilo, pegalo en tu local o subilo a tus redes para que pidan directo.</p>
+            
+            <div style="background: white; padding: 16px; border-radius: 16px; display: inline-block; box-shadow: var(--shadow-soft); margin-bottom: 20px;">
+                <img id="qr-image-display" src="" style="width: 220px; height: 220px; display: block;">
+            </div>
+            
+            <button class="btn-main" onclick="vibrar([40]); compartirQR()" style="background:var(--text-dark); box-shadow: 0 8px 20px rgba(15,23,42,0.3);">
+                <span style="font-size:1.2rem; margin-right:8px;">📲</span> COMPARTIR / DESCARGAR
+            </button>
+        </div>
+    </div>
+
     <!-- SCRIPT PRINCIPAL -->
     <script>
         const qs = (id) => document.getElementById(id);
