@@ -2748,25 +2748,34 @@
                 currentGpsMoto = null;
             } else {
                 if (!navigator.geolocation) {
-                    alert("Tu dispositivo no soporta GPS.");
+                    alert("Tu navegador no soporta GPS.");
                     return;
                 }
 
                 showToast("Solicitando permiso de GPS...", "info");
                 
+                // Pedimos el permiso DIRECTAMENTE
                 navigator.geolocation.getCurrentPosition(
                     function(pos) {
+                        // EXITO: El usuario dio permiso y el GPS está prendido
                         let html = '';
                         dbState.repartidores.forEach(m => {
-                            html += `<button class="chofer-btn-white" style="width:100%; margin-bottom:10px; padding:16px; font-size:1.1rem; box-shadow:none; border:2px solid var(--border-soft);" onclick="activarGpsParaMoto('${m.nombre}')">🛵 Transmitir como ${m.nombre}</button>`;
+                            html += `<button class="chofer-btn-white" style="width:100%; margin-bottom:10px; padding:16px; font-size:1.1rem; font-weight: bold; background: white; color: var(--text-dark); border-radius: 12px; cursor: pointer; box-shadow:none; border:2px solid var(--border-soft);" onclick="activarGpsParaMoto('${m.nombre}')">🛵 Transmitir como ${m.nombre}</button>`;
                         });
                         setHtml('motos-gps-list', html || '<p style="color:var(--text-gray); font-weight:500;">No hay motos cargadas. Agregalas desde el panel de Dueño.</p>');
                         if(qs('modal-select-moto-gps')) qs('modal-select-moto-gps').style.display = 'flex';
                     },
                     function(err) {
-                        alert("⚠️ No se pudo acceder al GPS. Asegurate de tocar 'Permitir' cuando el navegador te pregunte o revisá el candadito de la barra de direcciones.");
+                        // MANEJO DE ERRORES EXACTO PARA SABER POR QUÉ NO PREGUNTA
+                        if (err.code === 1) {
+                            alert("⛔ PERMISO DENEGADO: El navegador bloqueó el GPS. Tocá el candadito 🔒 arriba a la izquierda en la barra de direcciones, andá a 'Permisos', activá la 'Ubicación' y recargá la página.");
+                        } else if (err.code === 2) {
+                            alert("📡 GPS APAGADO: La ubicación de tu celular está apagada o no hay señal. Prendé el GPS de tu teléfono y volvé a tocar el botón.");
+                        } else {
+                            alert("⚠️ Error al conectar con el GPS (Código: " + err.code + "). Reintentá.");
+                        }
                     },
-                    { enableHighAccuracy: true } 
+                    { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 } 
                 );
             }
         };
