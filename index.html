@@ -1034,9 +1034,6 @@
             return parseFloat(cleaned) || 0;
         }
 
-        // ============================================
-        // LECTURA DIRECTA DE MOTO DESDE LA URL (SOLUCIÓN CLIENTE FUNCIONANDO)
-        // ============================================
         document.addEventListener('DOMContentLoaded', async () => {
             const urlParams = new URLSearchParams(window.location.search);
             const localParam = urlParams.get('local');
@@ -1279,7 +1276,7 @@
                         }
                     }).subscribe();
 
-                // SISTEMA ANTIFALLOS CADA 20 SEGUNDOS (FUNCIONANDO OK)
+                // SISTEMA ANTIFALLOS CADA 20 SEGUNDOS
                 if(window.orderCheckInterval) clearInterval(window.orderCheckInterval);
                 window.orderCheckInterval = setInterval(async () => {
                     if(!currentLocalId) return;
@@ -1332,9 +1329,6 @@
             }
         }
 
-        // ============================================
-        // CÁLCULO DE DÍAS RESTANTES (FUNCIONANDO OK)
-        // ============================================
         function renderDiasRestantes() {
             if(!storeData.sub_end_date) return;
             let end = new Date(storeData.sub_end_date);
@@ -2104,7 +2098,7 @@
                 if(i.codigo && i.codigo.includes('PLATO-')) {
                     let { img, vid, hasVideo, hasImg } = parseUrlsSeguro(i.foto_url); 
                     
-                    let mediaTag = '<div stylewidth:100%;height:100%;background:#0f172a;display:flex;align-items:center;justify-content:center;font-size:2.5rem;">🍽️</div>';
+                    let mediaTag = '<div style="width:100%;height:100%;background:#0f172a;display:flex;align-items:center;justify-content:center;font-size:2.5rem;">🍽️</div>';
                     if (hasVideo) { mediaTag = `<video src="${vid}" poster="${img}" muted loop playsinline class="lazy-video" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;"></video>`; } 
                     else if (hasImg) { mediaTag = `<img src="${img}" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">`; }
                     
