@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -565,6 +564,23 @@
         </div>
     </div>
 
+    <!-- MODAL GENERADOR DE QR -->
+    <div class="modal" id="modal-qr">
+        <div class="modal-content-standard" style="padding:32px 24px; text-align:center;">
+            <button class="modal-close-circle" style="background:rgba(0,0,0,0.05);" onclick="document.getElementById('modal-qr').style.display='none'">✕</button>
+            <h3 style="margin:0 0 10px; font-family:'Outfit'; font-size:1.6rem; font-weight:800; color:var(--text-dark);">Tu Código QR</h3>
+            <p style="color:var(--text-gray); font-size:0.95rem; margin-bottom:20px;">Imprimilo, pegalo en tu local o subilo a tus redes para que pidan directo.</p>
+            
+            <div style="background: white; padding: 16px; border-radius: 16px; display: inline-block; box-shadow: var(--shadow-soft); margin-bottom: 20px;">
+                <img id="qr-image-display" src="" style="width: 220px; height: 220px; display: block;">
+            </div>
+            
+            <button class="btn-main" onclick="vibrar([40]); compartirQR()" style="background:var(--text-dark); box-shadow: 0 8px 20px rgba(15,23,42,0.3);">
+                <span style="font-size:1.2rem; margin-right:8px;">📲</span> COMPARTIR / DESCARGAR
+            </button>
+        </div>
+    </div>
+
     <!-- VISTA 2: CAJA DEL LOCAL -->
     <div id="view-chofer" class="view-container-no-pad" style="display:none; flex-direction:column; height:100dvh; overflow:hidden; padding:12px; box-sizing:border-box; background:var(--bg-app); max-width:500px; margin:0 auto;">
         
@@ -659,6 +675,8 @@
                     <button style="background:var(--bg-pure); color:var(--text-dark); font-weight:700; border:2px solid var(--border-soft); border-radius:14px; flex:1; box-shadow:var(--shadow-soft); padding:16px;" onclick="vibrar([40]); copiarLinkExacto()">📄 COPIAR</button>
                 </div>
                 <input type="text" id="store-link-display" readonly style="width:100%; box-sizing:border-box; border:none; background:var(--bg-app); border-radius:20px; font-weight:700; color:var(--info); font-size:0.95rem; padding:18px; text-align:center; outline:none; border:2px dashed var(--info); white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
+                
+                <button style="background:var(--text-dark); color:white; font-weight:800; font-family:'Outfit'; border:none; border-radius:16px; width:100%; box-shadow:0 10px 25px rgba(15,23,42,0.2); padding:18px; margin-top: 16px; font-size: 1.05rem; cursor:pointer;" onclick="vibrar([40]); generarYMostrarQR()">📲 MOSTRAR CÓDIGO QR</button>
             </div>
 
             <div style="background:var(--gradient-orange); color:white; padding:32px 20px; border-radius:var(--radius-lg); text-align:center; box-shadow:var(--shadow-orange); margin-bottom:10px; width:100%; box-sizing:border-box;">
@@ -806,7 +824,6 @@
             <div id="adm-menu-list"></div>
         </div>
     </div>
-
     <!-- MODAL SELECCIONAR CHOFER GPS (RESTAURADO) -->
     <div class="modal" id="modal-select-moto-gps">
         <div class="modal-content-standard" style="padding:32px 24px; text-align:center;">
@@ -966,7 +983,10 @@
             <div style="padding: 24px 24px 32px 24px;">
                 <h2 id="qv-title" style="margin: 0 0 8px; font-family:'Outfit'; font-size:1.6rem; font-weight:700; line-height:1.2; letter-spacing: 0px; color:var(--text-dark);">Plato</h2>
                 <p id="qv-desc" style="margin: 0 0 20px; color:var(--text-gray); font-weight:500; line-height:1.5; font-size:0.95rem;"></p>
-                <span id="qv-price" style="font-size:1.8rem; font-weight:800; font-family:'Outfit'; letter-spacing:-0.5px; text-align: center; display: block; margin-bottom: 24px; color:var(--text-dark);">$0</span>
+                <span id="qv-price" style="font-size:1.8rem; font-weight:800; font-family:'Outfit'; letter-spacing:-0.5px; text-align: center; display: block; margin-bottom: 16px; color:var(--text-dark);">$0</span>
+                
+                <!-- NUEVO INPUT DE ACLARACIONES -->
+                <input type="text" id="qv-notes" class="form-input" placeholder="Aclaraciones (ej: sin tomate, extra mayo)..." style="margin-bottom: 24px; font-size: 0.95rem; background: #f8fafc;">
                 
                 <div style="display: flex; align-items: center; justify-content: center; gap: 32px; margin: 16px 0 24px;">
                     <button style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--border-soft); font-size: 1.4rem; font-weight: 500; cursor: pointer; background:white; color:var(--text-dark); transition:0.2s; display:flex; align-items:center; justify-content:center; line-height:1; padding-bottom: 2px;" onclick="vibrar([40]); cambiarQty(-1)">-</button>
@@ -1123,7 +1143,7 @@
             if(!('speechSynthesis' in window)) return alert("Tu navegador no soporta el asistente de voz.");
             window.speechSynthesis.cancel();
             const speech = new SpeechSynthesisUtterance(); 
-            speech.text = "¡Atención dueño de local! Bienvenido a Pedilo Ya Premium. Esta es la herramienta definitiva para multiplicar tus ventas. Imaginate a tus clientes viendo tu comida en videos verticales de alta definición, estilo TikTok. Podrán hacer su pedido en tres simples clics con nuestro carrito avanzado, y rastrear al repartidor en vivo por GPS en el mapa. Cero comisiones por venta, control estricto de caja, panel de métricas, ofertas relámpago y cupones de descuento automáticos."; 
+            speech.text = "¡Atención dueño de local! Sin computadora ni nada que te complique, generá tu propia página web con nuestro sistema y vendé desde tu celular al público con tu propio link. Ofrecé un carrito de compras inteligente donde tu cliente puede ver videos de tus platos, personalizar su pedido y rastrear el delivery por GPS. Es tu propia página web integrada con carrito y delivery. Todo rápido, fácil y sin pagar comisiones por venta."; 
             speech.lang = 'es-AR'; 
             speech.rate = 1.05; 
             window.speechSynthesis.speak(speech); 
@@ -2419,6 +2439,7 @@
             setText('qv-desc', item.descripcion || '');
             setText('qv-price', `$${item.precio.toLocaleString('es-AR')}`);
             setText('qv-qty', currentQvQty);
+            setVal('qv-notes', '');
             
             let { img, vid, hasVideo, hasImg } = parseUrlsSeguro(item.foto_url);
             let mediaHtml = '';
@@ -2448,7 +2469,10 @@
         }
 
         function agregarDesdeQuickView() { 
-            for(let i=0; i<currentQvQty; i++) shoppingCart.push(currentQvItem); 
+            let notaAclaracion = qs('qv-notes') ? qs('qv-notes').value.trim() : '';
+            for(let i=0; i<currentQvQty; i++) {
+                shoppingCart.push({...currentQvItem, nota_cliente: notaAclaracion}); 
+            }
             if(qs('modal-quick-view')) qs('modal-quick-view').style.display = 'none'; 
             updateCartUI(); showToast("Añadido al pedido"); 
         }
@@ -2485,25 +2509,29 @@
             
             let counts = {};
             shoppingCart.forEach(item => {
-                if(!counts[item.codigo]) counts[item.codigo] = { item: item, qty: 0 };
-                counts[item.codigo].qty++;
+                let key = item.codigo + '|' + (item.nota_cliente || '');
+                if(!counts[key]) counts[key] = { item: item, qty: 0, key: key };
+                counts[key].qty++;
                 totalBruto += parseFloat(item.precio);
             });
 
             Object.values(counts).forEach(group => {
                 let p = group.item;
+                let notaHtml = p.nota_cliente ? `<div style="font-size:0.85rem; color:var(--primary-orange); margin-top:2px; font-weight:700;">📝 ${p.nota_cliente}</div>` : '';
+                
                 html += `
                 <div style="background:var(--bg-app); border-radius:20px; padding:16px; margin-bottom:12px; border:1px solid var(--border-soft); display:flex; align-items:center; justify-content:space-between;">
                     <div style="display:flex; align-items:center; gap:14px; flex:1; overflow:hidden;">
                         <div style="background:var(--text-dark); color:white; font-weight:900; font-family:'Outfit'; width:36px; height:36px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0;">${group.qty}</div>
                         <div style="flex:1; overflow:hidden;">
                             <div style="font-family:'Outfit'; font-weight:800; color:var(--text-dark); font-size:1.15rem; line-height:1.2; margin-bottom:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${p.nombre}</div>
+                            ${notaHtml}
                             <div style="font-family:'Outfit'; font-weight:600; color:var(--text-gray); font-size:0.95rem;">$${p.precio.toLocaleString('es-AR')} <span style="opacity:0.6">c/u</span></div>
                         </div>
                     </div>
                     <div style="display:flex; align-items:center; gap:16px; flex-shrink:0; margin-left:10px;">
                         <span style="font-family:'Outfit'; font-weight:900; color:var(--text-dark); font-size:1.3rem;">$${(p.precio * group.qty).toLocaleString('es-AR')}</span>
-                        <button style="background:#fee2e2; color:var(--danger); border:none; width:40px; height:40px; border-radius:12px; font-weight:bold; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:0.2s;" onclick="vibrar([40]); removeGroupFromCart('${p.codigo}')">
+                        <button style="background:#fee2e2; color:var(--danger); border:none; width:40px; height:40px; border-radius:12px; font-weight:bold; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:0.2s;" onclick="vibrar([40]); removeGroupFromCartExact('${group.key}')">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
                         </button>
                     </div>
@@ -2526,6 +2554,19 @@
             setText('cart-final-total', "$" + totalFinal.toLocaleString('es-AR')); 
             updateCartUI();
             if(qs('modal-carrito')) qs('modal-carrito').style.display = 'flex';
+        }
+
+        window.removeGroupFromCartExact = function(keyToRem) {
+            shoppingCart = shoppingCart.filter(item => {
+                let key = item.codigo + '|' + (item.nota_cliente || '');
+                return key !== keyToRem;
+            });
+            updateCartUI(); 
+            if(shoppingCart.length === 0) { 
+                if(qs('modal-carrito')) qs('modal-carrito').style.display = 'none'; 
+            } else { 
+                abrirModalCarrito(); 
+            }
         }
 
         window.removeGroupFromCart = function(code) {
@@ -2562,11 +2603,18 @@
             let cuponInfo = cupoAplicado ? `\n🎟️ Cupón: [${cupoAplicado.codigo}] (-$${descuento.toLocaleString('es-AR')})` : '';
             let desc = `NUEVO PEDIDO [${orderId}]\nDir: ${dirFinal}${cuponInfo}\nNotas: ${notes}\nDetalle:\n`; 
             
-            let itemsCount = {}; shoppingCart.forEach(i => { itemsCount[i.nombre] = (itemsCount[i.nombre]||0)+1; });
+            let itemsCount = {}; 
+            let stockDeductions = {};
+            shoppingCart.forEach(i => { 
+                let nameWithNote = i.nombre + (i.nota_cliente ? ` (📝 ${i.nota_cliente})` : '');
+                itemsCount[nameWithNote] = (itemsCount[nameWithNote]||0)+1; 
+                stockDeductions[i.codigo] = (stockDeductions[i.codigo]||0)+1;
+            });
+            
             for (let [nombre, qty] of Object.entries(itemsCount)) { desc += `- ${qty}x ${nombre}\n`; } 
             
-            for (let [nombre, qty] of Object.entries(itemsCount)) {
-                let p = menuItems.find(x => x.nombre === nombre);
+            for (let [cod, qty] of Object.entries(stockDeductions)) {
+                let p = menuItems.find(x => x.codigo === cod);
                 if(p) { let nuevoStock = Math.max(0, p.stock - qty); await _supabase.from('pediloya_inventario').update({ stock: nuevoStock }).eq('codigo', p.codigo); }
             }
 
@@ -2581,28 +2629,33 @@
             
             let num = targetLocalPhone ? String(targetLocalPhone).replace(/\D/g, '') : '';
             if(num.length === 10) num = '549' + num;
-            if(num) {
-                let trackLink = `${window.location.origin}/?track=${orderId}&local=${encodeURIComponent(targetLocalName)}`;
-                let msgWa = `*¡NUEVO PEDIDO WEB!* 🛵\n\n*Total:* $${totalFinal.toLocaleString('es-AR')}${cupoUsado ? ` _(Cupón ${cupoUsado} aplicado)_` : ''}\n*Pago:* ${metodo}\n*Dirección:* ${dirFinal}\n\n*Detalle:*\n`; 
-                for (let [nombre, qty] of Object.entries(itemsCount)) { msgWa += `- ${qty}x ${nombre}\n`; } 
-                msgWa += `\n*Aclaraciones:* ${notes}\n\n*Link Rastreo:* ${trackLink}`; 
-                window.open(`https://wa.me/${num}?text=${encodeURIComponent(msgWa)}`, '_blank');
-            }
+            
+            let trackLink = `${window.location.origin}/?track=${orderId}&local=${encodeURIComponent(targetLocalName)}`;
+            let msgWa = `*¡NUEVO PEDIDO WEB!* 🛵\n\n*Total:* $${totalFinal.toLocaleString('es-AR')}${cupoUsado ? ` _(Cupón ${cupoUsado} aplicado)_` : ''}\n*Pago:* ${metodo}\n*Dirección:* ${dirFinal}\n\n*Detalle:*\n`; 
+            for (let [nombre, qty] of Object.entries(itemsCount)) { msgWa += `- ${qty}x ${nombre}\n`; } 
+            msgWa += `\n*Aclaraciones:* ${notes}\n\n*Link Rastreo:* ${trackLink}`; 
 
             let overlay = qs('order-success-overlay');
             if(overlay) {
                 overlay.classList.remove('hidden');
                 overlay.style.display = 'flex';
                 setTimeout(() => {
+                    overlay.style.display = 'none'; overlay.classList.add('hidden');
                     switchCustomerTab('track', document.querySelectorAll('.nav-item')[1]); 
                     if(qs('track-input-code')) qs('track-input-code').value = orderId; 
                     iniciarRastreoClienteManual();
-                    overlay.style.display = 'none'; overlay.classList.add('hidden');
-                }, 2500); 
+                    
+                    if(num) {
+                        window.open(`https://wa.me/${num}?text=${encodeURIComponent(msgWa)}`, '_blank');
+                    }
+                }, 2000); 
             } else {
                 switchCustomerTab('track', document.querySelectorAll('.nav-item')[1]); 
                 if(qs('track-input-code')) qs('track-input-code').value = orderId; 
                 iniciarRastreoClienteManual();
+                if(num) {
+                    window.open(`https://wa.me/${num}?text=${encodeURIComponent(msgWa)}`, '_blank');
+                }
             }
         }
 
@@ -3003,6 +3056,40 @@
                         setText('track-detail-text', 'Esperando señal del satélite (aprox 15s)...');
                     }
                 });
+        };
+
+        window.generarYMostrarQR = function() {
+            let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}`;
+            let qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodeURIComponent(link)}&margin=10`;
+            setImgSrc('qr-image-display', qrUrl);
+            if(qs('modal-qr')) qs('modal-qr').style.display = 'flex';
+        };
+
+        window.compartirQR = async function() {
+            let imgEl = qs('qr-image-display');
+            if(!imgEl || !imgEl.src) return;
+            try {
+                showToast("Preparando imagen...", "info");
+                let response = await fetch(imgEl.src);
+                let blob = await response.blob();
+                let file = new File([blob], "QR_Pediloya.png", { type: blob.type });
+                
+                if (navigator.share) {
+                    await navigator.share({
+                        title: `QR Menú ${cUser}`,
+                        text: `Escaneá este código para hacer tu pedido online en ${cUser} 🍔🛵`,
+                        files: [file]
+                    });
+                } else {
+                    let a = document.createElement('a');
+                    a.href = URL.createObjectURL(blob);
+                    a.download = `QR_${cUser}_Pediloya.png`;
+                    a.click();
+                    showToast("QR Descargado");
+                }
+            } catch(e) {
+                showToast("Error al compartir QR", "error");
+            }
         };
 
     </script>
