@@ -508,6 +508,18 @@
                 <button id="btn-log" onclick="vibrar([40]); executeLogin()" style="width:100%; padding:18px; background:rgba(14, 165, 233, 0.08); color:var(--info); font-weight:800; font-size:1.05rem; border:2px solid rgba(14, 165, 233, 0.3); border-radius:18px; text-transform:uppercase; cursor:pointer; transition: 0.2s; font-family:'Outfit',sans-serif;">Abrir Caja</button>
             </div>
 
+            <!-- NUEVA SECCIÓN: DOMINIO PROPIO (EX MARCA BLANCA) -->
+            <div class="glass-card-light" style="border-top: 4px solid #8b5cf6; margin-top: 30px; margin-bottom: 30px;">
+                <h2 style="text-align: center; font-size: 1.4rem; font-weight: 800; margin: 0 0 10px 0; color: var(--text-dark); letter-spacing: -0.5px; font-family:'Outfit',sans-serif;">👑 TU PROPIA MARCA</h2>
+                <p style="text-align: center; color: var(--text-gray); font-size: 0.95rem; margin-bottom: 24px; font-weight: 500;">¿Querés que el sistema lleve el nombre exclusivo de tu local? (Ej: <strong>www.tu-local.com.ar</strong>).<br><br>Adaptamos la plataforma para que sea 100% tuya.</p>
+                
+                <a href="https://wa.me/5493815110171?text=Hola,%20quiero%20consultar%20para%20tener%20el%20sistema%20de%20delivery%20con%20mi%20propio%20dominio%20personalizado." target="_blank" style="text-decoration: none;">
+                    <button class="btn-main" style="background:#25D366; box-shadow:0 10px 25px rgba(37,211,102,0.3); font-size: 1.05rem;">
+                        <span style="font-size:1.3rem; margin-right:8px;">💬</span> CONSULTAR OPCIÓN VIP
+                    </button>
+                </a>
+            </div>
+
             <div class="footer-tech">
                 <div class="footer-brand">ENERGY <span>SOFTWARE</span></div>
                 <p class="footer-sub">Soluciones Tecnológicas & Automatización</p>
@@ -561,23 +573,6 @@
             <p style="color:var(--text-gray); margin-bottom:24px; font-size: 0.95rem;">Ingresá el PIN de administrador para acceder a las finanzas.</p>
             <input type="password" id="pin-input" class="form-input" style="text-align:center; font-size:1.6rem; letter-spacing:15px; padding:20px; font-weight:800; border: 1px solid var(--border-soft);" maxlength="4" placeholder="****" autocomplete="off">
             <button class="btn-main" style="background:var(--text-dark); box-shadow: 0 10px 25px rgba(15,23,42,0.3);" onclick="vibrar([40]); verifyAdminPin()">ENTRAR AL PANEL</button>
-        </div>
-    </div>
-
-    <!-- MODAL GENERADOR DE QR -->
-    <div class="modal" id="modal-qr">
-        <div class="modal-content-standard" style="padding:32px 24px; text-align:center;">
-            <button class="modal-close-circle" style="background:rgba(0,0,0,0.05);" onclick="document.getElementById('modal-qr').style.display='none'">✕</button>
-            <h3 style="margin:0 0 10px; font-family:'Outfit'; font-size:1.6rem; font-weight:800; color:var(--text-dark);">Tu Código QR</h3>
-            <p style="color:var(--text-gray); font-size:0.95rem; margin-bottom:20px;">Imprimilo, pegalo en tu local o subilo a tus redes para que pidan directo.</p>
-            
-            <div style="background: white; padding: 16px; border-radius: 16px; display: inline-block; box-shadow: var(--shadow-soft); margin-bottom: 20px;">
-                <img id="qr-image-display" src="" style="width: 220px; height: 220px; display: block;">
-            </div>
-            
-            <button class="btn-main" onclick="vibrar([40]); compartirQR()" style="background:var(--text-dark); box-shadow: 0 8px 20px rgba(15,23,42,0.3);">
-                <span style="font-size:1.2rem; margin-right:8px;">📲</span> COMPARTIR / DESCARGAR
-            </button>
         </div>
     </div>
 
@@ -675,8 +670,6 @@
                     <button style="background:var(--bg-pure); color:var(--text-dark); font-weight:700; border:2px solid var(--border-soft); border-radius:14px; flex:1; box-shadow:var(--shadow-soft); padding:16px;" onclick="vibrar([40]); copiarLinkExacto()">📄 COPIAR</button>
                 </div>
                 <input type="text" id="store-link-display" readonly style="width:100%; box-sizing:border-box; border:none; background:var(--bg-app); border-radius:20px; font-weight:700; color:var(--info); font-size:0.95rem; padding:18px; text-align:center; outline:none; border:2px dashed var(--info); white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-                
-                <button style="background:var(--text-dark); color:white; font-weight:800; font-family:'Outfit'; border:none; border-radius:16px; width:100%; box-shadow:0 10px 25px rgba(15,23,42,0.2); padding:18px; margin-top: 16px; font-size: 1.05rem; cursor:pointer;" onclick="vibrar([40]); generarYMostrarQR()">📲 MOSTRAR CÓDIGO QR</button>
             </div>
 
             <div style="background:var(--gradient-orange); color:white; padding:32px 20px; border-radius:var(--radius-lg); text-align:center; box-shadow:var(--shadow-orange); margin-bottom:10px; width:100%; box-sizing:border-box;">
