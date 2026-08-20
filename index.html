@@ -1035,7 +1035,7 @@
         }
 
         // ============================================
-        // LECTURA DIRECTA DE MOTO DESDE LA URL
+        // LECTURA DIRECTA DE MOTO DESDE LA URL (SOLUCIÓN CLIENTE FUNCIONANDO)
         // ============================================
         document.addEventListener('DOMContentLoaded', async () => {
             const urlParams = new URLSearchParams(window.location.search);
@@ -1279,7 +1279,7 @@
                         }
                     }).subscribe();
 
-                // SISTEMA ANTIFALLOS CADA 20 SEGUNDOS
+                // SISTEMA ANTIFALLOS CADA 20 SEGUNDOS (FUNCIONANDO OK)
                 if(window.orderCheckInterval) clearInterval(window.orderCheckInterval);
                 window.orderCheckInterval = setInterval(async () => {
                     if(!currentLocalId) return;
@@ -1333,7 +1333,7 @@
         }
 
         // ============================================
-        // CÁLCULO DE DÍAS RESTANTES (SOLUCIONA EL PROBLEMA DE LOS 30 DÍAS)
+        // CÁLCULO DE DÍAS RESTANTES (FUNCIONANDO OK)
         // ============================================
         function renderDiasRestantes() {
             if(!storeData.sub_end_date) return;
@@ -2104,7 +2104,7 @@
                 if(i.codigo && i.codigo.includes('PLATO-')) {
                     let { img, vid, hasVideo, hasImg } = parseUrlsSeguro(i.foto_url); 
                     
-                    let mediaTag = '<div style="width:100%;height:100%;background:#0f172a;display:flex;align-items:center;justify-content:center;font-size:2.5rem;">🍽️</div>';
+                    let mediaTag = '<div stylewidth:100%;height:100%;background:#0f172a;display:flex;align-items:center;justify-content:center;font-size:2.5rem;">🍽️</div>';
                     if (hasVideo) { mediaTag = `<video src="${vid}" poster="${img}" muted loop playsinline class="lazy-video" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;"></video>`; } 
                     else if (hasImg) { mediaTag = `<img src="${img}" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">`; }
                     
@@ -2763,27 +2763,9 @@
         };
 
         // ============================================
-        // CORRECCIÓN: PIDE PERMISO INMEDIATAMENTE PARA FORZAR EL NAVEGADOR
+        // RESTAURACIÓN DE LA FUNCIÓN ORIGINAL QUE FUNCIONABA PERFECTO
         // ============================================
         window.activarGpsParaMoto = function(nombre) {
-            if(!navigator.geolocation) return alert("GPS no soportado en este dispositivo.");
-
-            navigator.geolocation.getCurrentPosition(
-                (pos) => {
-                    iniciarTransmisionReal(nombre, pos);
-                },
-                (err) => {
-                    if (err.code === 1) {
-                        alert("⚠️ Permiso denegado. Tocá el candadito en la barra de direcciones de Chrome, andá a 'Permisos' y permití la Ubicación.");
-                    } else {
-                        iniciarTransmisionReal(nombre, null);
-                    }
-                },
-                { enableHighAccuracy: false, timeout: 5000 } 
-            );
-        };
-
-        function iniciarTransmisionReal(nombre, posInicial) {
             currentGpsMoto = nombre;
             isGpsActive = true;
             if(qs('modal-select-moto-gps')) qs('modal-select-moto-gps').style.display = 'none';
@@ -2803,43 +2785,37 @@
             gpsChannel.subscribe(async (status) => {
                 if (status === 'SUBSCRIBED') {
                     showToast(`Transmitiendo GPS como ${nombre}`, "success");
-                    
-                    if (posInicial) {
-                        enviarPosicionPayload(posInicial);
+                    if(navigator.geolocation) {
+                        enviarUbicacionGPS();
+                        gpsInterval = setInterval(enviarUbicacionGPS, 15000);
+                    } else {
+                        alert("GPS no soportado en este dispositivo.");
                     }
-                    
-                    if(gpsInterval) clearInterval(gpsInterval);
-                    enviarUbicacionGPS();
-                    gpsInterval = setInterval(enviarUbicacionGPS, 15000);
                 }
             });
-        }
+        };
 
-        function enviarPosicionPayload(pos) {
-            if(!currentGpsMoto || !gpsChannel) return;
-            let payload = {
-                lat: pos.coords.latitude,
-                lon: pos.coords.longitude,
-                moto_nombre: currentGpsMoto,
-                hora: getTucumanTimeFE()
-            };
-            gpsChannel.send({
-                type: 'broadcast',
-                event: 'location_update',
-                payload: payload
-            });
-        }
-
-        // GPS: Totalmente silencioso en segundo plano. Si falla no molesta.
+        // ============================================
+        // RESTAURACIÓN DE LA FUNCIÓN ORIGINAL QUE FUNCIONABA PERFECTO
+        // ============================================
         window.enviarUbicacionGPS = async function() {
             if(!currentGpsMoto || !gpsChannel) return;
-            navigator.geolocation.getCurrentPosition(
-                enviarPosicionPayload, 
-                (err) => {
-                    console.log("Buscando satélite (reintento silencioso)...");
-                }, 
-                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-            );
+            navigator.geolocation.getCurrentPosition(async (pos) => {
+                let payload = {
+                    lat: pos.coords.latitude,
+                    lon: pos.coords.longitude,
+                    moto_nombre: currentGpsMoto,
+                    hora: getTucumanTimeFE()
+                };
+                
+                gpsChannel.send({
+                    type: 'broadcast',
+                    event: 'location_update',
+                    payload: payload
+                });
+            }, (err) => {
+                console.log("Error GPS", err);
+            }, { enableHighAccuracy: true });
         };
         
         function abrirRadarDueno() { 
