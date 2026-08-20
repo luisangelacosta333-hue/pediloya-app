@@ -1239,6 +1239,23 @@
                 
                 setText('btn-reg', "CARGANDO..."); if(qs('btn-reg')) qs('btn-reg').disabled = true;
                 let waLimpio = wa.replace(/\s+/g, '');
+
+                // ==========================================
+                // SISTEMA ANTIPÍCARO 🛑: VERIFICAR SI EL NÚMERO YA EXISTE
+                // ==========================================
+                let { data: existeCelular } = await _supabase
+                    .from('pediloya_usuarios')
+                    .select('id')
+                    .eq('whatsapp', waLimpio)
+                    .maybeSingle();
+
+                if (existeCelular) {
+                    alert("🛑 ¡CUIDADO! Este número de WhatsApp ya está registrado en nuestro sistema. Por favor, usá un número diferente para crear un nuevo local.");
+                    if(qs('btn-reg')) qs('btn-reg').disabled = false; 
+                    setText('btn-reg', "Empezar Gratis Ahora");
+                    return; // Corta la ejecución acá y no crea nada
+                }
+                // ==========================================
                 
                 await _supabase.auth.signUp({ email: `${waLimpio}@pediloya.com`, password: pin + "IA" }).catch(e=>console.log(e));
                 
@@ -1252,7 +1269,7 @@
                 alert("¡Plataforma Creada! Ingresá al sistema con tu PIN."); 
                 setVal('login-user', local); setVal('login-pass', pin);
                 if(qs('btn-reg')) qs('btn-reg').disabled=false; setText('btn-reg', "Empezar Gratis Ahora");
-            } catch (err) { alert("Fallo Interno: " + err.message); }
+            } catch (err) { alert("Fallo Interno: " + err.message); if(qs('btn-reg')) qs('btn-reg').disabled=false; setText('btn-reg', "Empezar Gratis Ahora"); }
         }
 
         async function executeLogin() {
@@ -2648,7 +2665,7 @@
                     if(num) {
                         window.open(`https://wa.me/${num}?text=${encodeURIComponent(msgWa)}`, '_blank');
                     }
-                }, 2000); 
+                }, 2500); 
             } else {
                 switchCustomerTab('track', document.querySelectorAll('.nav-item')[1]); 
                 if(qs('track-input-code')) qs('track-input-code').value = orderId; 
