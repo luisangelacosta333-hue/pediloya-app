@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -817,6 +818,7 @@
             <div id="adm-menu-list"></div>
         </div>
     </div>
+
     <!-- MODAL SELECCIONAR CHOFER GPS (RESTAURADO) -->
     <div class="modal" id="modal-select-moto-gps">
         <div class="modal-content-standard" style="padding:32px 24px; text-align:center;">
@@ -1014,7 +1016,7 @@
 
         let dbState = { inventory:[], logs:[], repartidores:[] };
         let cUser = "LOCAL_GENERICO", currentLocalId = "", cAdminPin = "0000", expr = "", isEval = false;
-        let shoppingCart = [], storeData = { perfil_url: '', descripcion: '', direccion: '', maps_url: '', whatsapp_publico: '', promos: [], sub_end_date: '', cupones: [], oferta_relampago: null };
+        let shoppingCart = [], storeData = { perfil_url: '', descripcion: '', direccion: '', maps_url: '', whatsapp_publico: '', promos: [], sub_end_date: '', cupones: [], oferta_relampago: null, dominio_vip: '' };
         let selProd = null, currentQvItem = null, currentQvQty = 1;
         let targetLocalId = "", targetLocalName = "", targetLocalPhone = "";
         let isDeliveryOption = true;
@@ -1049,17 +1051,33 @@
 
         document.addEventListener('DOMContentLoaded', async () => {
             const urlParams = new URLSearchParams(window.location.search);
-            const localParam = urlParams.get('local');
+            let localParam = urlParams.get('local');
             const trackParam = urlParams.get('track');
             const motoParam = urlParams.get('moto');
+
+            // --- DETECTOR AUTOMÁTICO DE DOMINIOS (MARCA BLANCA) ---
+            const hostname = window.location.hostname;
+            const isBaseDomain = hostname.includes('localhost') || hostname.includes('127.0.0.1') || hostname.includes('pediloyaa.com.ar') || hostname.includes('vercel.app');
+            
+            if (!isBaseDomain && !localParam) {
+                let { data: domainUser } = await _supabase.from('pediloya_usuarios')
+                    .select('local')
+                    .eq('app_data->>dominio_vip', hostname)
+                    .maybeSingle();
+                
+                if (domainUser) {
+                    localParam = domainUser.local;
+                }
+            }
+            // ------------------------------------------------------
             
             if (trackParam && localParam) { 
-                document.title = "Rastreo | Pediloya"; 
+                document.title = "Rastreo | " + localParam; 
                 go('view-customer-menu'); 
                 switchCustomerTab('track', document.querySelectorAll('.nav-item')[1]); 
                 iniciarRastreoCliente(trackParam, localParam, motoParam); 
             } else if (localParam) { 
-                document.title = "Menú | Pediloya"; 
+                document.title = "Menú | " + localParam; 
                 go('view-customer-menu'); 
                 cargarMenuCliente(localParam); 
             } else { 
@@ -1136,7 +1154,7 @@
             if(!('speechSynthesis' in window)) return alert("Tu navegador no soporta el asistente de voz.");
             window.speechSynthesis.cancel();
             const speech = new SpeechSynthesisUtterance(); 
-            speech.text = "¡Atención dueño de local! Sin computadora ni nada que te complique, generá tu propia página web con nuestro sistema y vendé desde tu celular al público con tu propio link. Ofrecé un carrito de compras inteligente donde tu cliente puede ver videos de tus platos, personalizar su pedido y rastrear el delivery por GPS. Es tu propia página web integrada con carrito y delivery. Todo rápido, fácil y sin pagar comisiones por venta."; 
+            speech.text = "¡Atención dueño de local! Sin computadora ni nada que te complique, generá tu propia página web con nuestro sistema y vendé desde tu celular al público con tu propio link. Ofrecé un carrito de compras inteligente donde tu cliente puede ver videos de tus platos, personalizar su pedido y rastrear el delivery por GPS. Es tu propia página web integrada con carrito y delivery. Todo rápido, fácil y sin pagar comisiones por venta. Y si querés ir a lo grande, consultá por nuestra opción VIP para tener tu propio dominio exclusivo con el nombre de tu local."; 
             speech.lang = 'es-AR'; 
             speech.rate = 1.05; 
             window.speechSynthesis.speak(speech); 
@@ -1246,14 +1264,14 @@
                     alert("🛑 ¡CUIDADO! Este número de WhatsApp ya está registrado en nuestro sistema. Por favor, usá un número diferente para crear un nuevo local.");
                     if(qs('btn-reg')) qs('btn-reg').disabled = false; 
                     setText('btn-reg', "Empezar Gratis Ahora");
-                    return; // Corta la ejecución acá y no crea nada
+                    return; 
                 }
                 // ==========================================
                 
                 await _supabase.auth.signUp({ email: `${waLimpio}@pediloya.com`, password: pin + "IA" }).catch(e=>console.log(e));
                 
                 let endDate = new Date(); endDate.setDate(endDate.getDate() + 30); 
-                let appDataObj = { perfil_url: '', descripcion: 'Tu mejor opción delivery', direccion: '', maps_url: '', whatsapp_publico: waLimpio, promos: [], sub_end_date: endDate.toISOString(), repartidores: [], cupones: [], oferta_relampago: null };
+                let appDataObj = { perfil_url: '', descripcion: 'Tu mejor opción delivery', direccion: '', maps_url: '', whatsapp_publico: waLimpio, promos: [], sub_end_date: endDate.toISOString(), repartidores: [], cupones: [], oferta_relampago: null, dominio_vip: '' };
 
                 let { error } = await _supabase.from('pediloya_usuarios').insert([{ local: local, pin: pin, admin_pin: apin, whatsapp: waLimpio, prov: 'Gastronomia', app_data: appDataObj }]);
                 
@@ -1283,7 +1301,7 @@
                 
                 currentLocalId = data.id; cUser = data.local; targetLocalPhone = data.whatsapp; 
                 cAdminPin = data.admin_pin || "0000";
-                storeData = data.app_data || { perfil_url: '', descripcion: '', direccion: '', maps_url: '', whatsapp_publico: '', promos: [], sub_end_date: '', repartidores: [], cupones: [], oferta_relampago: null };
+                storeData = data.app_data || { perfil_url: '', descripcion: '', direccion: '', maps_url: '', whatsapp_publico: '', promos: [], sub_end_date: '', repartidores: [], cupones: [], oferta_relampago: null, dominio_vip: '' };
                 
                 setText('lbl-owner', cUser);
                 await loadDataFromDB(); 
@@ -1726,6 +1744,23 @@
             setVal('store-desc-input', storeData.descripcion || '');
             setVal('store-address-input', storeData.direccion || '');
             setVal('store-wa-input', storeData.whatsapp_publico || targetLocalPhone || '');
+            
+            // INYECTAR CASILLERO DOMINIO VIP DINÁMICAMENTE EN EL PANEL DE DUEÑO
+            if (!qs('store-domain-input') && qs('btn-save-profile')) {
+                let configCard = qs('btn-save-profile').parentNode;
+                let domainInput = document.createElement('input');
+                domainInput.type = 'text';
+                domainInput.id = 'store-domain-input';
+                domainInput.className = 'form-input';
+                domainInput.placeholder = '👑 Dominio VIP (Ej: pizzeriapato.com.ar)';
+                domainInput.style.borderColor = '#8b5cf6'; 
+                domainInput.style.backgroundColor = 'rgba(139, 92, 246, 0.02)';
+                domainInput.style.marginBottom = '16px';
+                configCard.insertBefore(domainInput, qs('btn-save-profile'));
+            }
+            if(qs('store-domain-input')) {
+                setVal('store-domain-input', storeData.dominio_vip || '');
+            }
 
             dbState.repartidores = storeData.repartidores || [];
 
@@ -1818,7 +1853,7 @@
         }
 
         window.compartirCupon = function(codigo, descuento) {
-            let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}`; 
+            let link = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : `${window.location.origin}/?local=${encodeURIComponent(cUser)}`; 
             let msg = `¡Hola! Te regalo un cupón de descuento para tu próximo pedido en *${cUser}* 🍔🛵\n\n🎁 Ingresá el código: *${codigo}* al finalizar tu compra y obtené *${descuento} OFF* de regalo.\n\nPedí ahora acá: ${link}`;
             window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
         };
@@ -2016,7 +2051,10 @@
                 let desc = qs('store-desc-input') ? qs('store-desc-input').value.trim() : '';
                 let autoMapLink = addr ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cUser + " " + addr)}` : '';
 
-                let newAppData = { ...storeData, perfil_url: urlFinal, descripcion: desc, direccion: addr, maps_url: autoMapLink, whatsapp_publico: wa };
+                let domVip = qs('store-domain-input') ? qs('store-domain-input').value.trim().toLowerCase() : '';
+                domVip = domVip.replace(/^https?:\/\//, '').replace(/\/$/, ''); // Limpiamos formato
+
+                let newAppData = { ...storeData, perfil_url: urlFinal, descripcion: desc, direccion: addr, maps_url: autoMapLink, whatsapp_publico: wa, dominio_vip: domVip };
                 await _supabase.from('pediloya_usuarios').update({ app_data: newAppData }).eq('id', currentLocalId);
                 storeData = newAppData; 
                 showToast("Perfil guardado.");
@@ -2357,7 +2395,7 @@
         }
 
         window.compartirPlato = function(nombre, precio) {
-            let link = window.location.href.split('?')[0] + '?local=' + encodeURIComponent(targetLocalName);
+            let link = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : window.location.href.split('?')[0] + '?local=' + encodeURIComponent(targetLocalName);
             let msg = `¡Mirá este plato! 🍔\n*${nombre}* a $${precio.toLocaleString('es-AR')} en *${targetLocalName}*.\n\nPedilo acá: ${link}`;
             
             if (navigator.share) {
@@ -2640,7 +2678,9 @@
             let num = targetLocalPhone ? String(targetLocalPhone).replace(/\D/g, '') : '';
             if(num.length === 10) num = '549' + num;
             
-            let trackLink = `${window.location.origin}/?track=${orderId}&local=${encodeURIComponent(targetLocalName)}`;
+            let trackLinkBase = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : `${window.location.origin}/?local=${encodeURIComponent(targetLocalName)}`;
+            let trackLink = storeData.dominio_vip ? `${trackLinkBase}/?track=${orderId}` : `${trackLinkBase}&track=${orderId}`;
+
             let msgWa = `*¡NUEVO PEDIDO WEB!* 🛵\n\n*Total:* $${totalFinal.toLocaleString('es-AR')}${cupoUsado ? ` _(Cupón ${cupoUsado} aplicado)_` : ''}\n*Pago:* ${metodo}\n*Dirección:* ${dirFinal}\n\n*Detalle:*\n`; 
             for (let [nombre, qty] of Object.entries(itemsCount)) { msgWa += `- ${qty}x ${nombre}\n`; } 
             msgWa += `\n*Aclaraciones:* ${notes}\n\n*Link Rastreo:* ${trackLink}`; 
@@ -2773,19 +2813,27 @@
             showToast("Gasto registrado.");
         }
 
-        function actualizarLinkDisplay() { let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}`; setVal('store-link-display', link); }
+        function actualizarLinkDisplay() { 
+            let link = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : `${window.location.origin}/?local=${encodeURIComponent(cUser)}`; 
+            setVal('store-link-display', link); 
+        }
         function copiarLinkExacto() { let copyText = qs("store-link-display"); if(copyText){ copyText.select(); copyText.setSelectionRange(0, 99999); try { document.execCommand("copy"); showToast("Link copiado."); } catch(e) { alert("Mantené presionado el link para copiarlo."); } } }
-        function compartirLinkNativo() { let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}`; if (navigator.share) { navigator.share({ title: `Menú de ${cUser}`, text: `¡Hacé tu pedido online! 🛵🍔`, url: link }).catch(err => console.log(err)); } else { copiarLinkExacto(); } }
+        function compartirLinkNativo() { 
+            let link = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : `${window.location.origin}/?local=${encodeURIComponent(cUser)}`; 
+            if (navigator.share) { navigator.share({ title: `Menú de ${cUser}`, text: `¡Hacé tu pedido online! 🛵🍔`, url: link }).catch(err => console.log(err)); } else { copiarLinkExacto(); } 
+        }
         
         window.compartirSeguimientoGlobal = function() {
-            let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}&track=GPS`; 
+            let linkBase = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : `${window.location.origin}/?local=${encodeURIComponent(cUser)}`;
+            let link = storeData.dominio_vip ? `${linkBase}/?track=GPS` : `${linkBase}&track=GPS`; 
             let msg = `Seguí en vivo tu pedido de *${cUser}* desde este enlace de rastreo oficial: ${link}`;
             window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
         window.compartirTRKWhatsApp = function(trk, choferAsignado) {
             let motoQuery = (choferAsignado && choferAsignado !== 'undefined') ? '&moto=' + encodeURIComponent(choferAsignado) : '';
-            let link = window.location.origin + '/?local=' + encodeURIComponent(cUser) + '&track=' + trk + motoQuery;
+            let linkBase = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : `${window.location.origin}/?local=${encodeURIComponent(cUser)}`;
+            let link = storeData.dominio_vip ? `${linkBase}/?track=${trk}${motoQuery}` : `${linkBase}&track=${trk}${motoQuery}`;
             
             let choferMsg = choferAsignado && choferAsignado !== 'undefined' ? ` con *${choferAsignado}*` : '';
             let msg = `🛵 ¡Tu pedido va en camino${choferMsg}!\nSeguí la moto satelitalmente en vivo acá:\n\n📍 ${link}`;
@@ -3069,7 +3117,7 @@
         };
 
         window.generarYMostrarQR = function() {
-            let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}`;
+            let link = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : `${window.location.origin}/?local=${encodeURIComponent(cUser)}`;
             let qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodeURIComponent(link)}&margin=10`;
             setImgSrc('qr-image-display', qrUrl);
             if(qs('modal-qr')) qs('modal-qr').style.display = 'flex';
