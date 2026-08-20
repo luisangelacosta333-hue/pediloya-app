@@ -1035,19 +1035,19 @@
         }
 
         // ============================================
-        // INICIO CORRECCIÓN 1: LECTURA DIRECTA DE MOTO DESDE LA URL
+        // LECTURA DIRECTA DE MOTO DESDE LA URL
         // ============================================
         document.addEventListener('DOMContentLoaded', async () => {
             const urlParams = new URLSearchParams(window.location.search);
             const localParam = urlParams.get('local');
             const trackParam = urlParams.get('track');
-            const motoParam = urlParams.get('moto'); // NUEVO: Lee la moto del link
+            const motoParam = urlParams.get('moto');
             
             if (trackParam && localParam) { 
                 document.title = "Rastreo | Pediloya"; 
                 go('view-customer-menu'); 
                 switchCustomerTab('track', document.querySelectorAll('.nav-item')[1]); 
-                iniciarRastreoCliente(trackParam, localParam, motoParam); // Pasamos la moto
+                iniciarRastreoCliente(trackParam, localParam, motoParam); 
             } else if (localParam) { 
                 document.title = "Menú | Pediloya"; 
                 go('view-customer-menu'); 
@@ -1279,8 +1279,7 @@
                         }
                     }).subscribe();
 
-                // NUEVO: SISTEMA ANTIFALLOS CADA 20 SEGUNDOS
-                // Garantiza que la notificación salte aunque el celular duerma la conexión
+                // SISTEMA ANTIFALLOS CADA 20 SEGUNDOS
                 if(window.orderCheckInterval) clearInterval(window.orderCheckInterval);
                 window.orderCheckInterval = setInterval(async () => {
                     if(!currentLocalId) return;
@@ -1334,7 +1333,7 @@
         }
 
         // ============================================
-        // CORRECCIÓN 2: CÁLCULO DE DÍAS RESTANTES (SOLUCIONA EL PROBLEMA DE LOS 30 DÍAS)
+        // CÁLCULO DE DÍAS RESTANTES (SOLUCIONA EL PROBLEMA DE LOS 30 DÍAS)
         // ============================================
         function renderDiasRestantes() {
             if(!storeData.sub_end_date) return;
@@ -2179,7 +2178,6 @@
                         </div>`;
                     }
 
-                    // CORRECCIÓN: flex-shrink: 0 para que no se amontonen, y todo mucho más compacto
                     webLogsHtml += `
                     <div style="flex-shrink: 0; background:var(--bg-pure); padding:16px; border-radius:16px; border:1px solid rgba(255,94,0,0.3); margin-bottom:16px; box-shadow:0 4px 12px rgba(255,94,0,0.15); position:relative; overflow:hidden;">
                         <span style="position:absolute; top:0; left:0; width:100%; background:var(--primary-orange); color:#fff; padding:4px 0; font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:1px; text-align:center;">NUEVO PEDIDO</span>
@@ -2650,8 +2648,7 @@
         }
         
         window.submitSale = async function(metodo) {
-            evalCalc(); // Corrección: Forzamos la calculadora a cerrar la suma por si se olvidaron de tocar el "="
-            
+            evalCalc(); 
             let val = getCalcValue(); 
             if(val <= 0) { showToast("Ingresá un monto mayor a 0", "error"); return; }
             
@@ -2729,9 +2726,6 @@
             window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
-        // ============================================
-        // INICIO CORRECCIÓN 3: LINK DE WHATSAPP CON MOTO INCORPORADA
-        // ============================================
         window.compartirTRKWhatsApp = function(trk, choferAsignado) {
             let motoQuery = (choferAsignado && choferAsignado !== 'undefined') ? '&moto=' + encodeURIComponent(choferAsignado) : '';
             let link = window.location.origin + '/?local=' + encodeURIComponent(cUser) + '&track=' + trk + motoQuery;
@@ -2741,7 +2735,6 @@
             window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
         };
 
-        // GPS: AHORA USA CANALES BROADCAST DE SUPABASE
         window.toggleDriverGps = function() {
             if(isGpsActive) {
                 isGpsActive = false;
@@ -2800,7 +2793,7 @@
         };
 
         // ============================================
-        // INICIO CORRECCIÓN 4: ALARMA DE FALLO PARA EL CHOFER
+        // GPS INTELIGENTE: NO SPAMEA ERRORES SI TARDA
         // ============================================
         window.enviarUbicacionGPS = async function() {
             if(!currentGpsMoto || !gpsChannel) return;
@@ -2818,11 +2811,23 @@
                     payload: payload
                 });
             }, (err) => {
-                console.log("Error GPS", err);
-                // ALERTA VISUAL PARA EL CHOFER SI EL GPS DEL CELULAR ESTÁ APAGADO O BLOQUEADO
-                showToast("⚠️ GPS bloqueado. Encendé la ubicación de tu celular.", "error");
-                vibrar([200, 200, 200]);
-            }, { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 });
+                console.log("Error GPS", err.code, err.message);
+                if (err.code === 1) { // 1 = PERMISO DENEGADO
+                    showToast("⚠️ Permiso de GPS denegado por el navegador.", "error");
+                    vibrar([200, 200, 200]);
+                    
+                    if(gpsInterval) clearInterval(gpsInterval);
+                    if(gpsChannel) { _supabase.removeChannel(gpsChannel); gpsChannel = null; }
+                    isGpsActive = false;
+                    let btn = qs('btn-gps');
+                    if(btn) { btn.style.background = 'var(--text-dark)'; btn.style.borderColor = 'var(--text-dark)'; btn.style.color = 'white'; btn.innerText = "📍 GPS DELI"; }
+                    currentGpsMoto = null;
+                } else if (err.code === 3) { // 3 = TIMEOUT (Tarda en encontrar señal)
+                    console.log("Buscando señal GPS fuerte..."); // Silencioso
+                } else { // 2 = POSITION UNAVAILABLE (Problema de red o ubicación)
+                    console.log("Señal GPS inestable temporalmente."); // Silencioso
+                }
+            }, { enableHighAccuracy: true, timeout: 14000, maximumAge: 10000 });
         };
         
         function abrirRadarDueno() { 
@@ -2830,7 +2835,6 @@
             actualizarRadarMap(); 
         }
         
-        // GPS: LECTURA EN PANEL DUEÑO USANDO BROADCAST
         async function actualizarRadarMap() { 
             showToast("Conectando al radar satelital...", "info"); 
             
@@ -2935,9 +2939,6 @@
             setTimeout(() => mapVar.invalidateSize(), 300);
         };
 
-        // ============================================
-        // INICIO CORRECCIÓN 5: FILTRO A PRUEBA DE BALAS EN EL RASTREO
-        // ============================================
         window.iniciarRastreoClienteManual = function() {
             let code = qs('track-input-code') ? qs('track-input-code').value.trim().toUpperCase() : '';
             if(!code) return showToast("Ingresá un código de rastreo.", "error");
@@ -2946,7 +2947,6 @@
             iniciarRastreoCliente(code, targetLocalName || (qs('public-store-name') ? qs('public-store-name').innerText : ''), null);
         };
 
-        // GPS: LECTURA EN EL CLIENTE USANDO BROADCAST
         window.iniciarRastreoCliente = async function(trackCode, localName, motoParam) {
             if(!trackCode || !localName) return;
             
@@ -2970,33 +2970,27 @@
                 setText('track-detail-text', `Conectando con el satélite...`);
             }
 
-            // Buscamos a qué moto se le asignó este código de pedido (solo como respaldo)
             let { data: pedidoData } = await _supabase.from('pediloya_logs')
                 .select('moto_asignada')
                 .eq('local_id', targetLocalId)
                 .ilike('descripcion', `%${trackCode}%`)
                 .maybeSingle();
 
-            // Usamos la moto del Link (más rápido y seguro) o la de la base de datos
             let motoDelPedido = motoParam || (pedidoData ? pedidoData.moto_asignada : null);
 
-            // Inicializamos el mapa en Tucumán por defecto
             updateLiveMap(-26.8241, -65.2226, 'tracking-map-container', false);
 
             if(gpsSubscription) {
                 _supabase.removeChannel(gpsSubscription);
             }
 
-            // Escuchamos la radio del local
             gpsSubscription = _supabase.channel('gps-local-' + targetLocalId)
                 .on('broadcast', { event: 'location_update' }, payload => {
                     let data = payload.payload;
                     
-                    // FILTRO A PRUEBA DE BALAS: Comparamos en minúsculas y sin espacios
                     let motoDataNombre = data.moto_nombre ? String(data.moto_nombre).trim().toLowerCase() : '';
                     let motoEsperada = motoDelPedido ? String(motoDelPedido).trim().toLowerCase() : '';
 
-                    // Actualiza si es la moto correcta o si no hay moto asignada (mapa global)
                     if(!motoEsperada || motoDataNombre === motoEsperada) {
                         try {
                             updateLiveMap(data.lat, data.lon, 'tracking-map-container', false);
