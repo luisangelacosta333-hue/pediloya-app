@@ -322,7 +322,7 @@
         .btn-pay-transfer { background: linear-gradient(135deg, #0ea5e9, #0284c7); color: white; box-shadow: 0 10px 25px rgba(14, 165, 233, 0.3); border: none; padding: 18px; border-radius: 18px; font-family: 'Outfit'; font-weight: 800; font-size: 1.1rem; flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: 0.2s;}
         .btn-pay-transfer:active { transform: scale(0.95); }
 
-        /* ESTILOS PARA EL QR - ¡AQUÍ ESTÁ LA MAGIA DEL CENTRADO! */
+        /* ESTILOS PARA EL QR */
         .qr-fullscreen-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.95); z-index: 9999999; display: none; justify-content: center; align-items: center; flex-direction: column; backdrop-filter: blur(15px); opacity: 0; transition: opacity 0.3s; padding: 24px;}
         .qr-fullscreen-overlay.show { display: flex; opacity: 1; }
         .qr-fullscreen-card { background: #ffffff; padding: 40px; border-radius: 40px; text-align: center; width: 100%; max-width: 400px; box-shadow: 0 30px 80px rgba(0,0,0,0.5); transform: translateY(20px); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);}
@@ -371,7 +371,7 @@
                 qrContainer.innerHTML = ""; // Limpiar previo
                 new QRCode(qrContainer, {
                     text: url,
-                    width: 250, // Más grande para impresión/escaneo
+                    width: 250, 
                     height: 250,
                     colorDark : "#0f172a",
                     colorLight : "#ffffff",
@@ -404,19 +404,6 @@
                 document.getElementById('toast-msg').innerText = 'QR Descargado';
                 toast.classList.add('ver');
                 setTimeout(() => toast.classList.remove('ver'), 3000);
-            }
-        }
-
-        function compartirQR() {
-            let url = document.getElementById('store-link-display').value || "https://www.pediloyaa.com.ar/tu-local";
-            if (navigator.share) {
-                navigator.share({
-                    title: '¡Hacé tu pedido acá!',
-                    text: 'Escaneá este QR o visitá nuestro menú interactivo.',
-                    url: url
-                }).catch(console.error);
-            } else {
-                alert("La función de compartir nativa no está soportada en tu navegador.");
             }
         }
 
@@ -663,7 +650,7 @@
         <button class="modal-close-circle" style="position:absolute; top:30px; right:30px; width:50px; height:50px; font-size:1.5rem; z-index: 20;" onclick="cerrarModalQR()">✕</button>
         <div class="qr-fullscreen-card">
             <h2 style="font-family:'Outfit'; font-size:2rem; font-weight:900; color:var(--text-dark); margin:0 0 10px 0; letter-spacing:-1px;">ESCANEÁ AQUÍ</h2>
-            <p style="color:var(--text-gray); margin-bottom:24px; font-weight:500;">Para ver nuestro menú digital</p>
+            <p style="color:var(--text-gray); font-size:1rem; margin-bottom:24px; font-weight:500;">Para ver nuestro menú digital</p>
             
             <div id="qr-container"></div>
             
@@ -676,7 +663,7 @@
 
     <!-- VISTA 2: CAJA DEL LOCAL (SÚPER PREMIUM, BLANCA Y FIJA) -->
     <!-- === ACÁ ESTÁ LA MODIFICACIÓN DEL PADDING PARA LEVANTAR LA BOTONERA === -->
-    <div id="view-chofer" class="view-container-no-pad" style="display:none; flex-direction:column; justify-content:space-between; height:100svh; overflow:hidden; padding:max(10px, env(safe-area-inset-top)) 12px max(50px, env(safe-area-inset-bottom) + 30px) 12px; box-sizing:border-box; background:#ffffff; max-width:500px; margin:0 auto; position:fixed; top:0; bottom:0; left:0; right:0; z-index:10;">
+    <div id="view-chofer" class="view-container-no-pad" style="display:none; flex-direction:column; justify-content:space-between; height:100svh; overflow:hidden; padding:max(10px, env(safe-area-inset-top)) 12px max(90px, env(safe-area-inset-bottom) + 70px) 12px; box-sizing:border-box; background:#ffffff; max-width:500px; margin:0 auto; position:fixed; top:0; bottom:0; left:0; right:0; z-index:10;">
         
         <div class="chofer-top-bar" style="margin-bottom:6px;">
             <div class="pill-btn" onclick="vibrar([40]); toggleDriverGps()" id="btn-gps" style="background:var(--text-dark); color:white; transition: 0.3s; border-color:var(--text-dark);">📍 GPS DELI</div>
@@ -684,7 +671,8 @@
             <div class="pill-btn" style="color:var(--info); border-color:rgba(14,165,233,0.2); background:rgba(14,165,233,0.05);" onclick="vibrar([40]); document.getElementById('pin-modal').style.display='flex'">⚙️ DUEÑO</div>
         </div>
         
-        <div class="calc-display" style="min-height:50px; padding:10px 16px; margin-bottom:6px;">
+        <!-- PANTALLA BLANCA REDUCIDA -->
+        <div class="calc-display" style="min-height:50px; max-height: 22vh; padding:10px 16px; margin-bottom:6px;">
             <div id="ticket-success" class="ticket-success">
                 <div style="font-size:2.5rem; margin-bottom:5px;">✅</div>
                 <div style="font-size:1.5rem; font-weight:800; letter-spacing:-1px;">COBRADO</div>
@@ -932,10 +920,51 @@
             <div id="adm-menu-list"></div>
         </div>
     </div>
+    
+    <!-- SCRIPT CORREGIDO PARA COMPARTIR QR -->
+    <script>
+        window.compartirQR = async function() {
+            let imgEl = document.querySelector('#qr-container img');
+            if(!imgEl || !imgEl.src) return;
+            try {
+                showToast("Preparando imagen...", "info");
+                let response = await fetch(imgEl.src);
+                let blob = await response.blob();
+                let file = new File([blob], "QR_Pediloya.png", { type: 'image/png' });
+                
+                let shareData = {
+                    title: `QR Menú ${cUser}`,
+                    text: `Escaneá este código para hacer tu pedido online en ${cUser} 🍔🛵`,
+                    files: [file]
+                };
+
+                if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+                    await navigator.share(shareData);
+                } else if (navigator.share) {
+                    // Fallback si el celu no soporta mandar archivos por Share
+                    let link = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : `${window.location.origin}/?local=${encodeURIComponent(cUser)}`;
+                    await navigator.share({
+                        title: `QR Menú ${cUser}`,
+                        text: `¡Hacé tu pedido online en ${cUser}! 🍔🛵\n\nIngresá acá:\n${link}`
+                    });
+                } else {
+                    let a = document.createElement('a');
+                    a.href = URL.createObjectURL(blob);
+                    a.download = `QR_${cUser}_Pediloya.png`;
+                    a.click();
+                    showToast("QR Descargado");
+                }
+            } catch(e) {
+                // Evita mostrar error si el usuario simplemente canceló el diálogo de compartir
+                if (e.name !== 'AbortError') {
+                    showToast("Error al compartir QR", "error");
+                }
+            }
+        };
+    </script>
 </body>
 </html>
-
-    <!-- MODAL SELECCIONAR CHOFER GPS (RESTAURADO) -->
+<!-- MODAL SELECCIONAR CHOFER GPS (RESTAURADO) -->
     <div class="modal" id="modal-select-moto-gps">
         <div class="modal-content-standard" style="padding:32px 24px; text-align:center;">
             <button class="modal-close-circle" style="background:rgba(0,0,0,0.05);" onclick="document.getElementById('modal-select-moto-gps').style.display='none'">✕</button>
@@ -3286,4 +3315,3 @@
     </script>
 </body>
 </html>
-
