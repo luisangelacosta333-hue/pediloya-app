@@ -130,36 +130,36 @@
         .admin-container { width: 100%; max-width: 500px; margin: 0 auto; padding: 24px; box-sizing: border-box; padding-bottom: 60px; overflow-x: hidden;}
         
         /* =========================================================
-           ESTILOS CAJA / CHOFER
+           ESTILOS CAJA / CHOFER (NUEVAS PROPORCIONES PERFECTAS)
         ========================================================= */
-        .chofer-top-bar { display: flex; justify-content: center; align-items: center; margin-bottom: 10px; gap: 8px; flex-shrink: 0; }
-        .pill-btn { background: var(--bg-pure); border-radius: 50px; padding: 10px 8px; font-size: 0.75rem; font-weight: 800; color: var(--text-gray); box-shadow: var(--shadow-soft); cursor: pointer; border: 1px solid var(--border-soft); text-transform: uppercase; font-family:'Outfit'; letter-spacing: 0.5px; transition:0.2s; flex: 1; text-align: center; white-space: nowrap;}
+        .chofer-top-bar { display: flex; justify-content: center; align-items: center; margin-bottom: 8px; gap: 8px; flex-shrink: 0; }
+        .pill-btn { background: var(--bg-pure); border-radius: 50px; padding: 8px; font-size: 0.7rem; font-weight: 800; color: var(--text-gray); box-shadow: var(--shadow-soft); cursor: pointer; border: 1px solid var(--border-soft); text-transform: uppercase; font-family:'Outfit'; letter-spacing: 0.5px; transition:0.2s; flex: 1; text-align: center; white-space: nowrap;}
         .pill-btn:active { transform: scale(0.95); }
         
-        .calc-display { flex: 1; display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-end; min-height: 60px; padding: 12px 20px; background: #ffffff !important; border-radius: 24px; margin-bottom: 10px; box-shadow: 0 15px 35px rgba(255, 94, 0, 0.05); border: 1px solid rgba(255, 94, 0, 0.1); position: relative; overflow: hidden; }
-        .calc-main { font-size: 3rem; font-weight: 300; color: #000000 !important; line-height: 1; font-family: 'Outfit', sans-serif; word-break: break-all; letter-spacing: -2px; z-index:2;}
-        .calc-hist { font-size: 1rem; color: #64748b !important; font-weight: 500; min-height: 1.2rem; margin-bottom: 4px; z-index:2;}
+        .calc-display { flex: 1; display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-end; min-height: 50px; padding: 10px 16px; background: #ffffff !important; border-radius: 20px; margin-bottom: 8px; box-shadow: 0 15px 35px rgba(255, 94, 0, 0.05); border: 1px solid rgba(255, 94, 0, 0.1); position: relative; overflow: hidden; }
+        .calc-main { font-size: 2.4rem !important; font-weight: 300; color: #000000 !important; line-height: 1; font-family: 'Outfit', sans-serif; word-break: break-all; letter-spacing: -1px; z-index:2;}
+        .calc-hist { font-size: 0.9rem !important; color: #64748b !important; font-weight: 500; min-height: 1rem; margin-bottom: 2px; z-index:2;}
         
         .ticket-success { position: absolute; inset: 0; background: var(--success); color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Outfit'; z-index: 5; opacity: 0; pointer-events: none; transition: 0.3s; transform: translateY(100%); }
         .ticket-success.show { opacity: 1; transform: translateY(0); pointer-events: all; }
 
-        .btn-sheet-trigger { flex-shrink: 0; width: 100%; padding: 12px; background: rgba(255, 94, 0, 0.05); color: var(--primary-orange); font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.05rem; border: 1px solid rgba(255, 94, 0, 0.15); border-radius: 16px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display:flex; justify-content:center; align-items:center; gap:12px; transition:0.2s;}
+        .btn-sheet-trigger { flex-shrink: 0; width: 100%; padding: 10px; background: rgba(255, 94, 0, 0.05); color: var(--primary-orange); font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 0.95rem; border: 1px solid rgba(255, 94, 0, 0.15); border-radius: 14px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display:flex; justify-content:center; align-items:center; gap:12px; transition:0.2s;}
         .btn-sheet-trigger:active { transform: scale(0.97); background: rgba(255, 94, 0, 0.1); }
 
-        .chofer-action-row { flex-shrink: 0; display: flex; gap: 8px; margin-bottom: 10px; }
-        .chofer-btn-white { background: rgba(255, 94, 0, 0.05); border: 1px solid rgba(255, 94, 0, 0.15); border-radius: 16px; padding: 10px 4px; flex: 1; font-weight: 800; font-size: 0.8rem; color: var(--primary-orange); cursor: pointer; font-family: 'Outfit', sans-serif; text-transform:uppercase; transition:0.2s; display: flex; justify-content: center; align-items: center; gap: 4px;}
+        .chofer-action-row { flex-shrink: 0; display: flex; gap: 6px; margin-bottom: 8px; }
+        .chofer-btn-white { background: rgba(255, 94, 0, 0.05); border: 1px solid rgba(255, 94, 0, 0.15); border-radius: 14px; padding: 8px 4px; flex: 1; font-weight: 800; font-size: 0.75rem; color: var(--primary-orange); cursor: pointer; font-family: 'Outfit', sans-serif; text-transform:uppercase; transition:0.2s; display: flex; justify-content: center; align-items: center; gap: 4px;}
         .chofer-btn-white:active { transform: scale(0.95); background: rgba(255, 94, 0, 0.1); }
         
-        .chofer-keypad { flex-shrink: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 10px; padding: 0; }
-        .ckey { background: #ffffff !important; border: 1px solid rgba(255, 94, 0, 0.15); border-radius: 18px; height: 6.5vh; min-height: 48px; max-height: 65px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 500; color: #0f172a; box-shadow: 0 4px 12px rgba(255, 94, 0, 0.02); cursor: pointer; font-family: 'Outfit', sans-serif; transition: all 0.2s cubic-bezier(0.2, 1, 0.3, 1); }
+        .chofer-keypad { flex-shrink: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 8px; padding: 0; }
+        .ckey { background: #ffffff !important; border: 1px solid rgba(255, 94, 0, 0.15); border-radius: 14px; height: 5.5vh; min-height: 42px; max-height: 55px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 500; color: #0f172a; box-shadow: 0 4px 12px rgba(255, 94, 0, 0.02); cursor: pointer; font-family: 'Outfit', sans-serif; transition: all 0.2s cubic-bezier(0.2, 1, 0.3, 1); }
         .ckey:active { transform: scale(0.92); box-shadow: 0 2px 6px rgba(255, 94, 0, 0.05); background: rgba(255, 94, 0, 0.05) !important; border-color: var(--primary-orange); }
         
-        .ckey-op { color: var(--primary-orange) !important; font-size: 2.2rem; font-weight: 400; background: #ffffff !important; border-color: rgba(255, 94, 0, 0.15); }
-        .ckey-del { color: var(--primary-orange) !important; font-size: 1.8rem; }
-        .ckey-eq { background: var(--gradient-orange) !important; color: white !important; border: none; font-size: 2.4rem; box-shadow: 0 10px 25px rgba(255, 94, 0, 0.25); font-weight: 400; }
+        .ckey-op { color: var(--primary-orange) !important; font-size: 1.8rem !important; font-weight: 400; background: #ffffff !important; border-color: rgba(255, 94, 0, 0.15); }
+        .ckey-del { color: var(--primary-orange) !important; font-size: 1.5rem !important; }
+        .ckey-eq { background: var(--gradient-orange) !important; color: white !important; border: none; font-size: 2rem !important; box-shadow: 0 10px 25px rgba(255, 94, 0, 0.25); font-weight: 400; }
 
-        .chofer-pay-row { flex-shrink: 0; display: flex; gap: 8px; margin-bottom: 10px; }
-        .chofer-pay-btn, .btn-pay-transfer { flex: 1; border-radius: 16px; padding: 12px 8px; font-weight: 800; font-size: 1rem; font-family: 'Outfit', sans-serif; text-transform: uppercase; background: rgba(255, 94, 0, 0.05) !important; color: var(--primary-orange) !important; border: 1px solid rgba(255, 94, 0, 0.15) !important; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: 0.2s; box-shadow: none !important;}
+        .chofer-pay-row { flex-shrink: 0; display: flex; gap: 6px; margin-bottom: 8px; }
+        .chofer-pay-btn, .btn-pay-transfer { flex: 1; border-radius: 14px; padding: 10px 6px; font-weight: 800; font-size: 0.9rem; font-family: 'Outfit', sans-serif; text-transform: uppercase; background: rgba(255, 94, 0, 0.05) !important; color: var(--primary-orange) !important; border: 1px solid rgba(255, 94, 0, 0.15) !important; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 6px; transition: 0.2s; box-shadow: none !important;}
         .chofer-pay-btn:active, .btn-pay-transfer:active { transform: scale(0.95); background: rgba(255, 94, 0, 0.1) !important; }
         /* ========================================================= */
 
@@ -333,16 +333,18 @@
             padding: 16px; 
             border-radius: 20px; 
             border: 2px dashed var(--primary-orange); 
-            display: inline-flex; 
+            display: flex; 
             justify-content: center; 
             align-items: center; 
             margin: 0 auto 24px auto; 
             box-shadow: 0 10px 30px rgba(255,94,0,0.1);
-            max-width: 100%;
+            width: 100%;
+            max-width: 250px;
+            aspect-ratio: 1 / 1;
             box-sizing: border-box;
         }
         #qr-container img, #qr-container canvas { 
-            max-width: 100% !important; 
+            width: 100% !important; 
             height: auto !important; 
             display: block; 
         }
@@ -675,71 +677,71 @@
     </div>
 
     <!-- VISTA 2: CAJA DEL LOCAL (SÚPER PREMIUM, BLANCA Y FIJA) -->
-    <div id="view-chofer" class="view-container-no-pad" style="display:none; flex-direction:column; height:100svh; overflow:hidden; padding:max(16px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom)) 16px; box-sizing:border-box; background:#ffffff; max-width:500px; margin:0 auto; position:fixed; top:0; bottom:0; left:0; right:0; z-index:10;">
+    <div id="view-chofer" class="view-container-no-pad" style="display:none; flex-direction:column; justify-content:space-between; height:100svh; overflow:hidden; padding:max(10px, env(safe-area-inset-top)) 12px max(10px, env(safe-area-inset-bottom)) 12px; box-sizing:border-box; background:#ffffff; max-width:500px; margin:0 auto; position:fixed; top:0; bottom:0; left:0; right:0; z-index:10;">
         
-        <div class="chofer-top-bar">
+        <div class="chofer-top-bar" style="margin-bottom:6px;">
             <div class="pill-btn" onclick="vibrar([40]); toggleDriverGps()" id="btn-gps" style="background:var(--text-dark); color:white; transition: 0.3s; border-color:var(--text-dark);">📍 GPS DELI</div>
             <div class="pill-btn badge" id="btn-pedidos-web" style="color:var(--primary-orange); border-color:rgba(255,94,0,0.2); background:rgba(255,94,0,0.05);" onclick="vibrar([40]); abrirPedidosWeb()">🔔 PEDIDOS</div>
             <div class="pill-btn" style="color:var(--info); border-color:rgba(14,165,233,0.2); background:rgba(14,165,233,0.05);" onclick="vibrar([40]); document.getElementById('pin-modal').style.display='flex'">⚙️ DUEÑO</div>
         </div>
         
-        <div class="calc-display">
+        <div class="calc-display" style="min-height:50px; padding:10px 16px; margin-bottom:6px;">
             <div id="ticket-success" class="ticket-success">
                 <div style="font-size:2.5rem; margin-bottom:5px;">✅</div>
                 <div style="font-size:1.5rem; font-weight:800; letter-spacing:-1px;">COBRADO</div>
             </div>
-            <div id="calc-preview" class="calc-hist"></div>
-            <div id="calc-total" class="calc-main">0</div>
+            <div id="calc-preview" class="calc-hist" style="font-size:0.9rem !important; min-height:1rem; margin-bottom:2px;"></div>
+            <div id="calc-total" class="calc-main" style="font-size:2.4rem !important; letter-spacing:-1px;">0</div>
         </div>
         
-        <button class="btn-sheet-trigger" onclick="vibrar([40]); abrirPosSheet()">
+        <button class="btn-sheet-trigger" style="padding:10px; font-size:0.95rem; margin-bottom:6px; border-radius:14px;" onclick="vibrar([40]); abrirPosSheet()">
             <span style="font-size:1.4rem;">🍔</span> CATÁLOGO DE PRODUCTOS
         </button>
         
         <!-- BOTONERA DE ACCIÓN COMBINADA -->
-        <div class="chofer-action-row">
-            <button class="chofer-btn-white" onclick="vibrar([40]); triggerExpenseModal()">💸 Gastos</button>
-            <button class="chofer-btn-white" onclick="vibrar([40]); abrirModalMotos()">🛵 Repartidores</button>
-            <button class="chofer-btn-white" onclick="vibrar([40]); document.getElementById('ventas-modal').style.display='flex'">🧾 Historial</button>
+        <div class="chofer-action-row" style="margin-bottom:6px; gap:6px;">
+            <button class="chofer-btn-white" style="padding:8px 4px; font-size:0.75rem; border-radius:14px;" onclick="vibrar([40]); triggerExpenseModal()">💸 Gastos</button>
+            <button class="chofer-btn-white" style="padding:8px 4px; font-size:0.75rem; border-radius:14px;" onclick="vibrar([40]); abrirModalMotos()">🛵 Repartidores</button>
+            <button class="chofer-btn-white" style="padding:8px 4px; font-size:0.75rem; border-radius:14px;" onclick="vibrar([40]); document.getElementById('ventas-modal').style.display='flex'">🧾 Historial</button>
         </div>
         
-        <div class="chofer-keypad">
-            <button class="ckey" onclick="vibrar([40]); inputCalc('7')">7</button>
-            <button class="ckey" onclick="vibrar([40]); inputCalc('8')">8</button>
-            <button class="ckey" onclick="vibrar([40]); inputCalc('9')">9</button>
-            <button class="ckey ckey-del" onclick="vibrar([40]); deleteCalc()">⌫</button>
+        <div class="chofer-keypad" style="gap:6px; margin-bottom:6px;">
+            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('7')">7</button>
+            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('8')">8</button>
+            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('9')">9</button>
+            <button class="ckey ckey-del" style="height:5.5vh; min-height:42px; max-height:55px; border-radius:14px; font-size:1.5rem !important;" onclick="vibrar([40]); deleteCalc()">⌫</button>
             
-            <button class="ckey" onclick="vibrar([40]); inputCalc('4')">4</button>
-            <button class="ckey" onclick="vibrar([40]); inputCalc('5')">5</button>
-            <button class="ckey" onclick="vibrar([40]); inputCalc('6')">6</button>
-            <button class="ckey ckey-op" onclick="vibrar([40]); inputCalc('×')">×</button>
+            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('4')">4</button>
+            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('5')">5</button>
+            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('6')">6</button>
+            <button class="ckey ckey-op" style="height:5.5vh; min-height:42px; max-height:55px; border-radius:14px; font-size:1.8rem !important;" onclick="vibrar([40]); inputCalc('×')">×</button>
             
-            <button class="ckey" onclick="vibrar([40]); inputCalc('1')">1</button>
-            <button class="ckey" onclick="vibrar([40]); inputCalc('2')">2</button>
-            <button class="ckey" onclick="vibrar([40]); inputCalc('3')">3</button>
-            <button class="ckey ckey-op" onclick="vibrar([40]); inputCalc('-')">-</button>
+            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('1')">1</button>
+            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('2')">2</button>
+            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('3')">3</button>
+            <button class="ckey ckey-op" style="height:5.5vh; min-height:42px; max-height:55px; border-radius:14px; font-size:1.8rem !important;" onclick="vibrar([40]); inputCalc('-')">-</button>
             
-            <button class="ckey" style="color:var(--primary-orange);" onclick="vibrar([40]); clearCalc()">C</button>
-            <button class="ckey" onclick="vibrar([40]); inputCalc('0')">0</button>
-            <button class="ckey ckey-op" onclick="vibrar([40]); inputCalc('+')">+</button>
-            <button class="ckey ckey-eq" onclick="vibrar([40]); evalCalc()">=</button>
+            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px; color:var(--primary-orange);" onclick="vibrar([40]); clearCalc()">C</button>
+            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('0')">0</button>
+            <button class="ckey ckey-op" style="height:5.5vh; min-height:42px; max-height:55px; border-radius:14px; font-size:1.8rem !important;" onclick="vibrar([40]); inputCalc('+')">+</button>
+            <button class="ckey ckey-eq" style="height:5.5vh; min-height:42px; max-height:55px; border-radius:14px; font-size:2rem !important;" onclick="vibrar([40]); evalCalc()">=</button>
         </div>
 
-        <div style="flex-shrink:0; margin-bottom: 10px;">
-            <select id="chofer-moto-select" class="form-input" style="padding: 14px; margin-bottom: 0; background: rgba(255, 94, 0, 0.05); border: 1px solid rgba(255, 94, 0, 0.15); color: var(--primary-orange); border-radius: 16px; cursor: pointer; font-weight: 800; font-family: 'Outfit'; text-transform: uppercase; outline: none; text-align: center; text-align-last: center; appearance: none; font-size: 0.9rem;">
+        <div style="flex-shrink:0; margin-bottom:6px;">
+            <select id="chofer-moto-select" class="form-input" style="padding:10px; margin-bottom:0; background:rgba(255,94,0,0.05); border:1px solid rgba(255,94,0,0.15); color:var(--primary-orange); border-radius:14px; cursor:pointer; font-weight:800; font-family:'Outfit'; text-transform:uppercase; outline:none; text-align:center; text-align-last:center; appearance:none; font-size:0.85rem;">
                 <option value="">🏪 ENVIAR A: MOSTRADOR (CAJA)</option>
             </select>
         </div>
         
-        <div class="chofer-pay-row">
-            <button class="chofer-pay-btn" onclick="vibrar([40]); submitSale('EFECTIVO')">💵 EFECTIVO</button>
-            <button class="btn-pay-transfer" onclick="vibrar([40]); abrirSheetTransfVenta()">🏦 TRANSF.</button>
+        <div class="chofer-pay-row" style="margin-bottom:6px; gap:6px;">
+            <button class="chofer-pay-btn" style="padding:10px 6px; font-size:0.9rem; border-radius:14px;" onclick="vibrar([40]); submitSale('EFECTIVO')">💵 EFECTIVO</button>
+            <button class="btn-pay-transfer" style="padding:10px 6px; font-size:0.9rem; border-radius:14px;" onclick="vibrar([40]); abrirSheetTransfVenta()">🏦 TRANSF.</button>
         </div>
         
         <!-- ============================================== -->
         <!-- BOTÓN CERRAR TURNO (AHORA VISIBLE Y SIN SCROLL) -->
         <!-- ============================================== -->
-        <button style="flex-shrink:0; width:100%; border-radius:16px; padding:16px; font-weight:800; font-size:1rem; font-family:'Outfit'; text-transform:uppercase; background:var(--text-dark); color:white; border:none; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; box-shadow:0 10px 25px rgba(15,23,42,0.3); transition:0.2s; margin-bottom: 0px;" onclick="vibrar([40]); cerrarTurno()">🔒 CERRAR TURNO</button>
+        <button style="flex-shrink:0; width:100%; border-radius:14px; padding:12px; font-weight:800; font-size:0.95rem; font-family:'Outfit'; text-transform:uppercase; background:var(--text-dark); color:white; border:none; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; box-shadow:0 10px 25px rgba(15,23,42,0.3); transition:0.2s; margin-bottom:0px;" onclick="vibrar([40]); cerrarTurno()">🔒 CERRAR TURNO</button>
     </div>
 
     <!-- VISTA 3: PANEL DUEÑO -->
@@ -788,22 +790,22 @@
 
             <div style="background:var(--gradient-orange); color:white; padding:32px 20px; border-radius:var(--radius-lg); text-align:center; box-shadow:var(--shadow-orange); margin-bottom:10px; width:100%; box-sizing:border-box;">
                 <span style="font-size:0.9rem; font-weight:800; color:rgba(255,255,255,0.9); text-transform:uppercase; letter-spacing:1.5px;">💰 Balance Total (Gran Total)</span>
-                <div id="adm-total-general" style="font-size:3.5rem; font-weight:900; margin-top:16px; font-family:'Outfit'; letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
+                <div id="adm-total-general" style="font-size:2.4rem; font-weight:900; margin-top:12px; font-family:'Outfit'; letter-spacing:-1px; line-height:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">$0</div>
             </div>
 
             <div style="background:var(--bg-pure); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(0,0,0,0.03); box-shadow:var(--shadow-float); margin-bottom:10px; width:100%; box-sizing:border-box;">
                 <span style="font-size:0.9rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1.5px;">💵 Caja Mostrador</span>
-                <div id="adm-cash" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
+                <div id="adm-cash" style="font-size:2.2rem; font-weight:300; margin-top:12px; font-family:'Outfit'; letter-spacing:-1px; line-height:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">$0</div>
             </div>
 
             <div style="background:var(--bg-pure); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(0,0,0,0.03); box-shadow:var(--shadow-float); margin-bottom:10px; width:100%; box-sizing:border-box;">
                 <span style="font-size:0.9rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1.5px;">🏦 Transferencias</span>
-                <div id="adm-transf" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; color:var(--info); letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
+                <div id="adm-transf" style="font-size:2.2rem; font-weight:300; margin-top:12px; font-family:'Outfit'; color:var(--info); letter-spacing:-1px; line-height:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">$0</div>
             </div>
 
             <div style="background:var(--bg-pure); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(0,0,0,0.03); box-shadow:var(--shadow-float); margin-bottom:40px; width:100%; box-sizing:border-box;">
                 <span style="font-size:0.9rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1.5px;">🛵 Plata en Repartidores</span>
-                <div id="adm-motos-cash" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; color:var(--primary-orange); letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
+                <div id="adm-motos-cash" style="font-size:2.2rem; font-weight:300; margin-top:12px; font-family:'Outfit'; color:var(--primary-orange); letter-spacing:-1px; line-height:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">$0</div>
             </div>
 
             <!-- ============================================== -->
