@@ -297,7 +297,7 @@
         .pos-sheet-overlay.open { display: block; opacity: 1; }
         .sheet-product-card { display: flex; align-items: center; justify-content: space-between; background: var(--bg-app); padding: 16px; border-radius: 24px; border: 1px solid var(--border-soft); box-shadow: 0 4px 15px rgba(0,0,0,0.02); cursor: pointer; transition: 0.2s;}
         .sheet-product-card:active { transform: scale(0.97); }
-        .sheet-img-box { width: 60px; height: 60px; border-radius: 12px; background: #0f172a; overflow: hidden; margin-right: 16px; flex-shrink: 0; display:flex; justify-content:center; align-items:center; font-size: 1.5rem; position:relative;}
+        .sheet-img-box { width: 60px; height: 60px; border-radius: 12px; background: #0f172a; overflow: margin-right: 16px; flex-shrink: 0; display:flex; justify-content:center; align-items:center; font-size: 1.5rem; position:relative;}
         .sheet-img-box img, .sheet-img-box video { width: 100%; height: 100%; object-fit: cover; position:absolute; inset:0;}
         .custom-div-icon { background: transparent; border: none; }
         @keyframes pulse-deli { 0% {transform: scale(1);} 100% {transform: scale(1.15);} }
@@ -758,24 +758,49 @@
             </div>
             <!-- ============================================== -->
 
-            <div style="background:var(--gradient-orange); color:white; padding:32px 20px; border-radius:var(--radius-lg); text-align:center; box-shadow:var(--shadow-orange); margin-bottom:10px; width:100%; box-sizing:border-box;">
-                <span style="font-size:0.9rem; font-weight:800; color:rgba(255,255,255,0.9); text-transform:uppercase; letter-spacing:1.5px;">💰 Balance Total (Gran Total)</span>
-                <div id="adm-total-general" style="font-size:3.5rem; font-weight:900; margin-top:16px; font-family:'Outfit'; letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
+            <!-- ============================================== -->
+            <!-- 💳 BÓVEDA FINANCIERA (TARJETAS PREMIUM) -->
+            <!-- ============================================== -->
+            <div style="background: linear-gradient(135deg, #0f172a, #1e293b); color: white; padding: 28px; border-radius: 28px; position: relative; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); margin-bottom: 16px; width:100%; box-sizing:border-box;">
+                <div style="position:absolute; top:-30px; right:-30px; width:150px; height:150px; background:radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%); border-radius:50%;"></div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 24px;">
+                    <div style="background:#fbbf24; width:45px; height:32px; border-radius:6px; opacity:0.8; border: 1px solid rgba(0,0,0,0.2); box-shadow: inset 1px 1px 2px rgba(255,255,255,0.5);"></div>
+                    <div style="font-size: 1.5rem; opacity: 0.8; transform: rotate(90deg);">🛜</div>
+                </div>
+                <span style="font-size:0.85rem; font-weight:800; color:#94a3b8; text-transform:uppercase; letter-spacing:2px;">💰 BALANCE TOTAL</span>
+                <div id="adm-total-general" style="font-size:3.5rem; font-weight:900; margin-top:8px; font-family:'Outfit'; letter-spacing:-1px; line-height:1; text-shadow: 0 4px 10px rgba(0,0,0,0.5);">$0</div>
             </div>
 
-            <div style="background:var(--bg-pure); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(0,0,0,0.03); box-shadow:var(--shadow-float); margin-bottom:10px; width:100%; box-sizing:border-box;">
-                <span style="font-size:0.9rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1.5px;">💵 Caja Mostrador</span>
-                <div id="adm-cash" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
+            <div style="display:flex; gap:10px; margin-bottom:10px;">
+                <div style="background: linear-gradient(135deg, #ffffff, #f8fafc); padding: 20px; border-radius: 24px; flex:1; border: 1px solid var(--border-soft); box-shadow: var(--shadow-float); position:relative; overflow:hidden;">
+                    <span style="font-size:0.75rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1px;">💵 Mostrador</span>
+                    <div id="adm-cash" style="font-size:2.2rem; font-weight:800; margin-top:8px; font-family:'Outfit'; letter-spacing:-1px; color:var(--text-dark);">$0</div>
+                </div>
+                <div style="background: linear-gradient(135deg, #ffffff, #f8fafc); padding: 20px; border-radius: 24px; flex:1; border: 1px solid var(--border-soft); box-shadow: var(--shadow-float); position:relative; overflow:hidden;">
+                    <span style="font-size:0.75rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1px;">🏦 Transf.</span>
+                    <div id="adm-transf" style="font-size:2.2rem; font-weight:800; margin-top:8px; font-family:'Outfit'; letter-spacing:-1px; color:var(--info);">$0</div>
+                </div>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #ffffff, #f8fafc); padding: 20px; border-radius: 24px; width:100%; box-sizing:border-box; border: 1px solid var(--border-soft); box-shadow: var(--shadow-float); margin-bottom:40px; text-align:center;">
+                <span style="font-size:0.85rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1.5px;">🛵 Plata en Repartidores</span>
+                <div id="adm-motos-cash" style="font-size:3rem; font-weight:300; margin-top:10px; font-family:'Outfit'; color:var(--primary-orange); letter-spacing:-1px; line-height:1;">$0</div>
             </div>
 
-            <div style="background:var(--bg-pure); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(0,0,0,0.03); box-shadow:var(--shadow-float); margin-bottom:10px; width:100%; box-sizing:border-box;">
-                <span style="font-size:0.9rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1.5px;">🏦 Transferencias</span>
-                <div id="adm-transf" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; color:var(--info); letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
-            </div>
-
-            <div style="background:var(--bg-pure); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(0,0,0,0.03); box-shadow:var(--shadow-float); margin-bottom:40px; width:100%; box-sizing:border-box;">
-                <span style="font-size:0.9rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1.5px;">🛵 Plata en Repartidores</span>
-                <div id="adm-motos-cash" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; color:var(--primary-orange); letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
+            <!-- ============================================== -->
+            <!-- 🎨 PALETA DE COLORES DE MARCA -->
+            <!-- ============================================== -->
+            <div class="admin-card" style="border-top:4px solid #8b5cf6;">
+                <h3 style="margin:0 0 10px; font-size:1.5rem; font-family:'Outfit'; font-weight:800; color:var(--text-dark);">🎨 Tu Identidad VIP</h3>
+                <p style="font-size:0.95rem; color:var(--text-gray); margin-bottom:20px;">Elegí el color que verán tus clientes en tu página web.</p>
+                <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+                    <button onclick="vibrar([40]); cambiarColorMarca('#ff5e00')" style="width:45px; height:45px; border-radius:50%; background:#ff5e00; border:4px solid white; box-shadow:0 5px 15px rgba(255,94,0,0.3); cursor:pointer;"></button>
+                    <button onclick="vibrar([40]); cambiarColorMarca('#ef4444')" style="width:45px; height:45px; border-radius:50%; background:#ef4444; border:4px solid white; box-shadow:0 5px 15px rgba(239,68,68,0.3); cursor:pointer;"></button>
+                    <button onclick="vibrar([40]); cambiarColorMarca('#10b981')" style="width:45px; height:45px; border-radius:50%; background:#10b981; border:4px solid white; box-shadow:0 5px 15px rgba(16,185,129,0.3); cursor:pointer;"></button>
+                    <button onclick="vibrar([40]); cambiarColorMarca('#3b82f6')" style="width:45px; height:45px; border-radius:50%; background:#3b82f6; border:4px solid white; box-shadow:0 5px 15px rgba(59,130,246,0.3); cursor:pointer;"></button>
+                    <button onclick="vibrar([40]); cambiarColorMarca('#0f172a')" style="width:45px; height:45px; border-radius:50%; background:#0f172a; border:4px solid white; box-shadow:0 5px 15px rgba(15,23,42,0.3); cursor:pointer;"></button>
+                    <button onclick="vibrar([40]); cambiarColorMarca('#eab308')" style="width:45px; height:45px; border-radius:50%; background:#eab308; border:4px solid white; box-shadow:0 5px 15px rgba(234,179,8,0.3); cursor:pointer;"></button>
+                </div>
             </div>
 
             <!-- ============================================== -->
@@ -961,6 +986,22 @@
                 window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent("¡Mirá nuestro menú digital acá! " + window.location.href), "_blank");
             }
         };
+
+        // --- SISTEMA DE COLORES VIP ---
+        window.aplicarColorVisual = function(color) {
+            let c = color || '#ff5e00'; // Naranja por defecto si no eligió nada
+            document.documentElement.style.setProperty('--primary-orange', c);
+            document.documentElement.style.setProperty('--gradient-orange', `linear-gradient(135deg, ${c}, #111111)`);
+        };
+
+        window.cambiarColorMarca = async function(color) {
+            let nuevaAppData = { ...storeData, brand_color: color };
+            await _supabase.from('pediloya_usuarios').update({ app_data: nuevaAppData }).eq('id', currentLocalId);
+            storeData = nuevaAppData;
+            aplicarColorVisual(color);
+            showToast("Color actualizado con éxito");
+        };
+        // --------------------------------
     </script>
 </body>
 </html>
@@ -1178,7 +1219,7 @@
 
         let dbState = { inventory:[], logs:[], repartidores:[] };
         let cUser = "LOCAL_GENERICO", currentLocalId = "", cAdminPin = "0000", expr = "", isEval = false;
-        let shoppingCart = [], storeData = { perfil_url: '', descripcion: '', direccion: '', maps_url: '', whatsapp_publico: '', promos: [], sub_end_date: '', cupones: [], oferta_relampago: null, dominio_vip: '' };
+        let shoppingCart = [], storeData = { perfil_url: '', descripcion: '', direccion: '', maps_url: '', whatsapp_publico: '', promos: [], sub_end_date: '', cupones: [], oferta_relampago: null, dominio_vip: '', brand_color: '' };
         let selProd = null, currentQvItem = null, currentQvQty = 1;
         let targetLocalId = "", targetLocalName = "", targetLocalPhone = "";
         let isDeliveryOption = true;
@@ -1210,6 +1251,22 @@
             let cleaned = txt.replace(/[^0-9.-]/g, '');
             return parseFloat(cleaned) || 0;
         }
+
+        // --- SISTEMA DE COLORES VIP ---
+        window.aplicarColorVisual = function(color) {
+            let c = color || '#ff5e00'; // Naranja por defecto si no eligió nada
+            document.documentElement.style.setProperty('--primary-orange', c);
+            document.documentElement.style.setProperty('--gradient-orange', `linear-gradient(135deg, ${c}, #111111)`);
+        };
+
+        window.cambiarColorMarca = async function(color) {
+            let nuevaAppData = { ...storeData, brand_color: color };
+            await _supabase.from('pediloya_usuarios').update({ app_data: nuevaAppData }).eq('id', currentLocalId);
+            storeData = nuevaAppData;
+            aplicarColorVisual(color);
+            showToast("Color actualizado con éxito");
+        };
+        // --------------------------------
 
         document.addEventListener('DOMContentLoaded', async () => {
             const urlParams = new URLSearchParams(window.location.search);
@@ -1433,7 +1490,7 @@
                 await _supabase.auth.signUp({ email: `${waLimpio}@pediloya.com`, password: pin + "IA" }).catch(e=>console.log(e));
                 
                 let endDate = new Date(); endDate.setDate(endDate.getDate() + 30); 
-                let appDataObj = { perfil_url: '', descripcion: 'Tu mejor opción delivery', direccion: '', maps_url: '', whatsapp_publico: waLimpio, promos: [], sub_end_date: endDate.toISOString(), repartidores: [], cupones: [], oferta_relampago: null, dominio_vip: '' };
+                let appDataObj = { perfil_url: '', descripcion: 'Tu mejor opción delivery', direccion: '', maps_url: '', whatsapp_publico: waLimpio, promos: [], sub_end_date: endDate.toISOString(), repartidores: [], cupones: [], oferta_relampago: null, dominio_vip: '', brand_color: '' };
 
                 let { error } = await _supabase.from('pediloya_usuarios').insert([{ local: local, pin: pin, admin_pin: apin, whatsapp: waLimpio, prov: 'Gastronomia', app_data: appDataObj }]);
                 
@@ -1463,8 +1520,10 @@
                 
                 currentLocalId = data.id; cUser = data.local; targetLocalPhone = data.whatsapp; 
                 cAdminPin = data.admin_pin || "0000";
-                storeData = data.app_data || { perfil_url: '', descripcion: '', direccion: '', maps_url: '', whatsapp_publico: '', promos: [], sub_end_date: '', repartidores: [], cupones: [], oferta_relampago: null, dominio_vip: '' };
+                storeData = data.app_data || { perfil_url: '', descripcion: '', direccion: '', maps_url: '', whatsapp_publico: '', promos: [], sub_end_date: '', repartidores: [], cupones: [], oferta_relampago: null, dominio_vip: '', brand_color: '' };
                 
+                aplicarColorVisual(storeData.brand_color);
+
                 setText('lbl-owner', cUser);
                 await loadDataFromDB(); 
                 verificarSuscripcion();
@@ -1891,6 +1950,8 @@
             dbState.logs = allLogs;
             
             // --- CARGA DE PERFIL Y DATOS DEL LOCAL ---
+            aplicarColorVisual(storeData.brand_color);
+
             if(storeData.perfil_url) {
                 setImgSrc('store-logo-preview', storeData.perfil_url);
                 if(qs('placeholder-perfil')) qs('placeholder-perfil').style.display = 'none';
@@ -2519,6 +2580,8 @@
                 let sData = usr.app_data || {};
                 storeData = sData; 
                 
+                aplicarColorVisual(storeData.brand_color);
+
                 if(sData.perfil_url) {
                     setImgSrc('public-store-logo', sData.perfil_url);
                     if(qs('public-store-bg-img')) {
@@ -3289,39 +3352,40 @@
             let imgEl = qs('qr-image-display');
             if(!imgEl || !imgEl.src) return;
             
-            // 1. Forzar descarga de la imagen para no perder la funcionalidad "Descargar"
+            let storeName = (typeof cUser !== 'undefined' && cUser) ? cUser : "nuestro local";
+            let link = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : `${window.location.origin}/?local=${encodeURIComponent(cUser)}`;
+            let textMsg = `¡Hacé tu pedido online en ${storeName}! 🍔🛵\n\nIngresá acá para ver nuestro menú digital:\n${link}`;
+
             try {
+                showToast("Preparando imagen...", "info");
+                
+                // 1. Obtenemos la imagen QR como archivo real .png
                 let response = await fetch(imgEl.src);
                 let blob = await response.blob();
-                let a = document.createElement('a');
-                a.href = URL.createObjectURL(blob);
-                a.download = `QR_${cUser}_Pediloya.png`;
-                a.click();
-                showToast("QR Descargado correctamente", "success");
-            } catch(e) {
-                console.log("No se pudo descargar la imagen automáticamente.");
-            }
-
-            // 2. Compartir el texto garantizado (Soluciona el bug de WhatsApp que borra el texto si envías archivo)
-            let link = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : `${window.location.origin}/?local=${encodeURIComponent(cUser)}`;
-            let storeName = (typeof cUser !== 'undefined' && cUser) ? cUser : "nuestro local";
-            let textMsg = `¡Hacé tu pedido online en ${storeName}! 🍔🛵\n\nIngresá acá para ver nuestro menú digital:\n${link}\n\nO escaneá nuestro código QR directamente desde aquí:\n${imgEl.src}`;
-
-            try {
-                if (navigator.share) {
+                let file = new File([blob], `QR_${storeName.replace(/[^a-zA-Z0-9]/g, '_')}.png`, { type: blob.type });
+                
+                // 2. Verificamos si el celular soporta compartir archivos nativamente (Ej: Android/iOS)
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
                     await navigator.share({
                         title: `Menú de ${storeName}`,
-                        text: textMsg
-                    }).catch(err => {
-                        if (err.name !== 'AbortError') {
-                            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(textMsg)}`, '_blank');
-                        }
+                        text: textMsg,
+                        files: [file] // Esto adjunta el archivo físico al mensaje de WhatsApp!
                     });
                 } else {
+                    // 3. FALLBACK: Si no lo soporta (ej: PC), lo descarga y pide adjuntarlo manual
+                    let a = document.createElement('a');
+                    a.href = URL.createObjectURL(blob);
+                    a.download = `QR_${storeName.replace(/[^a-zA-Z0-9]/g, '_')}.png`;
+                    a.click();
+                    
+                    alert("✅ El QR se descargó en tu dispositivo.\n\nAhora se abrirá WhatsApp con el texto listo. ¡Acordate de ADJUNTAR LA IMAGEN del QR que se acaba de descargar!");
                     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(textMsg)}`, '_blank');
                 }
             } catch(e) {
-                window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(textMsg)}`, '_blank');
+                console.log("Error al compartir:", e);
+                if (e.name !== 'AbortError') {
+                    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(textMsg)}`, '_blank');
+                }
             }
         };
 
