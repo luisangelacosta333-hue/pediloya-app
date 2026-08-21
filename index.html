@@ -250,6 +250,9 @@
         .fcb-qty { background: var(--primary-orange); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 800;}
         .fcb-right { font-family: 'Outfit'; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.5px;}
 
+        /* =========================================================
+           MODAL PAYWALL DE DOS NIVELES (ESTÁNDAR Y VIP)
+        ========================================================= */
         .modal-paywall { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(15px); }
         .modal-paywall-content { background: #0f172a; border-top: 5px solid #0ea5e9; padding: 40px 24px; border-radius: 40px; box-shadow: 0 30px 80px rgba(0,0,0,0.8); color: white; width: 92%; max-width: 460px; text-align: center;}
         
@@ -582,20 +585,35 @@
         </div>
     </div>
 
-    <!-- MODAL IA PAGO SUSCRIPCIÓN -->
+    <!-- MODAL IA PAGO SUSCRIPCIÓN (2 NIVELES) -->
     <div class="modal modal-paywall" id="paywall-modal">
         <div class="modal-paywall-content">
             <div style="font-size: 2.5rem; margin-bottom: 10px;">⏳</div>
             <h1 style="color:white; font-size:2rem; margin-top:0; font-weight: 800; font-family:'Outfit',sans-serif; letter-spacing:-1px;">Licencia Expirada</h1>
-            <p style="color:#94a3b8; margin-bottom: 24px; font-size:0.95rem; line-height: 1.5;">Tu prueba gratis de 30 días terminó. Renovate por 30 días para seguir usando el sistema y recibiendo pedidos.</p>
+            <p style="color:#94a3b8; margin-bottom: 20px; font-size:0.95rem; line-height: 1.5;">Elegí tu plan y transferí el monto exacto para reactivar tu sistema automáticamente con IA.</p>
             
-            <div style="background:#0b1120; padding:20px; border-radius:20px; margin-bottom:24px; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);">
-                <h2 style="margin:0; color:white; font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; font-family:'Outfit',sans-serif;">$14.000</h2>
-                <span style="font-size:0.85rem; color:#64748b; display: block; margin-top: 5px; font-weight: 700; letter-spacing:1px;">ARS / MES</span>
+            <!-- PLAN ESTANDAR -->
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding:16px 20px; border-radius:20px; margin-bottom:12px; text-align: left; display: flex; align-items: center; justify-content: space-between;">
+                <div>
+                    <span style="color:#94a3b8; font-weight:800; font-size:0.75rem; text-transform:uppercase; letter-spacing:1px;">Plan Estándar</span>
+                    <div style="color:white; font-size: 1.8rem; font-weight: 900; font-family:'Outfit'; letter-spacing:-1px; line-height:1.2;">$14.000 <span style="font-size:0.8rem; color:#64748b; font-weight:600; letter-spacing:0;">/mes</span></div>
+                    <span style="color:#10b981; font-size:0.85rem; font-weight:600;">✓ Menú interactivo básico</span>
+                </div>
+                <div style="font-size:2.2rem; opacity:0.8;">🥈</div>
+            </div>
+
+            <!-- PLAN VIP -->
+            <div style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(0,0,0,0)); border: 1px solid #8b5cf6; padding:16px 20px; border-radius:20px; margin-bottom:24px; text-align: left; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 10px 25px rgba(139, 92, 246, 0.15);">
+                <div>
+                    <span style="color:#c4b5fd; font-weight:800; font-size:0.75rem; text-transform:uppercase; letter-spacing:1px;">Plan VIP (Recomendado)</span>
+                    <div style="color:white; font-size: 1.8rem; font-weight: 900; font-family:'Outfit'; letter-spacing:-1px; line-height:1.2;">$29.000 <span style="font-size:0.8rem; color:#64748b; font-weight:600; letter-spacing:0;">/mes</span></div>
+                    <span style="color:#c4b5fd; font-size:0.85rem; font-weight:600;">👑 Tu Propio Dominio (.com.ar)</span>
+                </div>
+                <div style="font-size:2.2rem;">🏆</div>
             </div>
 
             <div style="background: rgba(14, 165, 233, 0.05); padding: 24px 20px; border-radius: 20px; margin-bottom: 24px; border: 1px dashed #0ea5e9; text-align: center;">
-                <p style="margin: 0 0 12px 0; color: #94a3b8; font-size: 0.95rem;">1. Transferí exactamente $14.000 a este Alias:</p>
+                <p style="margin: 0 0 12px 0; color: #94a3b8; font-size: 0.95rem;">1. Transferí el monto de tu plan a este Alias:</p>
                 <div style="background:#0b1120; padding:16px; border-radius:16px; margin-bottom: 20px;">
                     <span style="color: white; font-size: 1.2rem; font-weight: 800; letter-spacing: 1px; font-family:'Outfit',sans-serif;">noir.elite.ceo</span>
                 </div>
