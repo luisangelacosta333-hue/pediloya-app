@@ -18,18 +18,22 @@ export default async function handler(req, res) {
 
         const fechaHoy = new Date().toLocaleDateString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires' });
 
-        // ORDEN ESTRICTA PARA PEDILO YAA ($14.000)
+        // ORDEN ESTRICTA DE DOS NIVELES (ESTÁNDAR O VIP)
         const systemPrompt = `Sos un auditor financiero extremadamente estricto. Analizá este comprobante de transferencia bancaria. 
         Tene en cuenta que la fecha de hoy es: ${fechaHoy}.
         
         Debe cumplir TODAS estas condiciones sin excepción:
-        1. El monto transferido debe ser EXACTAMENTE $14.000 (catorce mil pesos argentinos).
-        2. El destinatario debe ser obligatoriamente: "Luis Angel Acosta" (o variaciones), O el Alias: "noir.elite.ceo", O el CBU: "0110257630025717844115".
+        1. MONTO EXACTO: El monto debe ser exactamente $14.000 (Catorce mil pesos) O exactamente $29.000 (Veintinueve mil pesos).
+        2. EL DESTINATARIO: Debe ser obligatoriamente: "Luis Angel Acosta" (o variaciones), O el Alias: "noir.elite.ceo", O el CBU: "0110257630025717844115".
         3. ESTADO: Debe ser una transferencia real (Ej: dice "Comprobante de transferencia", "Aprobada", "Exitosa", o tiene un "Id Op."). Rechazá si dice "Programada" o "Pendiente".
         4. ANTIFRAUDE: La fecha del comprobante debe ser de hoy o máximo 48 hs atrás. Si es vieja, rechazá diciendo: "El ticket es viejo o ya fue utilizado."
         
-        Devolveme UNICAMENTE un objeto JSON estricto con este formato: {"aprobado": true, "motivo": "Explicación corta"}.
-        Si falta un solo dato o algo es sospechoso, respondé {"aprobado": false, "motivo": "Por qué se rechazó"}.`;
+        Devolveme UNICAMENTE un objeto JSON estricto con este formato: 
+        {"aprobado": true, "plan": "VIP", "motivo": "Explicación corta"} (Si pagó 29000)
+        {"aprobado": true, "plan": "ESTANDAR", "motivo": "Explicación corta"} (Si pagó 14000)
+        
+        Si el monto es incorrecto (ej: transfirió menos plata) o es sospechoso, respondé:
+        {"aprobado": false, "plan": "NINGUNO", "motivo": "Por qué se rechazó"}`;
 
         const openAiPayload = {
             model: "gpt-4o",
@@ -47,13 +51,15 @@ export default async function handler(req, res) {
         const openAiData = await openAiRes.json();
         const iaDecision = JSON.parse(openAiData.choices[0].message.content);
 
-        // Si la IA detecta que el comprobante no sirve, frena todo acá
+        // Si la IA detecta que el comprobante no sirve (o mandó $1.000 pesos de vivo), frena todo
         if (!iaDecision.aprobado) return res.status(200).json({ success: false, msg: "Ticket Rechazado: " + iaDecision.motivo });
 
-        // SI LLEGAMOS ACÁ, EL TICKET ES VÁLIDO.
-        // Solo devolvemos "success: true". El sistema frontal de Pedilo Yaa atrapará esta respuesta 
-        // y se encargará automáticamente de sumar los 30 días de manera segura.
-        return res.status(200).json({ success: true, msg: "¡Pago Aprobado y 30 días renovados!" });
+        // SI LLEGAMOS ACÁ, EL TICKET ES VÁLIDO Y LA IA DETECTÓ QUÉ PLAN ELIGIÓ EL DUEÑO
+        return res.status(200).json({ 
+            success: true, 
+            plan: iaDecision.plan, // Devuelve "VIP" o "ESTANDAR"
+            msg: `¡Pago Aprobado! Plan ${iaDecision.plan} activado por 30 días.` 
+        });
 
     } catch (error) { 
         return res.status(500).json({ success: false, msg: error.message }); 
