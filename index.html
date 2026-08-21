@@ -136,22 +136,22 @@
         .pill-btn { background: var(--bg-pure); border-radius: 50px; padding: 10px 8px; font-size: 0.75rem; font-weight: 800; color: var(--text-gray); box-shadow: var(--shadow-soft); cursor: pointer; border: 1px solid var(--border-soft); text-transform: uppercase; font-family:'Outfit'; letter-spacing: 0.5px; transition:0.2s; flex: 1; text-align: center; white-space: nowrap;}
         .pill-btn:active { transform: scale(0.95); }
         
-        .calc-display { flex: 1; display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-end; min-height: 60px; padding: 12px 20px; background: #ffffff !important; border-radius: 24px; margin-bottom: 10px; box-shadow: 0 15px 35px rgba(255, 94, 0, 0.05); border: 1px solid rgba(255, 94, 0, 0.1); position: relative; overflow: hidden; }
-        .calc-main { font-size: 3rem; font-weight: 300; color: #000000 !important; line-height: 1; font-family: 'Outfit', sans-serif; word-break: break-all; letter-spacing: -2px; z-index:2;}
-        .calc-hist { font-size: 1rem; color: #64748b !important; font-weight: 500; min-height: 1.2rem; margin-bottom: 4px; z-index:2;}
+        .calc-display { flex: 1; display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-end; min-height: 95px; padding: 12px 20px; background: #ffffff !important; border-radius: 24px; margin-bottom: 10px; box-shadow: 0 15px 35px rgba(255, 94, 0, 0.05); border: 1px solid rgba(255, 94, 0, 0.1); position: relative; overflow: hidden; }
+        .calc-main { font-size: 3.5rem; font-weight: 300; color: #000000 !important; line-height: 1; font-family: 'Outfit', sans-serif; word-break: break-all; letter-spacing: -2px; z-index:2;}
+        .calc-hist { font-size: 1.15rem; color: #64748b !important; font-weight: 500; min-height: 1.2rem; margin-bottom: 6px; z-index:2;}
         
         .ticket-success { position: absolute; inset: 0; background: var(--success); color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Outfit'; z-index: 5; opacity: 0; pointer-events: none; transition: 0.3s; transform: translateY(100%); }
         .ticket-success.show { opacity: 1; transform: translateY(0); pointer-events: all; }
 
-        .btn-sheet-trigger { flex-shrink: 0; width: 100%; padding: 12px; background: rgba(255, 94, 0, 0.05); color: var(--primary-orange); font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.05rem; border: 1px solid rgba(255, 94, 0, 0.15); border-radius: 16px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display:flex; justify-content:center; align-items:center; gap:12px; transition:0.2s;}
+        .btn-sheet-trigger { flex-shrink: 0; width: 100%; padding: 14px; background: rgba(255, 94, 0, 0.05); color: var(--primary-orange); font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.1rem; border: 1px solid rgba(255, 94, 0, 0.15); border-radius: 16px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display:flex; justify-content:center; align-items:center; gap:12px; transition:0.2s;}
         .btn-sheet-trigger:active { transform: scale(0.97); background: rgba(255, 94, 0, 0.1); }
 
         .chofer-action-row { flex-shrink: 0; display: flex; gap: 8px; margin-bottom: 10px; }
-        .chofer-btn-white { background: rgba(255, 94, 0, 0.05); border: 1px solid rgba(255, 94, 0, 0.15); border-radius: 16px; padding: 10px 4px; flex: 1; font-weight: 800; font-size: 0.8rem; color: var(--primary-orange); cursor: pointer; font-family: 'Outfit', sans-serif; text-transform:uppercase; transition:0.2s; display: flex; justify-content: center; align-items: center; gap: 4px;}
+        .chofer-btn-white { background: rgba(255, 94, 0, 0.05); border: 1px solid rgba(255, 94, 0, 0.15); border-radius: 16px; padding: 12px 6px; flex: 1; font-weight: 800; font-size: 0.85rem; color: var(--primary-orange); cursor: pointer; font-family: 'Outfit', sans-serif; text-transform:uppercase; transition:0.2s; display: flex; justify-content: center; align-items: center; gap: 4px;}
         .chofer-btn-white:active { transform: scale(0.95); background: rgba(255, 94, 0, 0.1); }
         
         .chofer-keypad { flex-shrink: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 10px; padding: 0; }
-        .ckey { background: #ffffff !important; border: 1px solid rgba(255, 94, 0, 0.15); border-radius: 18px; height: 6.5vh; min-height: 48px; max-height: 65px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 500; color: #0f172a; box-shadow: 0 4px 12px rgba(255, 94, 0, 0.02); cursor: pointer; font-family: 'Outfit', sans-serif; transition: all 0.2s cubic-bezier(0.2, 1, 0.3, 1); }
+        .ckey { background: #ffffff !important; border: 1px solid rgba(255, 94, 0, 0.15); border-radius: 18px; height: 6.5vh; min-height: 52px; max-height: 65px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 500; color: #0f172a; box-shadow: 0 4px 12px rgba(255, 94, 0, 0.02); cursor: pointer; font-family: 'Outfit', sans-serif; transition: all 0.2s cubic-bezier(0.2, 1, 0.3, 1); }
         .ckey:active { transform: scale(0.92); box-shadow: 0 2px 6px rgba(255, 94, 0, 0.05); background: rgba(255, 94, 0, 0.05) !important; border-color: var(--primary-orange); }
         
         .ckey-op { color: var(--primary-orange) !important; font-size: 2.2rem; font-weight: 400; background: #ffffff !important; border-color: rgba(255, 94, 0, 0.15); }
@@ -159,7 +159,7 @@
         .ckey-eq { background: var(--gradient-orange) !important; color: white !important; border: none; font-size: 2.4rem; box-shadow: 0 10px 25px rgba(255, 94, 0, 0.25); font-weight: 400; }
 
         .chofer-pay-row { flex-shrink: 0; display: flex; gap: 8px; margin-bottom: 10px; }
-        .chofer-pay-btn, .btn-pay-transfer { flex: 1; border-radius: 16px; padding: 12px 8px; font-weight: 800; font-size: 1rem; font-family: 'Outfit', sans-serif; text-transform: uppercase; background: rgba(255, 94, 0, 0.05) !important; color: var(--primary-orange) !important; border: 1px solid rgba(255, 94, 0, 0.15) !important; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: 0.2s; box-shadow: none !important;}
+        .chofer-pay-btn, .btn-pay-transfer { flex: 1; border-radius: 16px; padding: 14px 8px; font-weight: 800; font-size: 1rem; font-family: 'Outfit', sans-serif; text-transform: uppercase; background: rgba(255, 94, 0, 0.05) !important; color: var(--primary-orange) !important; border: 1px solid rgba(255, 94, 0, 0.15) !important; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: 0.2s; box-shadow: none !important;}
         .chofer-pay-btn:active, .btn-pay-transfer:active { transform: scale(0.95); background: rgba(255, 94, 0, 0.1) !important; }
         /* ========================================================= */
 
@@ -647,7 +647,7 @@
     </div>
 
     <!-- VISTA 2: CAJA DEL LOCAL (SÚPER PREMIUM, BLANCA Y FIJA) -->
-    <!-- AJUSTE EXACTO: Se subió el margen para achicar la calculadora y que no sobre pantalla blanca -->
+    <!-- AJUSTE EXACTO: Se agrandaron números, historial y se hicieron los botones unos milímetros más grandes aprovechando el espacio blanco -->
     <div id="view-chofer" class="view-container-no-pad" style="display:none; flex-direction:column; justify-content:space-between; height:100svh; overflow:hidden; padding:max(10px, env(safe-area-inset-top)) 12px max(10px, env(safe-area-inset-bottom)) 12px; box-sizing:border-box; background:#ffffff; max-width:500px; margin:0 auto; position:fixed; top:0; bottom:0; left:0; right:0; z-index:10;">
         
         <div class="chofer-top-bar" style="margin-bottom:6px;">
@@ -656,62 +656,62 @@
             <div class="pill-btn" style="color:var(--info); border-color:rgba(14,165,233,0.2); background:rgba(14,165,233,0.05);" onclick="vibrar([40]); document.getElementById('pin-modal').style.display='flex'">⚙️ DUEÑO</div>
         </div>
         
-        <div class="calc-display" style="flex: 1; min-height: 80px; max-height: 40vh; padding: 12px 20px; margin-bottom: 8px;">
+        <div class="calc-display" style="flex: 1; min-height: 95px; max-height: 40vh; padding: 12px 20px; margin-bottom: 8px;">
             <div id="ticket-success" class="ticket-success">
                 <div style="font-size:2.5rem; margin-bottom:5px;">✅</div>
                 <div style="font-size:1.5rem; font-weight:800; letter-spacing:-1px;">COBRADO</div>
             </div>
-            <div id="calc-preview" class="calc-hist" style="font-size:0.9rem !important; min-height:1rem; margin-bottom:2px;"></div>
-            <div id="calc-total" class="calc-main" style="font-size:2.4rem !important; letter-spacing:-1px;">0</div>
+            <div id="calc-preview" class="calc-hist" style="font-size:1.15rem !important; min-height:1.2rem; margin-bottom:6px;"></div>
+            <div id="calc-total" class="calc-main" style="font-size:3.5rem !important; letter-spacing:-1px;">0</div>
         </div>
         
-        <button class="btn-sheet-trigger" style="padding:10px; font-size:0.95rem; margin-bottom:6px; border-radius:14px;" onclick="vibrar([40]); abrirPosSheet()">
+        <button class="btn-sheet-trigger" style="padding:14px; font-size:1.1rem; margin-bottom:6px; border-radius:14px;" onclick="vibrar([40]); abrirPosSheet()">
             <span style="font-size:1.4rem;">🍔</span> CATÁLOGO DE PRODUCTOS
         </button>
         
         <!-- BOTONERA DE ACCIÓN COMBINADA -->
         <div class="chofer-action-row" style="margin-bottom:6px; gap:6px;">
-            <button class="chofer-btn-white" style="padding:8px 4px; font-size:0.75rem; border-radius:14px;" onclick="vibrar([40]); triggerExpenseModal()">💸 Gastos</button>
-            <button class="chofer-btn-white" style="padding:8px 4px; font-size:0.75rem; border-radius:14px;" onclick="vibrar([40]); abrirModalMotos()">🛵 Repartidores</button>
-            <button class="chofer-btn-white" style="padding:8px 4px; font-size:0.75rem; border-radius:14px;" onclick="vibrar([40]); document.getElementById('ventas-modal').style.display='flex'">🧾 Historial</button>
+            <button class="chofer-btn-white" style="padding:12px 6px; font-size:0.85rem; border-radius:14px;" onclick="vibrar([40]); triggerExpenseModal()">💸 Gastos</button>
+            <button class="chofer-btn-white" style="padding:12px 6px; font-size:0.85rem; border-radius:14px;" onclick="vibrar([40]); abrirModalMotos()">🛵 Repartidores</button>
+            <button class="chofer-btn-white" style="padding:12px 6px; font-size:0.85rem; border-radius:14px;" onclick="vibrar([40]); document.getElementById('ventas-modal').style.display='flex'">🧾 Historial</button>
         </div>
         
         <div class="chofer-keypad" style="gap:6px; margin-bottom:6px;">
-            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('7')">7</button>
-            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('8')">8</button>
-            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('9')">9</button>
-            <button class="ckey ckey-del" style="height:5.5vh; min-height:42px; max-height:55px; border-radius:14px; font-size:1.5rem !important;" onclick="vibrar([40]); deleteCalc()">⌫</button>
+            <button class="ckey" style="height:6.5vh; min-height:52px; max-height:65px; font-size:1.8rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('7')">7</button>
+            <button class="ckey" style="height:6.5vh; min-height:52px; max-height:65px; font-size:1.8rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('8')">8</button>
+            <button class="ckey" style="height:6.5vh; min-height:52px; max-height:65px; font-size:1.8rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('9')">9</button>
+            <button class="ckey ckey-del" style="height:6.5vh; min-height:52px; max-height:65px; border-radius:14px; font-size:1.8rem !important;" onclick="vibrar([40]); deleteCalc()">⌫</button>
             
-            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('4')">4</button>
-            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('5')">5</button>
-            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('6')">6</button>
-            <button class="ckey ckey-op" style="height:5.5vh; min-height:42px; max-height:55px; border-radius:14px; font-size:1.8rem !important;" onclick="vibrar([40]); inputCalc('×')">×</button>
+            <button class="ckey" style="height:6.5vh; min-height:52px; max-height:65px; font-size:1.8rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('4')">4</button>
+            <button class="ckey" style="height:6.5vh; min-height:52px; max-height:65px; font-size:1.8rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('5')">5</button>
+            <button class="ckey" style="height:6.5vh; min-height:52px; max-height:65px; font-size:1.8rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('6')">6</button>
+            <button class="ckey ckey-op" style="height:6.5vh; min-height:52px; max-height:65px; border-radius:14px; font-size:2.2rem !important;" onclick="vibrar([40]); inputCalc('×')">×</button>
             
-            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('1')">1</button>
-            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('2')">2</button>
-            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('3')">3</button>
-            <button class="ckey ckey-op" style="height:5.5vh; min-height:42px; max-height:55px; border-radius:14px; font-size:1.8rem !important;" onclick="vibrar([40]); inputCalc('-')">-</button>
+            <button class="ckey" style="height:6.5vh; min-height:52px; max-height:65px; font-size:1.8rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('1')">1</button>
+            <button class="ckey" style="height:6.5vh; min-height:52px; max-height:65px; font-size:1.8rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('2')">2</button>
+            <button class="ckey" style="height:6.5vh; min-height:52px; max-height:65px; font-size:1.8rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('3')">3</button>
+            <button class="ckey ckey-op" style="height:6.5vh; min-height:52px; max-height:65px; border-radius:14px; font-size:2.2rem !important;" onclick="vibrar([40]); inputCalc('-')">-</button>
             
-            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px; color:var(--primary-orange);" onclick="vibrar([40]); clearCalc()">C</button>
-            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('0')">0</button>
-            <button class="ckey ckey-op" style="height:5.5vh; min-height:42px; max-height:55px; border-radius:14px; font-size:1.8rem !important;" onclick="vibrar([40]); inputCalc('+')">+</button>
-            <button class="ckey ckey-eq" style="height:5.5vh; min-height:42px; max-height:55px; border-radius:14px; font-size:2rem !important;" onclick="vibrar([40]); evalCalc()">=</button>
+            <button class="ckey" style="height:6.5vh; min-height:52px; max-height:65px; font-size:1.8rem; border-radius:14px; color:var(--primary-orange);" onclick="vibrar([40]); clearCalc()">C</button>
+            <button class="ckey" style="height:6.5vh; min-height:52px; max-height:65px; font-size:1.8rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('0')">0</button>
+            <button class="ckey ckey-op" style="height:6.5vh; min-height:52px; max-height:65px; border-radius:14px; font-size:2.2rem !important;" onclick="vibrar([40]); inputCalc('+')">+</button>
+            <button class="ckey ckey-eq" style="height:6.5vh; min-height:52px; max-height:65px; border-radius:14px; font-size:2.4rem !important;" onclick="vibrar([40]); evalCalc()">=</button>
         </div>
 
         <div style="flex-shrink:0; margin-bottom:6px;">
-            <select id="chofer-moto-select" class="form-input" style="padding:10px; margin-bottom:0; background:rgba(255,94,0,0.05); border:1px solid rgba(255,94,0,0.15); color:var(--primary-orange); border-radius:14px; cursor:pointer; font-weight:800; font-family:'Outfit'; text-transform:uppercase; outline:none; text-align:center; text-align-last:center; appearance:none; font-size:0.85rem;">
+            <select id="chofer-moto-select" class="form-input" style="padding:12px; margin-bottom:0; background:rgba(255,94,0,0.05); border:1px solid rgba(255,94,0,0.15); color:var(--primary-orange); border-radius:14px; cursor:pointer; font-weight:800; font-family:'Outfit'; text-transform:uppercase; outline:none; text-align:center; text-align-last:center; appearance:none; font-size:0.9rem;">
                 <option value="">🏪 ENVIAR A: MOSTRADOR (CAJA)</option>
             </select>
         </div>
         
-        <!-- ESTE ES EL MARGEN DE 35PX QUE EMPUJA LA CALCULADORA 2CM PARA ARRIBA -->
-        <div class="chofer-pay-row" style="margin-bottom:35px; gap:6px;">
-            <button class="chofer-pay-btn" style="padding:10px 6px; font-size:0.9rem; border-radius:14px;" onclick="vibrar([40]); submitSale('EFECTIVO')">💵 EFECTIVO</button>
-            <button class="btn-pay-transfer" style="padding:10px 6px; font-size:0.9rem; border-radius:14px;" onclick="vibrar([40]); abrirSheetTransfVenta()">🏦 TRANSF.</button>
+        <!-- EL MARGEN SE AJUSTÓ SOLO PARA LLENAR LA PANTALLA CON BOTONES MÁS CÓMODOS -->
+        <div class="chofer-pay-row" style="margin-bottom:10px; gap:6px;">
+            <button class="chofer-pay-btn" style="padding:14px 8px; font-size:1rem; border-radius:14px;" onclick="vibrar([40]); submitSale('EFECTIVO')">💵 EFECTIVO</button>
+            <button class="btn-pay-transfer" style="padding:14px 8px; font-size:1rem; border-radius:14px;" onclick="vibrar([40]); abrirSheetTransfVenta()">🏦 TRANSF.</button>
         </div>
         
-        <!-- BOTÓN CERRAR TURNO -->
-        <button style="flex-shrink:0; width:100%; border-radius:14px; padding:12px; font-weight:800; font-size:0.95rem; font-family:'Outfit'; text-transform:uppercase; background:var(--text-dark); color:white; border:none; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; box-shadow:0 10px 25px rgba(15,23,42,0.3); transition:0.2s; margin-bottom:0px;" onclick="vibrar([40]); cerrarTurno()">🔒 CERRAR TURNO</button>
+        <!-- BOTÓN CERRAR TURNO MÁS GRANDE -->
+        <button style="flex-shrink:0; width:100%; border-radius:14px; padding:16px; font-weight:800; font-size:1.05rem; font-family:'Outfit'; text-transform:uppercase; background:var(--text-dark); color:white; border:none; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; box-shadow:0 10px 25px rgba(15,23,42,0.3); transition:0.2s; margin-bottom:0px;" onclick="vibrar([40]); cerrarTurno()">🔒 CERRAR TURNO</button>
     </div>
 
     <!-- VISTA 3: PANEL DUEÑO -->
@@ -904,7 +904,7 @@
         </div>
     </div>
     
-    <!-- SCRIPT CORREGIDO: DESCARGA DE IMAGEN Y COMPARTIR QR TEXTO PLANO PROTEGIDO -->
+    <!-- SCRIPT CORREGIDO Y BLINDADO: COMPARTIR QR TEXTO PLANO -->
     <script>
         window.descargarQR = function() {
             let storeName = (typeof cUser !== 'undefined' && cUser) ? cUser : "Local";
@@ -932,26 +932,33 @@
         };
 
         window.compartirQR = function() {
-            // Tomamos el link directo del campo de texto de la pantalla, que siempre va a ser válido
-            let linkEl = document.getElementById('store-link-display');
-            let link = linkEl && linkEl.value ? linkEl.value : window.location.href;
-            
-            // Nos aseguramos que cUser existe o usamos fallback
-            let storeName = (typeof cUser !== 'undefined' && cUser) ? cUser : "nuestro local";
-            
-            let textMsg = `¡Hacé tu pedido online en ${storeName}! 🍔🛵\n\nIngresá acá para ver el menú digital:\n${link}`;
+            try {
+                // Tomamos el link directo del campo de texto de la pantalla para ir a lo seguro
+                let linkEl = document.getElementById('store-link-display');
+                let link = (linkEl && linkEl.value) ? linkEl.value : window.location.href;
+                
+                let storeName = (typeof cUser !== 'undefined' && cUser) ? cUser : "nuestro local";
+                let textMsg = `¡Hacé tu pedido online en ${storeName}! 🍔🛵\n\nIngresá acá para ver el menú digital:\n${link}`;
 
-            if (navigator.share) {
-                navigator.share({
-                    title: `Menú de ${storeName}`,
-                    text: textMsg
-                }).catch(err => {
-                    if (err.name !== 'AbortError') {
-                        window.open(`https://wa.me/?text=${encodeURIComponent(textMsg)}`, '_blank');
-                    }
-                });
-            } else {
-                window.open(`https://wa.me/?text=${encodeURIComponent(textMsg)}`, '_blank');
+                // Utilizamos la API Universal de WhatsApp (nunca falla en abrirse ni en web ni en cel)
+                let fallbackUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(textMsg);
+
+                if (navigator.share) {
+                    navigator.share({
+                        title: `Menú de ${storeName}`,
+                        text: textMsg
+                    }).catch(err => {
+                        // Si falla o la App choca, forzamos abrir whatsapp por enlace
+                        if (err.name !== 'AbortError') {
+                            window.open(fallbackUrl, '_blank');
+                        }
+                    });
+                } else {
+                    window.open(fallbackUrl, '_blank');
+                }
+            } catch(error) {
+                // Super salvavidas por si falla CUALQUIER variable del sistema
+                window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent("¡Mirá nuestro menú digital acá! " + window.location.href), "_blank");
             }
         };
     </script>
