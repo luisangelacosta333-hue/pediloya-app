@@ -1643,7 +1643,7 @@
             if(statusText) {
                 statusText.style.display = 'block';
                 statusText.style.color = '#0ea5e9';
-                statusText.innerText = "IA Analizando ticket...";
+                statusText.innerText = "IA Analizando ticket y monto...";
             }
 
             try { 
@@ -1657,29 +1657,40 @@
                 if(d.success) { 
                     if(statusText) {
                         statusText.style.color = 'var(--success)';
-                        statusText.innerText = "¡Aprobado! Renovando sistema...";
+                        statusText.innerText = "¡Aprobado! " + d.msg;
                     }
                     if(qs('.scanner-line')) qs('.scanner-line').style.display = 'none';
 
+                    // 1. Sumamos 30 días
                     let newEnd = new Date(); newEnd.setDate(newEnd.getDate() + 30);
                     storeData.sub_end_date = newEnd.toISOString();
+                    
+                    // 2. Guardamos qué plan pagó (ESTANDAR o VIP)
+                    storeData.plan = d.plan; 
+                    
+                    // 3. SI PAGÓ EL BARATO ($14.000), LE APAGAMOS EL DOMINIO VIP POR PILLO
+                    if (d.plan === 'ESTANDAR') {
+                        storeData.dominio_vip = ''; 
+                    }
+
+                    // 4. Guardamos todo en la Base de Datos
                     await _supabase.from('pediloya_usuarios').update({ app_data: storeData }).eq('id', currentLocalId);
                     
                     setTimeout(() => {
-                        alert(d.msg || "Suscripción renovada exitosamente."); 
+                        alert(d.msg); 
                         if(qs('paywall-modal')) qs('paywall-modal').style.display = 'none'; 
-                        showToast("Suscripción Renovada");
+                        showToast("Sistema Renovado (" + d.plan + ")");
                         if(scanBox) scanBox.style.display = 'none';
                         if(statusText) statusText.style.display = 'none';
                         go('view-chofer');
-                    }, 1500);
+                    }, 2000);
                 } else { 
                     alert("Rechazado por IA: " + (d.msg || "Comprobante inválido.")); 
                     if(scanBox) scanBox.style.display = 'none';
                     if(statusText) statusText.style.display = 'none';
                 } 
             } catch(e) { 
-                alert("Falló la conexión con la IA."); 
+                alert("Falló la conexión con la IA. Verificá internet."); 
                 if(scanBox) scanBox.style.display = 'none';
                 if(statusText) statusText.style.display = 'none';
             } 
@@ -3407,6 +3418,85 @@
             }
         };
 
+        // --- SISTEMA DE COLORES VIP ---
+        window.aplicarColorVisual = function(color) {
+            let c = color || '#ff5e00'; // Naranja por defecto si no eligió nada
+            document.documentElement.style.setProperty('--primary-orange', c);
+            document.documentElement.style.setProperty('--gradient-orange', `linear-gradient(135deg, ${c}, #111111)`);
+        };
+
+        window.cambiarColorMarca = async function(color) {
+            let nuevaAppData = { ...storeData, brand_color: color };
+            await _supabase.from('pediloya_usuarios').update({ app_data: nuevaAppData }).eq('id', currentLocalId);
+            storeData = nuevaAppData;
+            aplicarColorVisual(color);
+            showToast("Color actualizado con éxito");
+        };
+        // --------------------------------
+
+        async function ejecutarValidacionPaywallIA(base64str) { 
+            let scanBox = qs('ai-scanner-box');
+            let statusText = qs('ia-status-text');
+            
+            if(scanBox) scanBox.style.display = 'block';
+            if(statusText) {
+                statusText.style.display = 'block';
+                statusText.style.color = '#0ea5e9';
+                statusText.innerText = "IA Analizando ticket y monto...";
+            }
+
+            try { 
+                let r = await fetch('/api/validate_payment', { 
+                    method: 'POST', 
+                    headers: {'Content-Type': 'application/json'}, 
+                    body: JSON.stringify({ local: cUser, fotoBase64: base64str }) 
+                }); 
+                let d = await r.json(); 
+                
+                if(d.success) { 
+                    if(statusText) {
+                        statusText.style.color = 'var(--success)';
+                        statusText.innerText = "¡Aprobado! " + d.msg;
+                    }
+                    if(qs('.scanner-line')) qs('.scanner-line').style.display = 'none';
+
+                    // 1. Sumamos 30 días
+                    let newEnd = new Date(); newEnd.setDate(newEnd.getDate() + 30);
+                    storeData.sub_end_date = newEnd.toISOString();
+                    
+                    // 2. Guardamos qué plan pagó (ESTANDAR o VIP)
+                    storeData.plan = d.plan; 
+                    
+                    // 3. SI PAGÓ EL BARATO ($14.000), LE APAGAMOS EL DOMINIO VIP POR PILLO
+                    if (d.plan === 'ESTANDAR') {
+                        storeData.dominio_vip = ''; 
+                    }
+
+                    // 4. Guardamos todo en la Base de Datos
+                    await _supabase.from('pediloya_usuarios').update({ app_data: storeData }).eq('id', currentLocalId);
+                    
+                    setTimeout(() => {
+                        alert(d.msg); 
+                        if(qs('paywall-modal')) qs('paywall-modal').style.display = 'none'; 
+                        showToast("Sistema Renovado (" + d.plan + ")");
+                        if(scanBox) scanBox.style.display = 'none';
+                        if(statusText) statusText.style.display = 'none';
+                        go('view-chofer');
+                    }, 2000);
+                } else { 
+                    alert("Rechazado por IA: " + (d.msg || "Comprobante inválido.")); 
+                    if(scanBox) scanBox.style.display = 'none';
+                    if(statusText) statusText.style.display = 'none';
+                } 
+            } catch(e) { 
+                alert("Falló la conexión con la IA. Verificá internet."); 
+                if(scanBox) scanBox.style.display = 'none';
+                if(statusText) statusText.style.display = 'none';
+            } 
+            isPaywallUpload = false; 
+            if(qs('foto-input-camara')) qs('foto-input-camara').value = ""; 
+            if(qs('foto-input-galeria')) qs('foto-input-galeria').value = ""; 
+        }
     </script>
 </body>
 </html>
