@@ -322,14 +322,30 @@
         .btn-pay-transfer { background: linear-gradient(135deg, #0ea5e9, #0284c7); color: white; box-shadow: 0 10px 25px rgba(14, 165, 233, 0.3); border: none; padding: 18px; border-radius: 18px; font-family: 'Outfit'; font-weight: 800; font-size: 1.1rem; flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: 0.2s;}
         .btn-pay-transfer:active { transform: scale(0.95); }
 
-        /* ESTILOS PARA EL QR */
+        /* ESTILOS PARA EL QR - ¡AQUÍ ESTÁ LA MAGIA DEL CENTRADO! */
         .qr-fullscreen-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.95); z-index: 9999999; display: none; justify-content: center; align-items: center; flex-direction: column; backdrop-filter: blur(15px); opacity: 0; transition: opacity 0.3s; padding: 24px;}
         .qr-fullscreen-overlay.show { display: flex; opacity: 1; }
         .qr-fullscreen-card { background: #ffffff; padding: 40px; border-radius: 40px; text-align: center; width: 100%; max-width: 400px; box-shadow: 0 30px 80px rgba(0,0,0,0.5); transform: translateY(20px); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);}
         .qr-fullscreen-overlay.show .qr-fullscreen-card { transform: translateY(0); }
-        /* Aca se arreglo el centrado del QR */
-        #qr-container { background: white; padding: 16px; border-radius: 20px; border: 2px dashed var(--primary-orange); display: flex; justify-content: center; align-items: center; margin-bottom: 24px; box-shadow: 0 10px 30px rgba(255,94,0,0.1); width: fit-content; margin-left: auto; margin-right: auto;}
-        #qr-container img { display: block;}
+        
+        #qr-container { 
+            background: white; 
+            padding: 16px; 
+            border-radius: 20px; 
+            border: 2px dashed var(--primary-orange); 
+            display: inline-flex; 
+            justify-content: center; 
+            align-items: center; 
+            margin: 0 auto 24px auto; 
+            box-shadow: 0 10px 30px rgba(255,94,0,0.1);
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        #qr-container img, #qr-container canvas { 
+            max-width: 100% !important; 
+            height: auto !important; 
+            display: block; 
+        }
     </style>
 </head>
 <body>
@@ -917,6 +933,7 @@
     </div>
 </body>
 </html>
+
     <!-- MODAL SELECCIONAR CHOFER GPS (RESTAURADO) -->
     <div class="modal" id="modal-select-moto-gps">
         <div class="modal-content-standard" style="padding:32px 24px; text-align:center;">
@@ -1078,6 +1095,7 @@
                 <p id="qv-desc" style="margin: 0 0 20px; color:var(--text-gray); font-weight:500; line-height:1.5; font-size:0.95rem;"></p>
                 <span id="qv-price" style="font-size:1.8rem; font-weight:800; font-family:'Outfit'; letter-spacing:-0.5px; text-align: center; display: block; margin-bottom: 16px; color:var(--text-dark);">$0</span>
                 
+                <!-- NUEVO INPUT DE ACLARACIONES -->
                 <input type="text" id="qv-notes" class="form-input" placeholder="Aclaraciones (ej: sin tomate, extra mayo)..." style="margin-bottom: 24px; font-size: 0.95rem; background: #f8fafc;">
                 
                 <div style="display: flex; align-items: center; justify-content: center; gap: 32px; margin: 16px 0 24px;">
@@ -1169,20 +1187,6 @@
             const trackParam = urlParams.get('track');
             const motoParam = urlParams.get('moto');
 
-            // --- INYECCIÓN AUTOMÁTICA DEL BOTÓN DE ENVÍO EN LA CAJA (BLOQUE 1) ---
-            // Esto asegura que se agregue el botón de Envío en la calculadora sin romper ni tocar el Bloque 1 original.
-            let actionRow = document.querySelector('.chofer-action-row');
-            if(actionRow && !document.getElementById('btn-add-envio')) {
-                let btnEnvio = document.createElement('button');
-                btnEnvio.className = 'chofer-btn-white';
-                btnEnvio.id = 'btn-add-envio';
-                btnEnvio.innerHTML = '🛵 + Envío';
-                btnEnvio.onclick = function() { vibrar([40]); agregarEnvioCaja(); };
-                // Lo metemos al principio de la botonera
-                actionRow.insertBefore(btnEnvio, actionRow.firstChild);
-            }
-            // ---------------------------------------------------------------------
-
             // --- DETECTOR AUTOMÁTICO DE DOMINIOS (MARCA BLANCA) ---
             const hostname = window.location.hostname;
             const isBaseDomain = hostname.includes('localhost') || hostname.includes('127.0.0.1') || hostname.includes('pediloyaa.com.ar') || hostname.includes('vercel.app');
@@ -1214,23 +1218,6 @@
             
             setupVideoObserver();
         });
-
-        // ==========================================
-        // FUNCIÓN NUEVA: SUMAR ENVÍO EN CAJA 
-        // ==========================================
-        window.agregarEnvioCaja = function() {
-            let costo = prompt("🛵 Ingresá el costo de envío a sumar:", "500");
-            if (costo && !isNaN(costo)) {
-                if (expr === "" || expr === "0") {
-                    expr = costo;
-                } else {
-                    expr += "+" + costo;
-                }
-                setText('calc-preview', expr.replace(/\*/g, '×').replace(/\//g, '÷'));
-                evalCalc();
-                showToast("Costo de envío sumado", "info");
-            }
-        };
 
         async function compressVideo(file, maxSeconds = 15) {
             return new Promise((resolve) => {
@@ -1396,6 +1383,9 @@
                 setText('btn-reg', "CARGANDO..."); if(qs('btn-reg')) qs('btn-reg').disabled = true;
                 let waLimpio = wa.replace(/\s+/g, '');
 
+                // ==========================================
+                // SISTEMA ANTIPÍCARO 🛑: VERIFICAR SI EL NÚMERO YA EXISTE
+                // ==========================================
                 let { data: existeCelular } = await _supabase
                     .from('pediloya_usuarios')
                     .select('id')
@@ -1408,6 +1398,7 @@
                     setText('btn-reg', "Empezar Gratis Ahora");
                     return; 
                 }
+                // ==========================================
                 
                 await _supabase.auth.signUp({ email: `${waLimpio}@pediloya.com`, password: pin + "IA" }).catch(e=>console.log(e));
                 
@@ -1451,6 +1442,7 @@
                 if(qs('btn-log')) qs('btn-log').disabled = false; setText('btn-log', "Abrir Caja");
                 go('view-chofer'); showToast("¡Bienvenido!");
 
+                // WEBSOCKETS EN TIEMPO REAL
                 _supabase.channel('pedidos-nuevos')
                     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'pediloya_logs', filter: `local_id=eq.${currentLocalId}` }, payload => {
                         if(payload.new.tipo === 'PEDIDO_WEB') {
@@ -1464,6 +1456,7 @@
                         }
                     }).subscribe();
 
+                // SISTEMA ANTIFALLOS CADA 20 SEGUNDOS
                 if(window.orderCheckInterval) clearInterval(window.orderCheckInterval);
                 window.orderCheckInterval = setInterval(async () => {
                     if(!currentLocalId) return;
@@ -1807,12 +1800,17 @@
             }
         }
 
+        // ==========================================
+        // LA SOLUCION DEFINITIVA PARA LA BASE DE DATOS
+        // ==========================================
         async function loadDataFromDB() {
             if (!currentLocalId) return;
 
+            // 1. Traer inventario
             const { data: inv } = await _supabase.from('pediloya_inventario').select('*').eq('local_id', currentLocalId);
             dbState.inventory = inv || [];
 
+            // 2. Traer el último cierre de turno
             const { data: lastCierre } = await _supabase.from('pediloya_logs')
                 .select('created_at')
                 .eq('local_id', currentLocalId)
@@ -1824,6 +1822,7 @@
             let turnoLogs = [];
             let webLogs = [];
 
+            // 3. Traer los movimientos SOLAMENTE DESDE el último cierre
             if (lastCierre && lastCierre.created_at) {
                 const { data: tLogs } = await _supabase.from('pediloya_logs')
                     .select('*')
@@ -1832,6 +1831,7 @@
                     .order('created_at', { ascending: false });
                 turnoLogs = tLogs || [];
             } else {
+                // Si es un local nuevo y nunca hizo cierre, le damos un margen de seguridad amplio
                 const { data: tLogs } = await _supabase.from('pediloya_logs')
                     .select('*')
                     .eq('local_id', currentLocalId)
@@ -1840,6 +1840,7 @@
                 turnoLogs = tLogs || [];
             }
 
+            // 4. Traer siempre los pedidos web pendientes (por si quedaron colgados de antes)
             const { data: wLogs } = await _supabase.from('pediloya_logs')
                 .select('*')
                 .eq('local_id', currentLocalId)
@@ -1847,6 +1848,7 @@
                 .order('created_at', { ascending: false });
             webLogs = wLogs || [];
 
+            // Unir todo y evitar datos duplicados
             let allLogs = [...turnoLogs];
             webLogs.forEach(wLog => {
                 if(!allLogs.some(l => l.id === wLog.id)) {
@@ -1854,9 +1856,11 @@
                 }
             });
 
+            // Ordenar por fecha del más nuevo al más viejo
             allLogs.sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
             dbState.logs = allLogs;
             
+            // --- CARGA DE PERFIL Y DATOS DEL LOCAL ---
             if(storeData.perfil_url) {
                 setImgSrc('store-logo-preview', storeData.perfil_url);
                 if(qs('placeholder-perfil')) qs('placeholder-perfil').style.display = 'none';
@@ -1873,6 +1877,7 @@
             setVal('store-address-input', storeData.direccion || '');
             setVal('store-wa-input', storeData.whatsapp_publico || targetLocalPhone || '');
             
+            // INYECTAR CASILLERO DOMINIO VIP DINÁMICAMENTE EN EL PANEL DE DUEÑO
             if (!qs('store-domain-input') && qs('btn-save-profile')) {
                 let configCard = qs('btn-save-profile').parentNode;
                 let domainInput = document.createElement('input');
@@ -1898,6 +1903,9 @@
             renderDiasRestantes();
         }
 
+        // ============================================
+        // FUNCIONES DE MARKETING (OFERTAS Y CUPONES)
+        // ============================================
         async function activarOfertaRelampago() {
             let titulo = qs('flash-title') ? qs('flash-title').value.trim() : '';
             if(!titulo) return showToast("Escribí el título de la oferta", "error");
@@ -2599,6 +2607,7 @@
             if(e.target.classList.contains('cat-pill')) {
                 document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
                 e.target.classList.add('active');
+                // Al haber solo "Menú Completo", renderizamos todo el menú siempre
                 renderMenuItems(menuItems);
             }
         });
@@ -2988,8 +2997,10 @@
 
                 showToast("Solicitando permiso de GPS...", "info");
                 
+                // Pedimos el permiso DIRECTAMENTE
                 navigator.geolocation.getCurrentPosition(
                     function(pos) {
+                        // EXITO: El usuario dio permiso y el GPS está prendido
                         let html = '';
                         dbState.repartidores.forEach(m => {
                             html += `<button class="chofer-btn-white" style="width:100%; margin-bottom:10px; padding:16px; font-size:1.1rem; font-weight: bold; background: white; color: var(--text-dark); border-radius: 12px; cursor: pointer; box-shadow:none; border:2px solid var(--border-soft);" onclick="activarGpsParaMoto('${m.nombre}')">🛵 Transmitir como ${m.nombre}</button>`;
@@ -2998,6 +3009,7 @@
                         if(qs('modal-select-moto-gps')) qs('modal-select-moto-gps').style.display = 'flex';
                     },
                     function(err) {
+                        // MANEJO DE ERRORES EXACTO PARA SABER POR QUÉ NO PREGUNTA
                         if (err.code === 1) {
                             alert("⛔ PERMISO DENEGADO: El navegador bloqueó el GPS. Tocá el candadito 🔒 arriba a la izquierda en la barra de direcciones, andá a 'Permisos', activá la 'Ubicación' y recargá la página.");
                         } else if (err.code === 2) {
@@ -3011,6 +3023,9 @@
             }
         };
 
+        // ============================================
+        // ACTIVAR LA TRANSMISIÓN (EL PERMISO YA FUE DADO)
+        // ============================================
         window.activarGpsParaMoto = function(nombre) {
             if(qs('modal-select-moto-gps')) qs('modal-select-moto-gps').style.display = 'none';
 
@@ -3145,20 +3160,10 @@
             if (!mapVar) {
                 mapVar = L.map(containerId, { zoomControl: false }).setView([lat, lon], 16);
                 
-                // =========================================================================
-                // NUEVO ESTILO DE MAPA: MAPBOX NAVIGATION NIGHT (PREMIUM DARK)
-                // =========================================================================
-                // Token público de prueba funcional de Mapbox. 
-                // CUANDO TENGAS EL TUYO PROPIO LO REEMPLAZAS ACA ADENTRO DE LAS COMILLAS:
-                let mapboxToken = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA'; 
-                
-                L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/navigation-night-v1/tiles/256/{z}/{x}/{y}@2x?access_token=' + mapboxToken, {
-                    attribution: '© <a href="https://www.mapbox.com/">Mapbox</a>',
-                    maxZoom: 20,
-                    tileSize: 512,
-                    zoomOffset: -1
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                    attribution: '&copy; OpenStreetMap',
+                    maxZoom: 19
                 }).addTo(mapVar);
-                // =========================================================================
 
                 markerVar = L.marker([lat, lon], { icon: motoIcon }).addTo(mapVar);
 
@@ -3280,3 +3285,4 @@
     </script>
 </body>
 </html>
+
