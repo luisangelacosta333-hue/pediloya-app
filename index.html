@@ -322,7 +322,7 @@
         .btn-pay-transfer { background: linear-gradient(135deg, #0ea5e9, #0284c7); color: white; box-shadow: 0 10px 25px rgba(14, 165, 233, 0.3); border: none; padding: 18px; border-radius: 18px; font-family: 'Outfit'; font-weight: 800; font-size: 1.1rem; flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: 0.2s;}
         .btn-pay-transfer:active { transform: scale(0.95); }
 
-        /* ESTILOS PARA EL QR */
+        /* ESTILOS PARA EL QR - ¡AQUÍ ESTÁ LA MAGIA DEL CENTRADO! */
         .qr-fullscreen-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.95); z-index: 9999999; display: none; justify-content: center; align-items: center; flex-direction: column; backdrop-filter: blur(15px); opacity: 0; transition: opacity 0.3s; padding: 24px;}
         .qr-fullscreen-overlay.show { display: flex; opacity: 1; }
         .qr-fullscreen-card { background: #ffffff; padding: 40px; border-radius: 40px; text-align: center; width: 100%; max-width: 400px; box-shadow: 0 30px 80px rgba(0,0,0,0.5); transform: translateY(20px); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);}
@@ -390,21 +390,6 @@
         function cerrarModalQR() {
             document.getElementById('qr-fullscreen-modal').classList.remove('show');
             setTimeout(() => { document.getElementById('qr-fullscreen-modal').style.display = 'none'; }, 300);
-        }
-
-        function descargarQR() {
-            let qrImg = document.querySelector('#qr-container img');
-            if (qrImg) {
-                let a = document.createElement('a');
-                a.href = qrImg.src;
-                a.download = 'QR_MiLocal.png';
-                a.click();
-                
-                let toast = document.getElementById('toast');
-                document.getElementById('toast-msg').innerText = 'QR Descargado';
-                toast.classList.add('ver');
-                setTimeout(() => toast.classList.remove('ver'), 3000);
-            }
         }
 
         // SIMULACIÓN DE CARGA PARA EL EJEMPLO VISUAL
@@ -662,73 +647,71 @@
     </div>
 
     <!-- VISTA 2: CAJA DEL LOCAL (SÚPER PREMIUM, BLANCA Y FIJA) -->
-    <!-- === ACÁ ESTÁ LA MODIFICACIÓN DEL PADDING PARA LEVANTAR LA BOTONERA === -->
-    <div id="view-chofer" class="view-container-no-pad" style="display:none; flex-direction:column; justify-content:space-between; height:100svh; overflow:hidden; padding:max(10px, env(safe-area-inset-top)) 12px max(90px, env(safe-area-inset-bottom) + 70px) 12px; box-sizing:border-box; background:#ffffff; max-width:500px; margin:0 auto; position:fixed; top:0; bottom:0; left:0; right:0; z-index:10;">
+    <!-- ESTA VISTA FUE TOTALMENTE RESTAURADA A SU DISEÑO ORIGINAL PARA EVITAR EL ESPACIO BLANCO EXTRA -->
+    <div id="view-chofer" class="view-container-no-pad" style="display:none; flex-direction:column; height:100svh; overflow:hidden; padding:max(16px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom)) 16px; box-sizing:border-box; background:#ffffff; max-width:500px; margin:0 auto; position:fixed; top:0; bottom:0; left:0; right:0; z-index:10;">
         
-        <div class="chofer-top-bar" style="margin-bottom:6px;">
+        <div class="chofer-top-bar">
             <div class="pill-btn" onclick="vibrar([40]); toggleDriverGps()" id="btn-gps" style="background:var(--text-dark); color:white; transition: 0.3s; border-color:var(--text-dark);">📍 GPS DELI</div>
             <div class="pill-btn badge" id="btn-pedidos-web" style="color:var(--primary-orange); border-color:rgba(255,94,0,0.2); background:rgba(255,94,0,0.05);" onclick="vibrar([40]); abrirPedidosWeb()">🔔 PEDIDOS</div>
             <div class="pill-btn" style="color:var(--info); border-color:rgba(14,165,233,0.2); background:rgba(14,165,233,0.05);" onclick="vibrar([40]); document.getElementById('pin-modal').style.display='flex'">⚙️ DUEÑO</div>
         </div>
         
-        <!-- PANTALLA BLANCA REDUCIDA -->
-        <div class="calc-display" style="min-height:50px; max-height: 22vh; padding:10px 16px; margin-bottom:6px;">
+        <!-- PANTALLA BLANCA HERMOSA Y FLEXIBLE QUE OCUPA EXACTAMENTE EL ESPACIO QUE SOBRA -->
+        <div class="calc-display" style="flex: 1; margin-bottom: 12px; padding: 16px 24px; min-height: 60px;">
             <div id="ticket-success" class="ticket-success">
                 <div style="font-size:2.5rem; margin-bottom:5px;">✅</div>
                 <div style="font-size:1.5rem; font-weight:800; letter-spacing:-1px;">COBRADO</div>
             </div>
-            <div id="calc-preview" class="calc-hist" style="font-size:0.9rem !important; min-height:1rem; margin-bottom:2px;"></div>
-            <div id="calc-total" class="calc-main" style="font-size:2.4rem !important; letter-spacing:-1px;">0</div>
+            <div id="calc-preview" class="calc-hist" style="font-size: 1.1rem !important; min-height: 1.5rem;"></div>
+            <div id="calc-total" class="calc-main" style="font-size: 3.5rem !important;">0</div>
         </div>
         
-        <button class="btn-sheet-trigger" style="padding:10px; font-size:0.95rem; margin-bottom:6px; border-radius:14px;" onclick="vibrar([40]); abrirPosSheet()">
+        <button class="btn-sheet-trigger" onclick="vibrar([40]); abrirPosSheet()">
             <span style="font-size:1.4rem;">🍔</span> CATÁLOGO DE PRODUCTOS
         </button>
         
         <!-- BOTONERA DE ACCIÓN COMBINADA -->
-        <div class="chofer-action-row" style="margin-bottom:6px; gap:6px;">
-            <button class="chofer-btn-white" style="padding:8px 4px; font-size:0.75rem; border-radius:14px;" onclick="vibrar([40]); triggerExpenseModal()">💸 Gastos</button>
-            <button class="chofer-btn-white" style="padding:8px 4px; font-size:0.75rem; border-radius:14px;" onclick="vibrar([40]); abrirModalMotos()">🛵 Repartidores</button>
-            <button class="chofer-btn-white" style="padding:8px 4px; font-size:0.75rem; border-radius:14px;" onclick="vibrar([40]); document.getElementById('ventas-modal').style.display='flex'">🧾 Historial</button>
+        <div class="chofer-action-row">
+            <button class="chofer-btn-white" onclick="vibrar([40]); triggerExpenseModal()">💸 Gastos</button>
+            <button class="chofer-btn-white" onclick="vibrar([40]); abrirModalMotos()">🛵 Repartidores</button>
+            <button class="chofer-btn-white" onclick="vibrar([40]); document.getElementById('ventas-modal').style.display='flex'">🧾 Historial</button>
         </div>
         
-        <div class="chofer-keypad" style="gap:6px; margin-bottom:6px;">
-            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('7')">7</button>
-            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('8')">8</button>
-            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('9')">9</button>
-            <button class="ckey ckey-del" style="height:5.5vh; min-height:42px; max-height:55px; border-radius:14px; font-size:1.5rem !important;" onclick="vibrar([40]); deleteCalc()">⌫</button>
+        <div class="chofer-keypad">
+            <button class="ckey" onclick="vibrar([40]); inputCalc('7')">7</button>
+            <button class="ckey" onclick="vibrar([40]); inputCalc('8')">8</button>
+            <button class="ckey" onclick="vibrar([40]); inputCalc('9')">9</button>
+            <button class="ckey ckey-del" onclick="vibrar([40]); deleteCalc()">⌫</button>
             
-            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('4')">4</button>
-            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('5')">5</button>
-            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('6')">6</button>
-            <button class="ckey ckey-op" style="height:5.5vh; min-height:42px; max-height:55px; border-radius:14px; font-size:1.8rem !important;" onclick="vibrar([40]); inputCalc('×')">×</button>
+            <button class="ckey" onclick="vibrar([40]); inputCalc('4')">4</button>
+            <button class="ckey" onclick="vibrar([40]); inputCalc('5')">5</button>
+            <button class="ckey" onclick="vibrar([40]); inputCalc('6')">6</button>
+            <button class="ckey ckey-op" onclick="vibrar([40]); inputCalc('×')">×</button>
             
-            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('1')">1</button>
-            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('2')">2</button>
-            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('3')">3</button>
-            <button class="ckey ckey-op" style="height:5.5vh; min-height:42px; max-height:55px; border-radius:14px; font-size:1.8rem !important;" onclick="vibrar([40]); inputCalc('-')">-</button>
+            <button class="ckey" onclick="vibrar([40]); inputCalc('1')">1</button>
+            <button class="ckey" onclick="vibrar([40]); inputCalc('2')">2</button>
+            <button class="ckey" onclick="vibrar([40]); inputCalc('3')">3</button>
+            <button class="ckey ckey-op" onclick="vibrar([40]); inputCalc('-')">-</button>
             
-            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px; color:var(--primary-orange);" onclick="vibrar([40]); clearCalc()">C</button>
-            <button class="ckey" style="height:5.5vh; min-height:42px; max-height:55px; font-size:1.5rem; border-radius:14px;" onclick="vibrar([40]); inputCalc('0')">0</button>
-            <button class="ckey ckey-op" style="height:5.5vh; min-height:42px; max-height:55px; border-radius:14px; font-size:1.8rem !important;" onclick="vibrar([40]); inputCalc('+')">+</button>
-            <button class="ckey ckey-eq" style="height:5.5vh; min-height:42px; max-height:55px; border-radius:14px; font-size:2rem !important;" onclick="vibrar([40]); evalCalc()">=</button>
+            <button class="ckey" style="color:var(--primary-orange);" onclick="vibrar([40]); clearCalc()">C</button>
+            <button class="ckey" onclick="vibrar([40]); inputCalc('0')">0</button>
+            <button class="ckey ckey-op" onclick="vibrar([40]); inputCalc('+')">+</button>
+            <button class="ckey ckey-eq" onclick="vibrar([40]); evalCalc()">=</button>
         </div>
 
-        <div style="flex-shrink:0; margin-bottom:6px;">
-            <select id="chofer-moto-select" class="form-input" style="padding:10px; margin-bottom:0; background:rgba(255,94,0,0.05); border:1px solid rgba(255,94,0,0.15); color:var(--primary-orange); border-radius:14px; cursor:pointer; font-weight:800; font-family:'Outfit'; text-transform:uppercase; outline:none; text-align:center; text-align-last:center; appearance:none; font-size:0.85rem;">
+        <div style="flex-shrink:0; margin-bottom: 12px;">
+            <select id="chofer-moto-select" class="form-input" style="padding: 16px; margin-bottom: 0; background: rgba(255, 94, 0, 0.05); border: 1px solid rgba(255, 94, 0, 0.15); color: var(--primary-orange); border-radius: 18px; cursor: pointer; font-weight: 800; font-family: 'Outfit'; text-transform: uppercase; outline: none; text-align: center; text-align-last: center; appearance: none;">
                 <option value="">🏪 ENVIAR A: MOSTRADOR (CAJA)</option>
             </select>
         </div>
         
-        <div class="chofer-pay-row" style="margin-bottom:6px; gap:6px;">
-            <button class="chofer-pay-btn" style="padding:10px 6px; font-size:0.9rem; border-radius:14px;" onclick="vibrar([40]); submitSale('EFECTIVO')">💵 EFECTIVO</button>
-            <button class="btn-pay-transfer" style="padding:10px 6px; font-size:0.9rem; border-radius:14px;" onclick="vibrar([40]); abrirSheetTransfVenta()">🏦 TRANSF.</button>
+        <div class="chofer-pay-row">
+            <button class="chofer-pay-btn" onclick="vibrar([40]); submitSale('EFECTIVO')">💵 EFECTIVO</button>
+            <button class="btn-pay-transfer" onclick="vibrar([40]); abrirSheetTransfVenta()">🏦 TRANSF.</button>
         </div>
         
-        <!-- ============================================== -->
-        <!-- BOTÓN CERRAR TURNO (AHORA VISIBLE Y SIN SCROLL) -->
-        <!-- ============================================== -->
-        <button style="flex-shrink:0; width:100%; border-radius:14px; padding:12px; font-weight:800; font-size:0.95rem; font-family:'Outfit'; text-transform:uppercase; background:var(--text-dark); color:white; border:none; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; box-shadow:0 10px 25px rgba(15,23,42,0.3); transition:0.2s; margin-bottom:0px;" onclick="vibrar([40]); cerrarTurno()">🔒 CERRAR TURNO</button>
+        <!-- BOTÓN CERRAR TURNO (CON FLEX-SHRINK PARA QUE NUNCA QUEDE TAPADO) -->
+        <button style="flex-shrink:0; width:100%; border-radius:18px; padding:18px; font-weight:800; font-size:1.05rem; font-family:'Outfit'; text-transform:uppercase; background:var(--text-dark); color:white; border:none; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; box-shadow:0 10px 25px rgba(15,23,42,0.3); transition:0.2s; margin-bottom: 0px;" onclick="vibrar([40]); cerrarTurno()">🔒 CERRAR TURNO</button>
     </div>
 
     <!-- VISTA 3: PANEL DUEÑO -->
@@ -777,22 +760,22 @@
 
             <div style="background:var(--gradient-orange); color:white; padding:32px 20px; border-radius:var(--radius-lg); text-align:center; box-shadow:var(--shadow-orange); margin-bottom:10px; width:100%; box-sizing:border-box;">
                 <span style="font-size:0.9rem; font-weight:800; color:rgba(255,255,255,0.9); text-transform:uppercase; letter-spacing:1.5px;">💰 Balance Total (Gran Total)</span>
-                <div id="adm-total-general" style="font-size:2.4rem; font-weight:900; margin-top:12px; font-family:'Outfit'; letter-spacing:-1px; line-height:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">$0</div>
+                <div id="adm-total-general" style="font-size:3.5rem; font-weight:900; margin-top:16px; font-family:'Outfit'; letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
             </div>
 
             <div style="background:var(--bg-pure); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(0,0,0,0.03); box-shadow:var(--shadow-float); margin-bottom:10px; width:100%; box-sizing:border-box;">
                 <span style="font-size:0.9rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1.5px;">💵 Caja Mostrador</span>
-                <div id="adm-cash" style="font-size:2.2rem; font-weight:300; margin-top:12px; font-family:'Outfit'; letter-spacing:-1px; line-height:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">$0</div>
+                <div id="adm-cash" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
             </div>
 
             <div style="background:var(--bg-pure); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(0,0,0,0.03); box-shadow:var(--shadow-float); margin-bottom:10px; width:100%; box-sizing:border-box;">
                 <span style="font-size:0.9rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1.5px;">🏦 Transferencias</span>
-                <div id="adm-transf" style="font-size:2.2rem; font-weight:300; margin-top:12px; font-family:'Outfit'; color:var(--info); letter-spacing:-1px; line-height:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">$0</div>
+                <div id="adm-transf" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; color:var(--info); letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
             </div>
 
             <div style="background:var(--bg-pure); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(0,0,0,0.03); box-shadow:var(--shadow-float); margin-bottom:40px; width:100%; box-sizing:border-box;">
                 <span style="font-size:0.9rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1.5px;">🛵 Plata en Repartidores</span>
-                <div id="adm-motos-cash" style="font-size:2.2rem; font-weight:300; margin-top:12px; font-family:'Outfit'; color:var(--primary-orange); letter-spacing:-1px; line-height:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">$0</div>
+                <div id="adm-motos-cash" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; color:var(--primary-orange); letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
             </div>
 
             <!-- ============================================== -->
@@ -920,45 +903,67 @@
             <div id="adm-menu-list"></div>
         </div>
     </div>
-    
-    <!-- SCRIPT CORREGIDO PARA COMPARTIR QR -->
-    <script>
-        window.compartirQR = async function() {
-            let imgEl = document.querySelector('#qr-container img');
-            if(!imgEl || !imgEl.src) return;
-            try {
-                showToast("Preparando imagen...", "info");
-                let response = await fetch(imgEl.src);
-                let blob = await response.blob();
-                let file = new File([blob], "QR_Pediloya.png", { type: 'image/png' });
-                
-                let shareData = {
-                    title: `QR Menú ${cUser}`,
-                    text: `Escaneá este código para hacer tu pedido online en ${cUser} 🍔🛵`,
-                    files: [file]
-                };
 
-                if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
-                    await navigator.share(shareData);
-                } else if (navigator.share) {
-                    // Fallback si el celu no soporta mandar archivos por Share
-                    let link = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : `${window.location.origin}/?local=${encodeURIComponent(cUser)}`;
-                    await navigator.share({
-                        title: `QR Menú ${cUser}`,
-                        text: `¡Hacé tu pedido online en ${cUser}! 🍔🛵\n\nIngresá acá:\n${link}`
-                    });
+    <!-- SCRIPT CORREGIDO Y BLINDADO PARA COMPARTIR Y DESCARGAR QR -->
+    <script>
+        // Nueva función de descarga 100% segura extrayendo datos directos del canvas de la librería
+        window.descargarQR = function() {
+            let canvas = document.querySelector('#qr-container canvas');
+            if (canvas) {
+                let a = document.createElement('a');
+                a.href = canvas.toDataURL("image/png");
+                a.download = `QR_Pediloya_${cUser.replace(/[^a-zA-Z0-9]/g, '_')}.png`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                showToast("QR Descargado con éxito");
+            } else {
+                showToast("Error al procesar el QR", "error");
+            }
+        };
+
+        // Nueva función de compartir con conversor Blob nativo y sistema anticaída
+        window.compartirQR = async function() {
+            let canvas = document.querySelector('#qr-container canvas');
+            let link = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : `${window.location.origin}/?local=${encodeURIComponent(cUser)}`;
+            let textMsg = `¡Hacé tu pedido online en ${cUser}! 🍔🛵\n\nIngresá acá:\n${link}`;
+
+            try {
+                if (canvas) {
+                    showToast("Preparando imagen...", "info");
+                    canvas.toBlob(async function(blob) {
+                        try {
+                            let file = new File([blob], "QR_Pediloya.png", { type: "image/png" });
+                            let shareData = {
+                                title: `QR Menú ${cUser}`,
+                                text: textMsg,
+                                files: [file]
+                            };
+                            
+                            // Intento de compartir archivo nativo (funciona en móviles modernos)
+                            if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+                                await navigator.share(shareData);
+                            } else if (navigator.share) {
+                                // Fallback: el celu no deja mandar archivos por esta vía
+                                await navigator.share({ title: `QR Menú ${cUser}`, text: textMsg });
+                            }
+                        } catch(e) {
+                            if (e.name !== 'AbortError') {
+                                // Fallback de emergencia si crashea el intento de archivo
+                                if (navigator.share) {
+                                    navigator.share({ title: `QR Menú ${cUser}`, text: textMsg }).catch(err=>{});
+                                }
+                            }
+                        }
+                    }, 'image/png');
                 } else {
-                    let a = document.createElement('a');
-                    a.href = URL.createObjectURL(blob);
-                    a.download = `QR_${cUser}_Pediloya.png`;
-                    a.click();
-                    showToast("QR Descargado");
+                    // Si por algún motivo no cargó el canvas, manda el link directo
+                    if (navigator.share) {
+                        navigator.share({ title: `QR Menú ${cUser}`, text: textMsg }).catch(err=>{});
+                    }
                 }
-            } catch(e) {
-                // Evita mostrar error si el usuario simplemente canceló el diálogo de compartir
-                if (e.name !== 'AbortError') {
-                    showToast("Error al compartir QR", "error");
-                }
+            } catch (err) {
+                showToast("Error al compartir", "error");
             }
         };
     </script>
