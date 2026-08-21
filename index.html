@@ -339,9 +339,12 @@
         .btn-pay-transfer:active { transform: scale(0.95); }
 
         /* ESTILOS PARA EL QR */
-        .qr-card-wrapper { background: #ffffff; border: 1px solid var(--border-soft); border-radius: 24px; padding: 24px; display: flex; flex-direction: column; align-items: center; margin-top: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
-        #qr-container { padding: 16px; background: white; border-radius: 16px; border: 1px dashed var(--primary-orange); margin-bottom: 20px; display: inline-block; }
-        #qr-container img { margin: 0 auto; display: block; }
+        .qr-fullscreen-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.95); z-index: 9999999; display: none; justify-content: center; align-items: center; flex-direction: column; backdrop-filter: blur(15px); opacity: 0; transition: opacity 0.3s; padding: 24px;}
+        .qr-fullscreen-overlay.show { display: flex; opacity: 1; }
+        .qr-fullscreen-card { background: #ffffff; padding: 40px; border-radius: 40px; text-align: center; width: 100%; max-width: 400px; box-shadow: 0 30px 80px rgba(0,0,0,0.5); transform: translateY(20px); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);}
+        .qr-fullscreen-overlay.show .qr-fullscreen-card { transform: translateY(0); }
+        #qr-container { background: white; padding: 16px; border-radius: 20px; border: 2px dashed var(--primary-orange); display: inline-block; margin-bottom: 24px; box-shadow: 0 10px 30px rgba(255,94,0,0.1);}
+        #qr-container img { width: 220px; height: 220px; margin: 0 auto; display: block;}
     </style>
 </head>
 <body>
@@ -360,15 +363,15 @@
 
         setTimeout(() => { let s = document.getElementById('splash-screen'); if (s) { s.style.opacity = '0'; setTimeout(() => s.style.display = 'none', 500); } }, 1200);
 
-        // FUNCIÓN PARA GENERAR QR (Se llama idealmente cuando carga el enlace)
+        // FUNCIÓN PARA GENERAR QR
         function generarQROficial(url) {
             let qrContainer = document.getElementById("qr-container");
             if(qrContainer) {
                 qrContainer.innerHTML = ""; // Limpiar previo
                 new QRCode(qrContainer, {
                     text: url,
-                    width: 150,
-                    height: 150,
+                    width: 250, // Más grande para impresión/escaneo
+                    height: 250,
                     colorDark : "#0f172a",
                     colorLight : "#ffffff",
                     correctLevel : QRCode.CorrectLevel.H
@@ -376,12 +379,18 @@
             }
         }
 
-        // SIMULACIÓN DE CARGA PARA EL EJEMPLO VISUAL
-        document.addEventListener('DOMContentLoaded', () => {
-            generarQROficial("https://www.pediloyaa.com.ar/tu-local");
-        });
-        
-        // Funciones simuladas para los botones del QR
+        function abrirModalQR() {
+            let url = document.getElementById('store-link-display').value || "https://www.pediloyaa.com.ar/tu-local";
+            generarQROficial(url);
+            document.getElementById('qr-fullscreen-modal').classList.add('show');
+            document.getElementById('qr-fullscreen-modal').style.display = 'flex';
+        }
+
+        function cerrarModalQR() {
+            document.getElementById('qr-fullscreen-modal').classList.remove('show');
+            setTimeout(() => { document.getElementById('qr-fullscreen-modal').style.display = 'none'; }, 300);
+        }
+
         function descargarQR() {
             let qrImg = document.querySelector('#qr-container img');
             if (qrImg) {
@@ -389,22 +398,31 @@
                 a.href = qrImg.src;
                 a.download = 'QR_MiLocal.png';
                 a.click();
-                alert("QR Descargado con éxito");
+                
+                let toast = document.getElementById('toast');
+                document.getElementById('toast-msg').innerText = 'QR Descargado';
+                toast.classList.add('ver');
+                setTimeout(() => toast.classList.remove('ver'), 3000);
             }
         }
 
         function compartirQR() {
-            // Usa Web Share API si está disponible
+            let url = document.getElementById('store-link-display').value || "https://www.pediloyaa.com.ar/tu-local";
             if (navigator.share) {
                 navigator.share({
                     title: '¡Hacé tu pedido acá!',
                     text: 'Escaneá este QR o visitá nuestro menú interactivo.',
-                    url: "https://www.pediloyaa.com.ar/tu-local"
+                    url: url
                 }).catch(console.error);
             } else {
                 alert("La función de compartir nativa no está soportada en tu navegador.");
             }
         }
+
+        // SIMULACIÓN DE CARGA PARA EL EJEMPLO VISUAL
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('store-link-display').value = "https://www.pediloyaa.com.ar/tu-local";
+        });
     </script>
 
     <!-- SPLASH SCREEN ULTRA VECTOR PY DELIVERY -->
@@ -639,6 +657,22 @@
         </div>
     </div>
 
+    <!-- MODAL QR FULLSCREEN PARA MOSTRADOR -->
+    <div class="qr-fullscreen-overlay" id="qr-fullscreen-modal">
+        <button class="modal-close-circle" style="position:absolute; top:30px; right:30px; width:50px; height:50px; font-size:1.5rem; z-index: 20;" onclick="cerrarModalQR()">✕</button>
+        <div class="qr-fullscreen-card">
+            <h2 style="font-family:'Outfit'; font-size:2rem; font-weight:900; color:var(--text-dark); margin:0 0 10px 0; letter-spacing:-1px;">ESCANEÁ AQUÍ</h2>
+            <p style="color:var(--text-gray); font-size:1rem; margin-bottom:24px; font-weight:500;">Para ver nuestro menú digital</p>
+            
+            <div id="qr-container"></div>
+            
+            <div style="display:flex; gap:12px; margin-top:20px;">
+                <button style="flex:1; background:var(--bg-pure); color:var(--text-dark); font-weight:800; font-family:'Outfit'; border:2px solid var(--border-soft); border-radius:16px; padding:16px; font-size:1rem; cursor:pointer;" onclick="vibrar([40]); compartirQR()">📤 COMPARTIR</button>
+                <button style="flex:1; background:var(--primary-orange); color:white; font-weight:800; font-family:'Outfit'; border:none; border-radius:16px; padding:16px; font-size:1rem; cursor:pointer; box-shadow:var(--shadow-orange);" onclick="vibrar([40]); descargarQR()">💾 DESCARGAR</button>
+            </div>
+        </div>
+    </div>
+
     <!-- VISTA 2: CAJA DEL LOCAL (SÚPER PREMIUM & BLANCA) -->
     <div id="view-chofer" class="view-container-no-pad" style="display:none; flex-direction:column; height:100dvh; overflow:hidden; padding:16px; box-sizing:border-box; background:#ffffff; max-width:500px; margin:0 auto;">
         
@@ -702,9 +736,9 @@
         </div>
         
         <!-- ============================================== -->
-        <!-- BOTÓN CERRAR TURNO REINCORPORADO -->
+        <!-- BOTÓN CERRAR TURNO (OSCURO ORIGINAL) -->
         <!-- ============================================== -->
-        <button style="flex-shrink:0; width:100%; border-radius:18px; padding:18px; font-weight:800; font-size:1.05rem; font-family:'Outfit'; text-transform:uppercase; background:var(--text-dark); color:white; border:none; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; box-shadow:0 10px 25px rgba(15,23,42,0.3); transition:0.2s; margin-bottom: 0px;" onclick="vibrar([40]); cerrarTurno()">🔒 CERRAR TURNO</button>
+        <button style="flex-shrink:0; width:100%; border-radius:16px; padding:18px; font-weight:800; font-size:1.05rem; font-family:'Outfit'; text-transform:uppercase; background:var(--text-dark); color:white; border:none; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; box-shadow:0 10px 25px rgba(15,23,42,0.3); transition:0.2s; margin-bottom: 0px;" onclick="vibrar([40]); cerrarTurno()">🔒 CERRAR TURNO</button>
     </div>
 
     <!-- VISTA 3: PANEL DUEÑO -->
@@ -731,24 +765,23 @@
             <!-- ============================================== -->
             <!-- SECCIÓN LINK OFICIAL Y CÓDIGO QR -->
             <!-- ============================================== -->
-            <div class="admin-card" style="border-top:5px solid var(--info);">
+            <div class="admin-card" style="border-top:5px solid var(--info); padding: 32px 24px;">
                 <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
-                    <span style="font-size:1.8rem;">🔗</span><h3 style="margin:0; font-size:1.5rem; font-family:'Outfit'; font-weight:800; color:var(--text-dark);">Link Oficial y QR</h3>
+                    <span style="font-size:1.8rem;">🔗</span><h3 style="margin:0; font-size:1.5rem; font-family:'Outfit'; font-weight:800; color:var(--text-dark);">Link Oficial</h3>
                 </div>
-                <p style="font-size:1rem; color:var(--text-gray); margin-bottom:20px; font-weight:500; line-height:1.6;">Enviá este enlace o compartí el código QR para que tus clientes vean tu menú.</p>
+                <p style="font-size:1rem; color:var(--text-gray); margin-bottom:30px; font-weight:500; line-height:1.6;">Enviá este enlace a tus clientes para que vean tu menú interactivo.</p>
                 
-                <input type="text" id="store-link-display" readonly style="width:100%; box-sizing:border-box; border:none; background:var(--bg-app); border-radius:20px; font-weight:700; color:var(--info); font-size:0.95rem; padding:18px; text-align:center; outline:none; border:2px dashed var(--info); white-space:nowrap; text-overflow:ellipsis; overflow:hidden; margin-bottom:20px;">
+                <input type="text" id="store-link-display" readonly style="width:100%; box-sizing:border-box; border:none; background:var(--bg-app); border-radius:20px; font-weight:700; color:var(--info); font-size:0.95rem; padding:18px; text-align:center; outline:none; border:2px dashed var(--info); white-space:nowrap; text-overflow:ellipsis; overflow:hidden; margin-bottom: 24px;">
                 
-                <!-- TARJETA DEL QR GENERADO -->
-                <div class="qr-card-wrapper">
-                    <h4 style="margin:0 0 10px 0; color:var(--text-dark); font-family:'Outfit'; font-size:1.2rem; text-align:center;">QR de tu Local</h4>
-                    <div id="qr-container"></div>
-                    
-                    <div style="display:flex; gap:10px; width:100%; margin-top:10px;">
-                        <button style="background:var(--primary-orange); color:white; font-weight:700; border:none; border-radius:14px; flex:1; box-shadow:var(--shadow-orange); padding:16px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="vibrar([40]); compartirQR()">📤 COMPARTIR</button>
-                        <button style="background:var(--bg-pure); color:var(--text-dark); font-weight:700; border:2px solid var(--border-soft); border-radius:14px; flex:1; box-shadow:var(--shadow-soft); padding:16px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="vibrar([40]); descargarQR()">💾 DESCARGAR</button>
-                    </div>
+                <div style="display:flex; gap:10px; margin-bottom:24px;">
+                    <button style="background:var(--primary-orange); color:white; font-weight:800; font-family:'Outfit'; font-size:1rem; border:none; border-radius:16px; flex:1; box-shadow:var(--shadow-orange); padding:16px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="vibrar([40]); compartirLinkNativo()">📤 COMPARTIR</button>
+                    <button style="background:var(--bg-pure); color:var(--text-dark); font-weight:800; font-family:'Outfit'; font-size:1rem; border:2px solid var(--border-soft); border-radius:16px; flex:1; box-shadow:var(--shadow-soft); padding:16px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="vibrar([40]); copiarLinkExacto()">📄 COPIAR</button>
                 </div>
+
+                <!-- BOTÓN PARA ABRIR QR FULLSCREEN -->
+                <button class="btn-main" style="background:#0f172a; box-shadow:0 10px 25px rgba(15,23,42,0.3); padding:18px;" onclick="vibrar([40]); abrirModalQR()">
+                    <span style="font-size:1.4rem; margin-right:10px;">📱</span> VER CÓDIGO QR / IMPRIMIR
+                </button>
             </div>
             <!-- ============================================== -->
 
@@ -899,11 +932,7 @@
     </div>
 </body>
 </html>
-
-
-	
-
-    <!-- MODAL SELECCIONAR CHOFER GPS (RESTAURADO) -->
+<!-- MODAL SELECCIONAR CHOFER GPS (RESTAURADO) -->
     <div class="modal" id="modal-select-moto-gps">
         <div class="modal-content-standard" style="padding:32px 24px; text-align:center;">
             <button class="modal-close-circle" style="background:rgba(0,0,0,0.05);" onclick="document.getElementById('modal-select-moto-gps').style.display='none'">✕</button>
@@ -3254,6 +3283,3 @@
     </script>
 </body>
 </html>
-
-
-
