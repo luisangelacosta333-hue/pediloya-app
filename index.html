@@ -80,8 +80,7 @@
         .btn-secondary { width: 100%; padding: 18px; background: var(--bg-pure); color: var(--text-dark); font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; border: 2px solid var(--border-soft); border-radius: 18px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; transition: var(--transition-smooth); box-shadow: var(--shadow-soft); }
         .btn-secondary:active { background: var(--bg-app); transform: scale(0.98); }
 
-        /* ARREGLO FOOTER: padding-bottom cambiado a 0px */
-        .landing-wrapper { padding-top: env(safe-area-inset-top, 0px); margin-top: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; background-color: var(--bg-pure); background-image: radial-gradient(circle at 15% 10%, rgba(255, 94, 0, 0.05), transparent 45%), radial-gradient(circle at 85% 90%, rgba(255, 94, 0, 0.04), transparent 45%); color: var(--text-dark); min-height: 100vh; position: relative; overflow: hidden; padding-bottom: 0px; }
+        .landing-wrapper { padding-top: env(safe-area-inset-top, 0px); margin-top: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; background-color: var(--bg-pure); background-image: radial-gradient(circle at 15% 10%, rgba(255, 94, 0, 0.05), transparent 45%), radial-gradient(circle at 85% 90%, rgba(255, 94, 0, 0.04), transparent 45%); color: var(--text-dark); min-height: 100vh; position: relative; overflow: hidden; padding-bottom: 80px; }
         .landing-content { position: relative; z-index: 2; padding: 0 24px 12px; max-width: 520px; width: 100%; margin: 0 auto; text-align: center; }
         
         .logo-premium-wrapper { position: relative; width: 230px; height: 140px; margin: 5px auto 0 auto; display: flex; justify-content: center; align-items: center; animation: floatLogo 4s ease-in-out infinite; }
@@ -119,8 +118,7 @@
         .subscription-box::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,94,0,0.04) 0%, transparent 50%); z-index: 0; pointer-events: none;}
         .subscription-box > * { position: relative; z-index: 1; }
 
-        /* ARREGLO FOOTER: Ancho al 100% y padding-bottom ajustado */
-        .footer-tech { text-align: center; padding-top: 40px; padding-bottom: 30px; margin-top: 50px; border-top: 1px solid var(--border-soft); position: relative; z-index: 2; width: 100%; }
+        .footer-tech { text-align: center; padding-top: 40px; margin-top: 50px; border-top: 1px solid var(--border-soft); position: relative; z-index: 2; }
         .footer-brand { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 900; color: var(--text-dark); letter-spacing: 2px; margin-bottom: 8px; }
         .footer-brand span { color: var(--primary-orange); }
         .footer-sub { font-size: 0.9rem; color: var(--text-gray); font-weight: 600; margin: 0 0 6px 0; text-transform: uppercase; letter-spacing: 1px; }
@@ -147,22 +145,12 @@
         .chofer-btn-white { background: var(--bg-pure); border: 1px solid var(--border-soft); border-radius: 12px; padding: 12px 6px; flex: 1; font-weight: 800; font-size: 0.9rem; color: var(--text-dark); box-shadow: var(--shadow-soft); cursor: pointer; font-family: 'Outfit', sans-serif; text-transform:uppercase; transition:0.2s; display: flex; justify-content: center; align-items: center; gap: 6px;}
         .chofer-btn-white:active { transform: scale(0.95); background: #f1f5f9; }
         
-        /* =========================================================
-           CALCULADORA ULTRA PREMIUM (FONDO BLANCO)
-        ========================================================= */
-        .chofer-keypad { flex-shrink: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 12px; padding: 0 4px; }
+        .chofer-keypad { flex-shrink: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 10px; }
+        .ckey { background: var(--bg-pure); border: 1px solid var(--border-soft); border-radius: 20px; height: 7.5vh; min-height: 50px; max-height: 70px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 600; color: var(--text-dark); box-shadow: 0 4px 10px rgba(0,0,0,0.02); cursor: pointer; font-family: 'Outfit', sans-serif; transition: 0.1s;}
+        .ckey:active { transform: scale(0.92); background: #f1f5f9; }
+        .ckey-op { color: var(--primary-orange); font-size: 2.5rem; background: rgba(255,94,0,0.05); border-color: transparent;}
+        .ckey-eq { background: var(--gradient-orange); color: white; border: none; font-size: 2.5rem; box-shadow: var(--shadow-orange); font-weight: 300; }
         
-        .ckey { background: #ffffff !important; border: 1px solid rgba(0,0,0,0.02); border-radius: 24px; height: 7.5vh; min-height: 55px; max-height: 75px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 600; color: #0f172a; box-shadow: 0 6px 16px rgba(0,0,0,0.03); cursor: pointer; font-family: 'Outfit', sans-serif; transition: all 0.2s cubic-bezier(0.2, 1, 0.3, 1); }
-        .ckey:active { transform: scale(0.92); box-shadow: 0 2px 6px rgba(0,0,0,0.02); background: #f8fafc !important; }
-        
-        /* Operadores y Borrar: Fondo ultra blanco y sutiles */
-        .ckey-op { color: var(--primary-orange) !important; font-size: 2.6rem; font-weight: 500; background: #ffffff !important; border-color: rgba(0,0,0,0.03); }
-        .ckey-del { color: #64748b !important; font-size: 2.2rem; }
-        
-        /* Único botón con color fuerte para guiar la venta */
-        .ckey-eq { background: var(--gradient-orange) !important; color: white !important; border: none; font-size: 2.8rem; box-shadow: 0 10px 25px rgba(255, 94, 0, 0.25); font-weight: 400; }
-        /* ========================================================= */
-
         .chofer-pay-row { flex-shrink: 0; display: flex; gap: 12px; margin-bottom: 4px; }
         .chofer-pay-btn { flex: 1; border-radius: 16px; padding: 16px 10px; font-weight: 800; font-size: 1.1rem; font-family: 'Outfit', sans-serif; text-transform: uppercase; background:#f1f5f9; color:var(--text-dark); border:1px solid var(--border-soft); cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; transition:0.2s;}
         .chofer-pay-btn:active { transform: scale(0.95); }
@@ -520,18 +508,6 @@
                 <button id="btn-log" onclick="vibrar([40]); executeLogin()" style="width:100%; padding:18px; background:rgba(14, 165, 233, 0.08); color:var(--info); font-weight:800; font-size:1.05rem; border:2px solid rgba(14, 165, 233, 0.3); border-radius:18px; text-transform:uppercase; cursor:pointer; transition: 0.2s; font-family:'Outfit',sans-serif;">Abrir Caja</button>
             </div>
 
-            <!-- NUEVA SECCIÓN: DOMINIO PROPIO (EX MARCA BLANCA) -->
-            <div class="glass-card-light" style="border-top: 4px solid #8b5cf6; margin-top: 30px; margin-bottom: 30px;">
-                <h2 style="text-align: center; font-size: 1.4rem; font-weight: 800; margin: 0 0 10px 0; color: var(--text-dark); letter-spacing: -0.5px; font-family:'Outfit',sans-serif;">👑 TU PROPIA MARCA</h2>
-                <p style="text-align: center; color: var(--text-gray); font-size: 0.95rem; margin-bottom: 24px; font-weight: 500;">¿Querés que el sistema lleve el nombre exclusivo de tu local? (Ej: <strong>www.tu-local.com.ar</strong>).<br><br>Adaptamos la plataforma para que sea 100% tuya.</p>
-                
-                <a href="https://wa.me/5493815110171?text=Hola,%20quiero%20consultar%20para%20tener%20el%20sistema%20de%20delivery%20con%20mi%20propio%20dominio%20personalizado." target="_blank" style="text-decoration: none;">
-                    <button class="btn-main" style="background:#25D366; box-shadow:0 10px 25px rgba(37,211,102,0.3); font-size: 1.05rem;">
-                        <span style="font-size:1.3rem; margin-right:8px;">💬</span> CONSULTAR OPCIÓN VIP
-                    </button>
-                </a>
-            </div>
-
             <div class="footer-tech">
                 <div class="footer-brand">ENERGY <span>SOFTWARE</span></div>
                 <p class="footer-sub">Soluciones Tecnológicas & Automatización</p>
@@ -585,6 +561,23 @@
             <p style="color:var(--text-gray); margin-bottom:24px; font-size: 0.95rem;">Ingresá el PIN de administrador para acceder a las finanzas.</p>
             <input type="password" id="pin-input" class="form-input" style="text-align:center; font-size:1.6rem; letter-spacing:15px; padding:20px; font-weight:800; border: 1px solid var(--border-soft);" maxlength="4" placeholder="****" autocomplete="off">
             <button class="btn-main" style="background:var(--text-dark); box-shadow: 0 10px 25px rgba(15,23,42,0.3);" onclick="vibrar([40]); verifyAdminPin()">ENTRAR AL PANEL</button>
+        </div>
+    </div>
+
+    <!-- MODAL GENERADOR DE QR -->
+    <div class="modal" id="modal-qr">
+        <div class="modal-content-standard" style="padding:32px 24px; text-align:center;">
+            <button class="modal-close-circle" style="background:rgba(0,0,0,0.05);" onclick="document.getElementById('modal-qr').style.display='none'">✕</button>
+            <h3 style="margin:0 0 10px; font-family:'Outfit'; font-size:1.6rem; font-weight:800; color:var(--text-dark);">Tu Código QR</h3>
+            <p style="color:var(--text-gray); font-size:0.95rem; margin-bottom:20px;">Imprimilo, pegalo en tu local o subilo a tus redes para que pidan directo.</p>
+            
+            <div style="background: white; padding: 16px; border-radius: 16px; display: inline-block; box-shadow: var(--shadow-soft); margin-bottom: 20px;">
+                <img id="qr-image-display" src="" style="width: 220px; height: 220px; display: block;">
+            </div>
+            
+            <button class="btn-main" onclick="vibrar([40]); compartirQR()" style="background:var(--text-dark); box-shadow: 0 8px 20px rgba(15,23,42,0.3);">
+                <span style="font-size:1.2rem; margin-right:8px;">📲</span> COMPARTIR / DESCARGAR
+            </button>
         </div>
     </div>
 
@@ -682,6 +675,8 @@
                     <button style="background:var(--bg-pure); color:var(--text-dark); font-weight:700; border:2px solid var(--border-soft); border-radius:14px; flex:1; box-shadow:var(--shadow-soft); padding:16px;" onclick="vibrar([40]); copiarLinkExacto()">📄 COPIAR</button>
                 </div>
                 <input type="text" id="store-link-display" readonly style="width:100%; box-sizing:border-box; border:none; background:var(--bg-app); border-radius:20px; font-weight:700; color:var(--info); font-size:0.95rem; padding:18px; text-align:center; outline:none; border:2px dashed var(--info); white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
+                
+                <button style="background:var(--text-dark); color:white; font-weight:800; font-family:'Outfit'; border:none; border-radius:16px; width:100%; box-shadow:0 10px 25px rgba(15,23,42,0.2); padding:18px; margin-top: 16px; font-size: 1.05rem; cursor:pointer;" onclick="vibrar([40]); generarYMostrarQR()">📲 MOSTRAR CÓDIGO QR</button>
             </div>
 
             <div style="background:var(--gradient-orange); color:white; padding:32px 20px; border-radius:var(--radius-lg); text-align:center; box-shadow:var(--shadow-orange); margin-bottom:10px; width:100%; box-sizing:border-box;">
@@ -1012,23 +1007,6 @@
     <div class="modal" id="pedidos-web-modal"><div class="modal-content" style="width:100%; max-width:500px; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background: var(--bg-app); border:none;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;"><h3 style="margin:0; font-size:1.8rem; font-weight:800; font-family:'Outfit'; color:var(--primary-orange); letter-spacing:-0.5px;">Pedidos Web</h3><button style="background:rgba(255,94,0,0.1); border:none; font-size:1.1rem; color:var(--primary-orange); cursor:pointer; width:35px; height:35px; border-radius:50%;" onclick="document.getElementById('pedidos-web-modal').style.display='none'">✕</button></div><div id="pedidos-web-list" style="flex:1; overflow-y:auto; text-align:left; display:flex; flex-direction:column; gap:16px; padding-bottom:40px;"></div></div></div>
     <div class="modal" id="ventas-modal"><div class="modal-content" style="width:100%; max-width:500px; height:100vh; border-radius:0; padding:32px 24px; display:flex; flex-direction:column; background: var(--bg-app); border:none;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-shrink:0;"><h3 style="margin:0; font-size:1.8rem; font-weight:800; font-family:'Outfit'; color:var(--success);">Ventas Diarias</h3><button style="background:rgba(16,185,129,0.1); border:none; font-size:1.1rem; color:var(--success); cursor:pointer; width:35px; height:35px; border-radius:50%;" onclick="document.getElementById('ventas-modal').style.display='none'">✕</button></div><div id="chofer-logs-modal-container" style="flex:1; overflow-y:auto; text-align:left; padding-bottom:40px;"></div></div></div>
     
-    <!-- MODAL GENERADOR DE QR -->
-    <div class="modal" id="modal-qr">
-        <div class="modal-content-standard" style="padding:32px 24px; text-align:center;">
-            <button class="modal-close-circle" style="background:rgba(0,0,0,0.05);" onclick="document.getElementById('modal-qr').style.display='none'">✕</button>
-            <h3 style="margin:0 0 10px; font-family:'Outfit'; font-size:1.6rem; font-weight:800; color:var(--text-dark);">Tu Código QR</h3>
-            <p style="color:var(--text-gray); font-size:0.95rem; margin-bottom:20px;">Imprimilo, pegalo en tu local o subilo a tus redes para que pidan directo.</p>
-            
-            <div style="background: white; padding: 16px; border-radius: 16px; display: inline-block; box-shadow: var(--shadow-soft); margin-bottom: 20px;">
-                <img id="qr-image-display" src="" style="width: 220px; height: 220px; display: block;">
-            </div>
-            
-            <button class="btn-main" onclick="vibrar([40]); compartirQR()" style="background:var(--text-dark); box-shadow: 0 8px 20px rgba(15,23,42,0.3);">
-                <span style="font-size:1.2rem; margin-right:8px;">📲</span> COMPARTIR / DESCARGAR
-            </button>
-        </div>
-    </div>
-
     <!-- SCRIPT PRINCIPAL -->
     <script>
         const qs = (id) => document.getElementById(id);
@@ -1043,7 +1021,7 @@
 
         let dbState = { inventory:[], logs:[], repartidores:[] };
         let cUser = "LOCAL_GENERICO", currentLocalId = "", cAdminPin = "0000", expr = "", isEval = false;
-        let shoppingCart = [], storeData = { perfil_url: '', descripcion: '', direccion: '', maps_url: '', whatsapp_publico: '', promos: [], sub_end_date: '', cupones: [], oferta_relampago: null, dominio_vip: '' };
+        let shoppingCart = [], storeData = { perfil_url: '', descripcion: '', direccion: '', maps_url: '', whatsapp_publico: '', promos: [], sub_end_date: '', cupones: [], oferta_relampago: null };
         let selProd = null, currentQvItem = null, currentQvQty = 1;
         let targetLocalId = "", targetLocalName = "", targetLocalPhone = "";
         let isDeliveryOption = true;
@@ -1078,33 +1056,17 @@
 
         document.addEventListener('DOMContentLoaded', async () => {
             const urlParams = new URLSearchParams(window.location.search);
-            let localParam = urlParams.get('local');
+            const localParam = urlParams.get('local');
             const trackParam = urlParams.get('track');
             const motoParam = urlParams.get('moto');
-
-            // --- DETECTOR AUTOMÁTICO DE DOMINIOS (MARCA BLANCA) ---
-            const hostname = window.location.hostname;
-            const isBaseDomain = hostname.includes('localhost') || hostname.includes('127.0.0.1') || hostname.includes('pediloyaa.com.ar') || hostname.includes('vercel.app');
-            
-            if (!isBaseDomain && !localParam) {
-                let { data: domainUser } = await _supabase.from('pediloya_usuarios')
-                    .select('local')
-                    .eq('app_data->>dominio_vip', hostname)
-                    .maybeSingle();
-                
-                if (domainUser) {
-                    localParam = domainUser.local;
-                }
-            }
-            // ------------------------------------------------------
             
             if (trackParam && localParam) { 
-                document.title = "Rastreo | " + localParam; 
+                document.title = "Rastreo | Pediloya"; 
                 go('view-customer-menu'); 
                 switchCustomerTab('track', document.querySelectorAll('.nav-item')[1]); 
                 iniciarRastreoCliente(trackParam, localParam, motoParam); 
             } else if (localParam) { 
-                document.title = "Menú | " + localParam; 
+                document.title = "Menú | Pediloya"; 
                 go('view-customer-menu'); 
                 cargarMenuCliente(localParam); 
             } else { 
@@ -1181,7 +1143,7 @@
             if(!('speechSynthesis' in window)) return alert("Tu navegador no soporta el asistente de voz.");
             window.speechSynthesis.cancel();
             const speech = new SpeechSynthesisUtterance(); 
-            speech.text = "¡Atención dueño de local! Sin computadora ni nada que te complique, generá tu propia página web con nuestro sistema y vendé desde tu celular al público con tu propio link. Ofrecé un carrito de compras inteligente donde tu cliente puede ver videos de tus platos, personalizar su pedido y rastrear el delivery por GPS. Es tu propia página web integrada con carrito y delivery. Todo rápido, fácil y sin pagar comisiones por venta. Y si querés ir a lo grande, consultá por nuestra opción VIP para tener tu propio dominio exclusivo con el nombre de tu local."; 
+            speech.text = "¡Atención dueño de local! Sin computadora ni nada que te complique, generá tu propia página web con nuestro sistema y vendé desde tu celular al público con tu propio link. Ofrecé un carrito de compras inteligente donde tu cliente puede ver videos de tus platos, personalizar su pedido y rastrear el delivery por GPS. Es tu propia página web integrada con carrito y delivery. Todo rápido, fácil y sin pagar comisiones por venta."; 
             speech.lang = 'es-AR'; 
             speech.rate = 1.05; 
             window.speechSynthesis.speak(speech); 
@@ -1291,14 +1253,14 @@
                     alert("🛑 ¡CUIDADO! Este número de WhatsApp ya está registrado en nuestro sistema. Por favor, usá un número diferente para crear un nuevo local.");
                     if(qs('btn-reg')) qs('btn-reg').disabled = false; 
                     setText('btn-reg', "Empezar Gratis Ahora");
-                    return; 
+                    return; // Corta la ejecución acá y no crea nada
                 }
                 // ==========================================
                 
                 await _supabase.auth.signUp({ email: `${waLimpio}@pediloya.com`, password: pin + "IA" }).catch(e=>console.log(e));
                 
                 let endDate = new Date(); endDate.setDate(endDate.getDate() + 30); 
-                let appDataObj = { perfil_url: '', descripcion: 'Tu mejor opción delivery', direccion: '', maps_url: '', whatsapp_publico: waLimpio, promos: [], sub_end_date: endDate.toISOString(), repartidores: [], cupones: [], oferta_relampago: null, dominio_vip: '' };
+                let appDataObj = { perfil_url: '', descripcion: 'Tu mejor opción delivery', direccion: '', maps_url: '', whatsapp_publico: waLimpio, promos: [], sub_end_date: endDate.toISOString(), repartidores: [], cupones: [], oferta_relampago: null };
 
                 let { error } = await _supabase.from('pediloya_usuarios').insert([{ local: local, pin: pin, admin_pin: apin, whatsapp: waLimpio, prov: 'Gastronomia', app_data: appDataObj }]);
                 
@@ -1328,7 +1290,7 @@
                 
                 currentLocalId = data.id; cUser = data.local; targetLocalPhone = data.whatsapp; 
                 cAdminPin = data.admin_pin || "0000";
-                storeData = data.app_data || { perfil_url: '', descripcion: '', direccion: '', maps_url: '', whatsapp_publico: '', promos: [], sub_end_date: '', repartidores: [], cupones: [], oferta_relampago: null, dominio_vip: '' };
+                storeData = data.app_data || { perfil_url: '', descripcion: '', direccion: '', maps_url: '', whatsapp_publico: '', promos: [], sub_end_date: '', repartidores: [], cupones: [], oferta_relampago: null };
                 
                 setText('lbl-owner', cUser);
                 await loadDataFromDB(); 
@@ -1771,23 +1733,6 @@
             setVal('store-desc-input', storeData.descripcion || '');
             setVal('store-address-input', storeData.direccion || '');
             setVal('store-wa-input', storeData.whatsapp_publico || targetLocalPhone || '');
-            
-            // INYECTAR CASILLERO DOMINIO VIP DINÁMICAMENTE EN EL PANEL DE DUEÑO
-            if (!qs('store-domain-input') && qs('btn-save-profile')) {
-                let configCard = qs('btn-save-profile').parentNode;
-                let domainInput = document.createElement('input');
-                domainInput.type = 'text';
-                domainInput.id = 'store-domain-input';
-                domainInput.className = 'form-input';
-                domainInput.placeholder = '👑 Dominio VIP (Ej: pizzeriapato.com.ar)';
-                domainInput.style.borderColor = '#8b5cf6'; 
-                domainInput.style.backgroundColor = 'rgba(139, 92, 246, 0.02)';
-                domainInput.style.marginBottom = '16px';
-                configCard.insertBefore(domainInput, qs('btn-save-profile'));
-            }
-            if(qs('store-domain-input')) {
-                setVal('store-domain-input', storeData.dominio_vip || '');
-            }
 
             dbState.repartidores = storeData.repartidores || [];
 
@@ -1880,7 +1825,7 @@
         }
 
         window.compartirCupon = function(codigo, descuento) {
-            let link = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : `${window.location.origin}/?local=${encodeURIComponent(cUser)}`; 
+            let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}`; 
             let msg = `¡Hola! Te regalo un cupón de descuento para tu próximo pedido en *${cUser}* 🍔🛵\n\n🎁 Ingresá el código: *${codigo}* al finalizar tu compra y obtené *${descuento} OFF* de regalo.\n\nPedí ahora acá: ${link}`;
             window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
         };
@@ -2078,10 +2023,7 @@
                 let desc = qs('store-desc-input') ? qs('store-desc-input').value.trim() : '';
                 let autoMapLink = addr ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(cUser + " " + addr)}` : '';
 
-                let domVip = qs('store-domain-input') ? qs('store-domain-input').value.trim().toLowerCase() : '';
-                domVip = domVip.replace(/^https?:\/\//, '').replace(/\/$/, ''); // Limpiamos formato
-
-                let newAppData = { ...storeData, perfil_url: urlFinal, descripcion: desc, direccion: addr, maps_url: autoMapLink, whatsapp_publico: wa, dominio_vip: domVip };
+                let newAppData = { ...storeData, perfil_url: urlFinal, descripcion: desc, direccion: addr, maps_url: autoMapLink, whatsapp_publico: wa };
                 await _supabase.from('pediloya_usuarios').update({ app_data: newAppData }).eq('id', currentLocalId);
                 storeData = newAppData; 
                 showToast("Perfil guardado.");
@@ -2422,7 +2364,7 @@
         }
 
         window.compartirPlato = function(nombre, precio) {
-            let link = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : window.location.href.split('?')[0] + '?local=' + encodeURIComponent(targetLocalName);
+            let link = window.location.href.split('?')[0] + '?local=' + encodeURIComponent(targetLocalName);
             let msg = `¡Mirá este plato! 🍔\n*${nombre}* a $${precio.toLocaleString('es-AR')} en *${targetLocalName}*.\n\nPedilo acá: ${link}`;
             
             if (navigator.share) {
@@ -2705,9 +2647,7 @@
             let num = targetLocalPhone ? String(targetLocalPhone).replace(/\D/g, '') : '';
             if(num.length === 10) num = '549' + num;
             
-            let trackLinkBase = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : `${window.location.origin}/?local=${encodeURIComponent(targetLocalName)}`;
-            let trackLink = storeData.dominio_vip ? `${trackLinkBase}/?track=${orderId}` : `${trackLinkBase}&track=${orderId}`;
-
+            let trackLink = `${window.location.origin}/?track=${orderId}&local=${encodeURIComponent(targetLocalName)}`;
             let msgWa = `*¡NUEVO PEDIDO WEB!* 🛵\n\n*Total:* $${totalFinal.toLocaleString('es-AR')}${cupoUsado ? ` _(Cupón ${cupoUsado} aplicado)_` : ''}\n*Pago:* ${metodo}\n*Dirección:* ${dirFinal}\n\n*Detalle:*\n`; 
             for (let [nombre, qty] of Object.entries(itemsCount)) { msgWa += `- ${qty}x ${nombre}\n`; } 
             msgWa += `\n*Aclaraciones:* ${notes}\n\n*Link Rastreo:* ${trackLink}`; 
@@ -2840,27 +2780,19 @@
             showToast("Gasto registrado.");
         }
 
-        function actualizarLinkDisplay() { 
-            let link = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : `${window.location.origin}/?local=${encodeURIComponent(cUser)}`; 
-            setVal('store-link-display', link); 
-        }
+        function actualizarLinkDisplay() { let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}`; setVal('store-link-display', link); }
         function copiarLinkExacto() { let copyText = qs("store-link-display"); if(copyText){ copyText.select(); copyText.setSelectionRange(0, 99999); try { document.execCommand("copy"); showToast("Link copiado."); } catch(e) { alert("Mantené presionado el link para copiarlo."); } } }
-        function compartirLinkNativo() { 
-            let link = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : `${window.location.origin}/?local=${encodeURIComponent(cUser)}`; 
-            if (navigator.share) { navigator.share({ title: `Menú de ${cUser}`, text: `¡Hacé tu pedido online! 🛵🍔`, url: link }).catch(err => console.log(err)); } else { copiarLinkExacto(); } 
-        }
+        function compartirLinkNativo() { let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}`; if (navigator.share) { navigator.share({ title: `Menú de ${cUser}`, text: `¡Hacé tu pedido online! 🛵🍔`, url: link }).catch(err => console.log(err)); } else { copiarLinkExacto(); } }
         
         window.compartirSeguimientoGlobal = function() {
-            let linkBase = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : `${window.location.origin}/?local=${encodeURIComponent(cUser)}`;
-            let link = storeData.dominio_vip ? `${linkBase}/?track=GPS` : `${linkBase}&track=GPS`; 
+            let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}&track=GPS`; 
             let msg = `Seguí en vivo tu pedido de *${cUser}* desde este enlace de rastreo oficial: ${link}`;
             window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
         window.compartirTRKWhatsApp = function(trk, choferAsignado) {
             let motoQuery = (choferAsignado && choferAsignado !== 'undefined') ? '&moto=' + encodeURIComponent(choferAsignado) : '';
-            let linkBase = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : `${window.location.origin}/?local=${encodeURIComponent(cUser)}`;
-            let link = storeData.dominio_vip ? `${linkBase}/?track=${trk}${motoQuery}` : `${linkBase}&track=${trk}${motoQuery}`;
+            let link = window.location.origin + '/?local=' + encodeURIComponent(cUser) + '&track=' + trk + motoQuery;
             
             let choferMsg = choferAsignado && choferAsignado !== 'undefined' ? ` con *${choferAsignado}*` : '';
             let msg = `🛵 ¡Tu pedido va en camino${choferMsg}!\nSeguí la moto satelitalmente en vivo acá:\n\n📍 ${link}`;
@@ -3144,7 +3076,7 @@
         };
 
         window.generarYMostrarQR = function() {
-            let link = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : `${window.location.origin}/?local=${encodeURIComponent(cUser)}`;
+            let link = `${window.location.origin}/?local=${encodeURIComponent(cUser)}`;
             let qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodeURIComponent(link)}&margin=10`;
             setImgSrc('qr-image-display', qrUrl);
             if(qs('modal-qr')) qs('modal-qr').style.display = 'flex';
