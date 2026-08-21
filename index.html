@@ -647,8 +647,8 @@
     </div>
 
     <!-- VISTA 2: CAJA DEL LOCAL (SÚPER PREMIUM, BLANCA Y FIJA) -->
-    <!-- AJUSTE EXACTO: Se bajó el padding-bottom de 90px a 75px, y se aumentó el max-height de la pantalla blanca a 32vh -->
-    <div id="view-chofer" class="view-container-no-pad" style="display:none; flex-direction:column; justify-content:space-between; height:100svh; overflow:hidden; padding:max(16px, env(safe-area-inset-top)) 12px max(24px, env(safe-area-inset-bottom) + 12px) 12px; box-sizing:border-box; background:#ffffff; max-width:500px; margin:0 auto; position:fixed; top:0; bottom:0; left:0; right:0; z-index:10;">
+    <!-- AJUSTE EXACTO: Se bajó el botón sacando el espacio extra y se agrandó la calculadora 1cm -->
+    <div id="view-chofer" class="view-container-no-pad" style="display:none; flex-direction:column; justify-content:space-between; height:100svh; overflow:hidden; padding:max(10px, env(safe-area-inset-top)) 12px max(10px, env(safe-area-inset-bottom)) 12px; box-sizing:border-box; background:#ffffff; max-width:500px; margin:0 auto; position:fixed; top:0; bottom:0; left:0; right:0; z-index:10;">
         
         <div class="chofer-top-bar" style="margin-bottom:6px;">
             <div class="pill-btn" onclick="vibrar([40]); toggleDriverGps()" id="btn-gps" style="background:var(--text-dark); color:white; transition: 0.3s; border-color:var(--text-dark);">📍 GPS DELI</div>
@@ -656,7 +656,7 @@
             <div class="pill-btn" style="color:var(--info); border-color:rgba(14,165,233,0.2); background:rgba(14,165,233,0.05);" onclick="vibrar([40]); document.getElementById('pin-modal').style.display='flex'">⚙️ DUEÑO</div>
         </div>
         
-        <div class="calc-display" style="flex: 1; min-height: 60px; max-height: 32vh; padding: 12px 20px; margin-bottom: 8px;">
+        <div class="calc-display" style="flex: 1; min-height: 80px; max-height: 40vh; padding: 12px 20px; margin-bottom: 8px;">
             <div id="ticket-success" class="ticket-success">
                 <div style="font-size:2.5rem; margin-bottom:5px;">✅</div>
                 <div style="font-size:1.5rem; font-weight:800; letter-spacing:-1px;">COBRADO</div>
@@ -759,22 +759,22 @@
 
             <div style="background:var(--gradient-orange); color:white; padding:32px 20px; border-radius:var(--radius-lg); text-align:center; box-shadow:var(--shadow-orange); margin-bottom:10px; width:100%; box-sizing:border-box;">
                 <span style="font-size:0.9rem; font-weight:800; color:rgba(255,255,255,0.9); text-transform:uppercase; letter-spacing:1.5px;">💰 Balance Total (Gran Total)</span>
-                <div id="adm-total-general" style="font-size:2.4rem; font-weight:900; margin-top:12px; font-family:'Outfit'; letter-spacing:-1px; line-height:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">$0</div>
+                <div id="adm-total-general" style="font-size:3.5rem; font-weight:900; margin-top:16px; font-family:'Outfit'; letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
             </div>
 
             <div style="background:var(--bg-pure); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(0,0,0,0.03); box-shadow:var(--shadow-float); margin-bottom:10px; width:100%; box-sizing:border-box;">
                 <span style="font-size:0.9rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1.5px;">💵 Caja Mostrador</span>
-                <div id="adm-cash" style="font-size:2.2rem; font-weight:300; margin-top:12px; font-family:'Outfit'; letter-spacing:-1px; line-height:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">$0</div>
+                <div id="adm-cash" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
             </div>
 
             <div style="background:var(--bg-pure); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(0,0,0,0.03); box-shadow:var(--shadow-float); margin-bottom:10px; width:100%; box-sizing:border-box;">
                 <span style="font-size:0.9rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1.5px;">🏦 Transferencias</span>
-                <div id="adm-transf" style="font-size:2.2rem; font-weight:300; margin-top:12px; font-family:'Outfit'; color:var(--info); letter-spacing:-1px; line-height:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">$0</div>
+                <div id="adm-transf" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; color:var(--info); letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
             </div>
 
             <div style="background:var(--bg-pure); padding:32px 20px; border-radius:var(--radius-lg); text-align:center; border:1px solid rgba(0,0,0,0.03); box-shadow:var(--shadow-float); margin-bottom:40px; width:100%; box-sizing:border-box;">
                 <span style="font-size:0.9rem; font-weight:800; color:var(--text-gray); text-transform:uppercase; letter-spacing:1.5px;">🛵 Plata en Repartidores</span>
-                <div id="adm-motos-cash" style="font-size:2.2rem; font-weight:300; margin-top:12px; font-family:'Outfit'; color:var(--primary-orange); letter-spacing:-1px; line-height:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">$0</div>
+                <div id="adm-motos-cash" style="font-size:3rem; font-weight:300; margin-top:16px; font-family:'Outfit'; color:var(--primary-orange); letter-spacing:-1px; line-height:1; word-wrap:break-word;">$0</div>
             </div>
 
             <!-- ============================================== -->
@@ -903,7 +903,7 @@
         </div>
     </div>
     
-    <!-- SCRIPT CORREGIDO: DESCARGA Y COMPARTIR QR TEXTO PLANO -->
+    <!-- SCRIPT CORREGIDO: DESCARGA DE IMAGEN Y COMPARTIR QR TEXTO PLANO -->
     <script>
         window.descargarQR = function() {
             let imgEl = document.querySelector('#qr-container img');
@@ -920,25 +920,22 @@
             }
         };
 
-        window.compartirQR = async function() {
-            // VOLVEMOS AL SISTEMA ORIGINAL PERFECTO (SIN ENVIAR ARCHIVO VACÍO)
+        window.compartirQR = function() {
+            // VOLVEMOS AL SISTEMA ORIGINAL DE TEXTO/LINK QUE FUNCIONA PERFECTO
             let link = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : `${window.location.origin}/?local=${encodeURIComponent(cUser)}`;
-            let textMsg = `¡Hacé tu pedido online en ${cUser}! 🍔🛵\n\nIngresá acá:`;
+            let textMsg = `¡Hacé tu pedido online en ${cUser}! 🍔🛵\n\nIngresá acá:\n${link}`;
 
-            try {
-                if (navigator.share) {
-                    await navigator.share({
-                        title: `QR Menú ${cUser}`,
-                        text: textMsg,
-                        url: link
-                    });
-                } else {
-                    window.open(`https://wa.me/?text=${encodeURIComponent(textMsg + "\n" + link)}`, '_blank');
-                }
-            } catch (err) {
-                if (err.name !== 'AbortError') {
-                    showToast("Error al compartir", "error");
-                }
+            if (navigator.share) {
+                navigator.share({
+                    title: `Menú de ${cUser}`,
+                    text: textMsg
+                }).catch(err => {
+                    if (err.name !== 'AbortError') {
+                        window.open(`https://wa.me/?text=${encodeURIComponent(textMsg)}`, '_blank');
+                    }
+                });
+            } else {
+                window.open(`https://wa.me/?text=${encodeURIComponent(textMsg)}`, '_blank');
             }
         };
     </script>
