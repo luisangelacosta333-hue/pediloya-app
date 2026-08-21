@@ -647,7 +647,7 @@
     </div>
 
     <!-- VISTA 2: CAJA DEL LOCAL (SÚPER PREMIUM, BLANCA Y FIJA) -->
-    <!-- AJUSTE EXACTO: Se bajó el botón sacando el espacio extra y se agrandó la calculadora 1cm -->
+    <!-- AJUSTE EXACTO: Se subió el margen para achicar la calculadora y que no sobre pantalla blanca -->
     <div id="view-chofer" class="view-container-no-pad" style="display:none; flex-direction:column; justify-content:space-between; height:100svh; overflow:hidden; padding:max(10px, env(safe-area-inset-top)) 12px max(10px, env(safe-area-inset-bottom)) 12px; box-sizing:border-box; background:#ffffff; max-width:500px; margin:0 auto; position:fixed; top:0; bottom:0; left:0; right:0; z-index:10;">
         
         <div class="chofer-top-bar" style="margin-bottom:6px;">
@@ -704,7 +704,8 @@
             </select>
         </div>
         
-        <div class="chofer-pay-row" style="margin-bottom:6px; gap:6px;">
+        <!-- ESTE ES EL MARGEN DE 35PX QUE EMPUJA LA CALCULADORA 2CM PARA ARRIBA -->
+        <div class="chofer-pay-row" style="margin-bottom:35px; gap:6px;">
             <button class="chofer-pay-btn" style="padding:10px 6px; font-size:0.9rem; border-radius:14px;" onclick="vibrar([40]); submitSale('EFECTIVO')">💵 EFECTIVO</button>
             <button class="btn-pay-transfer" style="padding:10px 6px; font-size:0.9rem; border-radius:14px;" onclick="vibrar([40]); abrirSheetTransfVenta()">🏦 TRANSF.</button>
         </div>
@@ -903,31 +904,46 @@
         </div>
     </div>
     
-    <!-- SCRIPT CORREGIDO: DESCARGA DE IMAGEN Y COMPARTIR QR TEXTO PLANO -->
+    <!-- SCRIPT CORREGIDO: DESCARGA DE IMAGEN Y COMPARTIR QR TEXTO PLANO PROTEGIDO -->
     <script>
         window.descargarQR = function() {
+            let storeName = (typeof cUser !== 'undefined' && cUser) ? cUser : "Local";
             let imgEl = document.querySelector('#qr-container img');
+            
+            // A veces QRCode renderiza en canvas en lugar de img, por si acaso lo cubrimos
+            if (!imgEl || !imgEl.src) {
+                let canvasEl = document.querySelector('#qr-container canvas');
+                if (canvasEl) {
+                    imgEl = { src: canvasEl.toDataURL("image/png") };
+                }
+            }
+
             if (imgEl && imgEl.src) {
                 let a = document.createElement('a');
                 a.href = imgEl.src;
-                a.download = `QR_Pediloya_${cUser.replace(/[^a-zA-Z0-9]/g, '_')}.png`;
+                a.download = `QR_Pediloya_${storeName.replace(/[^a-zA-Z0-9]/g, '_')}.png`;
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
-                showToast("QR Descargado con éxito");
+                if(typeof showToast === 'function') showToast("QR Descargado con éxito");
             } else {
-                showToast("Error al descargar QR", "error");
+                if(typeof showToast === 'function') showToast("Error al descargar QR", "error");
             }
         };
 
         window.compartirQR = function() {
-            // VOLVEMOS AL SISTEMA ORIGINAL DE TEXTO/LINK QUE FUNCIONA PERFECTO
-            let link = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : `${window.location.origin}/?local=${encodeURIComponent(cUser)}`;
-            let textMsg = `¡Hacé tu pedido online en ${cUser}! 🍔🛵\n\nIngresá acá:\n${link}`;
+            // Tomamos el link directo del campo de texto de la pantalla, que siempre va a ser válido
+            let linkEl = document.getElementById('store-link-display');
+            let link = linkEl && linkEl.value ? linkEl.value : window.location.href;
+            
+            // Nos aseguramos que cUser existe o usamos fallback
+            let storeName = (typeof cUser !== 'undefined' && cUser) ? cUser : "nuestro local";
+            
+            let textMsg = `¡Hacé tu pedido online en ${storeName}! 🍔🛵\n\nIngresá acá para ver el menú digital:\n${link}`;
 
             if (navigator.share) {
                 navigator.share({
-                    title: `Menú de ${cUser}`,
+                    title: `Menú de ${storeName}`,
                     text: textMsg
                 }).catch(err => {
                     if (err.name !== 'AbortError') {
