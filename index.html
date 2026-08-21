@@ -130,36 +130,36 @@
         .admin-container { width: 100%; max-width: 500px; margin: 0 auto; padding: 24px; box-sizing: border-box; padding-bottom: 60px; overflow-x: hidden;}
         
         /* =========================================================
-           ESTILOS CAJA / CHOFER (NUEVAS PROPORCIONES PERFECTAS)
+           ESTILOS CAJA / CHOFER
         ========================================================= */
-        .chofer-top-bar { display: flex; justify-content: center; align-items: center; margin-bottom: 8px; gap: 8px; flex-shrink: 0; }
-        .pill-btn { background: var(--bg-pure); border-radius: 50px; padding: 8px; font-size: 0.7rem; font-weight: 800; color: var(--text-gray); box-shadow: var(--shadow-soft); cursor: pointer; border: 1px solid var(--border-soft); text-transform: uppercase; font-family:'Outfit'; letter-spacing: 0.5px; transition:0.2s; flex: 1; text-align: center; white-space: nowrap;}
+        .chofer-top-bar { display: flex; justify-content: center; align-items: center; margin-bottom: 10px; gap: 8px; flex-shrink: 0; }
+        .pill-btn { background: var(--bg-pure); border-radius: 50px; padding: 10px 8px; font-size: 0.75rem; font-weight: 800; color: var(--text-gray); box-shadow: var(--shadow-soft); cursor: pointer; border: 1px solid var(--border-soft); text-transform: uppercase; font-family:'Outfit'; letter-spacing: 0.5px; transition:0.2s; flex: 1; text-align: center; white-space: nowrap;}
         .pill-btn:active { transform: scale(0.95); }
         
-        .calc-display { flex: 1; display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-end; min-height: 50px; padding: 10px 16px; background: #ffffff !important; border-radius: 20px; margin-bottom: 8px; box-shadow: 0 15px 35px rgba(255, 94, 0, 0.05); border: 1px solid rgba(255, 94, 0, 0.1); position: relative; overflow: hidden; }
-        .calc-main { font-size: 2.4rem !important; font-weight: 300; color: #000000 !important; line-height: 1; font-family: 'Outfit', sans-serif; word-break: break-all; letter-spacing: -1px; z-index:2;}
-        .calc-hist { font-size: 0.9rem !important; color: #64748b !important; font-weight: 500; min-height: 1rem; margin-bottom: 2px; z-index:2;}
+        .calc-display { flex: 1; display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-end; min-height: 60px; padding: 12px 20px; background: #ffffff !important; border-radius: 24px; margin-bottom: 10px; box-shadow: 0 15px 35px rgba(255, 94, 0, 0.05); border: 1px solid rgba(255, 94, 0, 0.1); position: relative; overflow: hidden; }
+        .calc-main { font-size: 3rem; font-weight: 300; color: #000000 !important; line-height: 1; font-family: 'Outfit', sans-serif; word-break: break-all; letter-spacing: -2px; z-index:2;}
+        .calc-hist { font-size: 1rem; color: #64748b !important; font-weight: 500; min-height: 1.2rem; margin-bottom: 4px; z-index:2;}
         
         .ticket-success { position: absolute; inset: 0; background: var(--success); color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Outfit'; z-index: 5; opacity: 0; pointer-events: none; transition: 0.3s; transform: translateY(100%); }
         .ticket-success.show { opacity: 1; transform: translateY(0); pointer-events: all; }
 
-        .btn-sheet-trigger { flex-shrink: 0; width: 100%; padding: 10px; background: rgba(255, 94, 0, 0.05); color: var(--primary-orange); font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 0.95rem; border: 1px solid rgba(255, 94, 0, 0.15); border-radius: 14px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display:flex; justify-content:center; align-items:center; gap:12px; transition:0.2s;}
+        .btn-sheet-trigger { flex-shrink: 0; width: 100%; padding: 12px; background: rgba(255, 94, 0, 0.05); color: var(--primary-orange); font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.05rem; border: 1px solid rgba(255, 94, 0, 0.15); border-radius: 16px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; display:flex; justify-content:center; align-items:center; gap:12px; transition:0.2s;}
         .btn-sheet-trigger:active { transform: scale(0.97); background: rgba(255, 94, 0, 0.1); }
 
-        .chofer-action-row { flex-shrink: 0; display: flex; gap: 6px; margin-bottom: 8px; }
-        .chofer-btn-white { background: rgba(255, 94, 0, 0.05); border: 1px solid rgba(255, 94, 0, 0.15); border-radius: 14px; padding: 8px 4px; flex: 1; font-weight: 800; font-size: 0.75rem; color: var(--primary-orange); cursor: pointer; font-family: 'Outfit', sans-serif; text-transform:uppercase; transition:0.2s; display: flex; justify-content: center; align-items: center; gap: 4px;}
+        .chofer-action-row { flex-shrink: 0; display: flex; gap: 8px; margin-bottom: 10px; }
+        .chofer-btn-white { background: rgba(255, 94, 0, 0.05); border: 1px solid rgba(255, 94, 0, 0.15); border-radius: 16px; padding: 10px 4px; flex: 1; font-weight: 800; font-size: 0.8rem; color: var(--primary-orange); cursor: pointer; font-family: 'Outfit', sans-serif; text-transform:uppercase; transition:0.2s; display: flex; justify-content: center; align-items: center; gap: 4px;}
         .chofer-btn-white:active { transform: scale(0.95); background: rgba(255, 94, 0, 0.1); }
         
-        .chofer-keypad { flex-shrink: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 8px; padding: 0; }
-        .ckey { background: #ffffff !important; border: 1px solid rgba(255, 94, 0, 0.15); border-radius: 14px; height: 5.5vh; min-height: 42px; max-height: 55px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 500; color: #0f172a; box-shadow: 0 4px 12px rgba(255, 94, 0, 0.02); cursor: pointer; font-family: 'Outfit', sans-serif; transition: all 0.2s cubic-bezier(0.2, 1, 0.3, 1); }
+        .chofer-keypad { flex-shrink: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 10px; padding: 0; }
+        .ckey { background: #ffffff !important; border: 1px solid rgba(255, 94, 0, 0.15); border-radius: 18px; height: 6.5vh; min-height: 48px; max-height: 65px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 500; color: #0f172a; box-shadow: 0 4px 12px rgba(255, 94, 0, 0.02); cursor: pointer; font-family: 'Outfit', sans-serif; transition: all 0.2s cubic-bezier(0.2, 1, 0.3, 1); }
         .ckey:active { transform: scale(0.92); box-shadow: 0 2px 6px rgba(255, 94, 0, 0.05); background: rgba(255, 94, 0, 0.05) !important; border-color: var(--primary-orange); }
         
-        .ckey-op { color: var(--primary-orange) !important; font-size: 1.8rem !important; font-weight: 400; background: #ffffff !important; border-color: rgba(255, 94, 0, 0.15); }
-        .ckey-del { color: var(--primary-orange) !important; font-size: 1.5rem !important; }
-        .ckey-eq { background: var(--gradient-orange) !important; color: white !important; border: none; font-size: 2rem !important; box-shadow: 0 10px 25px rgba(255, 94, 0, 0.25); font-weight: 400; }
+        .ckey-op { color: var(--primary-orange) !important; font-size: 2.2rem; font-weight: 400; background: #ffffff !important; border-color: rgba(255, 94, 0, 0.15); }
+        .ckey-del { color: var(--primary-orange) !important; font-size: 1.8rem; }
+        .ckey-eq { background: var(--gradient-orange) !important; color: white !important; border: none; font-size: 2.4rem; box-shadow: 0 10px 25px rgba(255, 94, 0, 0.25); font-weight: 400; }
 
-        .chofer-pay-row { flex-shrink: 0; display: flex; gap: 6px; margin-bottom: 8px; }
-        .chofer-pay-btn, .btn-pay-transfer { flex: 1; border-radius: 14px; padding: 10px 6px; font-weight: 800; font-size: 0.9rem; font-family: 'Outfit', sans-serif; text-transform: uppercase; background: rgba(255, 94, 0, 0.05) !important; color: var(--primary-orange) !important; border: 1px solid rgba(255, 94, 0, 0.15) !important; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 6px; transition: 0.2s; box-shadow: none !important;}
+        .chofer-pay-row { flex-shrink: 0; display: flex; gap: 8px; margin-bottom: 10px; }
+        .chofer-pay-btn, .btn-pay-transfer { flex: 1; border-radius: 16px; padding: 12px 8px; font-weight: 800; font-size: 1rem; font-family: 'Outfit', sans-serif; text-transform: uppercase; background: rgba(255, 94, 0, 0.05) !important; color: var(--primary-orange) !important; border: 1px solid rgba(255, 94, 0, 0.15) !important; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: 0.2s; box-shadow: none !important;}
         .chofer-pay-btn:active, .btn-pay-transfer:active { transform: scale(0.95); background: rgba(255, 94, 0, 0.1) !important; }
         /* ========================================================= */
 
@@ -333,18 +333,16 @@
             padding: 16px; 
             border-radius: 20px; 
             border: 2px dashed var(--primary-orange); 
-            display: flex; 
+            display: inline-flex; 
             justify-content: center; 
             align-items: center; 
             margin: 0 auto 24px auto; 
             box-shadow: 0 10px 30px rgba(255,94,0,0.1);
-            width: 100%;
-            max-width: 250px;
-            aspect-ratio: 1 / 1;
+            max-width: 100%;
             box-sizing: border-box;
         }
         #qr-container img, #qr-container canvas { 
-            width: 100% !important; 
+            max-width: 100% !important; 
             height: auto !important; 
             display: block; 
         }
@@ -665,7 +663,7 @@
         <button class="modal-close-circle" style="position:absolute; top:30px; right:30px; width:50px; height:50px; font-size:1.5rem; z-index: 20;" onclick="cerrarModalQR()">✕</button>
         <div class="qr-fullscreen-card">
             <h2 style="font-family:'Outfit'; font-size:2rem; font-weight:900; color:var(--text-dark); margin:0 0 10px 0; letter-spacing:-1px;">ESCANEÁ AQUÍ</h2>
-            <p style="color:var(--text-gray); font-size:1rem; margin-bottom:24px; font-weight:500;">Para ver nuestro menú digital</p>
+            <p style="color:var(--text-gray); margin-bottom:24px; font-weight:500;">Para ver nuestro menú digital</p>
             
             <div id="qr-container"></div>
             
@@ -677,7 +675,8 @@
     </div>
 
     <!-- VISTA 2: CAJA DEL LOCAL (SÚPER PREMIUM, BLANCA Y FIJA) -->
-    <div id="view-chofer" class="view-container-no-pad" style="display:none; flex-direction:column; justify-content:space-between; height:100svh; overflow:hidden; padding:max(10px, env(safe-area-inset-top)) 12px max(10px, env(safe-area-inset-bottom)) 12px; box-sizing:border-box; background:#ffffff; max-width:500px; margin:0 auto; position:fixed; top:0; bottom:0; left:0; right:0; z-index:10;">
+    <!-- === ACÁ ESTÁ LA MODIFICACIÓN DEL PADDING PARA LEVANTAR LA BOTONERA === -->
+    <div id="view-chofer" class="view-container-no-pad" style="display:none; flex-direction:column; justify-content:space-between; height:100svh; overflow:hidden; padding:max(10px, env(safe-area-inset-top)) 12px max(50px, env(safe-area-inset-bottom) + 30px) 12px; box-sizing:border-box; background:#ffffff; max-width:500px; margin:0 auto; position:fixed; top:0; bottom:0; left:0; right:0; z-index:10;">
         
         <div class="chofer-top-bar" style="margin-bottom:6px;">
             <div class="pill-btn" onclick="vibrar([40]); toggleDriverGps()" id="btn-gps" style="background:var(--text-dark); color:white; transition: 0.3s; border-color:var(--text-dark);">📍 GPS DELI</div>
@@ -935,7 +934,10 @@
     </div>
 </body>
 </html>
-
+Gmail	Luis angel Acosta <luisangelacosta444@gmail.com>
+Bloque 2 QR pediloya
+Luis angel Acosta <luisangelacosta444@gmail.com>	Thu, Aug 20, 2026 at 4:49 PM
+To: luisangelacosta333@gmail.com, Luis angel Acosta <luisangelacosta444@gmail.com>, nahuelacosta415@gmail.com
     <!-- MODAL SELECCIONAR CHOFER GPS (RESTAURADO) -->
     <div class="modal" id="modal-select-moto-gps">
         <div class="modal-content-standard" style="padding:32px 24px; text-align:center;">
