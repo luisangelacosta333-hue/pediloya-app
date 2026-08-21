@@ -41,6 +41,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
+    <!-- Librería para generar el QR -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
     <style>
         /* =========================================================
            DISEÑO ULTRA PREMIUM 9:16 & GLASSMORPHISM SAAS
@@ -334,6 +337,11 @@
         .btn-pay-cash:active { transform: scale(0.95); }
         .btn-pay-transfer { background: linear-gradient(135deg, #0ea5e9, #0284c7); color: white; box-shadow: 0 10px 25px rgba(14, 165, 233, 0.3); border: none; padding: 18px; border-radius: 18px; font-family: 'Outfit'; font-weight: 800; font-size: 1.1rem; flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: 0.2s;}
         .btn-pay-transfer:active { transform: scale(0.95); }
+
+        /* ESTILOS PARA EL QR */
+        .qr-card-wrapper { background: #ffffff; border: 1px solid var(--border-soft); border-radius: 24px; padding: 24px; display: flex; flex-direction: column; align-items: center; margin-top: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        #qr-container { padding: 16px; background: white; border-radius: 16px; border: 1px dashed var(--primary-orange); margin-bottom: 20px; display: inline-block; }
+        #qr-container img { margin: 0 auto; display: block; }
     </style>
 </head>
 <body>
@@ -351,6 +359,52 @@
         }
 
         setTimeout(() => { let s = document.getElementById('splash-screen'); if (s) { s.style.opacity = '0'; setTimeout(() => s.style.display = 'none', 500); } }, 1200);
+
+        // FUNCIÓN PARA GENERAR QR (Se llama idealmente cuando carga el enlace)
+        function generarQROficial(url) {
+            let qrContainer = document.getElementById("qr-container");
+            if(qrContainer) {
+                qrContainer.innerHTML = ""; // Limpiar previo
+                new QRCode(qrContainer, {
+                    text: url,
+                    width: 150,
+                    height: 150,
+                    colorDark : "#0f172a",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.H
+                });
+            }
+        }
+
+        // SIMULACIÓN DE CARGA PARA EL EJEMPLO VISUAL
+        document.addEventListener('DOMContentLoaded', () => {
+            generarQROficial("https://www.pediloyaa.com.ar/tu-local");
+        });
+        
+        // Funciones simuladas para los botones del QR
+        function descargarQR() {
+            let qrImg = document.querySelector('#qr-container img');
+            if (qrImg) {
+                let a = document.createElement('a');
+                a.href = qrImg.src;
+                a.download = 'QR_MiLocal.png';
+                a.click();
+                alert("QR Descargado con éxito");
+            }
+        }
+
+        function compartirQR() {
+            // Usa Web Share API si está disponible
+            if (navigator.share) {
+                navigator.share({
+                    title: '¡Hacé tu pedido acá!',
+                    text: 'Escaneá este QR o visitá nuestro menú interactivo.',
+                    url: "https://www.pediloyaa.com.ar/tu-local"
+                }).catch(console.error);
+            } else {
+                alert("La función de compartir nativa no está soportada en tu navegador.");
+            }
+        }
     </script>
 
     <!-- SPLASH SCREEN ULTRA VECTOR PY DELIVERY -->
@@ -646,6 +700,10 @@
             <button class="chofer-pay-btn" onclick="vibrar([40]); submitSale('EFECTIVO')">💵 EFECTIVO</button>
             <button class="btn-pay-transfer" onclick="vibrar([40]); abrirSheetTransfVenta()">🏦 TRANSF.</button>
         </div>
+        
+        <!-- ============================================== -->
+        <!-- BOTÓN CERRAR TURNO REINCORPORADO -->
+        <!-- ============================================== -->
         <button style="flex-shrink:0; width:100%; border-radius:18px; padding:18px; font-weight:800; font-size:1.05rem; font-family:'Outfit'; text-transform:uppercase; background:var(--text-dark); color:white; border:none; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; box-shadow:0 10px 25px rgba(15,23,42,0.3); transition:0.2s; margin-bottom: 0px;" onclick="vibrar([40]); cerrarTurno()">🔒 CERRAR TURNO</button>
     </div>
 
@@ -670,17 +728,29 @@
                 <div style="font-size: 1.6rem;">⏳</div>
             </div>
 
+            <!-- ============================================== -->
+            <!-- SECCIÓN LINK OFICIAL Y CÓDIGO QR -->
+            <!-- ============================================== -->
             <div class="admin-card" style="border-top:5px solid var(--info);">
                 <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
-                    <span style="font-size:1.8rem;">🔗</span><h3 style="margin:0; font-size:1.5rem; font-family:'Outfit'; font-weight:800; color:var(--text-dark);">Link Oficial</h3>
+                    <span style="font-size:1.8rem;">🔗</span><h3 style="margin:0; font-size:1.5rem; font-family:'Outfit'; font-weight:800; color:var(--text-dark);">Link Oficial y QR</h3>
                 </div>
-                <p style="font-size:1rem; color:var(--text-gray); margin-bottom:30px; font-weight:500; line-height:1.6;">Enviá este enlace a tus clientes. Verán tu Menú Súper Premium.</p>
-                <div style="display:flex; gap:10px; margin-bottom:24px;">
-                    <button style="background:var(--primary-orange); color:white; font-weight:700; border:none; border-radius:14px; flex:1; box-shadow:var(--shadow-orange); padding:16px;" onclick="vibrar([40]); compartirLinkNativo()">📤 COMPARTIR</button>
-                    <button style="background:var(--bg-pure); color:var(--text-dark); font-weight:700; border:2px solid var(--border-soft); border-radius:14px; flex:1; box-shadow:var(--shadow-soft); padding:16px;" onclick="vibrar([40]); copiarLinkExacto()">📄 COPIAR</button>
+                <p style="font-size:1rem; color:var(--text-gray); margin-bottom:20px; font-weight:500; line-height:1.6;">Enviá este enlace o compartí el código QR para que tus clientes vean tu menú.</p>
+                
+                <input type="text" id="store-link-display" readonly style="width:100%; box-sizing:border-box; border:none; background:var(--bg-app); border-radius:20px; font-weight:700; color:var(--info); font-size:0.95rem; padding:18px; text-align:center; outline:none; border:2px dashed var(--info); white-space:nowrap; text-overflow:ellipsis; overflow:hidden; margin-bottom:20px;">
+                
+                <!-- TARJETA DEL QR GENERADO -->
+                <div class="qr-card-wrapper">
+                    <h4 style="margin:0 0 10px 0; color:var(--text-dark); font-family:'Outfit'; font-size:1.2rem; text-align:center;">QR de tu Local</h4>
+                    <div id="qr-container"></div>
+                    
+                    <div style="display:flex; gap:10px; width:100%; margin-top:10px;">
+                        <button style="background:var(--primary-orange); color:white; font-weight:700; border:none; border-radius:14px; flex:1; box-shadow:var(--shadow-orange); padding:16px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="vibrar([40]); compartirQR()">📤 COMPARTIR</button>
+                        <button style="background:var(--bg-pure); color:var(--text-dark); font-weight:700; border:2px solid var(--border-soft); border-radius:14px; flex:1; box-shadow:var(--shadow-soft); padding:16px; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="vibrar([40]); descargarQR()">💾 DESCARGAR</button>
+                    </div>
                 </div>
-                <input type="text" id="store-link-display" readonly style="width:100%; box-sizing:border-box; border:none; background:var(--bg-app); border-radius:20px; font-weight:700; color:var(--info); font-size:0.95rem; padding:18px; text-align:center; outline:none; border:2px dashed var(--info); white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
             </div>
+            <!-- ============================================== -->
 
             <div style="background:var(--gradient-orange); color:white; padding:32px 20px; border-radius:var(--radius-lg); text-align:center; box-shadow:var(--shadow-orange); margin-bottom:10px; width:100%; box-sizing:border-box;">
                 <span style="font-size:0.9rem; font-weight:800; color:rgba(255,255,255,0.9); text-transform:uppercase; letter-spacing:1.5px;">💰 Balance Total (Gran Total)</span>
@@ -829,7 +899,7 @@
     </div>
 </body>
 </html>
-			
+
 
 	
 
