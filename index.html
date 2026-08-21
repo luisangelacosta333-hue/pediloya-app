@@ -3288,27 +3288,40 @@
         window.compartirQR = async function() {
             let imgEl = qs('qr-image-display');
             if(!imgEl || !imgEl.src) return;
+            
+            // 1. Forzar descarga de la imagen para no perder la funcionalidad "Descargar"
             try {
-                showToast("Preparando imagen...", "info");
                 let response = await fetch(imgEl.src);
                 let blob = await response.blob();
-                let file = new File([blob], "QR_Pediloya.png", { type: blob.type });
-                
+                let a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = `QR_${cUser}_Pediloya.png`;
+                a.click();
+                showToast("QR Descargado correctamente", "success");
+            } catch(e) {
+                console.log("No se pudo descargar la imagen automáticamente.");
+            }
+
+            // 2. Compartir el texto garantizado (Soluciona el bug de WhatsApp que borra el texto si envías archivo)
+            let link = storeData.dominio_vip ? `https://${storeData.dominio_vip}` : `${window.location.origin}/?local=${encodeURIComponent(cUser)}`;
+            let storeName = (typeof cUser !== 'undefined' && cUser) ? cUser : "nuestro local";
+            let textMsg = `¡Hacé tu pedido online en ${storeName}! 🍔🛵\n\nIngresá acá para ver nuestro menú digital:\n${link}\n\nO escaneá nuestro código QR directamente desde aquí:\n${imgEl.src}`;
+
+            try {
                 if (navigator.share) {
                     await navigator.share({
-                        title: `QR Menú ${cUser}`,
-                        text: `Escaneá este código para hacer tu pedido online en ${cUser} 🍔🛵`,
-                        files: [file]
+                        title: `Menú de ${storeName}`,
+                        text: textMsg
+                    }).catch(err => {
+                        if (err.name !== 'AbortError') {
+                            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(textMsg)}`, '_blank');
+                        }
                     });
                 } else {
-                    let a = document.createElement('a');
-                    a.href = URL.createObjectURL(blob);
-                    a.download = `QR_${cUser}_Pediloya.png`;
-                    a.click();
-                    showToast("QR Descargado");
+                    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(textMsg)}`, '_blank');
                 }
             } catch(e) {
-                showToast("Error al compartir QR", "error");
+                window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(textMsg)}`, '_blank');
             }
         };
 
